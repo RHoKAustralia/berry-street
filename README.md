@@ -38,10 +38,10 @@ $ docker-compose up
 
 The services will be listening as follows:
 
-* API: http://<docker-host-ip>:8081/
-* Frontend: http://<docker-host-ip>:8080/
-* Mysql: <docker-host-ip>:3306
-* Neo4j: http://<docker-host-ip>:7474/
+* API: http://\[docker-host-ip\]:8081/
+* Frontend: http://\[docker-host-ip\]:8080/
+* Mysql: \[docker-host-ip\]:3306
+* Neo4j: http://\[docker-host-ip\]:7474/
 
 To get your docker host IP:
 
