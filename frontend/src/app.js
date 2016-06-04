@@ -16,7 +16,7 @@ ReactDOM.render((
       <Route path="/about" component={About} />
       <Route path="/users" component={PersonList} />
       <Route path="/cases" component={CaseList} />
-      <Route path="/case" component={Case} />
+      <Route path="/case/:caseId" component={Case} />
      </Route>
   </Router>
 ), document.getElementById('app'));

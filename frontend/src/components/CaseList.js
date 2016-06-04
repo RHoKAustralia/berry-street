@@ -17,7 +17,7 @@ export default React.createClass({
 
   cases() {
     return this.state.cases.map((c, i) => {
-      return <CaseLink key={i} name={c.childName} />;
+      return <CaseLink key={i} name={c.childName} caseId={c.caseId} />;
     });
   },
 
@@ -33,7 +33,7 @@ export default React.createClass({
 var CaseLink = React.createClass({
   render() {
     return (
-      <li><Link to='/case'>{this.props.name}</Link></li>
+      <li><Link to={'/case/' + this.props.caseId}>{this.props.name}</Link></li>
     );
   }
 });

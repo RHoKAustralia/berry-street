@@ -9,7 +9,7 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    API.getCase("12346", newCase => {
+    API.getCase(this.props.params.caseId, newCase => {
       this.setState({ffCase: newCase});
     });
   },
