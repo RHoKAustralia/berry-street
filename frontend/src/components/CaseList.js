@@ -24,10 +24,11 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <Link to='/case'>New Case</Link>
-        <br />
-        <br />
+        <h2><Link to='/case'>New Case</Link></h2>
+        <fieldset>
+          <legend>Existing Cases</legend>
         <ul>{this.cases()}</ul>
+        </fieldset>
      </div>
     );
   }
