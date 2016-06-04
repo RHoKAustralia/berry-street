@@ -5,11 +5,11 @@
 
 POST /case
 
-* Staff name
+* staffName
 
 return json object
 
-* case id
+* caseId
 
 
 ### find all
@@ -17,9 +17,9 @@ return json object
 GET /case
 
 * list
-    * case id
-    * staff name
-    * child
+    * caseId
+    * staffName
+    * childName
 
 
 ### get
@@ -27,29 +27,19 @@ GET /case
 GET /case/:id
 
 * json object
-    - Staff name
+    - staffName
     - subject
     - status
-    - date opened
-    - case number
-    - case objective
-    
-
-### update case
-
-PUT /case/:id
-
-* Staff name
+    - dateOpened
+    - caseId
+    - caseObjective
     
 
 ### Link subject to Case
 
 POST /case/:caseId/person/:personId
 
-* return json object
-    - Guardians
-    - Siblings
-    - Other
+
 
 ## People
 
@@ -75,8 +65,9 @@ POST /person/:personId
 GET /person/:personId/relationships
 
 * list of directly connected people
-    * person id
+    * personId
     * name
+    * relationship
     
 
 ### Link people
@@ -84,6 +75,7 @@ GET /person/:personId/relationships
 POST /person/:personId/relationshipWith/:personId
 
 * json object
-    - connection type
-    - relationship health
+    - connectionType
+    - relationshipHealth
     - etc
+
