@@ -66,3 +66,4 @@ secrets.json
 
 # oauth variables
 **/auth0-variables.js
+/spikes/auth0-react-sample/npm-debug.log

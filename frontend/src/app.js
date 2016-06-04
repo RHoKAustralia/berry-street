@@ -11,6 +11,9 @@ import NewCase from './components/NewCase.js';
 import LoggedIn from './components/LoggedIn.js';
 import Index from './components/Index.js';
 import Home from './components/Home.js';
+import LogOut from './components/LogOut.js';
+
+
 
 ReactDOM.render((
   <Router history={hashHistory}>
@@ -22,6 +25,7 @@ ReactDOM.render((
       <Route path="/cases" component={CaseList} />
       <Route path="/case/:caseId" component={Case} />
       <Route path="/case" component={NewCase} />
+      <Route path="/logout" component={LogOut} />
     </Route>
   </Router>
 ), document.getElementById('app'));

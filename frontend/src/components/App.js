@@ -44,12 +44,13 @@ export default React.createClass({
   render() {
     if (this.state.idToken) {
     return (
-        <main lock={this.lock} idToken={this.state.idToken}>
+        <main lock={this.lock} idToken={this.state.idToken} >
           <h1><IndexLink to="/">Family Finder</IndexLink></h1>
           <nav>
             <Link to='/about'>About</Link>&nbsp;|&nbsp;
             <Link to='/users'>Users</Link>&nbsp;|&nbsp;
-            <Link to='/cases'>Case List</Link>
+            <Link to='/cases'>Case List</Link>&nbsp;|&nbsp;
+            <Link to='/logout'>Logout</Link>
           </nav>
           {this.props.children}
         </main>
