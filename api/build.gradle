@@ -50,7 +50,7 @@ def buildNumber() {
 version = "0.0.${buildNumber()}"
 
 jar {
-    baseName = 'familyfinder-api'
+    baseName = 'berry-api'
     version = version
 }
 ////////////////////////////////////////////
@@ -69,11 +69,11 @@ codenarc {
 }
 
 codenarcMain {
-    configFile = rootProject.file("familyfinder-api/config/codenarc/rules.groovy")
+    configFile = rootProject.file("config/codenarc/rules.groovy")
 }
 
 codenarcTest {
-    configFile = rootProject.file("familyfinder-api/config/codenarc/rules.groovy")
+    configFile = rootProject.file("config/codenarc/rules.groovy")
 }
 
 ////////////////////////////////////////////

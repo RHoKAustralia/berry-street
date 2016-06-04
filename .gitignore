@@ -22,6 +22,7 @@ buildNumber.properties
 ### IntelliJ ###
 .idea/
 *.iml
+*.ipr
 *.iws
 
 ### Java ###
@@ -57,10 +58,8 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 .springBeans
 
-# Archive to upload (used by ansible-dry)
-application.tar
 
 # Ansible output
 ops/ansible/output/*
-gradle/.DS_Store
+api/gradle/.DS_Store
 secrets.json
