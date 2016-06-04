@@ -1,0 +1,78 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'codenarc'
+apply plugin: 'spring-boot'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "joda-time:joda-time:$jodatimeVersion"
+    compile "org.codehaus.groovy.modules.http-builder:http-builder:$httpBuilderVersion"
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+}
+
+////////////////////////////////////////////
+// jar
+
+springBoot {
+    executable = true
+}
+
+def buildNumber() {
+    def buildNum = '0'
+    if (hasProperty('buildNumber')) {
+        buildNum = buildNumber
+    }
+    buildNum
+}
+
+version = "0.0.${buildNumber()}"
+
+jar {
+    baseName = 'familyfinder-api'
+    version = version
+}
+////////////////////////////////////////////
+
+////////////////////////////////////////////
+// codenarc
+
+processResources {
+    filesMatching("**/application.properties") {
+        expand(project.properties)
+    }
+}
+
+codenarc {
+    toolVersion = "0.25.2"
+}
+
+codenarcMain {
+    configFile = rootProject.file("familyfinder-api/config/codenarc/rules.groovy")
+}
+
+codenarcTest {
+    configFile = rootProject.file("familyfinder-api/config/codenarc/rules.groovy")
+}
+
+////////////////////////////////////////////
