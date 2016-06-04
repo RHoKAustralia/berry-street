@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Router, Route, Link, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-const Hello = React.createClass({
-  render() {
-    return (
-      <h2>hello world</h2>
-    );
-  }
-});
+import App from './components/App.js';
+import About from './components/About.js';
+import PersonList from './components/PersonList.js';
+import Home from './components/Home.js';
 
-// Declarative route configuration (could also load this config lazily
-// instead, all you really need is a single root route, you don't need to
-// colocate the entire config).
-ReactDOM.render(<Hello />, document.getElementById('app'));
+ReactDOM.render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App} >
+      <IndexRoute component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/users" component={PersonList} />
+    </Route>
+  </Router>
+), document.getElementById('app'));

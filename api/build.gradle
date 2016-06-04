@@ -22,13 +22,16 @@ repositories {
     jcenter()
 }
 
+
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
-    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
-    compile "org.springframework.data:spring-data-neo4j:4.1.1.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion"
+    compile "org.springframework.data:spring-data-neo4j:$springDataNeo4jVersion"
     compile "joda-time:joda-time:$jodatimeVersion"
     compile "org.codehaus.groovy.modules.http-builder:http-builder:$httpBuilderVersion"
+    compile "com.voodoodyne.jackson.jsog:jackson-jsog:1.1"
+
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
 
