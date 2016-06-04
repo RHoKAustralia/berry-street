@@ -9,8 +9,8 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    API.getCases(newCases => {
-      this.setState({ffCase: newCases[0]});
+    API.getCase("12346", newCase => {
+      this.setState({ffCase: newCase});
     });
   },
 
