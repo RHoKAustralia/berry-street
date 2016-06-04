@@ -1,0 +1,47 @@
+  
+neo4j-db:
+  image: neo4j:3.0
+  container_name: neo4j-db
+  ports:
+    - "7474:7474"
+    - "7687:7687"
+  volumes:
+    - ./neo4j/data:/data
+  environment:
+    NEO4J_AUTH: neo4j/my-secret-pw
+
+mysql-db:
+  image: mysql
+  container_name: mysql-db
+  ports:
+    - "3306:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: my-secret-pw
+    MYSQL_DATABASE: berry-street
+
+berry-api:
+  build: ./api
+  container_name: berry-api
+  links:
+    - mysql-db
+    - neo4j-db
+  ports:
+    - "8081:8080"
+  environment:
+    MYSQL_HOST: mysql-db
+    MYSQL_USER: root
+    MYSQL_PASSWORD: my-secret-pw
+    NEO4J_HOST: neo4j-db
+    NEO4J_USER: neo4j
+    NEO4J_PASSWORD: my-secret-pw
+
+berry-frontend:
+  build: ./frontend
+  container_name: berry-frontend
+  links:
+    - berry-api
+  ports:
+    - "8080:80"
+  environment:
+    API_ENDPOINT: http://berry-api:8080/
+

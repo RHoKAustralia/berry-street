@@ -1,0 +1,1 @@
+FROM webratio/groovy
