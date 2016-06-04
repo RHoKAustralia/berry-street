@@ -1,18 +1,44 @@
 package au.org.berrystreet.familyfinder.api.services
 
+import au.org.berrystreet.familyfinder.api.controller.requests.PersonChangeRequest
+import au.org.berrystreet.familyfinder.api.controller.requests.RelationshipRequest
 import au.org.berrystreet.familyfinder.api.repositories.PersonRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-/**
- * Created by ishepher on 2016-06-04.
- */
 @Service
 @Transactional
 class PersonService {
 
     @Autowired PersonRepository personRepository;
+
+    Long create(PersonChangeRequest personChangeRequest) {
+        12345
+    }
+
+    def update(long personId, PersonChangeRequest personChangeRequest) {
+
+    }
+
+    def findRelationshipsForPerson(long personId) {
+        [
+                [
+                        id: 51,
+                        name: 'Bertha',
+                        relationship: 'Aunt'
+                ],
+                [
+                        id: 52,
+                        name: 'Rob',
+                        relationship: 'Uncle'
+                ]
+        ]
+    }
+
+    def createRelationship(long fromPerson, long toPerson, RelationshipRequest relationshipRequest) {
+        4321
+    }
 
     private Map<String, Object> toD3Format(Iterator<Map<String, Object>> result) {
         List<Map<String,Object>> nodes = new ArrayList<Map<String,Object>>();
@@ -47,4 +73,5 @@ class PersonService {
         Iterator<Map<String, Object>> result = personRepository.graph(limit).iterator();
         return toD3Format(result);
     }
+
 }
