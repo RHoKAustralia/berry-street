@@ -24,6 +24,9 @@ export default React.createClass({
   render() {
     return (
       <div>
+        <Link to='/case'>New Case</Link>
+        <br />
+        <br />
         <ul>{this.cases()}</ul>
      </div>
     );

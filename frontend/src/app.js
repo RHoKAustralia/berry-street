@@ -8,6 +8,7 @@ import PersonList from './components/PersonList.js';
 import Home from './components/Home.js';
 import CaseList from './components/CaseList.js';
 import Case from './components/Case.js';
+import NewCase from './components/NewCase.js';
 
 ReactDOM.render((
   <Router history={hashHistory}>
@@ -17,6 +18,7 @@ ReactDOM.render((
       <Route path="/users" component={PersonList} />
       <Route path="/cases" component={CaseList} />
       <Route path="/case/:caseId" component={Case} />
+      <Route path="/case" component={NewCase} />
      </Route>
   </Router>
 ), document.getElementById('app'));
