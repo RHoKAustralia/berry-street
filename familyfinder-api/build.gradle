@@ -26,6 +26,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "org.springframework.data:spring-data-neo4j:4.1.1.RELEASE"
     compile "joda-time:joda-time:$jodatimeVersion"
     compile "org.codehaus.groovy.modules.http-builder:http-builder:$httpBuilderVersion"
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
