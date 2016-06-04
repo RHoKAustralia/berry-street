@@ -22,6 +22,7 @@ class CaseController {
     ResponseEntity<Map> get(@PathVariable("id") long id) {
         def result = [
             caseId: id,
+            caseNumber: 'ABC123',
             staffName: 'Jen',
             subjectName: 'Layla',
             status: 'Open',
@@ -37,11 +38,13 @@ class CaseController {
         def result = [
             [
                 caseId: 1,
+                caseNumber: 'ABC123',
                 staffName: 'Jen',
                 childName: 'Layla'
             ],
             [
                 caseId: 2,
+                caseNumber: 'ABC123',
                 staffName: 'Jen',
                 childName: 'Roslyn'
             ],
