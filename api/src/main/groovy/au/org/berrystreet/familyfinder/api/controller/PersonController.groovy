@@ -1,5 +1,9 @@
 package au.org.berrystreet.familyfinder.api.controller
 
+import au.org.berrystreet.familyfinder.api.controller.requests.PersonChangeRequest
+import au.org.berrystreet.familyfinder.api.controller.requests.RelationshipRequest
+import au.org.berrystreet.familyfinder.api.services.PersonService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
@@ -13,34 +17,30 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 @RestController
 class PersonController {
 
-    @RequestMapping(value = '/person', produces = APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    ResponseEntity<Map> create(@RequestBody Map<String, Object> payload) {
-        println payload.name
+    @Autowired PersonService personService;
 
-        def result = [id: 12341456]
+    @RequestMapping(value = '/person', produces = APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    ResponseEntity<Map> create(@RequestBody PersonChangeRequest personChangeRequest) {
+        def result = [id: personService.create(personChangeRequest)]
         new ResponseEntity<Map>(result, HttpStatus.valueOf(200))
     }
 
     @RequestMapping(value = '/person/{personId}', produces = APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
-    ResponseEntity<Map> update(@PathVariable("personId") long personId, @RequestBody Map<String, Object> payload) {
-        def result = [id: personId, name: payload.name]
-        new ResponseEntity<Map>(result, HttpStatus.valueOf(200))
+    ResponseEntity update(@PathVariable("personId") long personId, @RequestBody PersonChangeRequest personChangeRequest) {
+        personService.update(personId, personChangeRequest)
+        new ResponseEntity(HttpStatus.valueOf(200))
     }
 
     @RequestMapping(value = '/person/{personId}/relationships', produces = APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     ResponseEntity<List> getRelationships(@PathVariable("personId") long personId) {
-        def result = [
-            [
-                id: 51,
-                name: 'Bertha',
-                relationship: 'Aunt'
-            ],
-            [
-                id: 52,
-                name: 'Rob',
-                relationship: 'Uncle'
-            ]
-        ]
-        new ResponseEntity<List>(result, HttpStatus.valueOf(200))
+        new ResponseEntity<List>(personService.findRelationshipsForPerson(personId), HttpStatus.valueOf(200))
+    }
+
+    @RequestMapping(value = '/person/{personId}/relationshipWith/{otherPersonId}', produces = APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    ResponseEntity<Map> createRelationship(@PathVariable("personId") long personId,
+                                             @PathVariable("otherPersonId") long otherPersonId,
+                                             @RequestBody RelationshipRequest relationshipRequest) {
+        def result = [id: personService.createRelationship(personId, otherPersonId, relationshipRequest)]
+        new ResponseEntity<Map>(result, HttpStatus.valueOf(200))
     }
 }
