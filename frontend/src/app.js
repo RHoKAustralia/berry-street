@@ -6,6 +6,8 @@ import App from './components/App.js';
 import About from './components/About.js';
 import PersonList from './components/PersonList.js';
 import Home from './components/Home.js';
+import CaseList from './components/CaseList.js';
+import Case from './components/Case.js';
 
 ReactDOM.render((
   <Router history={hashHistory}>
@@ -13,6 +15,8 @@ ReactDOM.render((
       <IndexRoute component={Home} />
       <Route path="/about" component={About} />
       <Route path="/users" component={PersonList} />
-    </Route>
+      <Route path="/cases" component={CaseList} />
+      <Route path="/case" component={Case} />
+     </Route>
   </Router>
 ), document.getElementById('app'));
