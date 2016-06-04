@@ -12,33 +12,30 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.transaction.annotation.EnableTransactionManagement
 
-/**
- * Created by ishepher on 2016-06-04.
- */
 @EnableTransactionManagement
-@Import(RepositoryRestMvcConfiguration.class)
+@Import(RepositoryRestMvcConfiguration)
 @EnableScheduling
 @EnableAutoConfiguration
-@ComponentScan(basePackages = ["au.org.berrystreet.familyfinder.api.services"])
+@ComponentScan(basePackages = ['au.org.berrystreet.familyfinder.api.services'])
 @Configuration
-@EnableNeo4jRepositories(basePackages = "au.org.berrystreet.familyfinder.api.repositories")
+@EnableNeo4jRepositories(basePackages = 'au.org.berrystreet.familyfinder.api.repositories')
 class FamilyFinderNeo4jConfiguration extends Neo4jConfiguration {
-
-    static final String URL = System.getenv("NEO4J_URL") != null ? System.getenv("NEO4J_URL") : "http://neo4j:movies@localhost:7474"
+    static final String NEO4JENVURL = 'NEO4J_URL'
+    static final String URL = System.getenv(NEO4JENVURL) != null ?
+            System.getenv(NEO4JENVURL) : 'http://neo4j:movies@localhost:7474'
 
     @Bean
     org.neo4j.ogm.config.Configuration getConfiguration() {
-        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration()
+        def config = new org.neo4j.ogm.config.Configuration()
         config
                 .driverConfiguration()
-                .setDriverClassName("org.neo4j.ogm.drivers.http.driver.HttpDriver")
+                .setDriverClassName('org.neo4j.ogm.drivers.http.driver.HttpDriver')
                 .setURI(URL)
-        return config
+        config
     }
 
     @Override
     SessionFactory getSessionFactory() {
-        return new SessionFactory(getConfiguration(), "au.org.berrystreet.familyfinder.api.domain");
+        new SessionFactory(configuration, 'au.org.berrystreet.familyfinder.api.domain')
     }
-
 }
