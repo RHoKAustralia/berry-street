@@ -6,9 +6,10 @@ neo4j-db:
     - "7474:7474"
     - "7687:7687"
   volumes:
-    - ./neo4j/data:/data
+    - ./.neo4j/data:/data
   environment:
-    NEO4J_AUTH: neo4j/my-secret-pw
+    # Turn off auth for neo4j for now due to: https://github.com/neo4j/docker-neo4j/issues/32
+    NEO4J_AUTH: none
 
 mysql-db:
   image: mysql
@@ -32,8 +33,8 @@ berry-api:
     MYSQL_USER: root
     MYSQL_PASSWORD: my-secret-pw
     NEO4J_HOST: neo4j-db
-    NEO4J_USER: neo4j
-    NEO4J_PASSWORD: my-secret-pw
+    # NEO4J_USER: neo4j
+    # NEO4J_PASSWORD: my-secret-pw
 
 berry-frontend:
   build: ./frontend
