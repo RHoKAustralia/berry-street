@@ -7,8 +7,8 @@ export default React.createClass({
       ffCase: {
         caseId: "",
         staffName: "",
-        subject: "",
-        status: {},
+        subject: {},
+        status: "",
         dateOpened: "",
         caseObjective:""        
       },
