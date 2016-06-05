@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-@SuppressWarnings(['DuplicateStringLiteral', 'UnusedMethodParameter', 'DuplicateListLiteral'])@Service
+@SuppressWarnings(['DuplicateStringLiteral', 'UnusedMethodParameter', 'DuplicateListLiteral'])
+@Service
 @Transactional
 class PersonService {
 
@@ -44,41 +45,18 @@ class PersonService {
         ]
     }
 
-    def newRelationship(long fromPerson, long toPerson, RelationshipRequest relationshipRequest) {
-        4321
-    }
-
-    private Map toD3Format(Iterator result) {
-        def nodes = [[:]]
-        def rels = [[:]]
-        int i = 0
-        while (result.hasNext()) {
-            def row = result.next()
-            nodes.add(map('title', row.get('movie'), 'label', 'movie'))
-            int target = i
-            i++
-            for (Object name : (Collection) /*(String[])*/ row.get('cast')) {
-                def actor = ['title', name, 'label', 'actor']
-                int source = nodes.indexOf(actor)
-                if (source == -1) {
-                    nodes.add(actor)
-                    source = i++
-                }
-                rels.add(map('source', source, 'target', target))
-            }
+    def createRelationship(long fromPerson, long toPerson, RelationshipRequest relationshipRequest) {
+        def to = personRepository.findOne(toPerson)
+        def from = personRepository.findOne(fromPerson)
+        switch(relationshipRequest.type) {
+            case 'HAS_MOTHER':
+                from.mother = to
+                break;
+            case 'HAS_FATHER':
+                from.father = to
+                break;
         }
-        map('nodes', nodes, 'links', rels)
+        personRepository.save(from)
     }
 
-    private Map map(String key1, Object value1, String key2, Object value2) {
-        def result = [:]
-        result.put(key1, value1)
-        result.put(key2, value2)
-        result
-    }
-
-    Map graph(int limit) {
-        Iterator<Map<String, Object>> result = personRepository.graph(limit).iterator()
-        toD3Format(result)
-    }
 }
