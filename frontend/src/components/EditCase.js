@@ -10,7 +10,7 @@ export default React.createClass({
         subject: "",
         status: {},
         dateOpened: "",
-        caseObjective:""        
+        caseObjective:""
       },
       caseLoaded: false,
       newCase: true,
@@ -31,7 +31,7 @@ export default React.createClass({
       this.setState({caseLoaded: true});
     }
   },
-  
+
   updateStaffName(e) {
     var stateCase = this.state.ffCase;
     stateCase.staffName = e.target.value;
@@ -39,13 +39,13 @@ export default React.createClass({
   },
 
   render() {
-    
+
     var heading = <h1>New Case</h1>;
     if(!this.state.newCase)
       heading = <h1>Edit Case</h1>;
-    
+
     return (
-      <div>
+      <div className="container">
         {heading}
         <fieldset>
           <legend>
@@ -99,4 +99,3 @@ export default React.createClass({
       );
   }
 });
-
