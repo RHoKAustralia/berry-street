@@ -61,9 +61,6 @@ export default React.createClass({
               <IndexLink to="/" className="navbar-brand">Family Finder</IndexLink>
             </div>
             <ul className="nav navbar-nav">
-              <li className="active"><a href="#">Home</a></li>
-              <li><Link to='/about'>About</Link></li>
-              <li><Link to='/users'>Users</Link></li>
               <li><Link to='/cases'>Case List</Link></li>
             </ul>
               <ul className="nav navbar-nav navbar-right">
