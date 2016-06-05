@@ -1,6 +1,5 @@
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
-import Auth0Variables from './auth0-variables.js';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
 import Home from './Home.js';
@@ -41,22 +40,27 @@ export default React.createClass({
     }
     return idToken;
   },
+  
+  logout() {
+    this.setState({idToken: null});
+  },
+  
   render() {
     if (this.state.idToken) {
     return (
         <main lock={this.lock} idToken={this.state.idToken} >
-          <h1><IndexLink to="/">Family Finder</IndexLink></h1>
+          <h1><IndexLink to="/">Family Finder x</IndexLink></h1>
           <nav>
             <Link to='/about'>About</Link>&nbsp;|&nbsp;
             <Link to='/users'>Users</Link>&nbsp;|&nbsp;
             <Link to='/cases'>Case List</Link>&nbsp;|&nbsp;
-            <Link to='/logout'>Logout</Link>
+            <button type="button" onClick={this.logout}>Log out</button>
           </nav>
           {this.props.children}
         </main>
       );
       } else {
-      return (<Home lock={this.lock} />);
+       return (<Home lock={this.lock} />);
     }
 
 /*

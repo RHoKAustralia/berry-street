@@ -13,8 +13,6 @@ import Index from './components/Index.js';
 import Home from './components/Home.js';
 import LogOut from './components/LogOut.js';
 
-
-
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App} >
@@ -27,5 +25,6 @@ ReactDOM.render((
       <Route path="/case" component={NewCase} />
       <Route path="/logout" component={LogOut} />
     </Route>
+    <Route path="*" component={App} />
   </Router>
 ), document.getElementById('app'));
