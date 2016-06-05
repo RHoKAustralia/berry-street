@@ -43,23 +43,52 @@ export default React.createClass({
         <fieldset>
           {heading}
         </fieldset>
-        <label>Name</label> 
-        <input type="text"
-              ref="name"
-              defaultValue={ this.state.person.name } />
-        <label>Address</label> 
-        <input type="text"
-              ref="address"
-              defaultValue={ this.state.person.address } />
-        <label>Phone</label> 
-        <input type="text"
-              ref="phone"
-              defaultValue={ this.state.person.phone } />
-        <label>Do Not Contact</label> 
-        <input type="checkbox"
-              ref="doNotContact"
-              defaultValue={ this.state.person.doNotContact } />
-      </div>
+        <legend>
+           Person Details
+         </legend>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label for="personName">Name</label> 
+                  <input type="text" className="form-control"
+                        ref="name" id="personName" placeholder="Name"
+                        defaultValue={ this.state.person.name } />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label for="personAddress">Address</label> 
+                    <input type="text" className="form-control"
+                            ref="address" id="personAddress" placeholder="Primary Address"
+                            defaultValue={ this.state.person.address } />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label for="personPhone">Phone</label> 
+                    <input type="text" className="form-control"
+                          ref="phone" id="personPhone" placeholder="Primary Phone"
+                          defaultValue={ this.state.person.phone } />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label for="personDNC">Do Not Contact</label> 
+                    <input type="checkbox" className="form-control"
+                          ref="doNotContact" id="personDNC" 
+                          defaultValue={ this.state.person.doNotContact } />
+                </div>
+              </div>
+            </div>
+           </div>
+         </div>
 
       );
   }
