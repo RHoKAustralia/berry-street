@@ -61,6 +61,25 @@ export default React.createClass({
     stateCase.dateOpened = e.target.value;
     this.setState({ffCase: stateCase});
   },
+  
+   saveCase() {
+     alert("lets pretend we're saving the case!");
+ /*
+     if(this.state.newCase)
+     {
+        API.createCase(this.state.ffCase, id => {
+        var stateCase = this.state.ffCase;
+        stateCase.caseId = id;
+        this.setState({ffCase: stateCase});
+        this.setState({newCase: false});
+      });
+     }
+     else
+     {
+       API.updateCase(this.state.ffCase.caseId, this.state.ffCase, callback => {});
+     }
+  */
+  },
 
   render() {
 
@@ -110,14 +129,18 @@ export default React.createClass({
                   <input type="text" className="form-control" id="dateOpened" placeholder="Case Owner" value={this.state.ffCase.dateOpened} onChange={this.updateDateOpened}  />
                 </div>
               </div>
+              
+            </div>
+            <div className="row">
+            <div className="col-md-10">
+               &nbsp;
+              </div>
+            <div className="col-md-2">
+                  <button type="button" className="btn btn-primary pull-right" onClick={this.saveCase}>Save Case</button>
+              </div>
             </div>
         </fieldset>
-        <fieldset>
-          <legend>
-            Child Details
-          </legend>
-        </fieldset>
-      </div>
+       </div>
       );
   }
 });
