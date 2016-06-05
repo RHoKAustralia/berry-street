@@ -5,6 +5,8 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './components/App.js';
 import About from './components/About.js';
 import PersonList from './components/PersonList.js';
+import EditPerson from './components/EditPerson.js';
+import Person from './components/Person.js';
 import CaseList from './components/CaseList.js';
 import Case from './components/Case.js';
 import EditCase from './components/EditCase.js';
@@ -22,6 +24,9 @@ ReactDOM.render((
       <Route path="/case/:caseId" component={Case} />
       <Route path="/case" component={EditCase} />
       <Route path="/case/:caseId/edit" component={EditCase} />
+      <Route path="/person" component={Person} />
+      <Route path="/person/new" component={EditPerson} />
+      <Route path="/person/:personId/edit" component={EditPerson} />
     </Route>
     <Route path="*" component={App} />
   </Router>

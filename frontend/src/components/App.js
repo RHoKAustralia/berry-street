@@ -2,8 +2,8 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
-import Home from './Home.js';
-import LoggedIn from './LoggedIn.js';
+import Login from './Login.js';
+//import LoggedIn from './LoggedIn.js';
 import config from '../config.js';
 
 export default React.createClass({
@@ -63,6 +63,7 @@ export default React.createClass({
               <li><Link to='/about'>About</Link></li>
               <li><Link to='/users'>Users</Link></li>
               <li><Link to='/cases'>Case List</Link></li>
+              <li><Link to='/person/new'>Create Person</Link></li>
             </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><Link to='#' onClick={this.logout}>Log out</Link></li>
