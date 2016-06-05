@@ -1,6 +1,7 @@
 package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Person
+import org.springframework.util.LinkedMultiValueMap
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 
@@ -27,7 +28,7 @@ class PersonController {
             method = RequestMethod.GET)
     ResponseEntity<Person> get(@PathVariable('personId') long personId) {
         def result = personService.get(personId)
-        new ResponseEntity<Person>(result, HttpStatus.OK)
+        new ResponseEntity<Person>(result, defaultHeaders(), HttpStatus.OK)
     }
 
     @RequestMapping(
@@ -36,7 +37,7 @@ class PersonController {
             method = RequestMethod.POST)
     ResponseEntity<Map> create(@RequestBody PersonChangeRequest personChangeRequest) {
         def result = [id: personService.create(personChangeRequest)]
-        new ResponseEntity<Map>(result, HttpStatus.OK)
+        new ResponseEntity<Map>(result, defaultHeaders(), HttpStatus.OK)
     }
 
     @RequestMapping(
@@ -46,7 +47,7 @@ class PersonController {
     ResponseEntity update(@PathVariable('personId') long personId,
                           @RequestBody PersonChangeRequest personChangeRequest) {
         personService.update(personId, personChangeRequest)
-        new ResponseEntity(HttpStatus.OK)
+        new ResponseEntity(defaultHeaders(), HttpStatus.OK)
     }
 
     @RequestMapping(
@@ -54,7 +55,7 @@ class PersonController {
             produces = APPLICATION_JSON_VALUE,
             method = RequestMethod.GET)
     ResponseEntity<List> getRelationships(@PathVariable('personId') long personId) {
-        new ResponseEntity<List>(personService.findRelationshipsForPerson(personId), HttpStatus.valueOf(200))
+        new ResponseEntity<List>(personService.findRelationshipsForPerson(personId), defaultHeaders(), HttpStatus.valueOf(200))
     }
 
     @RequestMapping(
@@ -66,6 +67,12 @@ class PersonController {
                                             @RequestBody RelationshipRequest relationshipRequest) {
         personService.createRelationship(personId, otherPersonId, relationshipRequest)
         def result = [id: null] // not sure this is required
-        new ResponseEntity<Map>(result, HttpStatus.OK)
+        new ResponseEntity<Map>(result, defaultHeaders(), HttpStatus.OK)
+    }
+
+    def defaultHeaders() {
+        def headers = new LinkedMultiValueMap<String, String>()
+        headers.add('Access-Control-Allow-Origin', '*')
+        headers
     }
 }
