@@ -5,6 +5,8 @@ import au.org.berrystreet.familyfinder.api.domain.Case
 import au.org.berrystreet.familyfinder.api.services.CaseService
 import au.org.berrystreet.familyfinder.api.services.PersonService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.RequestBody
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE
@@ -27,7 +29,7 @@ class CaseController {
             method = RequestMethod.POST)
     ResponseEntity<Map> create(@RequestBody Case caseCreateRequest) {
         def result = [id: caseService.create(caseCreateRequest)]
-        new ResponseEntity<Map>(result, HttpStatus.OK)
+        new ResponseEntity<Map>(result, defaultHeaders(), HttpStatus.OK)
     }
 
     @RequestMapping(
@@ -36,7 +38,7 @@ class CaseController {
             method = RequestMethod.GET)
     ResponseEntity<Iterable> get() {
         def result = caseService.getAll()
-        new ResponseEntity<Iterable>(result, HttpStatus.OK)
+        new ResponseEntity<Iterable>(result, defaultHeaders(), HttpStatus.OK)
     }
 
     @RequestMapping(
@@ -45,10 +47,15 @@ class CaseController {
             method = RequestMethod.GET)
     ResponseEntity<Case> get(@PathVariable('caseId') long caseId) {
         def result = caseService.get(caseId)
-        new ResponseEntity<Case>(result, HttpStatus.OK)
+        new ResponseEntity<Case>(result, defaultHeaders(), HttpStatus.OK)
         // TODO 404 if result == null
     }
 
+    def defaultHeaders() {
+        def headers = new LinkedMultiValueMap<String, String>()
+        headers.add('Access-Control-Allow-Origin', '*')
+        headers
+    }
 
 
 //

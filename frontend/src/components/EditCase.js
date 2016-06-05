@@ -7,8 +7,8 @@ export default React.createClass({
       ffCase: {
         caseId: "",
         staffName: "",
-        subject: "",
-        status: {},
+        subject: {},
+        status: "",
         dateOpened: "",
         caseObjective:""
       },
@@ -38,6 +38,30 @@ export default React.createClass({
     this.setState({ffCase: stateCase});
   },
 
+    updateCaseId(e) {
+    var stateCase = this.state.ffCase;
+    stateCase.caseId = e.target.value;
+    this.setState({ffCase: stateCase});
+  },
+
+    updateStatus(e) {
+    var stateCase = this.state.ffCase;
+    stateCase.status = e.target.value;
+    this.setState({ffCase: stateCase});
+  },
+
+    updateObjective(e) {
+    var stateCase = this.state.ffCase;
+    stateCase.caseObjective = e.target.value;
+    this.setState({ffCase: stateCase});
+  },
+
+    updateDateOpened(e) {
+    var stateCase = this.state.ffCase;
+    stateCase.dateOpened = e.target.value;
+    this.setState({ffCase: stateCase});
+  },
+
   render() {
 
     var heading = <h1>New Case</h1>;
@@ -51,18 +75,17 @@ export default React.createClass({
           <legend>
             Family First Details
           </legend>
-          <div className="container">
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
                   <label for="caseNumber">Case Number</label>
-                  <input type="text" className="form-control" id="caseNumber" value={this.state.ffCase.caseId} onChange={this.updateCaseId}  />
+                  <input type="text" className="form-control" id="caseNumber" placeholder="Case Number" value={this.state.ffCase.caseId} onChange={this.updateCaseId}  />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
                   <label for="staffName">Staff Name</label>
-                  <input type="text" className="form-control" id="staffName" placeholder="Case Owner" value={this.state.ffCase.caseId} onChange={this.updateStaffName}  />
+                  <input type="text" className="form-control" id="staffName" placeholder="Case Owner" value={this.state.ffCase.staffName} onChange={this.updateStaffName}  />
                 </div>
               </div>
             </div>
@@ -70,13 +93,13 @@ export default React.createClass({
               <div className="col-md-6">
                 <div className="form-group">
                   <label for="staffName">Status</label>
-                  <input type="text" className="form-control" id="status" placeholder="Case Owner" value={this.state.ffCase.status} onChange={this.updateStatus}  />
+                  <input type="text" className="form-control" id="status" placeholder="Status" value={this.state.ffCase.status} onChange={this.updateStatus}  />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
                   <label for="caseNumber">Objective</label>
-                  <input type="text" className="form-control" id="objective" value={this.state.ffCase.caseObjective} onChange={this.updateObjective}  />
+                  <input type="text" className="form-control" id="objective" placeholder="Objective" value={this.state.ffCase.caseObjective} onChange={this.updateObjective}  />
                 </div>
               </div>
             </div>
@@ -87,7 +110,6 @@ export default React.createClass({
                   <input type="text" className="form-control" id="dateOpened" placeholder="Case Owner" value={this.state.ffCase.dateOpened} onChange={this.updateDateOpened}  />
                 </div>
               </div>
-            </div>
             </div>
         </fieldset>
         <fieldset>
