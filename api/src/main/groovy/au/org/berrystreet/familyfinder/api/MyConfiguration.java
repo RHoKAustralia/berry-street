@@ -34,6 +34,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableNeo4jRepositories(basePackages = "au.org.berrystreet.familyfinder.api.repositories")
 // Remove if moving back to spring data rest:
+@Import(RepositoryRestMvcConfiguration.class)
+@EnableScheduling
+@EnableAutoConfiguration
+@ComponentScan(basePackages = "au.org.berrystreet.familyfinder.api.services")
 public class MyConfiguration extends Neo4jConfiguration {
     static final String NEO4JENVURL = "NEO4J_URL";
     static final String URL = System.getenv(NEO4JENVURL) != null ?

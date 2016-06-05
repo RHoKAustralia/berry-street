@@ -90,16 +90,16 @@ processResources {
     }
 }
 
-codenarc {
-    toolVersion = "0.25.2"
-}
-
-codenarcMain {
-    configFile = rootProject.file("config/codenarc/rules.groovy")
-}
-
-codenarcTest {
-    configFile = rootProject.file("config/codenarc/rules.groovy")
-}
+//codenarc {
+//    toolVersion = "0.25.2"
+//}
+//
+//codenarcMain {
+//    configFile = rootProject.file("config/codenarc/rules.groovy")
+//}
+//
+//codenarcTest {
+//    configFile = rootProject.file("config/codenarc/rules.groovy")
+//}
 
 ////////////////////////////////////////////
