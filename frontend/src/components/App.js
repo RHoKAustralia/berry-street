@@ -2,8 +2,8 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
-import Home from './Home.js';
-import LoggedIn from './LoggedIn.js';
+import Login from './Login.js';
+//import LoggedIn from './LoggedIn.js';
 import config from '../config.js';
 
 export default React.createClass({
@@ -56,15 +56,13 @@ export default React.createClass({
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
-            <span className="brand brand-name navbar-left"><img src="src/assets/images/berry-street-sml.png" alt="Berry Street" />
+            <span className="brand brand-name navbar-left"><img src="src/assets/images/Berry-Street-Sml.png" alt="Berry Street" />
             </span>
               <IndexLink to="/" className="navbar-brand">Family Finder</IndexLink>
             </div>
             <ul className="nav navbar-nav">
-              <li className="active"><a href="#">Home</a></li>
-              <li><Link to='/about'>About</Link></li>
-              <li><Link to='/users'>Users</Link></li>
               <li><Link to='/cases'>Case List</Link></li>
+              <li><Link to='/person/new'>Create Person</Link></li>
             </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><Link to='#' onClick={this.logout}>Log out</Link></li>
@@ -75,7 +73,7 @@ export default React.createClass({
         </main>
       );
       } else {
-       return (<Home lock={this.lock} />);
+       return (<Login lock={this.lock} />);
     }
 
 /*
