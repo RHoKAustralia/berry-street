@@ -27,17 +27,40 @@ export default React.createClass({
 
   render() {
     
-    var heading = <legend>New Case</legend>;
+    var heading = <h1>New Case</h1>;
     if(!this.state.newCase)
-      heading = <legend>Edit Case</legend>;
+      heading = <h1>Edit Case</h1>;
     
     return (
       <div>
-      <fieldset>
         {heading}
-      </fieldset>
+        <fieldset>
+          <legend>
+            Family First Details
+          </legend>
+          <div className="container">
+          <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Email" />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Email" />
+                </div>
+              </div>
+          </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>
+            Child Details
+          </legend>
+        </fieldset>
       </div>
-
       );
   }
 });

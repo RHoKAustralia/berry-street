@@ -1,5 +1,6 @@
 package au.org.berrystreet.familyfinder.api;
 
+import au.org.berrystreet.familyfinder.api.services.CaseService;
 import au.org.berrystreet.familyfinder.api.services.PersonService;
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class Application {//extends org.springframework.data.neo4j.config.Neo4jC
 //        setBasePackage("au.org.berrystreet.familyfinder.api");
     }
 
-    public static final String URL = System.getenv("NEO4J_URL") != null ? System.getenv("NEO4J_URL") : "http://neo4j:movies@localhost:7474";
+    public static final String URL = System.getenv("NEO4J_HOST") != null ? System.getenv("NEO4J_HOST") : "http://neo4j:movies@localhost:7474";
 
 //    @Bean
 //    public org.neo4j.ogm.config.Configuration getConfiguration() {
@@ -63,6 +64,7 @@ public class Application {//extends org.springframework.data.neo4j.config.Neo4jC
         SpringApplication.run(Application.class, args);
     }
 
+    @Autowired CaseService caseService;
     @Autowired PersonService personService;
 
 //    @RequestMapping("/graph")

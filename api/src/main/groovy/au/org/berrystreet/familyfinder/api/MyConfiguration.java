@@ -39,7 +39,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "au.org.berrystreet.familyfinder.api.services")
 public class MyConfiguration extends Neo4jConfiguration {
-    static final String NEO4JENVURL = "NEO4J_URL";
+
+    static final String NEO4JENVURL = "NEO4J_HOST";
     static final String URL = System.getenv(NEO4JENVURL) != null ?
             System.getenv(NEO4JENVURL) : "http://neo4j:movies@localhost:7474";
 

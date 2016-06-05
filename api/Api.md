@@ -9,7 +9,7 @@ POST /case
 
 return json object
 
-* caseId
+* id
 
 
 ### find all
@@ -17,21 +17,24 @@ return json object
 GET /case
 
 * list
-    * caseId
     * staffName
-    * childName
+    * subject
+    * status
+    * dateOpened
+    * id
+    * caseObjective
 
 
 ### get
 
-GET /case/:id
+GET /case/:caseId
 
 * json object
     - staffName
     - subject
     - status
     - dateOpened
-    - caseId
+    - id
     - caseObjective
     
 
