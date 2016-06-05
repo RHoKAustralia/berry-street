@@ -9,8 +9,8 @@ export default {
   getCases(callback) {
     var cases = [
     { caseId: "12345", staffName: "Jenny", childName: "Bob Jones", caseNumber: "234956"},
-    { caseId: "12346", staffName: "Jenny", childName: "Ben James", caseNumber: "234956"},
-    { caseId: "12347", staffName: "Jenny", childName: "Kate Smith", caseNumber: "234956"},
+    { caseId: "12346", staffName: "Jenny", childName: "Ben James", caseNumber: "234957"},
+    { caseId: "12347", staffName: "Jenny", childName: "Kate Smith", caseNumber: "234958"},
   ];
     setTimeout(() => {
       callback(cases);
@@ -20,8 +20,8 @@ export default {
   getCase(id, callback) {
     var cases = [
     { caseId: "12345", staffName: "Jenny", childName: "Bob Jones", caseNumber: "234956"},
-    { caseId: "12346", staffName: "Jenny", childName: "Ben James", caseNumber: "234956"},
-    { caseId: "12347", staffName: "Jenny", childName: "Kate Smith", caseNumber: "234956"},
+    { caseId: "12346", staffName: "Jenny", childName: "Ben James", caseNumber: "234957"},
+    { caseId: "12347", staffName: "Jenny", childName: "Kate Smith", caseNumber: "234958"},
   ];
     var singleCase = cases[0];
 
