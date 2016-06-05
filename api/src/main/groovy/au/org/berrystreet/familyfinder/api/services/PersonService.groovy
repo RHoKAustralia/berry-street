@@ -1,7 +1,8 @@
 package au.org.berrystreet.familyfinder.api.services;
 
 import au.org.berrystreet.familyfinder.api.controller.requests.PersonChangeRequest
-import au.org.berrystreet.familyfinder.api.controller.requests.RelationshipRequest;
+import au.org.berrystreet.familyfinder.api.controller.requests.RelationshipRequest
+import au.org.berrystreet.familyfinder.api.domain.Person;
 import au.org.berrystreet.familyfinder.api.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,21 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-/**
- * Created by ishepher on 2016-06-04.
- */
 @SuppressWarnings(['DuplicateStringLiteral', 'UnusedMethodParameter', 'DuplicateListLiteral'])@Service
 @Transactional
 class PersonService {
 
     @Autowired PersonRepository personRepository;
 
-    Long newPerson(PersonChangeRequest personChangeRequest) {
-        12345
+    Long create(PersonChangeRequest personChangeRequest) {
+        personRepository.save(new Person(
+                name: personChangeRequest.name
+            )
+        ).id
     }
 
     def update(long personId, PersonChangeRequest personChangeRequest) {
-
+        def person = personRepository.findOne(personId)
+        person.name = personChangeRequest.name
+        personRepository.save(person)
     }
 
     def findRelationshipsForPerson(long personId) {

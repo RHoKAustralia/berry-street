@@ -14,30 +14,30 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 
-//@RestController
+@RestController
 class PersonController {
 
-//    @Autowired PersonService personService
-//
-//    @RequestMapping(
-//            value = '/person',
-//            produces = APPLICATION_JSON_VALUE,
-//            method = RequestMethod.POST)
-//    ResponseEntity<Map> newPerson(@RequestBody PersonChangeRequest personChangeRequest) {
-//        def result = [id: personService.create(personChangeRequest)]
-//        new ResponseEntity<Map>(result, HttpStatus.OK)
-//    }
-//
-//    @RequestMapping(
-//            value = '/person/{personId}',
-//            produces = APPLICATION_JSON_VALUE,
-//            method = RequestMethod.PUT)
-//    ResponseEntity update(@PathVariable('personId') long personId,
-//                          @RequestBody PersonChangeRequest personChangeRequest) {
-//        personService.update(personId, personChangeRequest)
-//        new ResponseEntity(HttpStatus.OK)
-//    }
-//
+    @Autowired PersonService personService
+
+    @RequestMapping(
+            value = '/person',
+            produces = APPLICATION_JSON_VALUE,
+            method = RequestMethod.POST)
+    ResponseEntity<Map> newPerson(@RequestBody PersonChangeRequest personChangeRequest) {
+        def result = [id: personService.create(personChangeRequest)]
+        new ResponseEntity<Map>(result, HttpStatus.OK)
+    }
+
+    @RequestMapping(
+            value = '/person/{personId}',
+            produces = APPLICATION_JSON_VALUE,
+            method = RequestMethod.PUT)
+    ResponseEntity update(@PathVariable('personId') long personId,
+                          @RequestBody PersonChangeRequest personChangeRequest) {
+        personService.update(personId, personChangeRequest)
+        new ResponseEntity(HttpStatus.OK)
+    }
+
 //    @RequestMapping(
 //            value = '/person/{personId}/relationships',
 //            produces = APPLICATION_JSON_VALUE,
