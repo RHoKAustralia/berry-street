@@ -43,10 +43,11 @@ export default React.createClass({
   },
   
   logout() {
+    localStorage.removeItem('userToken');
     this.setState({idToken: null});
   },
   
-  render() {
+  render() {    
     if (this.state.idToken) {
     return (
         <main lock={this.lock} idToken={this.state.idToken} >
@@ -55,7 +56,7 @@ export default React.createClass({
             <Link to='/about'>About</Link>&nbsp;|&nbsp;
             <Link to='/users'>Users</Link>&nbsp;|&nbsp;
             <Link to='/cases'>Case List</Link>&nbsp;|&nbsp;
-            <Link to='/' onClick={this.logout}>Log out</Link>
+            <Link to='#' onClick={this.logout}>Log out</Link>
           </nav>
           {this.props.children}
         </main>
