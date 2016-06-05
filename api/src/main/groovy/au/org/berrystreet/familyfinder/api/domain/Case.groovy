@@ -16,6 +16,9 @@ class Case {
     // Figure it out or call our ID something else
     @GraphId Long id
 
+    public Long getId() {
+        return id;
+    }
     String staffName
 
     @Relationship(type = "SUBJECT", direction = Relationship.OUTGOING)

@@ -22,14 +22,14 @@ class CaseService {
     }
 
     def get(long caseId) {
-        caseRepository.findOne(caseId)
+        caseRepository.findOne(caseId, 2)
     }
 
     Long create(Case caseCreateRequest) {
-        caseCreateRequest.caseId = null;
+        caseCreateRequest.id = null;
         // validation etc....
         def newObj = caseRepository.save(caseCreateRequest)
-        newObj.caseId
+        newObj.id
     }
 
     def upsert(Case caseUpdateRequest) {
