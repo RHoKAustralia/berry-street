@@ -1,5 +1,6 @@
 import React from 'react';
 import Person from './Person.js';
+import EditPerson from './EditPerson.js';
 import API from '../api.js';
 
 export default React.createClass({
