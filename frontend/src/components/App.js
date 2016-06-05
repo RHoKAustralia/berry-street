@@ -1,6 +1,5 @@
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
-// import Auth0Variables from './auth0-variables.js';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
 import Home from './Home.js';
@@ -64,14 +63,13 @@ export default React.createClass({
               <li><Link to='/about'>About</Link></li>
               <li><Link to='/users'>Users</Link></li>
               <li><Link to='/cases'>Case List</Link></li>
-              </ul>
+            </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><Link to='#' onClick={this.logout}>Log out</Link></li>
               </ul>
           </div>
         </nav>
           {this.props.children}
-        </div>
         </main>
       );
       } else {
