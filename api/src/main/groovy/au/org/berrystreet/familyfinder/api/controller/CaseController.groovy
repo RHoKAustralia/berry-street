@@ -38,9 +38,10 @@ class CaseController {
             value = '/case',
             produces = APPLICATION_JSON_VALUE,
             method = RequestMethod.GET)
-    ResponseEntity<Iterable> get() {
+    ResponseEntity<String> get() {
         def result = caseService.getAll()
-        new ResponseEntity<Iterable>(result, defaultHeaders(), HttpStatus.OK)
+        def json = new ObjectMapper().writeValueAsString(result);
+        new ResponseEntity<String>(json, defaultHeaders(), HttpStatus.OK)
     }
 
     @RequestMapping(
