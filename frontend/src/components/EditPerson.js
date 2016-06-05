@@ -8,7 +8,7 @@ export default React.createClass({
         address: null,
         phone: null,
         howFound: null, 
-        doNotContact: null, 
+        allowContact: null, 
       },
       personLoaded: false,
       newPerson: true,
@@ -18,6 +18,14 @@ export default React.createClass({
   componentDidMount() {
     if(this.props.params.personId)
     {
+      this.setState({
+        person: { 
+          name: "David Smith", 
+          address: "100 Main St, Townsville",
+          phone: "(555)-6363636",
+          howFound: "Facebook", 
+          allowContact: true, 
+      }});
       /*
       API.getCase(this.props.params.personId, dbCase => {
         this.setState({ffCase: dbCase});
@@ -31,7 +39,9 @@ export default React.createClass({
       this.setState({personLoaded: true});
     }
   },
-
+  saveAndContinue(){
+    
+  },
   render() {
     
     var heading = <legend>New Person</legend>;
@@ -39,14 +49,13 @@ export default React.createClass({
       heading = <legend>Edit Person</legend>;
     
     return (
-      <div>
+      <div className="container">
         <fieldset>
           {heading}
         </fieldset>
         <legend>
            Person Details
          </legend>
-          <div className="container">
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
@@ -80,15 +89,17 @@ export default React.createClass({
             <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
-                    <label for="personDNC">Do Not Contact</label> 
+                    <label for="personAllowContact">Continue Contact</label> 
                     <input type="checkbox" className="form-control"
-                          ref="doNotContact" id="personDNC" 
-                          defaultValue={ this.state.person.doNotContact } />
+                          ref="allowContact" id="personAllowContact" 
+                          defaultValue={ this.state.person.allowContact } />
                 </div>
               </div>
             </div>
+            <div className="row">
+              <button onClick={ this.saveAndContinue }>Save and Continue</button>              
+            </div>
            </div>
-         </div>
 
       );
   }
