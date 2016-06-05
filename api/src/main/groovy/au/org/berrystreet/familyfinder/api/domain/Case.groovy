@@ -5,11 +5,8 @@ import com.voodoodyne.jackson.jsog.JSOGGenerator
 import org.neo4j.ogm.annotation.GraphId
 import org.neo4j.ogm.annotation.NodeEntity
 
-@JsonIdentityInfo(generator=JSOGGenerator.class)
+@JsonIdentityInfo(generator=JSOGGenerator)
 @NodeEntity
 class Case {
-
-    @GraphId Long id;
-
-
+    @GraphId Long id
 }

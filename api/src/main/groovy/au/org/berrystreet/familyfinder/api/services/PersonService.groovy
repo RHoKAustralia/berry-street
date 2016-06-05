@@ -1,19 +1,23 @@
-package au.org.berrystreet.familyfinder.api.services
+package au.org.berrystreet.familyfinder.api.services;
 
-import au.org.berrystreet.familyfinder.api.controller.requests.PersonChangeRequest
-import au.org.berrystreet.familyfinder.api.controller.requests.RelationshipRequest
-import au.org.berrystreet.familyfinder.api.repositories.PersonRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
+import au.org.berrystreet.familyfinder.api.controller.requests.PersonChangeRequest;
+import au.org.berrystreet.familyfinder.api.repositories.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
+import java.util.*;
+
+/**
+ * Created by ishepher on 2016-06-04.
+ */
+@SuppressWarnings(['DuplicateStringLiteral', 'UnusedMethodParameter', 'DuplicateListLiteral'])@Service
 @Transactional
 class PersonService {
 
     @Autowired PersonRepository personRepository;
 
-    Long create(PersonChangeRequest personChangeRequest) {
+    Long newPerson(PersonChangeRequest personChangeRequest) {
         12345
     }
 
@@ -23,21 +27,17 @@ class PersonService {
 
     def findRelationshipsForPerson(long personId) {
         [
-                [
-                        id: 51,
-                        name: 'Bertha',
-                        relationship: 'Aunt'
-                ],
-                [
-                        id: 52,
-                        name: 'Rob',
-                        relationship: 'Uncle'
-                ]
+            [
+                id          : 51,
+                name        : 'Bertha',
+                relationship: 'Aunt'
+            ],
+            [
+                id          : 52,
+                name        : 'Rob',
+                relationship: 'Uncle'
+            ]
         ]
-    }
-
-    def createRelationship(long fromPerson, long toPerson, RelationshipRequest relationshipRequest) {
-        4321
     }
 
     private Map<String, Object> toD3Format(Iterator<Map<String, Object>> result) {
@@ -69,9 +69,8 @@ class PersonService {
         return result;
     }
 
-    public Map<String, Object> graph(int limit) {
-        Iterator<Map<String, Object>> result = personRepository.graph(limit).iterator();
-        return toD3Format(result);
-    }
-
+//    public Map<String, Object> graph(int limit) {
+//        Iterator<Map<String, Object>> result = personRepository.graph(limit).iterator();
+//        return toD3Format(result);
+//    }
 }

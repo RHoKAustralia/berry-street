@@ -63,4 +63,7 @@ gradle-app.setting
 ops/ansible/output/*
 api/gradle/.DS_Store
 secrets.json
-/spikes/auth0-react-sample/auth0-variables.js
+
+# oauth variables
+**/auth0-variables.js
+/spikes/auth0-react-sample/npm-debug.log
