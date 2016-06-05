@@ -1,4 +1,4 @@
-  
+
 neo4j-db:
   image: neo4j:3.0
   container_name: neo4j-db
@@ -32,7 +32,7 @@ berry-api:
     # MYSQL_HOST: mysql-db
     # MYSQL_USER: root
     # MYSQL_PASSWORD: my-secret-pw
-    NEO4J_HOST: neo4j-db
+    NEO4J_HOST: http://neo4j:neo4j@rhok.berrystreet.org.au:7474
     # NEO4J_USER: neo4j
     # NEO4J_PASSWORD: my-secret-pw
 
@@ -45,4 +45,3 @@ berry-frontend:
     - "80:80"
   environment:
     API_ENDPOINT: http://berry-api:8080/
-
