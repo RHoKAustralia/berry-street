@@ -1,5 +1,6 @@
 package au.org.berrystreet.familyfinder.api;
 
+import au.org.berrystreet.familyfinder.api.services.CaseService;
 import au.org.berrystreet.familyfinder.api.services.PersonService;
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,7 @@ public class Application {//extends org.springframework.data.neo4j.config.Neo4jC
         SpringApplication.run(Application.class, args);
     }
 
+    @Autowired CaseService caseService;
     @Autowired PersonService personService;
 
 //    @RequestMapping("/graph")
