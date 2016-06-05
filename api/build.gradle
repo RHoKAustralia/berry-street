@@ -12,7 +12,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'codenarc'
+//apply plugin: 'codenarc'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
 // http://stackoverflow.com/questions/36407803/graphquerylookupstrategy-resolvequery-exception-on-migration-from-sdn-4-0-to-sdn
@@ -84,22 +84,22 @@ jar {
 ////////////////////////////////////////////
 // codenarc
 
-processResources {
-    filesMatching("**/application.properties") {
-        expand(project.properties)
-    }
-}
+//processResources {
+//    filesMatching("**/application.properties") {
+//        expand(project.properties)
+//    }
+//}
 
-codenarc {
-    toolVersion = "0.25.2"
-}
-
-codenarcMain {
-    configFile = rootProject.file("config/codenarc/rules.groovy")
-}
-
-codenarcTest {
-    configFile = rootProject.file("config/codenarc/rules.groovy")
-}
+//codenarc {
+//    toolVersion = "0.25.2"
+//}
+//
+//codenarcMain {
+//    configFile = rootProject.file("config/codenarc/rules.groovy")
+//}
+//
+//codenarcTest {
+//    configFile = rootProject.file("config/codenarc/rules.groovy")
+//}
 
 ////////////////////////////////////////////

@@ -11,9 +11,6 @@ import EditCase from './components/EditCase.js';
 import LoggedIn from './components/LoggedIn.js';
 import Index from './components/Index.js';
 import Home from './components/Home.js';
-import LogOut from './components/LogOut.js';
-
-
 
 ReactDOM.render((
   <Router history={hashHistory}>
@@ -26,7 +23,7 @@ ReactDOM.render((
       <Route path="/case/:caseId" component={Case} />
       <Route path="/case" component={EditCase} />
       <Route path="/case/:caseId/edit" component={EditCase} />
-      <Route path="/logout" component={LogOut} />
     </Route>
+    <Route path="*" component={App} />
   </Router>
 ), document.getElementById('app'));
