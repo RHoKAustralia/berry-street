@@ -2,8 +2,10 @@ package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.controller.requests.PersonChangeRequest
 import au.org.berrystreet.familyfinder.api.domain.Case
+import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.services.CaseService
 import au.org.berrystreet.familyfinder.api.services.PersonService
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
@@ -36,19 +38,23 @@ class CaseController {
             value = '/case',
             produces = APPLICATION_JSON_VALUE,
             method = RequestMethod.GET)
-    ResponseEntity<Iterable> get() {
+    ResponseEntity<String> get() {
         def result = caseService.getAll()
-        new ResponseEntity<Iterable>(result, defaultHeaders(), HttpStatus.OK)
+        def json = new ObjectMapper().writeValueAsString(result);
+        new ResponseEntity<String>(json, defaultHeaders(), HttpStatus.OK)
     }
 
     @RequestMapping(
             value = '/case/{caseId}',
             produces = APPLICATION_JSON_VALUE,
             method = RequestMethod.GET)
-    ResponseEntity<Case> get(@PathVariable('caseId') long caseId) {
+    ResponseEntity<String> get(@PathVariable('caseId') long caseId) {
         def result = caseService.get(caseId)
-        new ResponseEntity<Case>(result, defaultHeaders(), HttpStatus.OK)
         // TODO 404 if result == null
+//        result.subject = new Person()
+//        result.subject.name = "TEST"
+        def json = new ObjectMapper().writeValueAsString(result);
+        new ResponseEntity<String>(json, defaultHeaders(), HttpStatus.OK)
     }
 
     def defaultHeaders() {
