@@ -38,22 +38,22 @@ class PersonController {
         new ResponseEntity(HttpStatus.OK)
     }
 
-    @RequestMapping(
-            value = '/person/{personId}/relationships',
-            produces = APPLICATION_JSON_VALUE,
-            method = RequestMethod.GET)
-    ResponseEntity<List> getRelationships(@PathVariable('personId') long personId) {
-        new ResponseEntity<List>(personService.findRelationshipsForPerson(personId), HttpStatus.valueOf(200))
-    }
-
-    @RequestMapping(
-            value = '/person/{personId}/relationshipWith/{otherPersonId}',
-            produces = APPLICATION_JSON_VALUE,
-            method = RequestMethod.POST)
-    ResponseEntity<Map> newRelationship(    @PathVariable('personId') long personId,
-                                            @PathVariable('otherPersonId') long otherPersonId,
-                                            @RequestBody RelationshipRequest relationshipRequest) {
-        def result = [id: personService.createRelationship(personId, otherPersonId, relationshipRequest)]
-        new ResponseEntity<Map>(result, HttpStatus.OK)
-    }
+//    @RequestMapping(
+//            value = '/person/{personId}/relationships',
+//            produces = APPLICATION_JSON_VALUE,
+//            method = RequestMethod.GET)
+//    ResponseEntity<List> getRelationships(@PathVariable('personId') long personId) {
+//        new ResponseEntity<List>(personService.findRelationshipsForPerson(personId), HttpStatus.valueOf(200))
+//    }
+//
+//    @RequestMapping(
+//            value = '/person/{personId}/relationshipWith/{otherPersonId}',
+//            produces = APPLICATION_JSON_VALUE,
+//            method = RequestMethod.POST)
+//    ResponseEntity<Map> newRelationship(    @PathVariable('personId') long personId,
+//                                            @PathVariable('otherPersonId') long otherPersonId,
+//                                            @RequestBody RelationshipRequest relationshipRequest) {
+//        def result = [id: personService.createRelationship(personId, otherPersonId, relationshipRequest)]
+//        new ResponseEntity<Map>(result, HttpStatus.OK)
+//    }
 }

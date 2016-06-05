@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.voodoodyne.jackson.jsog.JSOGGenerator
 import org.neo4j.ogm.annotation.GraphId
 import org.neo4j.ogm.annotation.NodeEntity
-import org.neo4j.ogm.annotation.Relationship
 
-@JsonIdentityInfo(generator=JSOGGenerator)
+//@JsonIdentityInfo(generator=JSOGGenerator.class)
 @NodeEntity
 class Person {
+    // Use subclassing - http://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#reference_programming-model_typerepresentationstrategy
+    // gives a label eg: Child:Person
 
     @GraphId Long id
+
     String name
 //    private int born
 //
