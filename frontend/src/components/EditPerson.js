@@ -8,7 +8,7 @@ export default React.createClass({
         address: null,
         phone: null,
         howFound: null, 
-        allowContact: null, 
+        allowContact: false, 
       },
       personLoaded: false,
       newPerson: true,
@@ -26,6 +26,8 @@ export default React.createClass({
           howFound: "Facebook", 
           allowContact: true, 
       }});
+      this.setState({personLoaded: true});
+      this.setState({newPerson: false});
       /*
       API.getCase(this.props.params.personId, dbCase => {
         this.setState({ffCase: dbCase});
@@ -41,6 +43,31 @@ export default React.createClass({
   },
   saveAndContinue(){
     
+  },
+  updateName(event){
+    var person = this.state.person;
+    person.name = event.target.value;
+    this.setState({person: person});
+  },
+  updateAddress(event){
+    var person = this.state.person;
+    person.address = event.target.value;
+    this.setState({person: person});
+  },
+  updatePhone(event){
+    var person = this.state.person;
+    person.phone = event.target.value;
+    this.setState({person: person});
+  },
+  updateHowFound(event){
+    var person = this.state.person;
+    person.howFound = event.target.value;
+    this.setState({person: person});
+  },
+  updateAllowContact(event){
+    var person = this.state.person;
+    person.allowContact = event.target.value;
+    this.setState({person: person});
   },
   render() {
     
@@ -62,7 +89,7 @@ export default React.createClass({
                   <label for="personName">Name</label> 
                   <input type="text" className="form-control"
                         ref="name" id="personName" placeholder="Name"
-                        defaultValue={ this.state.person.name } />
+                        value={ this.state.person.name } onChange={this.updateName} />
                 </div>
               </div>
             </div>
@@ -72,7 +99,7 @@ export default React.createClass({
                     <label for="personAddress">Address</label> 
                     <input type="text" className="form-control"
                             ref="address" id="personAddress" placeholder="Primary Address"
-                            defaultValue={ this.state.person.address } />
+                            value={ this.state.person.address } onChange={this.updateAddress} />
                 </div>
               </div>
             </div>
@@ -82,7 +109,17 @@ export default React.createClass({
                     <label for="personPhone">Phone</label> 
                     <input type="text" className="form-control"
                           ref="phone" id="personPhone" placeholder="Primary Phone"
-                          defaultValue={ this.state.person.phone } />
+                          value={ this.state.person.phone } onChange={this.updatePhone} />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label for="personHowFound">How Found</label> 
+                    <input type="text" className="form-control"
+                            ref="address" id="personHowFound" placeholder="How was the person found"
+                            value={ this.state.person.howFound } onChange={this.updateAddress} />
                 </div>
               </div>
             </div>
@@ -92,7 +129,7 @@ export default React.createClass({
                     <label for="personAllowContact">Continue Contact</label> 
                     <input type="checkbox" className="form-control"
                           ref="allowContact" id="personAllowContact" 
-                          defaultValue={ this.state.person.allowContact } />
+                          value={ this.state.person.allowContact } onChange={this.updateAllowContact}/>
                 </div>
               </div>
             </div>
