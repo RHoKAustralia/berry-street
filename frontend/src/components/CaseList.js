@@ -27,11 +27,10 @@ export default React.createClass({
   render() {
     return (
       <div className="container">
-      <div class="page-header">
+      <div className="page-header">
         <h1>Existing Cases <small><Link to='/case'>Add New Case</Link></small></h1>
       </div>
         <fieldset>
-          <legend></legend>
           <table className="table table-striped">
             <thead>
               <tr>
