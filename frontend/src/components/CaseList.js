@@ -18,15 +18,7 @@ export default React.createClass({
   cases() {
     var rows = [];
     this.state.cases.map((c, i) => {     
-     rows.push(
-        <tr>
-          <td>{c.caseNumber}</td>
-          <td>{c.childName}</td>
-          <td>{c.staffName}</td>
-          <td><CaseViewLink key={i} caseId={c.caseId} /></td>
-          <td><CaseEditLink key={i} caseId={c.caseId} /></td>
-        </tr>   
-        );
+     rows.push(<CaseRow key={i} caseNumber={c.caseNumber} caseId={c.caseId} staffName={c.staffName} childName={c.childName} />  );
       });
     
     return rows;
@@ -54,6 +46,19 @@ export default React.createClass({
           </table>
         </fieldset>
      </div>
+    );
+  }
+});
+
+var CaseRow = React.createClass({
+  render() { return (
+    <tr>
+          <td>{this.props.caseNumber}</td>
+          <td>{this.props.childName}</td>
+          <td>{this.props.staffName}</td>
+          <td><CaseViewLink caseId={this.props.caseId} /></td>
+          <td><CaseEditLink caseId={this.props.caseId} /></td>
+        </tr>
     );
   }
 });
