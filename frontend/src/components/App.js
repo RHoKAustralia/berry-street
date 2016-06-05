@@ -56,6 +56,8 @@ export default React.createClass({
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
+            <span className="brand brand-name navbar-left"><img src="src/assets/images/berry-street-sml.png" alt="Berry Street" />
+            </span>
               <IndexLink to="/" className="navbar-brand">Family Finder</IndexLink>
             </div>
             <ul className="nav navbar-nav">

@@ -1,0 +1,11 @@
+a {
+color: #1198aa;
+}
+
+#app > main > nav {
+  height: 52px;
+}
+
+#app > main > nav > div > div > span > img {
+  margin-right: 2em;
+}
