@@ -17,6 +17,10 @@ class PersonService {
 
     @Autowired PersonRepository personRepository;
 
+    def get(long personId) {
+        personRepository.findOne(personId)
+    }
+
     Long create(PersonChangeRequest personChangeRequest) {
         personRepository.save(new Person(
                 name: personChangeRequest.name
@@ -31,17 +35,10 @@ class PersonService {
     }
 
     def findRelationshipsForPerson(long personId) {
+        def person = get(personId)
         [
-            [
-                id          : 51,
-                name        : 'Bertha',
-                relationship: 'Aunt'
-            ],
-            [
-                id          : 52,
-                name        : 'Rob',
-                relationship: 'Uncle'
-            ]
+            [type: 'father', person: person.father.with { [id: id, name: name] }],
+            [type: 'mother', person: person.mother.with { [id: id, name: name] }],
         ]
     }
 
@@ -49,10 +46,10 @@ class PersonService {
         def to = personRepository.findOne(toPerson)
         def from = personRepository.findOne(fromPerson)
         switch(relationshipRequest.type) {
-            case 'HAS_MOTHER':
+            case 'mother':
                 from.mother = to
                 break;
-            case 'HAS_FATHER':
+            case 'father':
                 from.father = to
                 break;
         }

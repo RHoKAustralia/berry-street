@@ -8,9 +8,8 @@ export default React.createClass({
   render: function() {
     return (
     <div className="login-box auth0-box before">
-      <img src="https://i.cloudup.com/StzWWrY34s.png" />
-      <h3>Auth0 Example</h3>
-      <p>Zero friction identity infrastructure, built for developers</p>
+      <img src="http://www.berrystreet.org.au/custom/berrystreet/templates/images/xBerry-Street_Vert.gif.pagespeed.ic.7ZRIYBW81C.png" className="center-block" />
+      <div>&nbsp;</div>
       <a onClick={this.showLock} className="btn btn-primary btn-lg btn-login btn-block">Sign In</a>
     </div>);
   }
