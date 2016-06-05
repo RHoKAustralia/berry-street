@@ -17,7 +17,7 @@ export default React.createClass({
 
   cases() {
     var rows = [];
-    this.state.cases.map((c, i) => {     
+    this.state.cases.map((c, i) => {
      rows.push(
         <tr>
           <td>{c.caseNumber}</td>
@@ -25,19 +25,21 @@ export default React.createClass({
           <td>{c.staffName}</td>
           <td><CaseViewLink key={i} caseId={c.caseId} /></td>
           <td><CaseEditLink key={i} caseId={c.caseId} /></td>
-        </tr>   
+        </tr>
         );
       });
-    
+
     return rows;
   },
 
   render() {
     return (
-      <div>
-        <h2><Link to='/case'>New Case</Link></h2>
+      <div className="container">
+      <div class="page-header">
+        <h1>Existing Cases <small><Link to='/case'>Add New Case</Link></small></h1>
+      </div>
         <fieldset>
-          <legend>Existing Cases</legend>
+          <legend></legend>
           <table className="table table-striped">
             <thead>
               <tr>
@@ -45,10 +47,10 @@ export default React.createClass({
                 <th>Child Name</th>
                 <th>Staff Member</th>
                 <th>View</th>
-                <th>Edit</th>              
+                <th>Edit</th>
               </tr>
-            </thead>   
-              <tbody>           
+            </thead>
+              <tbody>
                 {this.cases()}
               </tbody>
           </table>
@@ -73,4 +75,3 @@ var CaseEditLink = React.createClass({
     );
   }
 });
-
