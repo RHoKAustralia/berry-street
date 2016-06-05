@@ -33,7 +33,7 @@ public class Application {//extends org.springframework.data.neo4j.config.Neo4jC
 //        setBasePackage("au.org.berrystreet.familyfinder.api");
     }
 
-    public static final String URL = System.getenv("NEO4J_URL") != null ? System.getenv("NEO4J_URL") : "http://neo4j:movies@localhost:7474";
+    public static final String URL = System.getenv("NEO4J_HOST") != null ? System.getenv("NEO4J_HOST") : "http://neo4j:movies@localhost:7474";
 
 //    @Bean
 //    public org.neo4j.ogm.config.Configuration getConfiguration() {
