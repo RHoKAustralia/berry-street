@@ -8,15 +8,14 @@ import PersonList from './components/PersonList.js';
 import CaseList from './components/CaseList.js';
 import Case from './components/Case.js';
 import EditCase from './components/EditCase.js';
-import LoggedIn from './components/LoggedIn.js';
+//import LoggedIn from './components/LoggedIn.js';
 import Index from './components/Index.js';
-import Home from './components/Home.js';
+import Login from './components/Login.js';
 
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App} >
       <IndexRoute component={Index} />
-      <Route path="/home" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/users" component={PersonList} />
       <Route path="/cases" component={CaseList} />

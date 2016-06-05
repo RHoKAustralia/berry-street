@@ -73,7 +73,7 @@ export default React.createClass({
         </main>
       );
       } else {
-       return (<Home lock={this.lock} />);
+       return (<Login lock={this.lock} />);
     }
 
 /*
