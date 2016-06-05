@@ -1,6 +1,6 @@
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
-//import Auth0Variables from './auth0-variables.js';
+// import Auth0Variables from './auth0-variables.js';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
 import Home from './Home.js';
@@ -45,14 +45,26 @@ export default React.createClass({
     if (this.state.idToken) {
     return (
         <main lock={this.lock} idToken={this.state.idToken} >
-          <h1><IndexLink to="/">Family Finder</IndexLink></h1>
-          <nav>
-            <Link to='/about'>About</Link>&nbsp;|&nbsp;
-            <Link to='/users'>Users</Link>&nbsp;|&nbsp;
-            <Link to='/cases'>Case List</Link>&nbsp;|&nbsp;
-            <Link to='/logout'>Logout</Link>
-          </nav>
+
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <IndexLink to="/" className="navbar-brand">Family Finder</IndexLink>
+            </div>
+            <ul className="nav navbar-nav">
+              <li className="active"><a href="#">Home</a></li>
+              <li><Link to='/about'>About</Link></li>
+              <li><Link to='/users'>Users</Link></li>
+              <li><Link to='/cases'>Case List</Link></li>
+              </ul>
+              <ul className="nav navbar-nav navbar-right">
+                <li><Link to='/logout'>Logout</Link></li>
+              </ul>
+          </div>
+        </nav>
+        <div className="container">
           {this.props.children}
+        </div>
         </main>
       );
       } else {
