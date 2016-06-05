@@ -1,6 +1,6 @@
 import React from 'react';
 import { IndexLink, Link } from 'react-router';
-import Auth0Variables from './auth0-variables.js';
+//import Auth0Variables from './auth0-variables.js';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
 import Home from './Home.js';
