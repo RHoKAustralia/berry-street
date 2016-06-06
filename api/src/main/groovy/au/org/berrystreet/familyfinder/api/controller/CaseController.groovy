@@ -63,26 +63,4 @@ class CaseController {
         headers
     }
 
-
-//
-//    @RequestMapping(value = '/case', produces = APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-//    ResponseEntity<List<Map>> listAll() {
-//
-//        def result = [
-//            [
-//                caseId: 1,
-//                caseNumber: caseNumber,
-//                staffName: staffName,
-//                childName: child1Name
-//            ],
-//            [
-//                caseId: 2,
-//                caseNumber: caseNumber,
-//                staffName: staffName,
-//                childName: 'Roslyn'
-//            ],
-//        ]
-//
-//        new ResponseEntity<List<Map>>(result, HttpStatus.OK)
-//    }
 }
