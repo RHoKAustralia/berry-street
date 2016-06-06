@@ -68,7 +68,7 @@ POST /person/:personId
 GET /person/:personId/relationships
 
 * list of directly connected people
-    * personId
+    * id
     * name
     * relationship
     
