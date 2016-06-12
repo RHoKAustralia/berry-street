@@ -1,7 +1,7 @@
 import React from 'react';
-import Person from './Person.js';
-import EditPerson from './EditPerson.js';
-import API from '../api.js';
+import Person from './Person.jsx';
+import EditPerson from './EditPerson.jsx';
+import API from '../api.jsx';
 
 export default React.createClass({
   getInitialState() {

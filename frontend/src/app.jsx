@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-import App from './components/App.js';
-import About from './components/About.js';
-import PersonList from './components/PersonList.js';
-import EditPerson from './components/EditPerson.js';
-import Person from './components/Person.js';
-import CaseList from './components/CaseList.js';
-import Case from './components/Case.js';
-import EditCase from './components/EditCase.js';
-//import LoggedIn from './components/LoggedIn.js';
-import Index from './components/Index.js';
-import Login from './components/Login.js';
+import App from './components/App.jsx';
+import About from './components/About.jsx';
+import PersonList from './components/PersonList.jsx';
+import EditPerson from './components/EditPerson.jsx';
+import Person from './components/Person.jsx';
+import CaseList from './components/CaseList.jsx';
+import Case from './components/Case.jsx';
+import EditCase from './components/EditCase.jsx';
+//import LoggedIn from './components/LoggedIn.jsx';
+import Index from './components/Index.jsx';
+import Login from './components/Login.jsx';
 
 ReactDOM.render((
   <Router history={hashHistory}>

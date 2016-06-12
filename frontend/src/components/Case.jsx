@@ -1,5 +1,5 @@
 import React from 'react';
-import API from '../api.js';
+import API from '../api.jsx';
 
 export default React.createClass({
   getInitialState() {

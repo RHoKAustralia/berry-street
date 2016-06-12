@@ -2,9 +2,9 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
-import Login from './Login.js';
-//import LoggedIn from './LoggedIn.js';
-import config from '../config.js';
+import Login from './Login.jsx';
+//import LoggedIn from './LoggedIn.jsx';
+import config from '../config.jsx';
 
 export default React.createClass({
   componentWillMount: function() {
