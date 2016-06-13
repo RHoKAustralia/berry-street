@@ -13,17 +13,17 @@ export default React.createClass({
 
   componentDidMount() {
     API.getUsers(newUsers => {
-      this.setState({users: newUsers});
+      this.setState({ users: newUsers });
     });
   },
 
   updateName(e) {
-    this.setState({newUser: e.target.value});
+    this.setState({ newUser: e.target.value });
   },
 
   addUser() {
     var newUsers = this.state.users.concat(this.state.newUser);
-    this.setState({users: newUsers, newUser: ""});
+    this.setState({ users: newUsers, newUser: "" });
   },
 
   users() {
@@ -35,7 +35,7 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <ul>{this.users()}</ul>
+        <ul>{this.users() }</ul>
         <input onChange={this.updateName} value={this.state.newUser} type="text" placeholder="Name" />
         <button type="button" onClick={this.addUser}>Add User</button>
       </div>

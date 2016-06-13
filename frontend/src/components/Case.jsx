@@ -10,7 +10,7 @@ export default React.createClass({
 
   componentDidMount() {
     API.getCase(this.props.params.caseId, newCase => {
-      this.setState({ffCase: newCase});
+      this.setState({ ffCase: newCase });
     });
   },
 
@@ -21,10 +21,10 @@ export default React.createClass({
           <h1>Case <small> ID: {this.state.ffCase.caseId}</small></h1>
         </div>
         <span>
-        <h4>Staff Member Name:</h4> {this.state.ffCase.staffName}
-        <h4>Child Name:</h4> {this.state.ffCase.childName}
+          <h4>Staff Member Name: </h4> {this.state.ffCase.staffName}
+          <h4>Child Name: </h4> {this.state.ffCase.childName}
         </span>
-     </div>
+      </div>
     );
   }
 });

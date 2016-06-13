@@ -11,15 +11,15 @@ export default React.createClass({
 
   componentDidMount() {
     API.getCases(newCases => {
-      this.setState({cases: newCases});
+      this.setState({ cases: newCases });
     });
   },
 
   cases() {
     var rows = [];
     this.state.cases.map((c, i) => {
-     rows.push(<CaseRow key={i} caseId={c.caseId} staffName={c.staffName} childName={c.childName} />  );
-      });
+      rows.push(<CaseRow key={i} caseId={c.caseId} staffName={c.staffName} childName={c.childName} />);
+    });
 
     return rows;
   },
@@ -27,9 +27,9 @@ export default React.createClass({
   render() {
     return (
       <div className="container">
-      <div className="page-header">
-        <h1>Existing Cases <small><Link to='/case'>Add New Case</Link></small></h1>
-      </div>
+        <div className="page-header">
+          <h1>Existing Cases <small><Link to='/case'>Add New Case</Link></small></h1>
+        </div>
         <fieldset>
           <table className="table table-striped">
             <thead>
@@ -41,25 +41,26 @@ export default React.createClass({
                 <th>Edit</th>
               </tr>
             </thead>
-              <tbody>
-                {this.cases()}
-              </tbody>
+            <tbody>
+              {this.cases() }
+            </tbody>
           </table>
         </fieldset>
-     </div>
+      </div>
     );
   }
 });
 
 var CaseRow = React.createClass({
-  render() { return (
-    <tr>
-          <td>{this.props.caseId}</td>
-          <td>{this.props.childName}</td>
-          <td>{this.props.staffName}</td>
-          <td><CaseViewLink caseId={this.props.caseId} /></td>
-          <td><CaseEditLink caseId={this.props.caseId} /></td>
-        </tr>
+  render() {
+    return (
+      <tr>
+        <td>{this.props.caseId}</td>
+        <td>{this.props.childName}</td>
+        <td>{this.props.staffName}</td>
+        <td><CaseViewLink caseId={this.props.caseId} /></td>
+        <td><CaseEditLink caseId={this.props.caseId} /></td>
+      </tr>
     );
   }
 });
