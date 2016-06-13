@@ -6,9 +6,8 @@ Basic getting going instructions
  
 1. open `cmd` window in frontend folder
 2. run `npm install`
-3. run `npm run watch`
-4. run `npm start`
-5. open browser navigate to `http://localhost:8080/index.htm`
+3. run `npm run dev`
+4. open browser navigate to `http://localhost:8080/index.htm`
 
 ## Using Docker
 

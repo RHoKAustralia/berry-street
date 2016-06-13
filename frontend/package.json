@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/webpack",
     "watch": "node_modules/.bin/webpack --watch",
-    "start": "node_modules/.bin/webpack-dev-server"
+    "dev": "node_modules/.bin/parallelshell \"npm run watch\" \"npm run server\" " ,
+    "server": "node_modules/.bin/http-server"
   },
   "author": "",
   "license": "ISC",
@@ -26,7 +27,8 @@
     "webpack": "^1.13.1"
   },
   "devDependencies": {
+    "http-server": "^0.9.0",
     "imports-loader": "^0.6.5",
-    "webpack-dev-server": "^1.14.1"
+    "parallelshell": "^2.0.0"
   }
 }
