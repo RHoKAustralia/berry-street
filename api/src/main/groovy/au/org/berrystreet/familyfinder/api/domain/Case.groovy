@@ -1,27 +1,22 @@
 package au.org.berrystreet.familyfinder.api.domain
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo
-import com.fasterxml.jackson.annotation.JsonProperty
-import com.voodoodyne.jackson.jsog.JSOGGenerator
-import org.neo4j.ogm.annotation.GraphId
 import org.neo4j.ogm.annotation.NodeEntity
 import org.neo4j.ogm.annotation.Relationship
 
-//@JsonIdentityInfo(generator=JSOGGenerator)
 @NodeEntity
-class Case {
-
-    // TODO this is not serialized by Jackson
-    // An example used @JsonIdentityInfo(generator=JSOGGenerator) but that means it invents its own ids
-    // Figure it out or call our ID something else
-    @GraphId Long id
+// http://neo4j.com/docs/ogm-manual/current/#_nodes
+class Case extends GraphEntity {
 
     String staffName
 
+    // http://neo4j.com/docs/ogm-manual/current/#_relationships
+    // StartNode/EndNode are for @RelationshipEntitys
     @Relationship(type = "SUBJECT", direction = Relationship.OUTGOING)
-    Person subject;
+    List<Person> subjects;
 
+//    @EnumString
     String status // TODO enum
-    String dateOpened // TODO date
+//    @DateLong
+    Date dateOpened // TODO date
     String caseObjective
 }

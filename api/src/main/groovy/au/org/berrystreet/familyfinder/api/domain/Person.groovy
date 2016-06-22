@@ -13,6 +13,7 @@ class Person {
 
     String name
 
+    // TODO This only models the relationship's existence. We'll need a @RelationshipEntity class.
     @Relationship(type = "HAS_MOTHER", direction = Relationship.OUTGOING)
     Person mother;
 

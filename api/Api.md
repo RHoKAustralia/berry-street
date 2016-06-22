@@ -1,84 +1,59 @@
+# API for the Family Finder app
+ 
+using the [HAL model](http://stateless.co/hal_specification.html)
+
 
 ## Cases
 
-### create case
+* staffName - string
+* status    - string (TBD enum)
+* dateOpened - string
+* caseObjective - string
+* subjects      - collection of Person URIs
 
-POST /case
+### create Case
 
-* staffName
+POST /cases
 
-return json object
+* Input: Case object
+* Output
+   * The new Case object
+   * URI to retrieve/update the Case object later
+   * URI for the Case object's Subjects collection
 
-* id
+### link a Case to a subject
 
+POST /cases/:caseId/subjects
+
+* Input: URI of a Person
 
 ### find all
 
-GET /case
+GET /cases
 
-* list
-    * staffName
-    * subject
-    * status
-    * dateOpened
-    * id
-    * caseObjective
-
-
-### get
-
-GET /case/:caseId
-
-* json object
-    - staffName
-    - subject
-    - status
-    - dateOpened
-    - id
-    - caseObjective
-    
-
-### Link subject to Case
-
-POST /case/:caseId/person/:personId
-
+* Optional params
+  * size - Limit number of results returned
+* Output
+  * list of Case objects
+  * _links - URI of each case; URI to switch pages in the search result
 
 
 ## People
 
+A Person may be (a) a Subject of Cases, (b) kith / kin of another Person.
 
-### Create subject and/or person
+* name  - string
+* mother - a Person URI (optional)
+* father - a Person URI (optional)
 
-POST /person
-    
-* json object
-    * name
-    * ...
 
-### Update person
+### create Person
 
-POST /person/:personId
+POST /persons
 
-* json object
-    * name
-    * ...
+* Input: Person object
+* Output
+   * The new Person object
+   * URI to retrieve/update the Person object later
 
-### Get relationships
-
-GET /person/:personId/relationships
-
-* list of directly connected people
-    * id
-    * name
-    * relationship
-    
-
-### Link people
-
-POST /person/:personId/relationshipWith/:personId
-
-* json object
-    - connectionType
-    - relationshipHealth
-    - etc
 
