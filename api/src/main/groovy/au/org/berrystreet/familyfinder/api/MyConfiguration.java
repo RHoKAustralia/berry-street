@@ -2,6 +2,7 @@ package au.org.berrystreet.familyfinder.api;
 
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -12,8 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-// http://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#_java_based_bean_configuration
-// (4.1 release)
 @EnableTransactionManagement
 @Configuration
 @EnableNeo4jRepositories(basePackages = "au.org.berrystreet.familyfinder.api.repositories")
@@ -41,6 +40,17 @@ public class MyConfiguration extends Neo4jConfiguration {
     Validator beanValidation() {
         return new LocalValidatorFactoryBean();
     }
+
+    @Bean
+    ApplicationListener<org.springframework.data.neo4j.event.BeforeSaveEvent> auditListener() {
+        // http://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#_data_manipulation_events_formerly_lifecycle_events
+        // Note *After*SaveEvent happens after neo4J commit.
+        return event -> {
+            Object entity = event.getEntity();
+            System.out.println("TODO save audit for: " + entity);
+        };
+    }
+
 
     @Override
     public SessionFactory getSessionFactory() {
