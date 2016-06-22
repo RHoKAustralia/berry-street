@@ -11,6 +11,7 @@ using the [HAL model](http://stateless.co/hal_specification.html)
 * caseObjective - string
 * subjects      - collection of Person URIs
 
+
 ### create Case
 
 POST /cases
@@ -21,11 +22,18 @@ POST /cases
    * URI to retrieve/update the Case object later
    * URI for the Case object's Subjects collection
 
+
+### update Case
+
+PUT :caseURI
+
+
 ### link a Case to a subject
 
-POST /cases/:caseId/subjects
+POST :caseURI/subjects
 
 * Input: URI of a Person
+
 
 ### find all
 
@@ -36,6 +44,7 @@ GET /cases
 * Output
   * list of Case objects
   * _links - URI of each case; URI to switch pages in the search result
+
 
 
 ## People
@@ -55,6 +64,11 @@ POST /persons
 * Output
    * The new Person object
    * URI to retrieve/update the Person object later
+
+
+### update Person
+
+PUT :personURI
 
 
 ### search for Person
