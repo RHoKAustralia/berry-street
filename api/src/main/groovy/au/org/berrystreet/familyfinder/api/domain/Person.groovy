@@ -1,16 +1,15 @@
 package au.org.berrystreet.familyfinder.api.domain
 
-import org.neo4j.ogm.annotation.GraphId
+import org.hibernate.validator.constraints.NotBlank
 import org.neo4j.ogm.annotation.NodeEntity
 import org.neo4j.ogm.annotation.Relationship
 
 @NodeEntity
-class Person {
+class Person extends GraphEntity {
     // Use subclassing - http://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#reference_programming-model_typerepresentationstrategy
     // gives a label eg: Child:Person
 
-    @GraphId Long id
-
+    @NotBlank
     String name
 
     // TODO This only models the relationship's existence. We'll need a @RelationshipEntity class.
