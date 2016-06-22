@@ -57,3 +57,8 @@ POST /persons
    * URI to retrieve/update the Person object later
 
 
+### search for Person
+
+GET /persons/search/nameContains?name=:fragment
+
+Returns Case objects
