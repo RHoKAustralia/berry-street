@@ -73,6 +73,6 @@ PUT :personURI
 
 ### search for Person
 
-GET /persons/search/nameContains?name=:fragment
+GET /persons?nameContains=:fragment
 
 Returns Case objects
