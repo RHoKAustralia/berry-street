@@ -70,3 +70,4 @@ secrets.json
 
 # spikes
 /spikes/auth0-react-sample/npm-debug.log
+/spikes/api/secret.js
