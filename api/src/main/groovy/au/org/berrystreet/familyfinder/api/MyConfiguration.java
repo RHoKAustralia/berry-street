@@ -2,42 +2,23 @@ package au.org.berrystreet.familyfinder.api;
 
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-//
-//import org.neo4j.ogm.session.SessionFactory
-//import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-//import org.springframework.context.annotation.Bean
-//import org.springframework.context.annotation.ComponentScan
-//import org.springframework.context.annotation.Configuration
-//import org.springframework.context.annotation.Import
-//import org.springframework.data.neo4j.config.EnableNeo4jRepositories
-//import org.springframework.data.neo4j.config.Neo4jConfiguration
-//import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration
-//import org.springframework.scheduling.annotation.EnableScheduling
-//import org.springframework.transaction.annotation.EnableTransactionManagement
-//
-///**
-// * Created by ishepher on 2016-06-04.
-// */
-// http://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#_java_based_bean_configuration
-// (4.1 release)
 @EnableTransactionManagement
 @Configuration
 @EnableNeo4jRepositories(basePackages = "au.org.berrystreet.familyfinder.api.repositories")
-// Remove if moving back to spring data rest:
 @Import(RepositoryRestMvcConfiguration.class)
-@EnableScheduling
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "au.org.berrystreet.familyfinder.api.services")
+//@ComponentScan(basePackages = "au.org.berrystreet.familyfinder.api.services")
 public class MyConfiguration extends Neo4jConfiguration {
 
     static final String NEO4JENVURL = "NEO4J_HOST";
@@ -46,6 +27,7 @@ public class MyConfiguration extends Neo4jConfiguration {
 
     @Bean
     org.neo4j.ogm.config.Configuration getConfiguration() {
+        // Another option is 'ogm.properties' file. http://neo4j.com/docs/ogm-manual/current/#tutorial_session
         org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
         config
                 .driverConfiguration()
@@ -53,6 +35,22 @@ public class MyConfiguration extends Neo4jConfiguration {
                 .setURI(URL);
         return config;
     }
+
+    @Bean
+    Validator beanValidation() {
+        return new LocalValidatorFactoryBean();
+    }
+
+    @Bean
+    ApplicationListener<org.springframework.data.neo4j.event.BeforeSaveEvent> auditListener() {
+        // http://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#_data_manipulation_events_formerly_lifecycle_events
+        // Note *After*SaveEvent happens after neo4J commit.
+        return event -> {
+            Object entity = event.getEntity();
+            System.out.println("TODO save audit for: " + entity);
+        };
+    }
+
 
     @Override
     public SessionFactory getSessionFactory() {
