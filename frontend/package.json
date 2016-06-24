@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/webpack",
     "watch": "node_modules/.bin/webpack --watch",
-    "dev": "node_modules/.bin/parallelshell \"npm run watch\" \"npm run server\" " ,
+    "dev": "node_modules/.bin/parallelshell \"npm run watch\" \"npm run server\" ",
     "server": "node_modules/.bin/http-server"
   },
   "author": "",
@@ -20,6 +20,7 @@
     "babel-preset-react": "^6.5.0",
     "jquery": "^2.2.4",
     "json-loader": "^0.5.4",
+    "jwt-decode": "^2.0.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",

@@ -8,7 +8,6 @@ import config from '../config.jsx';
 
 export default React.createClass({
   componentWillMount: function () {
-    this.setupAjax();
     this.createLock();
     this.setState({ idToken: this.getIdToken() })
   },
@@ -16,16 +15,6 @@ export default React.createClass({
     this.lock = new Auth0Lock(
       config.key,
       config.url);
-  },
-  setupAjax: function () {
-    $.ajaxSetup({
-      'beforeSend': function (xhr) {
-        if (localStorage.getItem('userToken')) {
-          xhr.setRequestHeader('Authorization',
-            'Bearer ' + localStorage.getItem('userToken'));
-        }
-      }
-    });
   },
   getIdToken: function () {
     var idToken = localStorage.getItem('userToken');
