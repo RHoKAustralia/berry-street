@@ -1,0 +1,62 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: Berry Street - Family Finder
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /persons:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `Person` objects.
+        Optional query param **nameContains** is a String representing a fragment of the name
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: nameContains
+          in: query
+          description: fragment of the name
+          required: false
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            $ref: '#/definitions/Persons'
+definitions:
+  Persons:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Person'
+      links:
+        $ref: '#/definitions/Links'
+  Person:
+    type: object
+    properties:
+      id:
+        type: number
+        format: long
+      name:
+        type: string
+  Links:
+    type: object
+    properties:
+      self:
+        type: string
+
