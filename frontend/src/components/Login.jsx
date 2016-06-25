@@ -2,7 +2,12 @@ import React from 'react';
 
 export default React.createClass({
   showLock: function () {
-    this.props.lock.show();
+    this.props.lock.show({
+      // ... other options ...
+      authParams: {
+        scope: 'openid offline_access'
+      }
+    });
   },
 
   render: function () {

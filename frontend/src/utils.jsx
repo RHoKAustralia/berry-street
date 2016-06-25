@@ -9,8 +9,8 @@ export default {
       return 0;    
     }
   },
-  hasTokenExpired(token){
+  hasTokenExpired(token, diff_secs){
     let now = Date.now() / 1000;
-    return this.getTokenExpiry(token) <= now;
+    return this.getTokenExpiry(token) <= (now - diff_secs);
   }
 };

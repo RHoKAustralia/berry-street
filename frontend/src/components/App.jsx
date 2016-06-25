@@ -5,11 +5,39 @@ import $ from 'jquery';
 import Login from './Login.jsx';
 import LoggedIn from './LoggedIn.jsx';
 import config from '../config.jsx';
+import utils from '../utils.jsx';
 
 export default React.createClass({
+  refresh_token_check_cycle: 10,
   componentWillMount: function () {
     this.createLock();
     this.setState({ idToken: this.getIdToken() })
+  },
+  componentDidMount: function () {
+    this.timer = setInterval(this.refeshTokenTick, this.refresh_token_check_cycle * 1000);
+  },
+  componentWillUnmount: function () {
+    clearInterval(this.timer);
+  },
+  refeshTokenTick: function () {
+    if (this.state.idToken) {
+      if (utils.hasTokenExpired(this.state.idToken, 2 * this.refresh_token_check_cycle)) {
+        var refreshToken = localStorage.getItem('refreshToken');
+        if (refreshToken) {
+          this.lock.getClient().refreshToken(refreshToken, this.handleRefreshTokenDelegationResult);
+        }
+      }
+    }
+  },
+  handleRefreshTokenDelegationResult: function (err, delegationResult) {
+    if (!err) {
+      var idToken = delegationResult.id_token;
+      localStorage.setItem('userToken', idToken);
+      this.setState({ idToken: idToken })
+    } else {
+      console.log(err);
+      this.logout();
+    }
   },
   createLock: function () {
     this.lock = new Auth0Lock(
@@ -23,16 +51,19 @@ export default React.createClass({
       if (authHash.id_token) {
         idToken = authHash.id_token
         localStorage.setItem('userToken', authHash.id_token);
+        localStorage.setItem('refreshToken', authHash.refresh_token);
       }
       if (authHash.error) {
         console.log("Error signing in", authHash);
       }
     }
+
     return idToken;
   },
 
   logout() {
     localStorage.removeItem('userToken');
+    localStorage.removeItem('refreshToken');
     this.setState({ idToken: null });
   },
 

@@ -1,12 +1,11 @@
 import React from 'react';
-import utils from '../utils.jsx'; 
+import utils from '../utils.jsx';
 
 export default React.createClass({
 
   makeCall: function () {
-      
-    if (!utils.hasTokenExpired(localStorage.getItem('userToken'))) {
 
+    if (!utils.hasTokenExpired(localStorage.getItem('userToken'), 20)) {
       var request = new Request('http://localhost:8081/products/1', {
         headers: new Headers({
           'Authorization': 'Bearer ' + localStorage.getItem('userToken')
