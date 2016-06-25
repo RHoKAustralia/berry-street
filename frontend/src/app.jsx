@@ -10,10 +10,9 @@ import Person from './components/Person.jsx';
 import CaseList from './components/CaseList.jsx';
 import Case from './components/Case.jsx';
 import EditCase from './components/EditCase.jsx';
-//import LoggedIn from './components/LoggedIn.jsx';
 import Index from './components/Index.jsx';
 import Login from './components/Login.jsx';
-
+ 
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App} >

@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/webpack",
     "watch": "node_modules/.bin/webpack --watch",
-    "dev": "node_modules/.bin/parallelshell \"npm run watch\" \"npm run server\" ",
-    "server": "node_modules/.bin/http-server"
+    "dev": "node_modules/.bin/parallelshell \"npm run watch\" \"npm run start\" ",
+    "start": "node_modules/.bin/http-server"
   },
   "author": "",
   "license": "ISC",

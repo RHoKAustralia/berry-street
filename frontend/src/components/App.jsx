@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexLink, Link } from 'react-router';
+import { IndexLink, Link, browserHistory } from 'react-router';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
 import Login from './Login.jsx';
@@ -52,6 +52,7 @@ export default React.createClass({
         idToken = authHash.id_token
         localStorage.setItem('userToken', authHash.id_token);
         localStorage.setItem('refreshToken', authHash.refresh_token);
+        browserHistory.push('#');
       }
       if (authHash.error) {
         console.log("Error signing in", authHash);
