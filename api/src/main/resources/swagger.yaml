@@ -1,41 +1,106 @@
-# Example YAML to get you started quickly.
-# Be aware that YAML has indentation based scoping.
-# Code completion support is available so start typing for available options.
 swagger: '2.0'
 
-# This is your document metadata
 info:
   version: "1.0.0"
   title: Berry Street - Family Finder
 
-# Describe your paths here
+host: rhok.berrystreet.org.au
+basePath: /
+
 paths:
-  # This is a path endpoint. Change it.
   /persons:
-    # This is a HTTP operation
-    get:
-      # Describe this verb here. Note: you can use markdown
+    post:
       description: |
-        Gets `Person` objects.
-        Optional query param **nameContains** is a String representing a fragment of the name
-      # This is array of GET operation parameters:
+        Creates a new `Person`
+      consumes:
+        - application/vnd.api+json
+      produces:
+        - application/vnd.api+json
       parameters:
-        # An example parameter that is in query and is required
+        - name: body
+          in: body
+          description: |
+            `Person` object to create
+          required: true
+          schema:
+            $ref: '#/definitions/Person'
+      responses:
+        "405":
+          description: Invalid input
+
+    put:
+      description: |
+        Updates an existing `Person`
+      consumes:
+        - application/vnd.api+json
+      produces:
+        - application/vnd.api+json
+      parameters:
+        - name: body
+          in: body
+          description: |
+            `Person` object to update
+          required: true
+          schema:
+            $ref: '#/definitions/Person'
+      responses:
+        "405":
+          description: Invalid input
+        "404":
+          description: |
+            `Person` not found
+
+  /persons/${id}:
+    get:
+      description: |
+        Gets `Person` identified with `id`
+      produces:
+        - application/vnd.api+json
+      parameters:
+        - name: id
+          in: path
+          description: ID of person to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Persons'
+
+  /persons/search:
+    get:
+      description: |
+        search for `Person`s that match the criteria provided in the parameters
+      produces:
+        - application/vnd.api+json
+      parameters:
         -
-          name: nameContains
+          name: firstName
+          in: query
+          description: first name
+          required: false
+          type: string
+        -
+          name: lastName
+          in: query
+          description: last name
+          required: false
+          type: string
+        -
+          name: dateOfBirth
           in: query
           description: fragment of the name
           required: false
           type: string
-      # Expected responses for this operation:
+          format: date
       responses:
-        # Response code
         200:
           description: Successful response
-          # A schema describing your response object.
-          # Use JSON Schema format
           schema:
             $ref: '#/definitions/Persons'
+
 definitions:
   Persons:
     type: object
@@ -52,11 +117,15 @@ definitions:
       id:
         type: number
         format: long
-      name:
+      firstName:
         type: string
+      lastName:
+        type: string
+      dateOfBirth:
+        type: string
+        format: date
   Links:
     type: object
     properties:
       self:
         type: string
-
