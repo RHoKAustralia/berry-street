@@ -103,7 +103,7 @@ paths:
 
   /cases:
     get:
-      description: list all cases
+      description: list all `Case`s
       consumes:
         - application/vnd.api+json
       produces:
@@ -112,7 +112,7 @@ paths:
         -
           name: size
           in: query
-          description: Max number of `Cases` to return
+          description: Maximum number of `Cases` to return
           required: false
           type: integer
       responses:
@@ -167,7 +167,38 @@ paths:
             $ref: '#/definitions/CaseResponse'
       responses:
         200:
-          description: Successful Response
+          description: Successfully updated `Case`
+        404:
+          description: Could not find `Case`
+
+  /case/${id}/person/${personId}:
+    post:
+      description: |
+        Link a `Person` to a `Case`
+      consumes:
+        - application/vnd.api+json
+      produces:
+        - application/vnd.api+json
+      parameters:
+        - name: id
+          in: path
+          description: ID of `Case` to update
+          required: true
+          type: integer
+          format: int64
+        - name: personId
+          in: path
+          description: ID of `Person` that should be linked to the `Case`
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: No change. `Person` already linked to `Case`
+        201:
+          description: Successfully linked `Person` to `Case`
+        404:
+          description: Could not find `Person` or `Case`
 
 definitions:
   Persons:
@@ -210,9 +241,9 @@ definitions:
         type: string
       dateOpened:
         type: string
+        format: date
       caseObjective:
         type: string
-      # subjects - collection of Person URIs
   CaseResponse:
     type: object
     properties:
@@ -222,9 +253,14 @@ definitions:
         type: string
       dateOpened:
         type: string
+        format: date
       caseObjective:
         type: string
-      # subjects - collection of Person URIs
+      subjects:
+        type: array
+        items:
+          $ref: '#/definitions/Person'
+          # need to also have the HAL link
       links:
         $ref: '#/definitions/Links'
   Links:
