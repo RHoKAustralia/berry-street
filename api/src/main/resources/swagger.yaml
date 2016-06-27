@@ -100,7 +100,55 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Persons'
-
+  
+  /case:
+    post: 
+      description: |
+        Creates a `Case`
+      consumes:
+        - application/vnd.api+json
+      produces:
+        - application/vnd.api+json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: A JSON string containing `Case` details
+          schema:
+            $ref: '#/definitions/Case'
+      responses:
+        201:
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/CaseResponse'
+        405:
+          description: Invalid input
+          
+  /case/${id}: 
+    put: 
+      description: |
+        Update the `Case` identified by `id`
+      consumes:
+        - application/vnd.api+json
+      produces:
+        - application/vnd.api+json
+      parameters:
+        - name: id
+          in: path
+          description: ID of `Case` to update
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          required: true
+          description: A JSON string containing `Case` details
+          schema:
+            $ref: '#/definitions/CaseResponse'
+      responses:
+        200:
+          description: Successful Response  
+            
 definitions:
   Persons:
     type: object
@@ -124,8 +172,35 @@ definitions:
       dateOfBirth:
         type: string
         format: date
+  Case:
+    type: object
+    properties:  
+      staffName:
+        type: string  
+      status:
+        type: string  
+      dateOpened:
+        type: string  
+      caseObjective:
+        type: string
+      # subjects - collection of Person URIs
+  CaseResponse:
+    type: object
+    properties:  
+      staffName:
+        type: string  
+      status:
+        type: string  
+      dateOpened:
+        type: string  
+      caseObjective:
+        type: string
+      # subjects - collection of Person URIs    
+      _links:
+        $ref: '#/definitions/Links'
   Links:
     type: object
     properties:
       self:
         type: string
+
