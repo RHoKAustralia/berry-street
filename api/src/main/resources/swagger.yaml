@@ -100,9 +100,29 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Persons'
-  
+
+  /cases:
+    get:
+      description: list all cases
+      consumes:
+        - application/vnd.api+json
+      produces:
+        - application/vnd.api+json
+      parameters:
+        -
+          name: size
+          in: query
+          description: Max number of `Cases` to return
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            $ref: '#/definitions/Cases'
+
   /case:
-    post: 
+    post:
       description: |
         Creates a `Case`
       consumes:
@@ -123,9 +143,9 @@ paths:
             $ref: '#/definitions/CaseResponse'
         405:
           description: Invalid input
-          
-  /case/${id}: 
-    put: 
+
+  /case/${id}:
+    put:
       description: |
         Update the `Case` identified by `id`
       consumes:
@@ -147,8 +167,8 @@ paths:
             $ref: '#/definitions/CaseResponse'
       responses:
         200:
-          description: Successful Response  
-            
+          description: Successful Response
+
 definitions:
   Persons:
     type: object
@@ -172,35 +192,43 @@ definitions:
       dateOfBirth:
         type: string
         format: date
+  Cases:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/CaseResponse'
+      links:
+        $ref: '#/definitions/Links'
   Case:
     type: object
-    properties:  
+    properties:
       staffName:
-        type: string  
+        type: string
       status:
-        type: string  
+        type: string
       dateOpened:
-        type: string  
+        type: string
       caseObjective:
         type: string
       # subjects - collection of Person URIs
   CaseResponse:
     type: object
-    properties:  
+    properties:
       staffName:
-        type: string  
+        type: string
       status:
-        type: string  
+        type: string
       dateOpened:
-        type: string  
+        type: string
       caseObjective:
         type: string
-      # subjects - collection of Person URIs    
-      _links:
+      # subjects - collection of Person URIs
+      links:
         $ref: '#/definitions/Links'
   Links:
     type: object
     properties:
       self:
         type: string
-
