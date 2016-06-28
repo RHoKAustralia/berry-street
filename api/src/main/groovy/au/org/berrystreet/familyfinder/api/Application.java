@@ -1,14 +1,19 @@
 package au.org.berrystreet.familyfinder.api;
 
+import au.org.berrystreet.familyfinder.api.configuration.SwaggerDocumentationConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.io.IOException;
 
 // http://spring.io/guides/gs/accessing-neo4j-data-rest/
 @SpringBootApplication
-@EnableNeo4jRepositories
+@EnableSwagger2
+@Import(SwaggerDocumentationConfig.class)
+//@EnableNeo4jRepositories
 //@Configuration
 //@Import(FamilyFinderNeo4jConfiguration.class)
 //@RestController("/")
