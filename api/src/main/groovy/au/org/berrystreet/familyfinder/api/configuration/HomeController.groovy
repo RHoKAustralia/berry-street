@@ -1,4 +1,4 @@
-package au.org.berrystreet.familyfinder.api.configuration;
+package au.org.berrystreet.familyfinder.api.configuration
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -9,8 +9,5 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class HomeController {
     @RequestMapping(value = '/')
-    public String index() {
-        System.out.println('swagger-ui.html')
-        return 'redirect:swagger-ui.html'
-    }
+    public String index() { return 'redirect:swagger-ui.html' }
 }
