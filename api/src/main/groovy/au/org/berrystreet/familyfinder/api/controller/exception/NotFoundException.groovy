@@ -1,9 +1,11 @@
-package au.org.berrystreet.familyfinder.api.controller.exception;
+package au.org.berrystreet.familyfinder.api.controller.exception
 
-public class NotFoundException extends ApiException {
-	private int code
-	public NotFoundException (int code, String msg) {
-		super(code, msg)
-		this.code = code
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.ResponseStatus
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class NotFoundException extends RuntimeException {
+	public NotFoundException() {
+		super('The resource you requested does not exist')
 	}
 }
