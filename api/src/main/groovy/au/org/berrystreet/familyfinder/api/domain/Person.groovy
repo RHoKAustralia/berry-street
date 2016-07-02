@@ -1,26 +1,25 @@
 package au.org.berrystreet.familyfinder.api.domain
 
-import org.hibernate.validator.constraints.NotBlank
-import org.neo4j.ogm.annotation.GraphId
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.NodeEntity
-import org.neo4j.ogm.annotation.Relationship
 
-@NodeEntity
-class Person {
-    // Use subclassing - http://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#reference_programming-model_typerepresentationstrategy
-    // gives a label eg: Child:Person
+@NodeEntity(label='Person')
+@JsonIgnoreProperties(value=['@id', 'metaClass'],ignoreUnknown=true)
+class Person extends Entity {
 
-    // https://neo4j.com/docs/ogm-manual/current/#__graphid
-    @GraphId
-    Long id;
+    @ApiModelProperty
+    @JsonProperty('firstName')
+    String firstName = null
 
-    @NotBlank
-    String name
+    @ApiModelProperty
+    @JsonProperty('lastName')
+    String lastName = null
 
-    // TODO This only models the relationship's existence. We'll need a @RelationshipEntity class.
-    @Relationship(type = "HAS_MOTHER", direction = Relationship.OUTGOING)
-    Person mother;
-
-    @Relationship(type = "HAS_FATHER", direction = Relationship.OUTGOING)
-    Person father;
+    @ApiModelProperty
+    @JsonProperty('dateOfBirth')
+    @JsonFormat(pattern='yyyy-MM-dd')
+    Date dateOfBirth = null
 }

@@ -1,30 +1,33 @@
 package au.org.berrystreet.familyfinder.api.domain
 
-import groovy.transform.ToString
-import org.hibernate.validator.constraints.NotEmpty
-import org.neo4j.ogm.annotation.GraphId
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.NodeEntity
-import org.neo4j.ogm.annotation.Relationship
 
-@NodeEntity
-@ToString
-// http://neo4j.com/docs/ogm-manual/current/#_nodes
-class Case {
+@NodeEntity(label='Case')
+@JsonIgnoreProperties(value=['@id', 'metaClass'],ignoreUnknown=true)
+class Case extends Entity {
 
-    // https://neo4j.com/docs/ogm-manual/current/#__graphid
-    @GraphId
-    Long id;
+    @ApiModelProperty
+    @JsonProperty('staffName')
+    String staffName = null
 
-    String staffName
+    @ApiModelProperty
+    @JsonProperty('status')
+    String status = null
 
-    // http://neo4j.com/docs/ogm-manual/current/#_relationships
-    @Relationship(type = "SUBJECT", direction = Relationship.OUTGOING)
-    @NotEmpty
-    List<Person> subjects;
+    @ApiModelProperty
+    @JsonProperty('dateOpened')
+    @JsonFormat(pattern='yyyy-MM-dd')
+    Date dateOpened = null
 
-//    @EnumString
-    String status // TODO enum
-//    @DateLong
-    Date dateOpened // TODO date
-    String caseObjective
+    @ApiModelProperty
+    @JsonProperty('caseObjective')
+    String caseObjective = null
+
+    @ApiModelProperty
+    @JsonProperty('subjects')
+    Person[] subjects = []
 }
