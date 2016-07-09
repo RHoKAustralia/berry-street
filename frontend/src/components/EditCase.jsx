@@ -32,6 +32,7 @@ class EditCase extends Component {
                 <div className="form-group">
                   <label for="caseId">Case Number</label>
                   <input type="text" className="form-control" id="caseId" placeholder="Case Number" {...caseId} />
+                  {caseId.error && caseId.touched && <div className="alert alert-danger" role="alert">{caseId.error}</div>}
                 </div>
               </div>
               <div className="col-md-6">
@@ -78,9 +79,18 @@ class EditCase extends Component {
   }
 }
 
+function validateCase(data, props) {
+  const errors = {}
+  if (!data.caseId) {
+    errors.caseId = 'Required'
+  }
+  return errors
+}
+
 export default reduxForm({
     fields: ['caseId', 'staffName', 'status', 'objective', 'dateOpened'],
-    form: 'editCase'
+    form: 'editCase',
+     validate: validateCase
   },
   state => ({
       initialValues: state.cases.selectedCase
