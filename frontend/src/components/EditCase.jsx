@@ -5,7 +5,7 @@ import { createCase, addCase, fetchCase, updateCase } from '../actions.jsx'
 class EditCase extends Component {
 
   componentWillMount() {
-    this.props.dispatch(this.props.params.caseId ? fetchCase(this.props.params.caseId): createCase())
+    this.props.dispatch(this.props.params.caseId ? fetchCase(this.props.params.caseId) : createCase())
   }
 
   saveCase(caseToSave) {
