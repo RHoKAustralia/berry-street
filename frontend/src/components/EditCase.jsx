@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {reduxForm} from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { createCase, addCase, fetchCase, updateCase } from '../actions.jsx'
+import { withRouter } from 'react-router'
 
 class EditCase extends Component {
 
@@ -10,6 +11,7 @@ class EditCase extends Component {
 
   saveCase(caseToSave) {
     this.props.dispatch(this.props.params.caseId ? updateCase(caseToSave) : addCase(caseToSave))
+    this.props.router.push('/cases')
   }
 
   render() {
@@ -87,6 +89,12 @@ function validateCase(data, props) {
   return errors
 }
 
+EditCase.propTypes = {
+  router: React.PropTypes.shape({
+    push: React.PropTypes.func.isRequired
+  }).isRequired
+};
+
 export default reduxForm({
     fields: ['caseId', 'staffName', 'status', 'objective', 'dateOpened'],
     form: 'editCase',
@@ -95,4 +103,4 @@ export default reduxForm({
   state => ({
       initialValues: state.cases.selectedCase
   })
-)(EditCase);
+)(withRouter(EditCase));
