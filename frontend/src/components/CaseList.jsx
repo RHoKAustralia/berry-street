@@ -21,8 +21,8 @@ const CaseList = React.createClass({
               </tr>
             </thead>
             <tbody>
-              {this.props.cases.map(c =>
-                  <CaseRow key={c.caseId} caseId={c.caseId} staffName={c.staffName} childName={c.childName} />
+              {this.props.cases.map(ffCase =>
+                  <CaseRow key={ffCase.caseId} caseId={ffCase.caseId} staffName={ffCase.staffName} childName={ffCase.childName} />
               )}
             </tbody>
           </table>
@@ -62,14 +62,9 @@ var CaseEditLink = React.createClass({
   }
 });
 
-const mapStateToProps = (state) => {
+export default connect((state) => {
   return {
     cases: state.cases.cases
   }
-}
+})(CaseList)
 
-const VisibleCaseList = connect(
-    mapStateToProps
-)(CaseList)
-
-export default VisibleCaseList
