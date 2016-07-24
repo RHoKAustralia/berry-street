@@ -8,7 +8,6 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
 apply plugin: 'groovy'
 //apply plugin: 'codenarc'
 apply plugin: 'spring-boot'
@@ -31,7 +30,6 @@ dependencies {
 
     compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
-    compile "org.springframework.boot:spring-boot-starter-data-rest" //:$springBootVersion"
     compile "org.springframework.data:spring-data-neo4j:$springDataNeo4jVersion"
 
     compile 'org.neo4j:neo4j-ogm-embedded-driver:2.0.3'
