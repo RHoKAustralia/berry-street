@@ -57,10 +57,9 @@ class People extends Controller<Person> {
             value = '',
             method = GET)
     Person[] list(
-//            @ApiParam(value = 'name') @RequestParam(value = 'name', required = false) String name,
-//            @ApiParam(value = 'DOB') @RequestParam(value = 'dateOfBirth', required = false) Date dateOfBirth
+            @ApiParam(value = 'depth') @RequestParam(value = 'depth', required = true) int depth
     ) {
-        super.list()
+        super.list(depth) as Person[]
     }
 
     @ApiOperation(value = '', notes = 'Gets `Person` identified with `id`', response = Person)
