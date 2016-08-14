@@ -30,6 +30,7 @@ class SwaggerDocumentationConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage('au.org.berrystreet.familyfinder.api.controller'))
                 .build()
+                .ignoredParameterTypes(MetaClass)
                 .apiInfo(apiInfo())
     }
 
