@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 @RequestMapping(value = '/')
 abstract class Controller<T> {
 
-    Iterable<T> list() {
-        service.findAll()
+    T[] list(int depth) {
+        service.findAll(depth)
     }
 
     T create(T entity) {
@@ -22,10 +22,10 @@ abstract class Controller<T> {
         entity
     }
 
-    void delete(Long id) {
-        if (service.find(id) == null) throw new NotFoundException()
-        service.delete(id)
-    }
+//    void delete(Long id) {
+//        if (service.find(id) == null) throw new NotFoundException()
+//        service.delete(id)
+//    }
 
     T update(Long id, T entity) {
         if (service.find(id) == null) throw new NotFoundException()
