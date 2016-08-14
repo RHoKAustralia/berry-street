@@ -1,13 +1,14 @@
 package au.org.berrystreet.familyfinder.api.domain
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.NodeEntity
+import org.neo4j.ogm.annotation.Relationship
 
+@ApiModel(value='Case')
 @NodeEntity(label='Case')
-@JsonIgnoreProperties(value=['@id', 'metaClass'],ignoreUnknown=true)
 class Case extends Entity {
 
     @ApiModelProperty
@@ -21,7 +22,7 @@ class Case extends Entity {
     @ApiModelProperty
     @JsonProperty('dateOpened')
     @JsonFormat(pattern='yyyy-MM-dd')
-    Date dateOpened = null
+    String dateOpened = null
 
     @ApiModelProperty
     @JsonProperty('caseObjective')
@@ -29,5 +30,6 @@ class Case extends Entity {
 
     @ApiModelProperty
     @JsonProperty('subjects')
-    Person[] subjects = []
+    @Relationship(type = 'SUBJECT')
+    List<Subject> subjects = []
 }
