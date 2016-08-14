@@ -8,6 +8,7 @@ final class Constants {
     static final String SPRING_PROFILE_CLOUD = 'cloud'
     static final String SYSTEM_ACCOUNT = 'system'
 
-    static final String APPLICATION_JSON_API_VALUE = 'application/vnd.api+json'
+    static final String APPLICATION_JSON_API = 'application/vnd.api+json'
+    static final String APPLICATION_JSON = 'application/json'
 
 }
