@@ -1,6 +1,6 @@
 
 neo4j-db:
-  image: neo4j:3.0
+  image: neo4j:latest
   container_name: neo4j-db
   ports:
     - "7474:7474"
@@ -32,7 +32,8 @@ berry-api:
     # MYSQL_HOST: mysql-db
     # MYSQL_USER: root
     # MYSQL_PASSWORD: my-secret-pw
-    NEO4J_HOST: http://neo4j:neo4j@rhok.berrystreet.org.au:7474
+#    NEO4J_HOST: http://neo4j:neo4j@rhok.berrystreet.org.au:7474
+    NEO4J_HOST: http://neo4j:neo4j@localhost:7474
     # NEO4J_USER: neo4j
     # NEO4J_PASSWORD: my-secret-pw
 

@@ -1,8 +1,7 @@
 package au.org.berrystreet.familyfinder.api.repositories
 
-import au.org.berrystreet.familyfinder.api.domain.Case
+import au.org.berrystreet.familyfinder.api.domain.Family
 import org.springframework.data.neo4j.repository.GraphRepository
 
-interface CaseRepository extends GraphRepository<Case> {
-
+interface FamilyRepository extends GraphRepository<Family> {
 }

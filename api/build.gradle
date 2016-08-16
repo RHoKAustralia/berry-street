@@ -1,67 +1,50 @@
 buildscript {
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
-        classpath "io.spring.gradle:dependency-management-plugin:0.4.0.RELEASE"
-    }
     repositories {
         jcenter()
         mavenCentral()
-        maven { url "https://repo.spring.io/libs-release" }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
     }
 }
 
-apply plugin: 'java'
 apply plugin: 'groovy'
 //apply plugin: 'codenarc'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
-// http://stackoverflow.com/questions/36407803/graphquerylookupstrategy-resolvequery-exception-on-migration-from-sdn-4-0-to-sdn
-apply plugin: "io.spring.dependency-management"
 
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.data:spring-data-releasetrain:$springDataReleasetrainVersion"
-    }
-}
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
     jcenter()
-    maven {
-        // http://stackoverflow.com/a/36410303/162215
-        url 'https://repo.spring.io/libs-milestone'
-        // url "https://repo.spring.io/libs-release"
-    }
 }
 
-
-// http://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#_dependencies_for_spring_data_neo4j_4_1
-
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    compile "org.codehaus.groovy.modules.http-builder:http-builder:$httpBuilderVersion"
+
     compile "io.springfox:springfox-swagger2:$springfoxVersion"
     compile "io.springfox:springfox-swagger-ui:$springfoxVersion"
-    compile "org.springframework.boot:spring-boot-starter-data-rest" //:$springBootVersion"
+
+    compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     compile "org.springframework.data:spring-data-neo4j:$springDataNeo4jVersion"
+
+    compile 'org.neo4j:neo4j-ogm-embedded-driver:2.0.3'
     compile "joda-time:joda-time:$jodatimeVersion"
-    compile "org.codehaus.groovy.modules.http-builder:http-builder:$httpBuilderVersion"
-    compile "com.voodoodyne.jackson.jsog:jackson-jsog:1.1"
-    compile("org.hibernate:hibernate-validator")
+
+    compile 'com.voodoodyne.jackson.jsog:jackson-jsog:1.1'
 
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
+bootRun {
+    addResources = true
+    systemProperties = System.properties
+
 }
-
-
-////////////////////////////////////////////
-// jar
 
 springBoot {
     executable = true
@@ -76,6 +59,7 @@ def buildNumber() {
 }
 
 version = "0.0.${buildNumber()}"
+project.group = 'au.org.berrystreet'
 
 jar {
     baseName = 'berry-api'
