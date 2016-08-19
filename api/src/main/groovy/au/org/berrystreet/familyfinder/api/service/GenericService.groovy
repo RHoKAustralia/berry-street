@@ -19,11 +19,6 @@ abstract class GenericService<T> implements Service<T> {
     }
 
     @Override
-    void delete(Long id) {
-        getRepository().delete(id)
-    }
-
-    @Override
     T createOrUpdate(T entity) {
         getRepository().save(entity, DEPTH_ENTITY)
         find(((Entity) entity).id)
