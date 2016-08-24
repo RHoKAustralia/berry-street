@@ -1,29 +1,8 @@
 import React from 'react';
-import API from '../api.jsx';
-import { IndexLink, Link } from 'react-router';
+import { Link } from 'react-router';
+import { connect } from 'react-redux'
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      cases: []
-    };
-  },
-
-  componentDidMount() {
-    API.getCases(newCases => {
-      this.setState({ cases: newCases });
-    });
-  },
-
-  cases() {
-    var rows = [];
-    this.state.cases.map((c, i) => {
-      rows.push(<CaseRow key={i} caseId={c.caseId} staffName={c.staffName} childName={c.childName} />);
-    });
-
-    return rows;
-  },
-
+const CaseList = React.createClass({
   render() {
     return (
       <div className="container">
@@ -42,7 +21,9 @@ export default React.createClass({
               </tr>
             </thead>
             <tbody>
-              {this.cases() }
+              {this.props.cases.map(ffCase =>
+                  <CaseRow key={ffCase.caseId} caseId={ffCase.caseId} staffName={ffCase.staffName} childName={ffCase.childName} />
+              )}
             </tbody>
           </table>
         </fieldset>
@@ -80,3 +61,10 @@ var CaseEditLink = React.createClass({
     );
   }
 });
+
+export default connect((state) => {
+  return {
+    cases: state.cases.cases
+  }
+})(CaseList)
+
