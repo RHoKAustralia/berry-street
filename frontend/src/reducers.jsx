@@ -1,8 +1,10 @@
 var update = require('react/lib/update')
 import { ADD_CASE, CREATE_CASE, UPDATE_CASE, FETCH_CASE } from "./actions.jsx"
+import { ADD_PERSON, CREATE_PERSON, UPDATE_PERSON, FETCH_PERSON } from "./actions.jsx"
 
 const initialState = {
-  cases: []
+  cases: [],
+  people: []
 }
 
 export function caseReducer (state = initialState, action) {
@@ -32,3 +34,32 @@ export function caseReducer (state = initialState, action) {
       return state
   }
 }
+  
+  export function personReducer (state = initialState, action) {
+  switch (action.type) {
+    case ADD_PERSON:
+      return Object.assign({}, state, {
+        people: [
+          ...state.people,
+          action.person
+        ]
+      })
+    case UPDATE_PERSON:
+      // TODO: there must be a better way
+      var index = state.people.map(function(c) { return c.id; }).indexOf(action.person.id)
+      return update(state, {
+        people: {
+          [index]: {$set: action.person }
+        }
+      })
+    case CREATE_PERSON:
+      return Object.assign({}, state, {selectedPerson: {}})
+    case FETCH_PERSON:
+      return Object.assign({}, state, {
+        selectedPerson: state.people.find(function(c) { return c.id == action.personId; })
+      })
+    default:
+      return state
+  }
+  }
+

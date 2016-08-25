@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
+import { createPerson, addPerson, fetchPerson, updatePerson } from '../actions.jsx';
+import { withRouter } from 'react-router';
+import { FormInput } from './Form.jsx';
+
 
 export default React.createClass({
   getInitialState() {

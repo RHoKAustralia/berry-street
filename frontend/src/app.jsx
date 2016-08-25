@@ -15,20 +15,25 @@ import Login from './components/Login.jsx';
 
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { caseReducer } from './reducers.jsx';
+import { caseReducer, personReducer } from './reducers.jsx';
 import { reducer as formReducer } from 'redux-form';
 
 const reducer = combineReducers({
   cases: caseReducer,
-  form: formReducer
+  form: formReducer,
+  people: personReducer
 });
 const store = createStore(reducer);
 
 // For testing -- until we bring in async redux actions
-import { addCase, updateCase } from './actions.jsx'
+import { addCase, updateCase, addPerson, updatePerson } from './actions.jsx'
 store.dispatch(addCase({ caseId: "12346", staffName: "Jenny", childName: "Ben James", caseNumber: "234957" }))
 store.dispatch(addCase({ caseId: "12347", staffName: "Jenny", childName: "Kate Smith", caseNumber: "234958" }))
 store.dispatch(updateCase({ caseId: "12347", staffName: "Mia", childName: "Bob Smith", caseNumber: "234958" }))
+
+store.dispatch(addPerson({ id: "12346", name: "Jenny", father: "Ben James", mother: "234957" }))
+store.dispatch(addPerson({ id: "12347", name: "Jenny", father: "Kate Smith", mother: "234958" }))
+store.dispatch(updatePerson({ id: "12347", name: "Mia", father: "Bob Smith", mother: "234958" }))
 
 ReactDOM.render((
   <div>
@@ -42,9 +47,10 @@ ReactDOM.render((
           <Route path="/case/:caseId" component={Case} />
           <Route path="/case" component={EditCase} />
           <Route path="/case/:caseId/edit" component={EditCase} />
-          <Route path="/person" component={Person} />
-          <Route path="/person/new" component={EditPerson} />
-          <Route path="/person/:personId/edit" component={EditPerson} />
+          <Route path="/personlist" component={PersonList} />
+          <Route path="/person/:id" component={Person} />
+          <Route path="/person" component={EditPerson} />
+          <Route path="/person/:id/edit" component={EditPerson} />
         </Route>
         <Route path="*" component={App} />
       </Router>
