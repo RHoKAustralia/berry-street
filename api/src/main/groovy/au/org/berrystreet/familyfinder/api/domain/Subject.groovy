@@ -1,6 +1,7 @@
 package au.org.berrystreet.familyfinder.api.domain
 
 import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.EndNode
 import org.neo4j.ogm.annotation.RelationshipEntity
 import org.neo4j.ogm.annotation.StartNode
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component
 class Subject extends Entity {
     @StartNode Person person
     @EndNode Case aCase
-    String date
+    @ApiModelProperty String date
 
     Subject() { }
 
@@ -20,5 +21,6 @@ class Subject extends Entity {
         this.person = person
         this.aCase = aCase
         this.date = date
+        this.aCase.subjects.add(this)
     }
 }

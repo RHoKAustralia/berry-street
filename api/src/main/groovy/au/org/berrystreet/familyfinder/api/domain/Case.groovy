@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.NodeEntity
 import org.neo4j.ogm.annotation.Relationship
 
+import static org.neo4j.ogm.annotation.Relationship.INCOMING
+
 @ApiModel(value='Case')
 @NodeEntity(label='Case')
 class Case extends Entity {
@@ -30,6 +32,6 @@ class Case extends Entity {
 
     @ApiModelProperty
     @JsonProperty('subjects')
-    @Relationship(type = 'SUBJECT')
+    @Relationship(type = 'SUBJECT', direction = INCOMING)
     List<Subject> subjects = []
 }

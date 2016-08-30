@@ -4,6 +4,7 @@ import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.domain.Subject
 import au.org.berrystreet.familyfinder.api.service.PersonService
 import au.org.berrystreet.familyfinder.api.service.SubjectService
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestParam
 
 import java.text.SimpleDateFormat
@@ -46,7 +47,7 @@ class Cases extends Controller<Case> {
     SubjectService subjectService
 
     @ApiOperation(value = '', notes = 'Creates a `Case`', response = Case)
-    @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Case)])
+    @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Void)])
     @RequestMapping(
             value = '',
             consumes = [APPLICATION_JSON],
@@ -57,7 +58,7 @@ class Cases extends Controller<Case> {
 
     @ApiOperation(value = '', notes = 'Update the `Case` ', response = Void)
     @ApiResponses(value = [
-            @ApiResponse(code = 200, message = 'Successfully updated `Case`', response = Void),
+            @ApiResponse(code = 200, message = 'Successfully updated `Case`', response = Case),
             @ApiResponse(code = 404, message = 'Could not find `Case`', response = Void)])
     @RequestMapping(
             value = '/{id}',
@@ -70,7 +71,7 @@ class Cases extends Controller<Case> {
 
     @ApiOperation(value = '', notes = 'Update the `Case` ', response = Void)
     @ApiResponses(value = [
-            @ApiResponse(code = 200, message = 'Successfully updated `Case`', response = Void),
+            @ApiResponse(code = 200, message = 'Successfully updated `Case`', response = Case),
             @ApiResponse(code = 404, message = 'Could not find `Case`', response = Void)])
     @RequestMapping(
             value = '/{id}/subject/{personId}',
@@ -86,13 +87,14 @@ class Cases extends Controller<Case> {
     }
 
     @ApiOperation(value = '', notes = 'list all `Case`s')
-    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful Response')])
+    @ApiResponses(value = [
+        @ApiResponse(code = 200, message = 'Successful Response', response = Case, responseContainer = 'List')])
     @RequestMapping(value = '',
             method = GET)
     Case[] list(
 //            @ApiParam(value = 'depth') @RequestParam(value = 'depth', required = true) int depth
     ) {
-        super.list(0) as Case[]
+        super.list(1) as Case[]
     }
 
     @ApiOperation(value = '', notes = 'list all `Case`s', response = Case)

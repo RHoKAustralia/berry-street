@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 class SubjectService extends GenericService<Subject> {
 
     @Autowired
-    SubjectRepository repository
+    private SubjectRepository repository
 
     @Override
     GraphRepository<Subject> getRepository() { return repository }
