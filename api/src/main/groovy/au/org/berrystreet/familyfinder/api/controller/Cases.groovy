@@ -88,7 +88,6 @@ class Cases extends Controller<Case> {
     @ApiOperation(value = '', notes = 'list all `Case`s')
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful Response')])
     @RequestMapping(value = '',
-            consumes = [APPLICATION_JSON],
             method = GET)
     Case[] list(
 //            @ApiParam(value = 'depth') @RequestParam(value = 'depth', required = true) int depth
