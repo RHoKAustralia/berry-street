@@ -6,6 +6,7 @@ import au.org.berrystreet.familyfinder.api.service.PersonService
 import au.org.berrystreet.familyfinder.api.service.SubjectService
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.CrossOrigin
 
 import java.text.SimpleDateFormat
 
@@ -91,6 +92,7 @@ class Cases extends Controller<Case> {
         @ApiResponse(code = 200, message = 'Successful Response', response = Case, responseContainer = 'List')])
     @RequestMapping(value = '',
             method = GET)
+    @CrossOrigin(origins='*')
     Case[] list(
 //            @ApiParam(value = 'depth') @RequestParam(value = 'depth', required = true) int depth
     ) {
