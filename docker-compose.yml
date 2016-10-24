@@ -8,7 +8,8 @@ neo4j:
   environment:
     NEO4J_AUTH: "none"
 api:
-  image: "berry-api:0.0.0"
+  # image: "berry-api:0.0.0"
+  build: api
   ports:
     - "8080:8080"
   environment:
