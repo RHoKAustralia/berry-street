@@ -1,7 +1,11 @@
+import fetch from 'isomorphic-fetch'
+
 export const ADD_CASE = 'ADD_CASE'
 export const CREATE_CASE = 'CREATE_CASE'
 export const FETCH_CASE = 'FETCH_CASE'
 export const UPDATE_CASE = 'UPDATE_CASE'
+export const REQUEST_CASES = 'REQUEST_CASES'
+export const RECEIVE_CASES = 'RECEIVE_CASES'
 
 export const ADD_PERSON = 'ADD_PERSON'
 export const CREATE_PERSON = 'CREATE_PERSON'
@@ -38,4 +42,25 @@ export function fetchPerson(personId) {
 
 export function updatePerson(personDetails) {
   return { type: UPDATE_PERSON, person: personDetails }
+}
+
+export function requestCases() {
+  return { type: REQUEST_CASES }
+}
+
+export function receiveCases(json) {
+  return { type: RECEIVE_CASES, cases: json }
+}
+
+export function fetchCases() {
+  return dispatch => {
+    var request = new Request('http://localhost:8080/cases', {
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    return fetch(request)
+        .then(response => response.json())
+        .then(json => {console.log('got response', json); dispatch(receiveCases(json))})
+  }
 }

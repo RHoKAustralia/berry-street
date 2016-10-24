@@ -22,7 +22,7 @@ const CaseList = React.createClass({
             </thead>
             <tbody>
               {this.props.cases.map(ffCase =>
-                  <CaseRow key={ffCase.caseId} caseId={ffCase.caseId} staffName={ffCase.staffName} childName={ffCase.childName} />
+                  <CaseRow key={ffCase.id} caseId={ffCase.id} staffName={ffCase.staffName} childName={ffCase.childName} />
               )}
             </tbody>
           </table>

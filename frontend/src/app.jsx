@@ -13,23 +13,25 @@ import EditCase from './components/EditCase.jsx';
 import Index from './components/Index.jsx';
 import Login from './components/Login.jsx';
 
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { caseReducer, personReducer } from './reducers.jsx';
 import { reducer as formReducer } from 'redux-form';
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 
 const reducer = combineReducers({
   cases: caseReducer,
   form: formReducer,
   people: personReducer
 });
-const store = createStore(reducer);
+const store = createStore(reducer,
+    applyMiddleware(thunkMiddleware, createLogger()));
 
 // For testing -- until we bring in async redux actions
-import { addCase, updateCase, addPerson, updatePerson } from './actions.jsx'
-store.dispatch(addCase({ caseId: "12346", staffName: "Jenny", childName: "Ben James", caseNumber: "234957" }))
-store.dispatch(addCase({ caseId: "12347", staffName: "Jenny", childName: "Kate Smith", caseNumber: "234958" }))
-store.dispatch(updateCase({ caseId: "12347", staffName: "Mia", childName: "Bob Smith", caseNumber: "234958" }))
+import { addCase, updateCase, addPerson, updatePerson, requestCases, fetchCases } from './actions.jsx'
+
+store.dispatch(fetchCases())
 
 store.dispatch(addPerson({ id: "12346", name: "Jenny", father: "Ben James", mother: "234957" }))
 store.dispatch(addPerson({ id: "12347", name: "Jenny", father: "Kate Smith", mother: "234958" }))

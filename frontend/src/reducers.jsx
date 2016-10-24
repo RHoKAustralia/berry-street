@@ -1,5 +1,5 @@
 var update = require('react/lib/update')
-import { ADD_CASE, CREATE_CASE, UPDATE_CASE, FETCH_CASE } from "./actions.jsx"
+import { ADD_CASE, CREATE_CASE, UPDATE_CASE, FETCH_CASE, RECEIVE_CASES } from "./actions.jsx"
 import { ADD_PERSON, CREATE_PERSON, UPDATE_PERSON, FETCH_PERSON } from "./actions.jsx"
 
 const initialState = {
@@ -29,6 +29,10 @@ export function caseReducer (state = initialState, action) {
     case FETCH_CASE:
       return Object.assign({}, state, {
         selectedCase: state.cases.find(function(c) { return c.caseId == action.caseId; })
+      })
+    case RECEIVE_CASES:
+      return Object.assign({}, state, {
+        cases: action.cases
       })
     default:
       return state
