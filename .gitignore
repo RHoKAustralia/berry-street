@@ -46,6 +46,7 @@ hs_err_pid*
 
 # Gradle
 .gradle
+.gradle_cache
 build/
 gradle-app.setting
 
