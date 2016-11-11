@@ -1,49 +1,84 @@
-# berry-street
+# Berry Street Family Finder
 
-Basic getting going instructions
+## Basic setup instructions
 
-## front end
- 
-1. open `cmd` window in frontend folder
-2. run `npm install`
-3. run `npm run dev`
-4. open browser navigate to `http://localhost:8080/index.htm`
+The quickest way to get the application up and running on your local machine is using [Docker](https://www.docker.com/products/overview)
 
-## Using Docker
+Once you have Docker installed,
 
-There is a docker-compose file to spin up all services and get them talking together.
+- Go to the rood directory of the project and run
 
-You need a running docker host to use, for OSX / Windows use Docker Toolbox: https://www.docker.com/products/docker-toolbox
+  ```
+  $ docker-compose build
+  ```
 
-Test that docker is running:
+  this will create all the containers for the application.
+
+  *Note. This is going to take a while to complete. The good news is it's only when done for the first time.*
+
+- Now that everything is installed, run
+
+  ```
+  $ docker-compose up
+  ```
+
+- Go to
+
+  ```
+  http://localhost
+  ```
+
+To stop the application, just hit `Ctrl+C`
+
+## Back End Development / Testing
+
+You will need to have [Java 8](https://www.java.com/en/download/) installed on your system and also groovy and gradle. [SDKMAN!](sdkman.io) is a good option to install the latter two.
+
+- In a terminal, run
+
+  ```
+  $ docker-compose up neo4j
+  ```
+
+  This will start the neo4j container.
+
+- In another terminal you can run
+
+  ```
+  $ cd api
+  api$ ./gradlew bootRun
+  ```
+  to start up the backend api; And then, you can test it through its [swagger interface](http://localhost:8080) or using any other REST Client, like [Postman](https://www.getpostman.com/)
+
+If you want to use an IDE like IntelliJ Idea (this is the preferred one) or Eclipse, you can generate the appropriate project files by running
 
 ```
-$ docker info
+api$ ./gradlew idea
+api$ ./gradlew eclipse
 ```
+and then import the project in the IDE
 
-You then need to download all the docker images used and build the images for the API and frontend:
+## Front End Development / Testing
 
-```
-$ docker-compose build
-```
+- In a terminal, run
 
-The first time, this will download half the internet so it will take a while.
+  ```
+  $ docker-compose up api
+  ```
 
-To then start all the services:
+  This will start the backend api and neo4j containers.
 
-```
-$ docker-compose up
-```
+- In a second terminal
 
-The services will be listening as follows:
+  ```
+  $ cd frontend
+  frontend$ npm install
+  frontend$ npm run build
+  frontend$ node_modules/.bin/webpack-dev-server --port 8081
+  ```
 
-* API: http://\[docker-host-ip\]:8081/
-* Frontend: http://\[docker-host-ip\]:8080/
-* Mysql: \[docker-host-ip\]:3306
-* Neo4j: http://\[docker-host-ip\]:7474/
+- Go to
 
-To get your docker host IP:
-
-```
-docker-machine env default|grep HOST
-```
+  ```
+  http://localhost
+  ```

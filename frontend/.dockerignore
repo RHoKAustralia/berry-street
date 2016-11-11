@@ -1,5 +1,3 @@
 ### Node ###
 node_modules
-
-### Misc ###
-*.md
+build
