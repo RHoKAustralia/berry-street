@@ -1,0 +1,13 @@
+### IntelliJ ###
+.idea/
+*.iml
+*.ipr
+*.iws
+
+### Gradle ###
+build
+.gradle
+
+### Misc ###
+*.md
+*.bat
