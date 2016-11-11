@@ -1,26 +1,31 @@
-neo4j:
-  image: "neo4j:latest"
-  ports:
-    - "7474:7474"
-    - "7687:7687"
-  volumes:
-    - "./.neo4j/data:/data"
-  environment:
-    NEO4J_AUTH: "none"
-api:
-  # image: "berry-api:0.0.0"
-  build: api
-  ports:
-    - "8080:8080"
-  environment:
-    NEO4J_HOST: "http://neo4j:neo4j@neo4j:7474"
-  links:
-    - neo4j
-frontend:
-  build: frontend
-  environment:
-    API_ENDPOINT: "http://api:8080/"
-  ports:
-    - "80:80"
-  links:
-    - api
+version: '2'
+services:
+  neo4j:
+    image: "neo4j:latest"
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - "./.neo4j/data:/data"
+    environment:
+      NEO4J_AUTH: "none"
+  api:
+    build: api
+    depends_on:
+      - neo4j
+    ports:
+      - "8080:8080"
+    environment:
+      NEO4J_HOST: "http://neo4j:neo4j@neo4j:7474"
+    links:
+      - neo4j
+    volumes:
+      - "./.gradle_cache:/root/.gradle:rw"
+  frontend:
+    build: frontend
+    environment:
+      API_ENDPOINT: "http://localhost:8080/"
+    ports:
+      - "80:80"
+    links:
+      - api
