@@ -3,7 +3,12 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux'
 
 const CaseList = React.createClass({
+
   render() {
+    if (!this.props.cases) {
+        return renderLoading()
+    }
+
     return (
       <div className="container">
         <div className="page-header">
@@ -29,6 +34,12 @@ const CaseList = React.createClass({
         </fieldset>
       </div>
     );
+  },
+
+  renderLoading() {
+      return (
+          <p>Loading...</p>
+      )
   }
 });
 
@@ -64,7 +75,6 @@ var CaseEditLink = React.createClass({
 
 export default connect((state) => {
   return {
-    cases: state.cases.cases
+    cases: state.cases
   }
 })(CaseList)
-

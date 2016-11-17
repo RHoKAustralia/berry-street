@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping(value = '/cases', produces = [APPLICATION_JSON])
 @Api(value = '/cases', description = 'the case API')
+@CrossOrigin(origins='*')
 class Cases extends Controller<Case> {
 
     @Autowired
@@ -92,7 +93,6 @@ class Cases extends Controller<Case> {
         @ApiResponse(code = 200, message = 'Successful Response', response = Case, responseContainer = 'List')])
     @RequestMapping(value = '',
             method = GET)
-    @CrossOrigin(origins='*')
     Case[] list(
 //            @ApiParam(value = 'depth') @RequestParam(value = 'depth', required = true) int depth
     ) {

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { createCase, addCase, fetchCase, updateCase } from '../actions.jsx'
+import { createCase, addCase, updateCase, selectCase } from '../actions.jsx'
 import { withRouter } from 'react-router'
+import { selectCaseById } from '../reducers.jsx'
 
 class EditCase extends Component {
 
   componentWillMount() {
-    this.props.dispatch(this.props.params.caseId ? fetchCase(this.props.params.caseId) : createCase())
+    this.props.dispatch(this.props.params.caseId ? selectCase(this.props.params.caseId) : createCase())
   }
 
   saveCase(caseToSave) {
@@ -15,7 +16,7 @@ class EditCase extends Component {
   }
 
   render() {
-    const {fields: {caseId, staffName, status, objective, dateOpened}, handleSubmit} = this.props
+    const {fields: {id, staffName, status, objective, dateOpened}, handleSubmit} = this.props
 
     var heading = <h1>New Case</h1>;
     if (this.props.params.caseId) {
@@ -32,9 +33,9 @@ class EditCase extends Component {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="caseId">Case Number</label>
-                  <input type="text" className="form-control" id="caseId" placeholder="Case Number" {...caseId} />
-                  {caseId.error && caseId.touched && <div className="alert alert-danger" role="alert">{caseId.error}</div>}
+                  <label for="id">Case Number</label>
+                  <input type="text" className="form-control" id="id" placeholder="Case Number" {...id} />
+                  {id.error && id.touched && <div className="alert alert-danger" role="alert">{id.error}</div>}
                 </div>
               </div>
               <div className="col-md-6">
@@ -83,8 +84,8 @@ class EditCase extends Component {
 
 function validateCase(data, props) {
   const errors = {}
-  if (!data.caseId) {
-    errors.caseId = 'Required'
+  if (!data.id) {
+    errors.id = 'Required'
   }
   return errors
 }
@@ -96,11 +97,11 @@ EditCase.propTypes = {
 };
 
 export default reduxForm({
-    fields: ['caseId', 'staffName', 'status', 'objective', 'dateOpened'],
+    fields: ['id', 'staffName', 'status', 'objective', 'dateOpened'],
     form: 'editCase',
      validate: validateCase
   },
   state => ({
-      initialValues: state.cases.selectedCase
+      initialValues: selectCaseById(state, state.selectedCase)
   })
 )(withRouter(EditCase));

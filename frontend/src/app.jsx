@@ -15,13 +15,14 @@ import Login from './components/Login.jsx';
 
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { caseReducer, personReducer } from './reducers.jsx';
+import { caseReducer, selectedCaseReducer, personReducer } from './reducers.jsx';
 import { reducer as formReducer } from 'redux-form';
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 
 const reducer = combineReducers({
   cases: caseReducer,
+  selectedCase: selectedCaseReducer,
   form: formReducer,
   people: personReducer
 });
@@ -29,7 +30,7 @@ const store = createStore(reducer,
     applyMiddleware(thunkMiddleware, createLogger()));
 
 // For testing -- until we bring in async redux actions
-import { addCase, updateCase, addPerson, updatePerson, requestCases, fetchCases } from './actions.jsx'
+import { addPerson, updatePerson, fetchCases } from './actions.jsx'
 
 store.dispatch(fetchCases())
 
