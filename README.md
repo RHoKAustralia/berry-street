@@ -2,11 +2,11 @@
 
 ## Getting Started
 
-You will need to get this code onto your laptop. To do this you will need a `git` client. If you are on windows, make sure you are using UNIX line endings as most of the tools will inside a linux docker container.
-
   ```
   git clone https://github.com/RHoKAustralia/berry-street.git
   ```
+
+If you are on windows, make sure you are using UNIX line endings as most of the tools will inside a linux docker container.
 
 ## Basic setup instructions
 
@@ -23,6 +23,7 @@ Once you have Docker installed,
   this will create all the containers for the application.
 
   *Note. This is going to take a while to complete. The good news is it's only when done for the first time.*
+
 
 - Now that everything is installed, run
 
@@ -122,3 +123,19 @@ For a supercharged frontend dev experience, make sure you have these Chrome exte
 - Fix issue with backend where gradle is downloading libraries/packages when backend code is changed
 - Fix issue with frontend yarn install (This may be fixed by the upgrading above)
 - Fix issue with docker-compose up which appears to be rebuilding and re-downloading
+
+
+## Troubleshooting  
+  
+  *Windows 7:* If you see this
+
+  ```
+  ←[91m/bin/sh: 1: ./gradlew: Permission denied
+  ←[0m←[31mERROR←[0m: Service 'api' failed to build: The command '/bin/sh -c ./gradlew build jar' returned a non-zero code: 126
+  ```
+  
+  then you can try running the api on its own, and using docker to run everything else:
+  
+  1. Edit `docker-compose.yml` to comment-out (#) the `api` section, and the link to it in `frontend/links`.
+  2. Rerun `docker-compose build` then `docker-compose up` as below.
+  3. Open a command prompt at <project root>\api. Run `gradlew bootRun` to start the api
