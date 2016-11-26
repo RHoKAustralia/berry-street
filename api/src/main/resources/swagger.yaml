@@ -242,14 +242,21 @@ definitions:
   Case:
     type: object
     properties:
-      staffName:
+      caseManager:
+        type: string
+      familyFinderStaffName:
         type: string
       status:
         type: string
       dateOpened:
         type: string
         format: date
+      dateClosed:
+        type: string
+        format: date
       caseObjective:
+        type: string
+      phaseOfInvolvement:
         type: string
       subjects:
         type: array

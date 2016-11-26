@@ -1,5 +1,8 @@
 import fetch from 'isomorphic-fetch'
 
+export const FETCH_PROFILE = 'FETCH_PROFILE'
+export const SET_PROFILE = 'SET_PROFILE'
+
 export const CASE_UPDATED = 'CASE_UPDATED'
 export const CREATE_CASE = 'CREATE_CASE'
 export const SELECT_CASE = 'SELECT_CASE'
@@ -90,4 +93,16 @@ export function updatePerson(personDetails) {
 
 export function createCase() {
   return { type: CREATE_CASE, case: {} }
+}
+
+export function fetchProfile(lock, token) {
+  return (dispatch, getState) => {
+    lock.getProfile(token, function (err, profile) {
+      if (err) {
+        console.log("Error loading the Profile", err);
+        alert("Error loading the Profile");
+      }
+      dispatch({ type: SET_PROFILE, profile: profile });
+    });
+  }
 }

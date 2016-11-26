@@ -1,26 +1,37 @@
-import React from 'react';
+import React , { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchProfile } from '../actions.jsx'
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
+function mapStateToProps(state, ownProps) {
+  return {
+    profile: state.auth.profile
+  }
+}
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    fetchProfile: () => dispatch(fetchProfile(ownProps.lock, ownProps.idToken))
+  }
+}
+
+class LoggedIn extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       profile: null
+    };
+  }
+  componentDidMount() {
+    const { profile, fetchProfile } = this.props;
+    if (!profile) {
+      fetchProfile();
     }
-  },
-  componentDidMount: function () {
-    this.props.lock.getProfile(this.props.idToken, function (err, profile) {
-      if (err) {
-        console.log("Error loading the Profile", err);
-        alert("Error loading the Profile");
-      }
-      this.setState({ profile: profile });
-    }.bind(this));
-  },
-
-  render: function () {
-    if (this.state.profile) {
+  }
+  render() {
+    const { profile } = this.props;
+    if (profile) {
       return (
         <div>
-          <img width={50} height={50} src={this.state.profile.picture} />
+          <img width={50} height={50} src={profile.picture} />
         </div>
       );
     } else {
@@ -29,4 +40,6 @@ export default React.createClass({
         </div>);
     }
   }
-});
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoggedIn)
