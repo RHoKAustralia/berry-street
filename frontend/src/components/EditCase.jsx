@@ -3,9 +3,20 @@ import { reduxForm } from 'redux-form';
 import { createCase, addCase, updateCase, selectCase } from '../actions.jsx'
 import { withRouter } from 'react-router'
 import { selectCaseById } from '../reducers.jsx'
+import api from '../api.jsx'
 
 class EditCase extends Component {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      statuses: null,
+      phases: null
+    }
+  }
+  componentDidMount() {
+    api.getPhases().then(r => this.setState({ phases: r }))
+    api.getCaseStatuses().then(r => this.setState({ statuses: r }))
+  }
   componentWillMount() {
     this.props.dispatch(this.props.params.caseId ? selectCase(this.props.params.caseId) : createCase())
   }
@@ -17,7 +28,7 @@ class EditCase extends Component {
 
   render() {
     const {fields: {id, caseManager, familyFinderStaffName, status, objective, dateOpened, dateClosed, phaseOfInvolvement}, handleSubmit} = this.props
-
+    const { phases, statuses } = this.state;
     var heading = <h1>New Case</h1>;
     if (this.props.params.caseId) {
       heading = <h1>Edit Case</h1>;
@@ -48,21 +59,39 @@ class EditCase extends Component {
               <div className="col-md-6">
                 <div className="form-group">
                   <label for="status">Status</label>
-                  <select className="form-control" id="status" placeholder="Status" {...status}>
-                    <option></option>
-                    <option>Open</option>
-                    <option>Closed</option>
-                  </select>
+                  {(() => {
+                    if (statuses) {
+                      return <select className="form-control" id="status" placeholder="Status" {...status}>
+                        <option></option>
+                        {statuses.map((st, i) => <option key={i}>{st}</option>)}
+                      </select>
+                    } else {
+                      return <div className="alert alert-info">
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    }
+                  })()}
+                  
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
                   <label for="phaseOfInvolvement">Phase of Involvement</label>
-                  <select className="form-control" id="phaseOfInvolvement" {...phaseOfInvolvement}>
-                    <option></option>
-                    <option>Referred</option>
-                    <option>Searching</option>
-                  </select>
+                  {(() => {
+                    if (phases) {
+                      return <select className="form-control" id="phaseOfInvolvement" {...phaseOfInvolvement}>
+                        <option></option>
+                        {phases.map((ph, i) => <option key={i}>{ph}</option>)}
+                      </select>
+                    } else {
+                      return <div className="alert alert-info">
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    }
+                  })()}
+                  
                 </div>
               </div>
             </div>

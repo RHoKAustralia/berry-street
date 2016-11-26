@@ -44,6 +44,12 @@ function sendRequest(url, method, data) {
 }
 
 export default {
+  getCaseStatuses() {
+    return Promise.resolve([ "Open", "Closed" ])
+  },
+  getPhases() {
+    return Promise.resolve([ "Referred", "Searching" ])
+  },
   getUsers() {
     return new Promise((resolve, reject) => {
       // This should actually be a fetch AJAX request
