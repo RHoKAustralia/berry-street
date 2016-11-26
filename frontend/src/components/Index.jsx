@@ -26,7 +26,10 @@ class HomeScreen extends Component {
         <CaseTileGrid />
       </div>
     } else {
-      return <div>Loading ...</div>
+      return <div className="alert alert-info">
+        <i className="fa fa-cog fa-spin fa-3x fa-fw"></i>
+        <span className="sr-only">Loading...</span>
+      </div>
     }
   }
 }

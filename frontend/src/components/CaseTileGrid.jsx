@@ -1,19 +1,6 @@
 import React, { Component } from "react"
-import { Link } from 'react-router';
-
-const TEST_DATA = [
-  { surname: "Simpson", firstname: "Bart", phase: "New", case_id: 1 },
-  { surname: "Simpson", firstname: "Lisa", phase: "Talking", case_id: 2 },
-  { surname: "Van Houten", firstname: "Milhouse", phase: "New", case_id: 3 },
-  { surname: "Wiggum", firstname: "Ralph", phase: "New", case_id: 4 },
-  { surname: "Muntz", firstname: "Nelson", phase: "Closed", case_id: 5 },
-  { surname: "Simpson", firstname: "Maggie", phase: "Closed", case_id: 6 } /*,
-    { name: "Lisa Simpson", phase: "Talking", case_id: 7 },
-    { name: "Lisa Simpson", phase: "Talking", case_id: 8 },
-    ,{ name: "Lisa Simpson", phase: "Talking", case_id: 9 },
-    { name: "Lisa Simpson", phase: "Talking", case_id: 10 },
-    { name: "Lisa Simpson", phase: "Talking", case_id: 11 },*/
-];
+import { Link } from 'react-router'
+import { CASE_SUMMARY_DATA } from '../testdata.jsx'
 
 const TILE_WIDTH = 250;
 const TILE_HEIGHT = 310;
@@ -60,7 +47,7 @@ class CaseTileGrid extends Component {
   render() {
     return <div className="row">
       <CreateNewCaseTile />
-      {TEST_DATA.map(function (item) { return <CaseTile key={item.case_id} case={item} />; })}
+      {CASE_SUMMARY_DATA.map((item) => <CaseTile key={item.case_id} case={item} />)}
     </div>
   }
 }
