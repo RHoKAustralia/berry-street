@@ -1,12 +1,18 @@
 var update = require('react/lib/update')
 import { ADD_CASE, CASE_UPDATED, CREATE_CASE, UPDATE_CASE, RECEIVE_CASES, SELECT_CASE } from "./actions.jsx"
 import { ADD_PERSON, CREATE_PERSON, UPDATE_PERSON, FETCH_PERSON } from "./actions.jsx"
-import { SET_PROFILE } from './actions.jsx'
+import { SET_PROFILE, SET_ID_TOKEN } from './actions.jsx'
 
 export function authReducer (state = {}, action) {
   switch (action.type) {
     case SET_PROFILE:
-      return { profile: action.profile }
+      return Object.assign({}, state, { profile: action.profile })
+    case SET_ID_TOKEN:
+      return Object.assign({}, state, { 
+        login: { 
+          idToken: action.idToken
+        }
+      })
     default:
       return state
   }
@@ -30,7 +36,6 @@ export function caseReducer (state = [], action) {
       return update(state, {
         [index]: {$set: action.case }
       })
-      return state
     case RECEIVE_CASES:
       return action.cases
     default:

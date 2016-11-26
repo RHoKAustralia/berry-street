@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from 'react-router'
-import { CASE_SUMMARY_DATA } from '../testdata.jsx'
+import api from "../api.jsx"
 
 const TILE_WIDTH = 250;
 const TILE_HEIGHT = 310;
@@ -25,9 +25,9 @@ class CaseTile extends Component {
   }
   render() {
     return <div style={{ height: TILE_HEIGHT, marginBottom: TILE_VERT_MARGIN }} className="col-xs-12 col-sm-6 col-md-3 rwrapper">
-      <Link to={`/cases/${this.props.case.case_id}/edit`} className="rlisting">
+      <Link to={`/cases/${this.props.case.caseNumber}/edit`} className="rlisting">
         <div className="col-md-12 nopad">
-          <img src={`http://lorempixel.com/${TILE_WIDTH}/${TILE_WIDTH}/cats/${this.props.case.case_id}`} className="img-responsive" />
+          <img src={`http://lorempixel.com/${TILE_WIDTH}/${TILE_WIDTH}/cats/${this.props.case.caseNumber}`} className="img-responsive" />
         </div>
         <div className="col-md-12 nopad">
           <h5>{`${this.props.case.surname}, ${this.props.case.firstname}`}</h5>
@@ -43,12 +43,29 @@ class CaseTile extends Component {
 class CaseTileGrid extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      summary: null,
+      error: null
+    };
+  }
+  componentDidMount() {
+    api.getCases()
+       .then(r => this.setState({ summary: r }))
+       .catch(err => this.setState({ error: err }));
   }
   render() {
-    return <div className="row">
-      <CreateNewCaseTile />
-      {CASE_SUMMARY_DATA.map((item) => <CaseTile key={item.case_id} case={item} />)}
-    </div>
+    const { summary, error } = this.state;
+    if (summary) {
+      return <div className="row">
+        <CreateNewCaseTile />
+        {summary.map((item) => <CaseTile key={item.caseNumber} case={item} />)}
+      </div>
+    } else {
+      return <div className="alert alert-info">
+        <i className="fa fa-cog fa-spin fa-3x fa-fw"></i>
+        <span className="sr-only">Loading...</span>
+      </div>
+    }
   }
 }
 
