@@ -33,21 +33,6 @@ class EditCase extends Component {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="id">Case Number</label>
-                  <input type="text" className="form-control" id="id" placeholder="Case Number" {...id} />
-                  {id.error && id.touched && <div className="alert alert-danger" role="alert">{id.error}</div>}
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label for="objective">Objective</label>
-                  <input type="text" className="form-control" id="objective" placeholder="Objective" {...objective} />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
                   <label for="caseManager">Case Manager</label>
                   <input type="text" className="form-control" id="caseManager" {...caseManager} />
                 </div>
@@ -112,9 +97,6 @@ class EditCase extends Component {
 
 function validateCase(data, props) {
   const errors = {}
-  if (!data.id) {
-    errors.id = 'Required'
-  }
   return errors
 }
 
@@ -125,9 +107,9 @@ EditCase.propTypes = {
 };
 
 export default reduxForm({
-    fields: ['id', 'caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
+    fields: ['caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
     form: 'editCase',
-     validate: validateCase
+    validate: validateCase
   },
   state => ({
       initialValues: selectCaseById(state, state.selectedCase)
