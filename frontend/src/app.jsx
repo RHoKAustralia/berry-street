@@ -15,13 +15,14 @@ import Login from './components/Login.jsx';
 
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import { caseReducer, selectedCaseReducer, personReducer } from './reducers.jsx';
+import { caseReducer, selectedCaseReducer, personReducer, authReducer } from './reducers.jsx';
 import { reducer as formReducer } from 'redux-form';
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 
 const reducer = combineReducers({
   cases: caseReducer,
+  auth: authReducer,
   selectedCase: selectedCaseReducer,
   form: formReducer,
   people: personReducer
