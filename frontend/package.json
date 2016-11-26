@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/webpack",
     "watch": "node_modules/.bin/webpack --watch",
-    "watch:dev": "node_modules/.bin/webpack-dev-server --port 8081",
     "dev": "node_modules/.bin/parallelshell \"npm run watch\" \"npm run start\" ",
     "start": "node_modules/.bin/http-server"
   },
@@ -37,7 +36,6 @@
   "devDependencies": {
     "http-server": "^0.9.0",
     "imports-loader": "^0.6.5",
-    "parallelshell": "^2.0.0",
-    "webpack-dev-server": "^1.16.2"
+    "parallelshell": "^2.0.0"
   }
 }

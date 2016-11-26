@@ -73,8 +73,7 @@ and then import the project in the IDE
   ```
   $ cd frontend
   frontend$ npm install
-  frontend$ npm run build
-  frontend$ npm run watch:dev
+  frontend$ npm run dev
   ```
 
 - Go to
