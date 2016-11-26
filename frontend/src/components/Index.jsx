@@ -20,7 +20,9 @@ class HomeScreen extends Component {
     const { profile } = this.props;
     if (profile) {
       return <div className="container-fluid">
-        <div className="alert alert-info">Welcome <strong>{profile.nickname}</strong></div>
+        <div className="page-header">
+          <h1>My Cases</h1>
+        </div>
         <CaseTileGrid />
       </div>
     } else {
