@@ -7,9 +7,7 @@ import au.org.berrystreet.familyfinder.api.service.SubjectService
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.CrossOrigin
-import springfox.documentation.annotations.ApiIgnore
 
-import java.security.Principal
 import java.text.SimpleDateFormat
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET
@@ -56,12 +54,8 @@ class Cases extends Controller<Case> {
             value = '',
             consumes = [APPLICATION_JSON],
             method = POST)
-    Case create(@ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body,
-                @ApiIgnore Principal user) {
-        System.err.println("DEBUGGING Case Create called by: " + user)
+    Case create(@ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body) {
         super.create(body)
-        // TODO write an Audit (principal...)
-        // TODO 'ProfileController' example shows checking the user's roles. https://github.com/auth0-samples/auth0-spring-security-api-sample
     }
 
     @ApiOperation(value = '', notes = 'Update the `Case` ', response = Void)

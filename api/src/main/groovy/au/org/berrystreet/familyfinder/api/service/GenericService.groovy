@@ -20,7 +20,6 @@ abstract class GenericService<T> implements Service<T> {
 
     @Override
     T createOrUpdate(T entity) {
-        // TODO 'UsernameService' example shows how to add a user role precondition. https://github.com/auth0-samples/auth0-spring-security-api-sample
         getRepository().save(entity, DEPTH_ENTITY)
         find(((Entity) entity).id)
     }
