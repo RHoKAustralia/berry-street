@@ -79,8 +79,14 @@ and then import the project in the IDE
 - Go to
 
   ```
-  http://localhost
+  http://localhost:8081
   ```
+
+For a supercharged frontend dev experience, make sure you have these Chrome extensions installed:
+
+ - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+ - [Redux dev tools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
+
 
 ## Populating the Database with Sample Data
 
