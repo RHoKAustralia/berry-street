@@ -30,8 +30,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @PropertySources([
     @PropertySource("classpath:application.properties"),
     @PropertySource("classpath:auth0.properties"),
-    @PropertySource(name = "For 'auth0.clientSecret' param, only needed if you're using auth0",
-            value = "classpath:auth0.secret.properties", ignoreResourceNotFound = true)
+    @PropertySource("classpath:auth0.secret.properties")
 ])
 class Application extends Neo4jConfiguration {
 
