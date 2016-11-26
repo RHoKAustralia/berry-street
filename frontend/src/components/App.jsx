@@ -81,9 +81,9 @@ export default React.createClass({
               </div>
               <ul className="nav navbar-nav">
                 <li><Link to='/cases'>Case List</Link></li>
-                <li><Link to='/personlist'>People</Link></li>
-                <li><Link to='/case'>Create Case</Link></li>
-                <li><Link to='/person'>Create Person</Link></li>
+                <li><Link to='/people'>People</Link></li>
+                <li><Link to='/cases/new'>Create Case</Link></li>
+                <li><Link to='/people/new'>Create Person</Link></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><LoggedIn lock={this.lock} idToken={this.state.idToken} /></li>

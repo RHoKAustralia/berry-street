@@ -37,27 +37,27 @@ store.dispatch(fetchCases())
 
 store.dispatch(addPerson({ id: "12346", name: "Jenny", father: "Ben James", mother: "234957" }))
 store.dispatch(addPerson({ id: "12347", name: "Jenny", father: "Kate Smith", mother: "234958" }))
-store.dispatch(updatePerson({ id: "12347", name: "Mia", father: "Bob Smith", mother: "234958" }))
-
 ReactDOM.render((
-  <div>
-    <Provider store={store}>
-      <Router history={hashHistory}>
-        <Route path="/" component={App} >
-          <IndexRoute component={Index} />
-          <Route path="/about" component={About} />
-          <Route path="/users" component={PersonList} />
-          <Route path="/cases" component={CaseList} />
-          <Route path="/case/:caseId" component={Case} />
-          <Route path="/case" component={EditCase} />
-          <Route path="/case/:caseId/edit" component={EditCase} />
-          <Route path="/personlist" component={PersonList} />
-          <Route path="/person/:id" component={Person} />
-          <Route path="/person" component={EditPerson} />
-          <Route path="/person/:id/edit" component={EditPerson} />
-        </Route>
-        <Route path="*" component={App} />
-      </Router>
-    </Provider>
-  </div>
+    <div>
+      <Provider store={store}>
+        <Router history={hashHistory}>
+          <Route path="/" component={App} >
+            <IndexRoute component={Index} />
+            <Route path="/about" component={About} />
+            <Route path="/users" component={PersonList} />
+            <Route path="/cases" component={CaseList} />
+            <Route path="/cases/new" component={EditCase} />
+            <Route path="/cases/:caseId" component={Case} />
+            <Route path="/cases/:caseId/edit" component={EditCase} />
+            <Route path="/people" component={PersonList} />
+            <Route path="/people/new" component={EditPerson} />
+            <Route path="/people/:id" component={Person} />
+            <Route path="/people/:id/edit" component={EditPerson} />
+          </Route>
+          <Route path="*" component={App} />
+        </Router>
+      </Provider>
+    </div>
 ), document.getElementById('app'));
+
+store.dispatch(updatePerson({ id: "12347", name: "Mia", father: "Bob Smith", mother: "234958" }))

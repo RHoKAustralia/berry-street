@@ -46,7 +46,7 @@ export default React.createClass({
     }
   },
   saveAndContinue() {
-    
+
   },
   updateName(event) {
     var person = this.state.person;

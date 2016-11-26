@@ -12,7 +12,7 @@ const CaseList = React.createClass({
     return (
       <div className="container">
         <div className="page-header">
-          <h1>Existing Cases <small><Link to='/case'>Add New Case</Link></small></h1>
+          <h1>Existing Cases <small><Link to='/cases/new'>Add New Case</Link></small></h1>
         </div>
         <fieldset>
           <table className="table table-striped">
@@ -60,7 +60,7 @@ var CaseRow = React.createClass({
 var CaseViewLink = React.createClass({
   render() {
     return (
-      <Link to={'/case/' + this.props.caseId}>View</Link>
+      <Link to={'/cases/' + this.props.caseId}>View</Link>
     );
   }
 });
@@ -68,7 +68,7 @@ var CaseViewLink = React.createClass({
 var CaseEditLink = React.createClass({
   render() {
     return (
-      <Link to={'/case/' + this.props.caseId + '/edit'}>Edit</Link>
+      <Link to={'/cases/' + this.props.caseId + '/edit'}>Edit</Link>
     );
   }
 });

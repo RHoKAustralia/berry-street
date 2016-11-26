@@ -7,7 +7,7 @@ const PersonList = React.createClass({
     return (
       <div className="container">
         <div className="page-header">
-          <h1>Existing People <small><Link to='/person'>Add New Person</Link></small></h1>
+          <h1>Existing People <small><Link to='/people/new'>Add New Person</Link></small></h1>
         </div>
         <fieldset>
           <table className="table table-striped">
@@ -46,7 +46,7 @@ var PersonRow = React.createClass({
 var PersonViewLink = React.createClass({
   render() {
     return (
-      <Link to={'/person/' + this.props.id}>View</Link>
+      <Link to={'/people/' + this.props.id}>View</Link>
     );
   }
 });
@@ -54,7 +54,7 @@ var PersonViewLink = React.createClass({
 var PersonEditLink = React.createClass({
   render() {
     return (
-      <Link to={'/person/' + this.props.id + '/edit'}>Edit</Link>
+      <Link to={'/people/' + this.props.id + '/edit'}>Edit</Link>
     );
   }
 });
