@@ -1,17 +1,31 @@
 import React from 'react';
 import { IndexLink, Link, browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
 import Login from './Login.jsx';
 import LoggedIn from './LoggedIn.jsx';
 import config from '../config.jsx';
 import utils from '../utils.jsx';
+import { setIdToken } from '../actions.jsx';
 
-export default React.createClass({
+function mapStateToProps(state, ownProps) {
+  return {
+    login: state.auth.login
+  }
+}
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    setIdToken: (idToken) => dispatch(setIdToken(idToken))
+  }
+}
+
+const App = React.createClass({
   refresh_token_check_cycle: 10,
   componentWillMount: function () {
+    const { setIdToken } = this.props;
     this.createLock();
-    this.setState({ idToken: this.getIdToken() })
+    setIdToken(this.getIdToken());
   },
   componentDidMount: function () {
     this.timer = setInterval(this.refeshTokenTick, this.refresh_token_check_cycle * 1000);
@@ -20,9 +34,10 @@ export default React.createClass({
     clearInterval(this.timer);
   },
   refeshTokenTick: function () {
-    if (this.state.idToken) {
-      if (utils.hasTokenExpired(this.state.idToken, 2 * this.refresh_token_check_cycle)) {
-        var refreshToken = localStorage.getItem('refreshToken');
+    const { login } = this.props;
+    if (login && login.idToken) {
+      if (utils.hasTokenExpired(login.idToken.idToken, 2 * this.refresh_token_check_cycle)) {
+        const refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken) {
           this.lock.getClient().refreshToken(refreshToken, this.handleRefreshTokenDelegationResult);
         }
@@ -30,10 +45,11 @@ export default React.createClass({
     }
   },
   handleRefreshTokenDelegationResult: function (err, delegationResult) {
+    const { setIdToken } = this.props;
     if (!err) {
       var idToken = delegationResult.id_token;
       localStorage.setItem('userToken', idToken);
-      this.setState({ idToken: idToken })
+      setIdToken(idToken);
     } else {
       console.log(err);
       this.logout();
@@ -63,21 +79,23 @@ export default React.createClass({
   },
 
   logout() {
+    const { setIdToken } = this.props;
     localStorage.removeItem('userToken');
     localStorage.removeItem('refreshToken');
-    this.setState({ idToken: null });
+    setIdToken(null);
   },
 
   render() {
-    if (this.state.idToken) {
+    const { login } = this.props;
+    if (login && login.idToken) {
       return (
-        <main lock={this.lock} idToken={this.state.idToken} >
+        <main lock={this.lock} idToken={login.idToken} >
           <nav className="navbar navbar-default">
             <div className="container-fluid">
               <div className="navbar-header">
                 <span className="brand brand-name navbar-left"><img src="src/assets/images/Berry-Street-Sml.png" alt="Berry Street" />
                 </span>
-                <IndexLink to="/" className="navbar-brand">Family Finder</IndexLink>
+                <IndexLink to="/" className="navbar-brand">My Cases</IndexLink>
               </div>
               <ul className="nav navbar-nav">
                 <li><Link to='/cases'>Case List</Link></li>
@@ -86,7 +104,7 @@ export default React.createClass({
                 <li><Link to='/people/new'>Create Person</Link></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
-                <li><LoggedIn lock={this.lock} idToken={this.state.idToken} /></li>
+                <li><LoggedIn lock={this.lock} idToken={login.idToken} /></li>
                 <li><Link to='#' onClick={this.logout}>Log out</Link></li>
               </ul>
             </div>
@@ -99,3 +117,5 @@ export default React.createClass({
     }
   }
 });
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

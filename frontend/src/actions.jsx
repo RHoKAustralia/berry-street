@@ -1,7 +1,9 @@
 import fetch from 'isomorphic-fetch'
+import api from './api.jsx'
 
 export const FETCH_PROFILE = 'FETCH_PROFILE'
 export const SET_PROFILE = 'SET_PROFILE'
+export const SET_ID_TOKEN = 'SET_ID_TOKEN'
 
 export const CASE_UPDATED = 'CASE_UPDATED'
 export const CREATE_CASE = 'CREATE_CASE'
@@ -24,44 +26,26 @@ export function selectCase(caseId) {
 
 export function fetchCases() {
   return dispatch => {
-    var request = new Request('http://localhost:8080/cases', {
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
+    api.getCases().then(json => {
+      dispatch(receiveCases(json));
     })
-    return fetch(request)
-        .then(response => response.json())
-        .then(json => { dispatch(receiveCases(json))})
-        .catch()
-  }
+  };
 }
 
 export function addCase(caseDetails) {
   return dispatch => {
-    var request = new Request('http://localhost:8080/cases', {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(caseDetails)
-    })
-    return fetch(request)
-        .then(response => dispatch(fetchCases()))
-  }
+    api.addCase(caseDetails).then(r => {
+      dispatch(fetchCases()); //Fetching everything again sounds like overkill
+    });
+  };
 }
 
 export function updateCase(caseDetails) {
   return dispatch => {
-    var request = new Request('http://localhost:8080/cases/' + caseDetails.id, {
-      method: 'PUT',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(caseDetails)
+    api.updateCase(caseDetails).then(r => {
+      dispatch(caseUpdated(caseDetails));
     })
-    return fetch(request)
-        .then(response => dispatch(caseUpdated(caseDetails)))
-  }
+  };
 }
 
 export function caseUpdated(caseDetails) {
@@ -88,12 +72,21 @@ export function createCase() {
   return { type: CREATE_CASE, case: {} }
 }
 
+export function setIdToken(idToken) {
+  return { type: SET_ID_TOKEN, idToken: idToken }
+}
+
 export function fetchProfile(lock, token) {
   return (dispatch, getState) => {
     lock.getProfile(token, function (err, profile) {
       if (err) {
         console.log("Error loading the Profile", err);
         alert("Error loading the Profile");
+        
+        //My observations thus far is that this is caused by token expiry, so clear everything
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('refreshToken');
+        dispatch(setIdToken(null));
       }
       dispatch({ type: SET_PROFILE, profile: profile });
     });
