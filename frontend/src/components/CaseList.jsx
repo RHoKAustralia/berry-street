@@ -21,13 +21,15 @@ const CaseList = React.createClass({
                 <th>Case Number</th>
                 <th>Child Name</th>
                 <th>Staff Member</th>
+		<th>Status</th>
+                <th>Phase of Involvement</th>
                 <th>View</th>
                 <th>Edit</th>
               </tr>
             </thead>
             <tbody>
               {this.props.cases.map(ffCase =>
-                  <CaseRow key={ffCase.id} caseId={ffCase.id} staffName={ffCase.staffName} childName={ffCase.childName} />
+                  <CaseRow key={ffCase.id} caseId={ffCase.id} staffName={ffCase.caseManager} status={ffCase.status} phaseOfInvolvement={ffCase.phaseOfInvolvement} childName={ffCase.childName} />
               )}
             </tbody>
           </table>
@@ -50,6 +52,8 @@ var CaseRow = React.createClass({
         <td>{this.props.caseId}</td>
         <td>{this.props.childName}</td>
         <td>{this.props.staffName}</td>
+        <td>{this.props.status}</td>
+        <td>{this.props.phaseOfInvolvement}</td>
         <td><CaseViewLink caseId={this.props.caseId} /></td>
         <td><CaseEditLink caseId={this.props.caseId} /></td>
       </tr>
