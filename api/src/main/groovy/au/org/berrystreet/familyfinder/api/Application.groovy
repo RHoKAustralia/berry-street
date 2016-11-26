@@ -11,6 +11,8 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
+import org.springframework.context.annotation.PropertySource
+import org.springframework.context.annotation.PropertySources
 import org.springframework.context.annotation.Scope
 import org.springframework.context.annotation.ScopedProxyMode
 import org.springframework.core.env.Environment
@@ -25,6 +27,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @Import(SwaggerDocumentationConfig)
 @EnableNeo4jRepositories(basePackages = 'au.org.berrystreet.familyfinder.api.repositories')
 @EnableTransactionManagement
+@PropertySources([
+    @PropertySource("classpath:application.properties"),
+    @PropertySource("classpath:auth0.properties"),
+    @PropertySource(name = "For 'auth0.clientSecret' param, only needed if you're using auth0",
+            value = "classpath:auth0.secret.properties", ignoreResourceNotFound = true)
+])
 class Application extends Neo4jConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(Application.class)

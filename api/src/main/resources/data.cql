@@ -13,7 +13,7 @@ create (nelson:Person {name: 'Nelson Muntz', dateOfBirth: '1987-04-19'})
 create (patty:Person {name: 'Patty Bouvier', dateOfBirth: '1987-04-19'})
 create (ned:Person {name: 'Ned Flanders', dateOfBirth: '1987-04-19'})
 
-create (simpsonCase:Case {staffName: 'staff1', status: 'open', dateOpened: '2016-08-05', caseObjective: 'test Neo4J'})
+create (simpsonCase:Case {staffName: 'staff1', status: 'Open', phaseOfInvolvement: 'Referred', dateOpened: '2016-08-05', caseManager: 'Jen', familyFinderStaffName: 'Dolores', caseObjective: 'test Neo4J'})
 
 create (homer)-[:FAMILY  {relationship: 'parent'}]->(maggie)
 create (homer)-[:FAMILY  {relationship: 'parent'}]->(lisa)
@@ -33,4 +33,3 @@ create (nelson)-[:FRIEND {relationship: 'friend'}]->(bart)
 create (ned)-[:FRIEND {relationship: 'neighbour'}]->(homer)
 
 create (bart)-[:SUBJECT {date: '2016-08-05'}]->(simpsonCase)
-
