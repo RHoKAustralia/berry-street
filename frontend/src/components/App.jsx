@@ -21,19 +21,20 @@ function mapDispatchToProps(dispatch, ownProps) {
 }
 
 const App = React.createClass({
-  refresh_token_check_cycle: 10,
+  refresh_token_check_cycle: 2,
   componentWillMount: function () {
     const { setIdToken } = this.props;
     this.createLock();
     setIdToken(this.getIdToken());
   },
   componentDidMount: function () {
-    this.timer = setInterval(this.refeshTokenTick, this.refresh_token_check_cycle * 1000);
+    this.timer = setTimeout(this.refeshTokenTick, this.refresh_token_check_cycle * 1000);
   },
   componentWillUnmount: function () {
     clearInterval(this.timer);
   },
   refeshTokenTick: function () {
+    console.log("refreshTokenTick")
     const { login } = this.props;
     if (login && login.idToken) {
       if (utils.hasTokenExpired(login.idToken.idToken, 2 * this.refresh_token_check_cycle)) {
@@ -50,6 +51,8 @@ const App = React.createClass({
       var idToken = delegationResult.id_token;
       localStorage.setItem('userToken', idToken);
       setIdToken(idToken);
+      console.log(`Next JWT token check in ${delegationResult.expires_in * 0.9}s`)
+      setTimeout(this.refeshTokenTick, (delegationResult.expires_in * 0.9) * 1000);
     } else {
       console.log(err);
       this.logout();
