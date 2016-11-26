@@ -38,6 +38,12 @@ class EditCase extends Component {
                   {id.error && id.touched && <div className="alert alert-danger" role="alert">{id.error}</div>}
                 </div>
               </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label for="objective">Objective</label>
+                  <input type="text" className="form-control" id="objective" placeholder="Objective" {...objective} />
+                </div>
+              </div>
             </div>
             <div className="row">
               <div className="col-md-6">
@@ -66,8 +72,12 @@ class EditCase extends Component {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="objective">Objective</label>
-                  <input type="text" className="form-control" id="objective" placeholder="Objective" {...objective} />
+                  <label for="phaseOfInvolvement">Phase of Involvement</label>
+                  <select className="form-control" id="phaseOfInvolvement" {...phaseOfInvolvement}>
+                    <option></option>
+                    <option>Referred</option>
+                    <option>Searching</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -80,12 +90,8 @@ class EditCase extends Component {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="phaseOfInvolvement">Phase of Involvement</label>
-                  <select className="form-control" id="phaseOfInvolvement" {...phaseOfInvolvement}>
-                    <option></option>
-                    <option>Referred</option>
-                    <option>Searching</option>
-                  </select>
+                  <label for="dateClosed">Date Closed</label>
+                  <input type="text" className="form-control" id="dateClosed" placeholder="Date Closed" {...dateClosed} />
                 </div>
               </div>
             </div>
