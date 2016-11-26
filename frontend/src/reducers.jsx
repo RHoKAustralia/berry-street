@@ -1,6 +1,6 @@
 var update = require('react/lib/update')
 import { ADD_CASE, CASE_UPDATED, CREATE_CASE, UPDATE_CASE, RECEIVE_CASES, SELECT_CASE } from "./actions.jsx"
-import { ADD_PERSON, CREATE_PERSON, UPDATE_PERSON, FETCH_PERSON } from "./actions.jsx"
+import { ADD_PERSON, CREATE_PERSON, UPDATE_PERSON, RECEIVE_PEOPLE, FETCH_PERSON } from "./actions.jsx"
 
 export function selectedCaseReducer (state = {}, action) {
   switch (action.type) {
@@ -49,6 +49,8 @@ export function personReducer (state = {people:[]}, action) {
           [index]: {$set: action.person }
         }
       })
+    case RECEIVE_PEOPLE:
+      return action.people
     case CREATE_PERSON:
       return Object.assign({}, state, {selectedPerson: {}})
     case FETCH_PERSON:

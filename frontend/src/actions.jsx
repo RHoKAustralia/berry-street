@@ -10,6 +10,7 @@ export const ADD_PERSON = 'ADD_PERSON'
 export const CREATE_PERSON = 'CREATE_PERSON'
 export const FETCH_PERSON = 'FETCH_PERSON'
 export const UPDATE_PERSON = 'UPDATE_PERSON'
+export const RECEIVE_PEOPLE = 'RECEIVE_PEOPLE'
 
 export function receiveCases(json) {
   return { type: RECEIVE_CASES, cases: json }
@@ -29,6 +30,27 @@ export function fetchCases() {
     return fetch(request)
         .then(response => response.json())
         .then(json => { dispatch(receiveCases(json))})
+  }
+}
+
+export function receivePeople(json) {
+  return { type: RECEIVE_PEOPLE, people: json }
+}
+
+export function selectPerson(personId) {
+  return { type: SELECT_PERSON, personId }
+}
+
+export function fetchPeople() {
+  return dispatch => {
+    var request = new Request('http://localhost:8080/people?depth=1', {
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    return fetch(request)
+        .then(response => response.json())
+        .then(json => { dispatch(receivePeople(json))})
   }
 }
 

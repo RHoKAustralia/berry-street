@@ -31,13 +31,15 @@ const composedEnhancers = composeEnhancers(applyMiddleware(thunkMiddleware, crea
 const store = createStore(reducer, composedEnhancers);
 
 // For testing -- until we bring in async redux actions
-import { addPerson, updatePerson, fetchCases } from './actions.jsx'
+import { addPerson, updatePerson, fetchCases, fetchPeople } from './actions.jsx'
 
 store.dispatch(fetchCases())
+store.dispatch(fetchPeople())
 
-store.dispatch(addPerson({ id: "12346", name: "Jenny", father: "Ben James", mother: "234957" }))
-store.dispatch(addPerson({ id: "12347", name: "Jenny", father: "Kate Smith", mother: "234958" }))
-store.dispatch(updatePerson({ id: "12347", name: "Mia", father: "Bob Smith", mother: "234958" }))
+
+// store.dispatch(addPerson({ id: "12346", name: "Jenny", father: "Ben James", mother: "234957" }))
+// store.dispatch(addPerson({ id: "12347", name: "Jenny", father: "Kate Smith", mother: "234958" }))
+// store.dispatch(updatePerson({ id: "12347", name: "Mia", father: "Bob Smith", mother: "234958" }))
 
 ReactDOM.render((
   <div>

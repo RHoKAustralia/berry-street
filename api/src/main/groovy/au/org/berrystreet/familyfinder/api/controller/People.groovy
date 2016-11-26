@@ -5,6 +5,7 @@ import au.org.berrystreet.familyfinder.api.domain.Friend
 import au.org.berrystreet.familyfinder.api.service.FamilyService
 import au.org.berrystreet.familyfinder.api.service.FriendService
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.CrossOrigin
 
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
 import static org.springframework.web.bind.annotation.RequestMethod.GET
@@ -30,6 +31,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT
 @RestController
 @RequestMapping(value = '/people', produces = [APPLICATION_JSON])
 @Api(value = '/people', description = 'the person API')
+@CrossOrigin(origins='*')
 class People extends Controller<Person> {
 
     @Autowired

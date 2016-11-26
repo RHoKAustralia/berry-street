@@ -61,7 +61,7 @@ var PersonEditLink = React.createClass({
 
 export default connect((state) => {
   return {
-    people: state.people.people
+    people: state.people
   }
 })(PersonList)
 
