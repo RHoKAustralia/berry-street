@@ -26,7 +26,7 @@ if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ] ; then
 	tty -s && echo "No changes detected"
 else
 	echo "Deploying changes"
-	git log --reverse --no-merges --stat HEAD..FETCH_HEAD
+	git --no-pager log --reverse --no-merges --stat HEAD..FETCH_HEAD
 	git merge FETCH_HEAD
 	DEPLOY=true
 fi
