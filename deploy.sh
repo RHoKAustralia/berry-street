@@ -8,6 +8,7 @@
 # then it will merge and run them
 #
 # To deploy code from github, open a pull request from master to prod
+#  base: prod ... compare: master
 # Merge the pull and wait up to 5 mins
 
 set -e
@@ -20,9 +21,9 @@ else
 fi
 
 cd ~/berry-street
-git fetch origin $BRANCH
+git fetch -q origin $BRANCH
 if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ] ; then
-	echo "No changes detected"
+	tty -s && echo "No changes detected"
 else
 	echo "Deploying changes"
 	git log --reverse --no-merges --stat HEAD..FETCH_HEAD
