@@ -13,7 +13,7 @@ import EditCase from './components/EditCase.jsx';
 import Index from './components/Index.jsx';
 import Login from './components/Login.jsx';
 
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { caseReducer, selectedCaseReducer, personReducer } from './reducers.jsx';
 import { reducer as formReducer } from 'redux-form';
@@ -26,8 +26,9 @@ const reducer = combineReducers({
   form: formReducer,
   people: personReducer
 });
-const store = createStore(reducer,
-    applyMiddleware(thunkMiddleware, createLogger()));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composedEnhancers = composeEnhancers(applyMiddleware(thunkMiddleware, createLogger()));
+const store = createStore(reducer, composedEnhancers);
 
 // For testing -- until we bring in async redux actions
 import { addPerson, updatePerson, fetchCases } from './actions.jsx'

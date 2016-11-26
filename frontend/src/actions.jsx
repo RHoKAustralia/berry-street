@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 
 export const CASE_UPDATED = 'CASE_UPDATED'
+export const CREATE_CASE = 'CREATE_CASE'
 export const SELECT_CASE = 'SELECT_CASE'
 export const UPDATE_CASE = 'UPDATE_CASE'
 export const RECEIVE_CASES = 'RECEIVE_CASES'
@@ -63,4 +64,8 @@ export function fetchPerson(personId) {
 
 export function updatePerson(personDetails) {
   return { type: UPDATE_PERSON, person: personDetails }
+}
+
+export function createCase() {
+  return { type: CREATE_CASE, case: {} }
 }

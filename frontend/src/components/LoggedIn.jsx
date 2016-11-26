@@ -20,7 +20,7 @@ export default React.createClass({
     if (this.state.profile) {
       return (
         <div>
-          <img src={this.state.profile.picture} />
+          <img width={50} height={50} src={this.state.profile.picture} />
         </div>
       );
     } else {

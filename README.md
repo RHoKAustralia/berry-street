@@ -74,7 +74,7 @@ and then import the project in the IDE
   $ cd frontend
   frontend$ npm install
   frontend$ npm run build
-  frontend$ node_modules/.bin/webpack-dev-server --port 8081
+  frontend$ npm run watch:dev
   ```
 
 - Go to
@@ -82,3 +82,10 @@ and then import the project in the IDE
   ```
   http://localhost
   ```
+
+## Populating the Database with Sample Data
+
+- Visit the Neo4j interface [http://localhost:7474/](http://localhost:7474/)
+- Copy the script from [/api/src/main/resources/data.cql](/api/src/main/resources/data.cql) (ignoring line 1) paste into the console
+- Click the 'Play' button to run
+
