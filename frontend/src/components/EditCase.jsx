@@ -107,7 +107,7 @@ EditCase.propTypes = {
 };
 
 export default reduxForm({
-    fields: ['caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
+    fields: ['id', 'caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
     form: 'editCase',
     validate: validateCase
   },
