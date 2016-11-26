@@ -10,7 +10,7 @@ buildscript {
 
 apply plugin: 'groovy'
 //apply plugin: 'codenarc'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'idea'
 
 sourceCompatibility = 1.8
@@ -29,7 +29,13 @@ dependencies {
     compile "io.springfox:springfox-swagger-ui:$springfoxVersion"
 
     compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+
+    // https://github.com/auth0-samples/auth0-spring-security-api-sample
+    compile "com.auth0:auth0-spring-security-api:0.3.2"
+    compile 'com.auth0:auth0:0.4.0'
+
     compile "org.springframework.data:spring-data-neo4j:$springDataNeo4jVersion"
 
     compile 'org.neo4j:neo4j-ogm-embedded-driver:2.0.3'
