@@ -122,8 +122,8 @@ export default React.createClass({
             <div className="form-group">
               <label for="personHowFound">How Found</label>
               <input type="text" className="form-control"
-                ref="address" id="personHowFound" placeholder="How was the person found"
-                value={ this.state.person.howFound } onChange={this.updateAddress} />
+                ref="howFound" id="personHowFound" placeholder="How was the person found"
+                value={ this.state.person.howFound } onChange={this.updateHowFound} />
             </div>
           </div>
         </div>

@@ -16,7 +16,7 @@ class EditCase extends Component {
   }
 
   render() {
-    const {fields: {id, staffName, status, objective, dateOpened}, handleSubmit} = this.props
+    const {fields: {id, caseManager, familyFinderStaffName, status, objective, dateOpened, dateClosed, phaseOfInvolvement}, handleSubmit} = this.props
 
     var heading = <h1>New Case</h1>;
     if (this.props.params.caseId) {
@@ -40,20 +40,6 @@ class EditCase extends Component {
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="staffName">Staff Name</label>
-                  <input type="text" className="form-control" id="staffName" placeholder="Case Owner" {...staffName} />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label for="status">Status</label>
-                  <input type="text" className="form-control" id="status" placeholder="Status" {...status} />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
                   <label for="objective">Objective</label>
                   <input type="text" className="form-control" id="objective" placeholder="Objective" {...objective} />
                 </div>
@@ -62,8 +48,50 @@ class EditCase extends Component {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
+                  <label for="caseManager">Case Manager</label>
+                  <input type="text" className="form-control" id="caseManager" {...caseManager} />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label for="familyFinderStaffName">Family Finder Staff Member</label>
+                  <input type="text" className="form-control" id="familyFinderStaffName" {...familyFinderStaffName} />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label for="status">Status</label>
+                  <select className="form-control" id="status" placeholder="Status" {...status}>
+                    <option></option>
+                    <option>Open</option>
+                    <option>Closed</option>
+                  </select>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label for="phaseOfInvolvement">Phase of Involvement</label>
+                  <select className="form-control" id="phaseOfInvolvement" {...phaseOfInvolvement}>
+                    <option></option>
+                    <option>Referred</option>
+                    <option>Searching</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
                   <label for="dateOpened">Date Opened</label>
                   <input type="text" className="form-control" id="dateOpened" placeholder="Date Opened" {...dateOpened} />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label for="dateClosed">Date Closed</label>
+                  <input type="text" className="form-control" id="dateClosed" placeholder="Date Closed" {...dateClosed} />
                 </div>
               </div>
             </div>
@@ -97,7 +125,7 @@ EditCase.propTypes = {
 };
 
 export default reduxForm({
-    fields: ['id', 'staffName', 'status', 'objective', 'dateOpened'],
+    fields: ['id', 'caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
     form: 'editCase',
      validate: validateCase
   },

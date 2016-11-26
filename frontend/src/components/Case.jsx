@@ -18,7 +18,7 @@ class ViewCase extends Component {
           <h1>Case <small> ID: {ffCase.id}</small></h1>
         </div>
         <span>
-          <h4>Staff Member Name: </h4> {ffCase.staffName}
+          <h4>Staff Member Name: </h4> {ffCase.caseManager}
           <h4>Child Name: </h4> {ffCase.childName}
         </span>
       </div>

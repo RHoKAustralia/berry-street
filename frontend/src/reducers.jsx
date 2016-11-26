@@ -1,6 +1,16 @@
 var update = require('react/lib/update')
 import { ADD_CASE, CASE_UPDATED, CREATE_CASE, UPDATE_CASE, RECEIVE_CASES, SELECT_CASE } from "./actions.jsx"
 import { ADD_PERSON, CREATE_PERSON, UPDATE_PERSON, FETCH_PERSON } from "./actions.jsx"
+import { SET_PROFILE } from './actions.jsx'
+
+export function authReducer (state = {}, action) {
+  switch (action.type) {
+    case SET_PROFILE:
+      return { profile: action.profile }
+    default:
+      return state
+  }
+}
 
 export function selectedCaseReducer (state = {}, action) {
   switch (action.type) {

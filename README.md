@@ -73,12 +73,24 @@ and then import the project in the IDE
   ```
   $ cd frontend
   frontend$ npm install
-  frontend$ npm run build
-  frontend$ node_modules/.bin/webpack-dev-server --port 8081
+  frontend$ npm run dev
   ```
 
 - Go to
 
   ```
-  http://localhost
+  http://localhost:8081
   ```
+
+For a supercharged frontend dev experience, make sure you have these Chrome extensions installed:
+
+ - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+ - [Redux dev tools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
+
+
+## Populating the Database with Sample Data
+
+- Visit the Neo4j interface [http://localhost:7474/](http://localhost:7474/)
+- Copy the script from [/api/src/main/resources/data.cql](/api/src/main/resources/data.cql) (ignoring line 1) paste into the console
+- Click the 'Play' button to run
+
