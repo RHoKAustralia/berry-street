@@ -1,12 +1,20 @@
 # Berry Street Family Finder
 
+## Getting Started
+
+You will need to get this code onto your laptop. To do this you will need a `git` client. If you are on windows, make sure you are using UNIX line endings as most of the tools will inside a linux docker container.
+
+  ```
+  git clone https://github.com/RHoKAustralia/berry-street.git
+  ```
+
 ## Basic setup instructions
 
 The quickest way to get the application up and running on your local machine is using [Docker](https://www.docker.com/products/overview)
 
 Once you have Docker installed,
 
-- Go to the rood directory of the project and run
+- Go to the root directory of the project and run
 
   ```
   $ docker-compose build

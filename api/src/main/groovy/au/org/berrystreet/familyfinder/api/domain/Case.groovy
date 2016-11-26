@@ -14,8 +14,12 @@ import static org.neo4j.ogm.annotation.Relationship.INCOMING
 class Case extends Entity {
 
     @ApiModelProperty
-    @JsonProperty('staffName')
-    String staffName = null
+    @JsonProperty('familyFinderStaffName')
+    String familyFinderStaffName = null
+
+    @ApiModelProperty
+    @JsonProperty('caseManager')
+    String caseManager = null
 
     @ApiModelProperty
     @JsonProperty('status')
@@ -27,8 +31,17 @@ class Case extends Entity {
     String dateOpened = null
 
     @ApiModelProperty
+    @JsonProperty('dateClosed')
+    @JsonFormat(pattern='yyyy-MM-dd')
+    String dateClosed = null
+
+    @ApiModelProperty
     @JsonProperty('caseObjective')
     String caseObjective = null
+
+    @ApiModelProperty
+    @JsonProperty('phaseOfInvolvement')
+    String phaseOfInvolvement
 
     @ApiModelProperty
     @JsonProperty('subjects')
