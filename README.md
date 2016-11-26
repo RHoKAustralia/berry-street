@@ -74,7 +74,7 @@ and then import the project in the IDE
   $ cd frontend
   frontend$ npm install
   frontend$ npm run build
-  frontend$ node_modules/.bin/webpack-dev-server --port 8081
+  frontend$ npm run watch:dev
   ```
 
 - Go to
