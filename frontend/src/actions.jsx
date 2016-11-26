@@ -32,6 +32,21 @@ export function fetchCases() {
     return fetch(request)
         .then(response => response.json())
         .then(json => { dispatch(receiveCases(json))})
+        .catch()
+  }
+}
+
+export function addCase(caseDetails) {
+  return dispatch => {
+    var request = new Request('http://localhost:8080/cases', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(caseDetails)
+    })
+    return fetch(request)
+        .then(response => dispatch(fetchCases()))
   }
 }
 
