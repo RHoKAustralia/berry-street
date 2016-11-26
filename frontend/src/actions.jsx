@@ -43,7 +43,7 @@ export function selectPerson(personId) {
 
 export function fetchPeople() {
   return dispatch => {
-    var request = new Request('http://localhost:8080/people?depth=1', {
+    var request = new Request('http://localhost:8080/people?depth=0', {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
