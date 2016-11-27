@@ -1,15 +1,7 @@
-.PersonRelationship {
+.PersonRelationshipList {
 
 }
 
-.PersonRelationship-riskStatus {
-
-}
-
-.PersonRelationship-personName {
-
-}
-
-.PersonRelationship-relationship {
-
+.PersonRelationshipList ul {
+    list-style-type: none;
 }
