@@ -4,6 +4,7 @@ import { selectCase } from '../actions.jsx'
 import { selectCaseById } from '../reducers.jsx'
 import api from "../api.jsx"
 import CaseHeader from './CaseHeader.jsx'
+import PersonRelationshipList from './PersonRelationshipList.jsx';
 
 class CaseDetails extends Component {
   constructor(props) {
@@ -28,7 +29,8 @@ class CaseDetails extends Component {
     if (!ffCase) return this.renderLoading()
     return (
       <div className="container">
-        <CaseHeader />
+        <CaseHeader case={ffCase} />
+        <PersonRelationshipList />
       </div>
     )
   }

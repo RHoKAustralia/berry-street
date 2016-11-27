@@ -17,11 +17,11 @@ create (billy:Person {name: 'Billy Ward', dateOfBirth: '2003-10-19',
     image: 'http://il2.picdn.net/shutterstock/videos/303445/thumb/1.jpg'})
 create (billy)-[:SUBJECT {date: '2016-08-05'}]->(billyCase)
 
-create (jenny:Person {name: 'Jenny Quinn', atsi: 'false'})
+create (jenny:Person {name: 'Jenny Quinn', atsi: false})
 create (jenny)-[:FAMILY  {relationship: 'parent'}]->(billy)
 // [PAGE 3] Jenny's siblings: Rowan, Philip, Helen
 
-create (bob:Person {name: 'Bob Ward', atsi: 'false'})
+create (bob:Person {name: 'Bob Ward', atsi: false})
 create (bob)-[:FAMILY  {relationship: 'parent'}]->(billy)
 // [PAGE 2] Billy says Jenny thinks Bob moved to SA
 

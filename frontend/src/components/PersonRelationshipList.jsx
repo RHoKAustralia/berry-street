@@ -9,7 +9,7 @@ const PersonRelationshipList = React.createClass({
       <div >
         <ul>
             {this.props.relationships.map(relationship =>
-                <li><PersonRelationship key={relationship.id} personName={relationship.personName}
+                <li key={relationship.id}><PersonRelationship personName={relationship.personName}
                     relationship={relationship.relationship} riskStatus={relationship.riskStatus}/></li>
             )}
         </ul>

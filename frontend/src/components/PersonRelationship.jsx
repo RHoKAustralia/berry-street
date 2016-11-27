@@ -1,5 +1,5 @@
 import React from 'react';
-//import './PersonRelationship.css';
+import './PersonRelationship.css';
 
 const PersonRelationship = React.createClass({
   render() {

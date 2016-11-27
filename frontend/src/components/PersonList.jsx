@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import PersonRelationshipList from './PersonRelationshipList.jsx';
 
 const PersonList = React.createClass({
   render() {
     return (
       <div className="container">
-        <PersonRelationshipList />
-
         <div className="page-header">
           <h1>Existing People <small><Link to='/people/new'>Add New Person</Link></small></h1>
         </div>
