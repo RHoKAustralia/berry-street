@@ -1,38 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './PersonRelationshipList.css';
 import PersonRelationship from './PersonRelationship.jsx';
 
-const PersonRelationshipList = React.createClass({
+class PersonRelationshipList extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      selectedRelationShip: this.props.relationships[0]
+    }
+
+    this.personRelationshipOnClick = this.personRelationshipOnClick.bind(this);
+  }
+
   render() {
     return (
       <div className="PersonRelationshipList">
         <ul className="list-group">
             {this.props.relationships.map(relationship =>
-                <li className={ 'list-group-item ' + (relationship.id === 1 ? 'active' : '' ) }><PersonRelationship key={relationship.id} personName={relationship.personName}
+                <li onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.state.selectedRelationShip === relationship ? 'active' : '' ) }><PersonRelationship key={relationship.id} personName={relationship.personName}
                     relationship={relationship.relationship} riskStatus={relationship.riskStatus}/></li>
             )}
         </ul>
       </div>
     );
   }
-});
 
-export default connect((state) => {
-  return {
-    relationships: [
-        {
-            id: 1,
-            personName: 'Lisa Simpson',
-            relationship: 'parent',
-            riskStatus: 1
-        },
-        {
-            id: 2,
-            personName: 'Maggie Simpson',
-            relationship: 'sister',
-            riskStatus: 2
-        }
-    ]
+  personRelationshipOnClick(personRelationship) {
+    this.setState({
+      selectedRelationShip: personRelationship
+    });
   }
-})(PersonRelationshipList)
+}
+
+export default PersonRelationshipList;

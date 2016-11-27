@@ -14,6 +14,21 @@ class CaseDetails extends Component {
       ffCase: null,
       error: null,
     };
+
+    this.relationships = [
+      {
+          id: 1,
+          personName: 'Lisa Simpson',
+          relationship: 'parent',
+          riskStatus: 1
+      },
+      {
+          id: 2,
+          personName: 'Maggie Simpson',
+          relationship: 'sister',
+          riskStatus: 2
+      }
+    ];
   }
 
   componentDidMount() {
@@ -33,7 +48,7 @@ class CaseDetails extends Component {
         <CaseHeader case={ffCase} />
         <div className="row">
           <div className="col-xs-12 col-sm-6 col-md-3">
-            <PersonRelationshipList />
+            <PersonRelationshipList relationships={this.relationships}/>
           </div>
           <div className="col-xs-12 col-sm-6 col-md-9">
             <RelationshipDetails />
