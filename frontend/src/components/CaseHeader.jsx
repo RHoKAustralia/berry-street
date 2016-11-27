@@ -14,7 +14,7 @@ class CaseHeader extends Component {
         <p style={{'fontSize': '1.4em'}}><span style={{'color': 'rgba(199,196,196,1)'}}>Phase of Involvement:</span> {this.props.case.phaseOfInvolvement}</p>
       </div>
       <div className="col-xs-12 col-sm-6 col-md-3">
-        <img src={subject.person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive pull-right" />
+        <img src={subject.person.image || `src/assets/images/child_case_720.jpg`} className="pull-right" height="100px"/>
       </div>
     </div>
   }
