@@ -5,7 +5,7 @@ import { selectCaseById } from '../reducers.jsx'
 import api from "../api.jsx"
 import CaseHeader from './CaseHeader.jsx'
 
-class ViewCase extends Component {
+class CaseDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,5 +38,4 @@ class ViewCase extends Component {
   }
 }
 
-export default ViewCase
-
+export default CaseDetails
