@@ -2,25 +2,33 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectCase } from '../actions.jsx'
 import { selectCaseById } from '../reducers.jsx'
+import api from "../api.jsx"
+import CaseHeader from './CaseHeader.jsx'
 
 class ViewCase extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ffCase: null,
+      error: null,
+    };
+  }
 
-  componentWillMount() {
-    this.props.dispatch(selectCase(this.props.params.caseId))
+  componentDidMount() {
+    api.getCases()
+       .then(r => {
+         let ccase = r.find(cc => { return this.props.params.caseId == cc.id})
+         this.setState({ ffCase: ccase })
+        })
+       .catch(err => this.setState({ error: err }));
   }
 
   render() {
-    if (!this.props.ffCase) return this.renderLoading()
-    const ffCase = this.props.ffCase || {}
+    const { ffCase, error } = this.state;
+    if (!ffCase) return this.renderLoading()
     return (
       <div className="container">
-        <div className="page-header">
-          <h1>Case <small> ID: {ffCase.id}</small></h1>
-        </div>
-        <span>
-          <h4>Staff Member Name: </h4> {ffCase.caseManager}
-          <h4>Child Name: </h4> {ffCase.childName}
-        </span>
+        <CaseHeader />
       </div>
     )
   }
@@ -30,8 +38,5 @@ class ViewCase extends Component {
   }
 }
 
-export default connect((state) => {
-  return {
-    ffCase: state.selectedCase != null ? selectCaseById(state, state.selectedCase) : {}
-  }
-})(ViewCase)
+export default ViewCase
+

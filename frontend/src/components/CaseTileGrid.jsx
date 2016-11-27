@@ -26,7 +26,7 @@ class CaseTile extends Component {
   render() {
     const { subjects } = this.props.case;
     return <div style={{ heighdt: TILE_HEIGHT, marginBottom: TILE_VERT_MARGIN }} className="col-xs-12 col-sm-6 col-md-3 rwrapper">
-      <Link to={`/cases/${this.props.case.id}/edit`} className="rlisting">
+      <Link to={`/cases/${this.props.case.id}`} className="rlisting">
         <div className="col-md-12 nopad">
           <img src={subjects[0].person.image} className="img-responsive" />
         </div>

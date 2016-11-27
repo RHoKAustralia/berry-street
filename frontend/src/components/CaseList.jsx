@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
+import CaseHeader from './CaseHeader.jsx';
 
 const CaseList = React.createClass({
 
@@ -11,6 +12,7 @@ const CaseList = React.createClass({
 
     return (
       <div className="container">
+        <CaseHeader />
         <div className="page-header">
           <h1>Existing Cases <small><Link to='/cases/new'>Add New Case</Link></small></h1>
         </div>
