@@ -13,7 +13,16 @@ class Person extends Entity {
 
     @ApiModelProperty
     @JsonProperty('name')
+    /** @Deprecated Temp compatibility - Remove this */
     String name = null
+
+    @ApiModelProperty
+    @JsonProperty
+    String givenNames = null
+
+    @ApiModelProperty
+    @JsonProperty
+    String familyName = null
 
     @ApiModelProperty
     @JsonProperty
