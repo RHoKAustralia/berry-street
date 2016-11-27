@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -30,6 +31,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT
 @RestController
 @RequestMapping(value = '/people', produces = [APPLICATION_JSON])
 @Api(value = '/people', description = 'the person API')
+@CrossOrigin(origins='*')
 class People extends Controller<Person> {
 
     @Autowired
@@ -37,7 +39,7 @@ class People extends Controller<Person> {
 
     @Autowired
     FamilyService familyService
-    
+
     @Autowired
     FriendService friendService
 
