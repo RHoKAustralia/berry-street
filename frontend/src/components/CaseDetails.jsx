@@ -28,7 +28,7 @@ class CaseDetails extends Component {
     if (!ffCase) return this.renderLoading()
     return (
       <div className="container">
-        <CaseHeader />
+        <CaseHeader case={ffCase} />
       </div>
     )
   }
