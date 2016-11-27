@@ -38,7 +38,7 @@ class Person extends Entity {
 
     @ApiModelProperty
     @JsonProperty
-    URI image = null
+    String image = null
 
     @ApiModelProperty
     @JsonProperty('family')
