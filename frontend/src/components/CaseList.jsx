@@ -1,11 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import CaseHeader from './CaseHeader.jsx';
+import CaseHeader from './CaseHeader.jsx'
+import { fetchCases } from '../actions.jsx'
 
 const CaseList = React.createClass({
 
-  render() {
+  componentWillMount: function() {
+    this.props.dispatch(fetchCases())
+  },
+
+  render: function() {
     if (!this.props.cases) {
         return renderLoading()
     }
@@ -21,8 +26,8 @@ const CaseList = React.createClass({
               <tr>
                 <th>Case Number</th>
                 <th>Child Name</th>
-                <th>Staff Member</th>
-		<th>Status</th>
+                <th>Case Manager</th>
+                <th>Status</th>
                 <th>Phase of Involvement</th>
                 <th>View</th>
                 <th>Edit</th>
@@ -30,7 +35,7 @@ const CaseList = React.createClass({
             </thead>
             <tbody>
               {this.props.cases.map(ffCase =>
-                  <CaseRow key={ffCase.id} caseId={ffCase.id} staffName={ffCase.caseManager} status={ffCase.status} phaseOfInvolvement={ffCase.phaseOfInvolvement} childName={ffCase.childName} />
+                  <CaseRow key={ffCase.id} personOne={ffCase.subjects[0].person} caseId={ffCase.id} caseManager={ffCase.caseManager} status={ffCase.status} phaseOfInvolvement={ffCase.phaseOfInvolvement} childName={ffCase.childName} />
               )}
             </tbody>
           </table>
@@ -51,8 +56,8 @@ var CaseRow = React.createClass({
     return (
       <tr>
         <td>{this.props.caseId}</td>
-        <td>{this.props.childName}</td>
-        <td>{this.props.staffName}</td>
+        <td>{this.props.personOne.name}</td>
+        <td>{this.props.caseManager}</td>
         <td>{this.props.status}</td>
         <td>{this.props.phaseOfInvolvement}</td>
         <td><CaseViewLink caseId={this.props.caseId} /></td>
