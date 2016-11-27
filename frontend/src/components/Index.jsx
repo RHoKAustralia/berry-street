@@ -19,7 +19,7 @@ class HomeScreen extends Component {
   render() {
     const { profile } = this.props;
     if (profile) {
-      return <div className="container-fluid">
+      return <div className="portfolio container">
         <div className="page-header">
           <h1>My Cases</h1>
         </div>
