@@ -24,15 +24,16 @@ class CaseTile extends Component {
     super(props);
   }
   render() {
-    return <div style={{ height: TILE_HEIGHT, marginBottom: TILE_VERT_MARGIN }} className="col-xs-12 col-sm-6 col-md-3 rwrapper">
-      <Link to={`/cases/${this.props.case.caseNumber}/edit`} className="rlisting">
+    const { subjects } = this.props.case;
+    return <div style={{ heighdt: TILE_HEIGHT, marginBottom: TILE_VERT_MARGIN }} className="col-xs-12 col-sm-6 col-md-3 rwrapper">
+      <Link to={`/cases/${this.props.case.id}/edit`} className="rlisting">
         <div className="col-md-12 nopad">
-          <img src={`http://lorempixel.com/${TILE_WIDTH}/${TILE_WIDTH}/cats/${this.props.case.caseNumber}`} className="img-responsive" />
+          <img src={subjects[0].person.image} className="img-responsive" />
         </div>
         <div className="col-md-12 nopad">
-          <h5>{`${this.props.case.surname}, ${this.props.case.firstname}`}</h5>
+          <h5>{`${subjects[0].person.name}`}</h5>
           <div className="rfooter">
-            <i className="fa fa-flag"></i> {this.props.case.phase}
+            <i className="fa fa-flag"></i> {this.props.case.phaseOfInvolvement}
           </div>
         </div>
       </Link>
@@ -58,7 +59,7 @@ class CaseTileGrid extends Component {
     if (summary) {
       return <div className="row">
         <CreateNewCaseTile />
-        {summary.map((item) => <CaseTile key={item.caseNumber} case={item} />)}
+        {summary.map((item) => <CaseTile key={item.id} case={item} />)}
       </div>
     } else {
       return <div className="alert alert-info">
