@@ -35,7 +35,7 @@ const CaseList = React.createClass({
             </thead>
             <tbody>
               {this.props.cases.map(ffCase =>
-                  <CaseRow key={ffCase.id} personOne={ffCase.subjects[0].person} caseId={ffCase.id} caseManager={ffCase.caseManager} status={ffCase.status} phaseOfInvolvement={ffCase.phaseOfInvolvement} childName={ffCase.childName} />
+                  <CaseRow key={ffCase.id} personOne={ffCase.subjects && ffCase.subjects.length > 0 ? ffCase.subjects[0].person : {}} caseId={ffCase.id} caseManager={ffCase.caseManager} status={ffCase.status} phaseOfInvolvement={ffCase.phaseOfInvolvement} childName={ffCase.childName} />
               )}
             </tbody>
           </table>
