@@ -1,33 +1,33 @@
 const CASE_DATA = [
   {
-        "@id": "1",
-        "id": 191,
-        "familyFinderStaffName": "Dolores",
-        "caseManager": "Jen",
-        "status": "Open",
-        "dateOpened": "2016-08-05",
-        "dateClosed": null,
-        "caseObjective": "test Neo4J",
-        "phaseOfInvolvement": "Referred",
-        "subjects": [
-            {
-                "@id": "2",
-                "id": 255,
-                "person": {
-                    "@id": "3",
-                    "id": 182,
-                    "name": "Bart Simpson",
-                    "dateOfBirth": "1987-04-19",
-                    "family": [],
-                    "friends": []
-                },
-                "aCase": {
-                    "@ref": "1"
-                },
-                "date": "2016-08-05"
-            }
-        ]
-    }
+    "@id": "1",
+    "id": 191,
+    "familyFinderStaffName": "Dolores",
+    "caseManager": "Jen",
+    "status": "Open",
+    "dateOpened": "2016-08-05",
+    "dateClosed": null,
+    "caseObjective": "test Neo4J",
+    "phaseOfInvolvement": "Referred",
+    "subjects": [
+      {
+        "@id": "2",
+        "id": 255,
+        "person": {
+          "@id": "3",
+          "id": 182,
+          "name": "Bart Simpson",
+          "dateOfBirth": "1987-04-19",
+          "family": [],
+          "friends": []
+        },
+        "aCase": {
+          "@ref": "1"
+        },
+        "date": "2016-08-05"
+      }
+    ]
+  }
 ];
 const PEOPLE_DATA = [
   {
@@ -293,6 +293,10 @@ const PEOPLE_DATA = [
   }
 ];
 
+const RELATIONSHIPS = [
+
+];
+
 const CASE_DETAILS_DATA = [
   { id: 1, "familyFinderStaffName": "Dolores", "caseManager": "Jen", "status": "Open", "dateOpened": "2016-08-05", "dateClosed": null, "caseObjective": "test Neo4J", "phaseOfInvolvement": "Referred", subjects: [] },
   { id: 2, "familyFinderStaffName": "Dolores", "caseManager": "Jen", "status": "Open", "dateOpened": "2016-08-05", "dateClosed": null, "caseObjective": "test Neo4J", "phaseOfInvolvement": "Referred", subjects: [] },
@@ -330,6 +334,9 @@ function sendRequest(url, method, data) {
 }
 
 export default {
+  getRelationship(id) {
+    return Promise.resolve({});
+  },
   getCaseStatuses() {
     return Promise.resolve(["Open", "Closed"])
   },
@@ -348,7 +355,7 @@ export default {
     if (MOCK_BACKEND) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve(CASE_SUMMARY_DATA);
+          resolve(CASE_DATA);
         }, 2000);
       });
     } else {

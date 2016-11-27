@@ -3,18 +3,19 @@ import { Link } from 'react-router'
 import api from "../api.jsx"
 
 const TILE_WIDTH = 250;
-const TILE_HEIGHT = 310;
-const TILE_VERT_MARGIN = 15;
+const TILE_HEIGHT = 400;
+const TILE_VERT_MARGIN = 30;
 
 class CreateNewCaseTile extends Component {
   render() {
-    return <div style={{ height: TILE_HEIGHT, marginBottom: TILE_VERT_MARGIN }} className="col-xs-12 col-sm-6 col-md-3 rwrapper">
-      <div className="col-md-12 nopad" style={{ height: "100%" }}>
-        <Link to='/cases/new' style={{ width: TILE_WIDTH }} className="btn btn-block btn-success">
-          <h1 style={{ fontSize: 80 }}><i className="fa fa-plus" style={{ verticalAilgn: "middle" }} /></h1>
-          <h3>New Case</h3>
+    return <div className="col-md-3">
+      <div className="work nopad">
+       <Link to='/cases/new' style={{ width: TILE_WIDTH }} className="rlisting">
+          <img src="src/assets/images/add_child_case_720.jpg" className="img-responsive" />
+          <h3>New Case<br />&nbsp;</h3>
+	  <h4>&nbsp;</h4>
         </Link>
-      </div>
+	</div>
     </div>
   }
 }
@@ -24,18 +25,15 @@ class CaseTile extends Component {
     super(props);
   }
   render() {
-    return <div style={{ height: TILE_HEIGHT, marginBottom: TILE_VERT_MARGIN }} className="col-xs-12 col-sm-6 col-md-3 rwrapper">
-      <Link to={`/cases/${this.props.case.caseNumber}/edit`} className="rlisting">
-        <div className="col-md-12 nopad">
-          <img src={`http://lorempixel.com/${TILE_WIDTH}/${TILE_WIDTH}/cats/${this.props.case.caseNumber}`} className="img-responsive" />
-        </div>
-        <div className="col-md-12 nopad">
-          <h5>{`${this.props.case.surname}, ${this.props.case.firstname}`}</h5>
-          <div className="rfooter">
-            <i className="fa fa-flag"></i> {this.props.case.phase}
-          </div>
-        </div>
+    const { subjects } = this.props.case;
+    return <div className="col-md-3">
+      <div className="work nopad">
+      <Link to={`/cases/${this.props.case.id}`} className="rlisting">
+          <img src={subjects[0].person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive" />
+          <h3>{`${subjects[0].person.name}`}</h3>
+            <h4>{this.props.case.phaseOfInvolvement}</h4>
       </Link>
+    </div>
     </div>
   }
 }
@@ -58,7 +56,7 @@ class CaseTileGrid extends Component {
     if (summary) {
       return <div className="row">
         <CreateNewCaseTile />
-        {summary.map((item) => <CaseTile key={item.caseNumber} case={item} />)}
+        {summary.map((item) => <CaseTile key={item.id} case={item} />)}
       </div>
     } else {
       return <div className="alert alert-info">

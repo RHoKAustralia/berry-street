@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 const PersonList = React.createClass({
   render() {

@@ -2,6 +2,10 @@ a {
 color: #1198aa;
 }
 
+a:hover{
+    color: #337ab7
+}
+
 #app > main > nav {
   height: 52px;
 }
@@ -13,3 +17,64 @@ color: #1198aa;
 #app > main > nav > div > div > a {
   color: #1198aa;
 }
+
+/* ----- Portfolio ----- */
+
+.portfolio .work {
+    margin-bottom: 40px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 20px;
+    background: #f8f8f8;
+    border-bottom: 2px solid #23527c;
+    text-align: center
+}
+
+.portfolio .work:hover img {
+    opacity: 0.7;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+}
+
+.portfolio .img-responsive {
+    width: 250px;
+    height: 250px;
+}
+
+.portfolio .work:hover {
+    box-shadow:
+        0 5px 15px 0 rgba(0,0,0,.05),
+        0 1px 25px 0 rgba(0,0,0,.05) inset,
+        0 -1px 25px 0 rgba(0,0,0,.05) inset;
+    -o-transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    -ms-transition: all .5s;
+    text-decoration: none;
+}
+
+.portfolio .work a:hover {
+    text-decoration: none;
+}
+
+.portfolio .work h4 {
+    margin-top: 20px;
+    font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #5d5d5d;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255,255,255,.7);
+}
+
+.portfolio .work h3 {
+    font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+.portfolio .work p {
+    line-height: 24px;
+    font-style: italic;
+}
+

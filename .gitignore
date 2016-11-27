@@ -74,3 +74,5 @@ secrets.json
 /spikes/api/secret.js
 
 **/*.nogit.*
+
+npm-debug.log
