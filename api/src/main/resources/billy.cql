@@ -14,7 +14,7 @@ create (billyCase:Case {
     })
 
 create (billy:Person {name: 'Billy Ward', givenNames: 'Billy', familyName: 'Ward', dateOfBirth: '2003-10-19',
-    image: 'https://files.slack.com/files-tmb/T03RTKHQG-F36M1H33K-b1ec366a28/billy_cropped_480.jpg'})
+    image: 'http://il2.picdn.net/shutterstock/videos/303445/thumb/1.jpg'})
 create (billy)-[:SUBJECT {date: '2016-08-05'}]->(billyCase)
 
 create (jenny:Person {name: 'Jenny Quinn', givenNames: 'Jenny', familyName: 'Quinn', atsi: false})
