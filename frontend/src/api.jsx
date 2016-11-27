@@ -358,8 +358,35 @@ function sendRequest(url, method, data) {
 }
 
 export default {
-  getRelationship(id) {
-    return Promise.resolve({});
+  getPerson(id) {
+    if (MOCK_BACKEND) {
+      return new Promise((resolve, reject) => {
+        const matches = PEOPLE_DATA.filter(p => p.id == id);
+        if (matches.length == 1) {
+          resolve(matches[0]);
+        } else {
+          reject(new Error("Person not found"));
+        }
+      })
+    } else {
+      return sendRequest(`${SERVICE_URL_BASE}/people/${id}`, 'GET');
+    }
+  },
+  getRelationship(personId, relationId) {
+    return this.getPerson(personId).then(r => {
+      const family = r.family;
+      const friends = r.friends;
+
+      let matches = family.filter(f => f.id == relationId);
+      if (matches.length == 1) {
+        return Promise.resolve(matches[0]);
+      }
+      matches = friends.filter(f => f.id == relationId);
+      if (matches.length == 1) {
+        return Promise.resolve(matches[0]);
+      }
+      return Promise.reject(new Error("No such relationship"));
+    });
   },
   getCaseStatuses() {
     return Promise.resolve(["Open", "Closed"])

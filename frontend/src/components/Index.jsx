@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-//import CaseList from "./CaseList.jsx"
 import CaseTileGrid from "./CaseTileGrid.jsx"
+import RelationshipDetails from './RelationshipDetails.jsx'
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -24,6 +24,7 @@ class HomeScreen extends Component {
           <h1>My Cases</h1>
         </div>
         <CaseTileGrid />
+        <RelationshipDetails personId={249} relationshipId={312} />
       </div>
     } else {
       return <div className="alert alert-info">
