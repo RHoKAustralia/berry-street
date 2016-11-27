@@ -11,7 +11,7 @@ create (syrahCase:Case {
     })
 
 create (syrah:Person {name: 'Syrah Ward', givenNames: 'Syrah', familyName: 'Ward', dateOfBirth: '2002-03-19',
-    image: 'http://q1065.fm/files/2013/05/Nicole11.jpg?w=600&h=0&zc=1&s=0&a=t&q=89'})
+    image: 'https://files.slack.com/files-pri/T03RTKHQG-F36M1HF2M/syrah_cropped.jpg'})
 create (syrah)-[:SUBJECT {date: '2016-10-05'}]->(syrahCase)
 
 create (kimmie:Person {name: 'Kimmie Charles', givenNames: 'Kimmie', familyName: 'Charles'})
