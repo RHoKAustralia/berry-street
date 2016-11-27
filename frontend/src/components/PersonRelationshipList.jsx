@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-//import './PersonRelationshipList.css';
+import './PersonRelationshipList.css';
 import PersonRelationship from './PersonRelationship.jsx';
 
 const PersonRelationshipList = React.createClass({
   render() {
     return (
-      <div >
-        <ul>
+      <div className="PersonRelationshipList">
+        <ul className="list-group">
             {this.props.relationships.map(relationship =>
-                <li key={relationship.id}><PersonRelationship personName={relationship.personName}
+                <li className={ 'list-group-item ' + (relationship.id === 1 ? 'active' : '' ) }><PersonRelationship key={relationship.id} personName={relationship.personName}
                     relationship={relationship.relationship} riskStatus={relationship.riskStatus}/></li>
             )}
         </ul>
@@ -31,7 +31,7 @@ export default connect((state) => {
             id: 2,
             personName: 'Maggie Simpson',
             relationship: 'sister',
-            riskStatus: 1
+            riskStatus: 2
         }
     ]
   }
