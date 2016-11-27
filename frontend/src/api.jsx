@@ -19,7 +19,9 @@ const CASE_DATA = [
           "name": "Bart Simpson",
           "dateOfBirth": "1987-04-19",
           "family": [],
-          "friends": []
+          "friends": [],
+	  "givenNames": "Bart",
+	  "familyName": "Simpson"
         },
         "aCase": {
           "@ref": "1"
@@ -36,13 +38,17 @@ const PEOPLE_DATA = [
     "name": "Maggie Simpson",
     "dateOfBirth": "1987-04-19",
     "family": [],
-    "friends": []
+    "friends": [],
+    "givenNames": "Maggie",
+    "familyName": "Simpson"
   },
   {
     "@id": "2",
     "id": 189,
     "name": "Patty Bouvier",
     "dateOfBirth": "1987-04-19",
+    "givenNames": "Patty",
+    "familyName": "Bouvier",
     "family": [
       {
         "@id": "3",
@@ -56,7 +62,9 @@ const PEOPLE_DATA = [
           "name": "Lisa Simpson",
           "dateOfBirth": "1987-04-19",
           "family": [],
-          "friends": []
+          "friends": [],
+	  "givenNames": "Lisa",
+	  "familyName": "Simpson"
         },
         "relationship": "aunt"
       },
@@ -83,7 +91,9 @@ const PEOPLE_DATA = [
           "name": "Bart Simpson",
           "dateOfBirth": "1987-04-19",
           "family": [],
-          "friends": []
+          "friends": [],
+          "givenNames": "Bart",
+          "familyName": "Simpson"
         },
         "relationship": "aunt"
       }
@@ -95,6 +105,8 @@ const PEOPLE_DATA = [
     "id": 183,
     "name": "Marge Simpson",
     "dateOfBirth": "1987-04-19",
+    "givenNames": "Marge",
+    "familyName": "Simpson",
     "family": [
       {
         "@id": "9",
@@ -137,6 +149,8 @@ const PEOPLE_DATA = [
     "id": 184,
     "name": "Homer Simpson",
     "dateOfBirth": "1987-04-19",
+    "givenNames": "Homer",
+    "familyName": "Simpson",
     "family": [
       {
         "@id": "13",
@@ -206,7 +220,9 @@ const PEOPLE_DATA = [
         },
         "relationship": "friend"
       }
-    ]
+    ],
+    "givenNames": "Ralph",
+    "familyName": "Wiggum"
   },
   {
     "@ref": "7"
@@ -229,7 +245,9 @@ const PEOPLE_DATA = [
         },
         "relationship": "grounskeeper"
       }
-    ]
+    ],
+    "givenNames": "Groundskeeper",
+    "familyName": "Willie"
   },
   {
     "@id": "21",
@@ -249,7 +267,9 @@ const PEOPLE_DATA = [
         },
         "relationship": "friend"
       }
-    ]
+    ],
+    "givenNames": "Nelson",
+    "familyName": "Muntz"
   },
   {
     "@id": "23",
@@ -269,7 +289,9 @@ const PEOPLE_DATA = [
         },
         "relationship": "friend"
       }
-    ]
+    ],
+    "givenNames": "Milhouse",
+    "familyName": "Van Houten"
   },
   {
     "@id": "25",
@@ -289,7 +311,9 @@ const PEOPLE_DATA = [
         },
         "relationship": "neighbour"
       }
-    ]
+    ],
+    "givenNames": "Ned",
+    "familyName": "Flanders"
   }
 ];
 

@@ -30,7 +30,7 @@ class CaseTile extends Component {
       <div className="work nopad">
       <Link to={`/cases/${this.props.case.id}`} className="rlisting">
           <img src={subjects[0].person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive" />
-          <h3>{`${subjects[0].person.name}`}</h3>
+          <h3>{`${subjects[0].person.familyName}`}<br />{`${subjects[0].person.givenNames}`}</h3>
             <h4>{this.props.case.phaseOfInvolvement}</h4>
       </Link>
     </div>
