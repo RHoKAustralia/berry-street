@@ -44,13 +44,13 @@ class EditCase extends Component {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="caseManager">Case Manager</label>
+                  <label htmlFor="caseManager">Case Manager</label>
                   <input type="text" className="form-control" id="caseManager" {...caseManager} />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="familyFinderStaffName">Family Finder Staff Member</label>
+                  <label htmlFor="familyFinderStaffName">Family Finder Staff Member</label>
                   <input type="text" className="form-control" id="familyFinderStaffName" {...familyFinderStaffName} />
                 </div>
               </div>
@@ -58,7 +58,7 @@ class EditCase extends Component {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="status">Status</label>
+                  <label htmlFor="status">Status</label>
                   {(() => {
                     if (statuses) {
                       return <select className="form-control" id="status" placeholder="Status" {...status}>
@@ -67,17 +67,17 @@ class EditCase extends Component {
                       </select>
                     } else {
                       return <div className="alert alert-info">
-                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-                        <span class="sr-only">Loading...</span>
+                        <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                        <span className="sr-only">Loading...</span>
                       </div>
                     }
                   })()}
-                  
+
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="phaseOfInvolvement">Phase of Involvement</label>
+                  <label htmlFor="phaseOfInvolvement">Phase of Involvement</label>
                   {(() => {
                     if (phases) {
                       return <select className="form-control" id="phaseOfInvolvement" {...phaseOfInvolvement}>
@@ -86,25 +86,25 @@ class EditCase extends Component {
                       </select>
                     } else {
                       return <div className="alert alert-info">
-                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-                        <span class="sr-only">Loading...</span>
+                        <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                        <span className="sr-only">Loading...</span>
                       </div>
                     }
                   })()}
-                  
+
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="dateOpened">Date Opened</label>
+                  <label htmlFor="dateOpened">Date Opened</label>
                   <input type="text" className="form-control" id="dateOpened" placeholder="Date Opened" {...dateOpened} />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-group">
-                  <label for="dateClosed">Date Closed</label>
+                  <label htmlFor="dateClosed">Date Closed</label>
                   <input type="text" className="form-control" id="dateClosed" placeholder="Date Closed" {...dateClosed} />
                 </div>
               </div>
