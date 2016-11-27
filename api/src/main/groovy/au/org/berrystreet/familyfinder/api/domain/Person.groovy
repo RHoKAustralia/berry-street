@@ -16,9 +16,29 @@ class Person extends Entity {
     String name = null
 
     @ApiModelProperty
+    @JsonProperty
+    String clientNumber = null
+
+    @ApiModelProperty
+    @JsonProperty
+    String aliases = null
+
+    @ApiModelProperty
     @JsonProperty('dateOfBirth')
     @JsonFormat(pattern='yyyy-MM-dd')
     String dateOfBirth = null
+
+    @ApiModelProperty
+    @JsonProperty
+    Boolean atsi = null
+
+    @ApiModelProperty
+    @JsonProperty
+    String atsiLocation = null
+
+    @ApiModelProperty
+    @JsonProperty
+    String image = null
 
     @ApiModelProperty
     @JsonProperty('family')
@@ -29,5 +49,4 @@ class Person extends Entity {
     @JsonProperty('friends')
     @Relationship(type = 'FRIEND')
     List<Friend> friends = []
-
 }

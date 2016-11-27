@@ -8,7 +8,7 @@ import PersonList from './components/PersonList.jsx';
 import EditPerson from './components/EditPerson.jsx';
 import Person from './components/Person.jsx';
 import CaseList from './components/CaseList.jsx';
-import Case from './components/Case.jsx';
+import CaseDetails from './components/CaseDetails.jsx';
 import EditCase from './components/EditCase.jsx';
 import Index from './components/Index.jsx';
 import Login from './components/Login.jsx';
@@ -48,7 +48,7 @@ ReactDOM.render((
             <Route path="/users" component={PersonList} />
             <Route path="/cases" component={CaseList} />
             <Route path="/cases/new" component={EditCase} />
-            <Route path="/cases/:caseId" component={Case} />
+            <Route path="/cases/:caseId" component={CaseDetails} />
             <Route path="/cases/:caseId/edit" component={EditCase} />
             <Route path="/people" component={PersonList} />
             <Route path="/people/new" component={EditPerson} />

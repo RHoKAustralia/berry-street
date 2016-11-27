@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
+import CaseHeader from './CaseHeader.jsx';
 
 const CaseList = React.createClass({
 

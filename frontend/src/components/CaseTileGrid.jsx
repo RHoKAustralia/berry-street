@@ -25,12 +25,13 @@ class CaseTile extends Component {
     super(props);
   }
   render() {
+    const { subjects } = this.props.case;
     return <div className="col-md-3">
       <div className="work nopad">
-      <Link to={`/cases/${this.props.case.caseNumber}/edit`} className="rlisting">
-          <img src={`http://lorempixel.com/${TILE_WIDTH}/${TILE_WIDTH}/cats/${this.props.case.caseNumber}`} className="img-responsive" />
-          <h3>{`${this.props.case.surname}`}<br /> {`${this.props.case.firstname}`}</h3>
-            <h4>{this.props.case.phase}</h4>
+      <Link to={`/cases/${this.props.case.id}`} className="rlisting">
+          <img src={subjects[0].person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive" />
+          <h3>{`${subjects[0].person.name}`}</h3>
+            <h4>{this.props.case.phaseOfInvolvement}</h4>
       </Link>
     </div>
     </div>
@@ -55,7 +56,7 @@ class CaseTileGrid extends Component {
     if (summary) {
       return <div className="row">
         <CreateNewCaseTile />
-        {summary.map((item) => <CaseTile key={item.caseNumber} case={item} />)}
+        {summary.map((item) => <CaseTile key={item.id} case={item} />)}
       </div>
     } else {
       return <div className="alert alert-info">
