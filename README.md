@@ -24,6 +24,20 @@ Once you have Docker installed,
 
   *Note. This is going to take a while to complete. The good news is it's only when done for the first time.*
 
+  *Troubleshooting - Windows 7:* If you see this
+
+  ```
+  ←[91m/bin/sh: 1: ./gradlew: Permission denied
+  ←[0m←[31mERROR←[0m: Service 'api' failed to build: The command '/bin/sh -c ./gradlew build jar' returned a non-zero code: 126
+  ```
+  
+  then you can try running the api on its own, and using docker to run everything else:
+  
+  1. Edit `docker-compose.yml` to comment-out (#) the `api` section, and the link to it in `frontend/links`.
+  2. Rerun `docker-compose build` then `docker-compose up` as below.
+  3. Open a command prompt at <project root>\api. Run `gradlew bootRun` to start the api
+
+
 - Now that everything is installed, run
 
   ```
@@ -36,6 +50,9 @@ Once you have Docker installed,
   http://localhost
   ```
 
+  *Troubleshooting - Windows* If you see a 404, use `netstat -abno | more` to find which process is listening on port 80. (Could be Skype). Stop the offender then try again.
+  **TODO** now nothing is listening on port 80, node is not listening either...
+  
 To stop the application, just hit `Ctrl+C`
 
 ## Back End Development / Testing
