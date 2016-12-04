@@ -36,6 +36,8 @@ Once you have Docker installed,
   http://localhost
   ```
 
+  **_Note this is different from what the terminal states http://127.0.0.1:80 will not work only localhost will._**
+
 To stop the application, just hit `Ctrl+C`
 
 ## Back End Development / Testing
@@ -102,3 +104,21 @@ For a supercharged frontend dev experience, make sure you have these Chrome exte
 - Copy the script from [/api/src/main/resources/data.cql](/api/src/main/resources/data.cql) (ignoring line 1) paste into the console
 - Click the 'Play' button to run
 
+
+## Open tasks
+- Enable CORS globally: [https://spring.io/guides/gs/rest-service-cors#_global_cors_configuration](https://spring.io/guides/gs/rest-service-cors#_global_cors_configuration)
+- Change components to use ES6 classes
+- Change components to use stylesheets (one per component i.e {Component.css}) and BEM for styles i.e. {Component}-{element}-{modifier}
+- Start convention for naming of events: 
+    - FETCH_OBJ - dispatch to make the api request
+    - FETCH_OBJ_SUCCESS - dispatch when a successful response is returned from the api request
+    - FETCH_OBJ_FAILURE - dispatch when a failed response is returned from the api request
+    - RESET_OBJ - dispatch to reset components state. This is optional
+- Apply these conventions to current Case List, People, Create Case and Create Person
+- Introduce redux into new case relationship screen
+- Develop functionality for case relationship screen to load details into the right panel when a relationship is selected
+- Upgrade frontend to use create-react-app and latest Node
+- Make it easy to run frontend in docker with live reload and update wiki on how to do this
+- Fix issue with backend where gradle is downloading libraries/packages when backend code is changed
+- Fix issue with frontend yarn install (This may be fixed by the upgrading above)
+- Fix issue with docker-compose up which appears to be rebuilding and re-downloading
