@@ -24,7 +24,6 @@ class HomeScreen extends Component {
           <h1>My Cases</h1>
         </div>
         <CaseTileGrid />
-        <RelationshipDetails personId={249} relationshipId={312} />
       </div>
     } else {
       return <div className="alert alert-info">

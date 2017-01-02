@@ -414,14 +414,18 @@ export default {
     }
   },
   getCase(id) {
-    return new Promise((resolve, reject) => {
-      const singleCase = CASE_SUMMARY_DATA.filter(c => c.case_id == id);
-      if (singleCase.length = 1) {
-        resolve(singleCase[0]);
-      } else {
-        reject(new Error("Case not found"));
-      }
-    });
+    if (MOCK_BACKEND) {
+      return new Promise((resolve, reject) => {
+        const singleCase = CASE_SUMMARY_DATA.filter(c => c.case_id == id);
+        if (singleCase.length = 1) {
+          resolve(singleCase[0]);
+        } else {
+          reject(new Error("Case not found"));
+        }
+      });
+    } else {
+      return sendRequest(`${SERVICE_URL_BASE}/cases/${id}`, "GET");
+    }
   },
   addCase(caseDetails) {
     if (MOCK_BACKEND) {

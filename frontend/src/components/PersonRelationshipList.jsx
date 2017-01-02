@@ -6,31 +6,29 @@ import PersonRelationship from './PersonRelationship.jsx';
 class PersonRelationshipList extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      selectedRelationShip: this.props.relationships[0]
-    }
-
     this.personRelationshipOnClick = this.personRelationshipOnClick.bind(this);
   }
-
   render() {
+    //FIXME: There is no risk status in the modeled relationship
     return (
       <div className="PersonRelationshipList">
         <ul className="list-group">
-            {this.props.relationships.map(relationship =>
-                <li onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.state.selectedRelationShip === relationship ? 'active' : '' ) }><PersonRelationship key={relationship.id} personName={relationship.personName}
-                    relationship={relationship.relationship} riskStatus={relationship.riskStatus}/></li>
-            )}
+            {this.props.relationships.map(relationship => {
+              //HACK: kin or kith? Typo?
+              const related = relationship.kin || relationship.kith || {};
+              return <li key={relationship.id} onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.props.selectedRelationId === relationship.id ? 'active' : '' ) }>
+                <PersonRelationship personName={related.name} relationship={relationship.relationship} riskStatus={relationship.riskStatus}/>
+              </li>;
+            })}
         </ul>
       </div>
     );
   }
 
   personRelationshipOnClick(personRelationship) {
-    this.setState({
-      selectedRelationShip: personRelationship
-    });
+    if (this.props.onRelationSelected) {
+      this.props.onRelationSelected(personRelationship.id);
+    }
   }
 }
 

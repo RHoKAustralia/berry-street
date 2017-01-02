@@ -13,45 +13,41 @@ class CaseDetails extends Component {
     this.state = {
       ffCase: null,
       error: null,
+      person: null,
+      selectedRelationshipId: null
     };
-
-    this.relationships = [
-      {
-          id: 1,
-          personName: 'Lisa Simpson',
-          relationship: 'parent',
-          riskStatus: 1
-      },
-      {
-          id: 2,
-          personName: 'Maggie Simpson',
-          relationship: 'sister',
-          riskStatus: 2
-      }
-    ];
   }
 
   componentDidMount() {
-    api.getCases()
+    api.getCase(this.props.params.caseId)
        .then(r => {
-         let ccase = r.find(cc => { return this.props.params.caseId == cc.id})
-         this.setState({ ffCase: ccase })
+          //FIXME: GET /cases/{id} returns a subject with empty arrays for family and friends!!!
+          //We have to workaround this by doing 2 requests: First for the case, Second for the
+          //full person details via the referenced subject
+          return Promise.all([ r, api.getPerson(r.subjects[0].person.id) ]);
+        })
+        .then(results => {
+          this.setState({ffCase: results[0], person: results[1]});
         })
        .catch(err => this.setState({ error: err }));
   }
-
+  onRelationSelected(id) {
+    this.setState({ selectedRelationshipId: id });
+  }
   render() {
-    const { ffCase, error } = this.state;
-    if (!ffCase) return this.renderLoading()
+    const { ffCase, person, error } = this.state;
+    if (!ffCase && !person)
+      return this.renderLoading();
+    const relations = person.family.concat(person.friends);
     return (
       <div className="container">
         <CaseHeader case={ffCase} />
         <div className="row">
           <div className="col-xs-12 col-sm-6 col-md-3">
-            <PersonRelationshipList relationships={this.relationships}/>
+            <PersonRelationshipList relationships={relations} selectedRelationId={this.state.selectedRelationshipId} onRelationSelected={this.onRelationSelected.bind(this)} />
           </div>
           <div className="col-xs-12 col-sm-6 col-md-9">
-            <RelationshipDetails />
+            <RelationshipDetails personId={person.id} relationshipId={this.state.selectedRelationshipId}  />
           </div>
         </div>
       </div>
