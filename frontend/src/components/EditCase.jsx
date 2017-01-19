@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
 import { createCase, addCase, updateCase, selectCase } from '../actions.jsx'
 import { withRouter } from 'react-router'
 import { selectCaseById } from '../reducers.jsx'
 import api from '../api.jsx'
 
 class EditCase extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       statuses: null,
       phases: null
     }
   }
-  componentDidMount() {
+  componentDidMount () {
     api.getPhases().then(r => this.setState({ phases: r }))
     api.getCaseStatuses().then(r => this.setState({ statuses: r }))
   }
-  componentWillMount() {
+  componentWillMount () {
     this.props.dispatch(this.props.params.caseId ? selectCase(this.props.params.caseId) : createCase())
   }
 
-  saveCase(caseToSave) {
+  saveCase (caseToSave) {
     this.props.dispatch(this.props.params.caseId ? updateCase(caseToSave) : addCase(caseToSave))
     this.props.router.push('/cases')
   }
 
-  render() {
-    const {fields: {id, caseManager, familyFinderStaffName, status, objective, dateOpened, dateClosed, phaseOfInvolvement}, handleSubmit} = this.props
-    const { phases, statuses } = this.state;
-    var heading = <h1>New Case</h1>;
+  render () {
+    const {fields: {id, childsName, childsDob, childsAddress, caseManager, familyFinderStaffName, status, objective, dateOpened, dateClosed, phaseOfInvolvement}, handleSubmit} = this.props
+    const { phases, statuses } = this.state
+    var heading = <h1>New Case</h1>
     if (this.props.params.caseId) {
-      heading = <h1>Edit Case</h1>;
+      heading = <h1>Edit Case</h1>
     }
     return (
       <div className="container">
@@ -39,7 +39,35 @@ class EditCase extends Component {
           {heading}
           <fieldset>
             <legend>
-              Family First Details
+              Child Details
+            </legend>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label htmlFor="childsName">Child's Name</label>
+                  <input type="text" className="form-control" id="childsName" {...childsName} />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label htmlFor="childsDob">Date of Birth</label>
+                  <input type="text" className="form-control" id="childsDob" {...childsDob} />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <div className="form-group">
+                  <label htmlFor="childsAddress">Address</label>
+                  <input type="text" className="form-control" id="childsAddress" {...childsAddress} />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              Case Details
             </legend>
             <div className="row">
               <div className="col-md-6">
@@ -120,11 +148,11 @@ class EditCase extends Component {
           </fieldset>
         </form>
       </div>
-    );
+    )
   }
 }
 
-function validateCase(data, props) {
+function validateCase (data, props) {
   const errors = {}
   return errors
 }
@@ -133,14 +161,14 @@ EditCase.propTypes = {
   router: React.PropTypes.shape({
     push: React.PropTypes.func.isRequired
   }).isRequired
-};
+}
 
 export default reduxForm({
-    fields: ['id', 'caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
-    form: 'editCase',
-    validate: validateCase
-  },
+  fields: ['id', 'childsName', 'childsDob', 'childsAddress', 'caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
+  form: 'editCase',
+  validate: validateCase
+},
   state => ({
-      initialValues: selectCaseById(state, state.selectedCase)
+    initialValues: selectCaseById(state, state.selectedCase)
   })
-)(withRouter(EditCase));
+)(withRouter(EditCase))

@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import api from "../api.jsx"
+import React, { Component } from 'react'
+import api from '../api.jsx'
 
-const TILE_WIDTH = 100;
-const TILE_HEIGHT = 100;
+const TILE_WIDTH = 100
+const TILE_HEIGHT = 100
 
 class CaseHeader extends Component {
   render() {

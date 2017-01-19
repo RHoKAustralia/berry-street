@@ -10,30 +10,28 @@ class CreateNewCaseTile extends Component {
   render() {
     return <div className="col-md-3">
       <div className="work nopad">
-       <Link to='/cases/new' style={{ width: TILE_WIDTH }} className="rlisting">
+        <Link to='/cases/new' style={{ width: TILE_WIDTH }} className="rlisting">
           <img src="src/assets/images/add_child_case_720.jpg" className="img-responsive" />
           <h3>New Case<br />&nbsp;</h3>
-	  <h4>&nbsp;</h4>
+          <h4>&nbsp;</h4>
         </Link>
-	</div>
+      </div>
     </div>
   }
 }
 
 class CaseTile extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     const { subjects } = this.props.case;
     return <div className="col-md-3">
       <div className="work nopad">
-      <Link to={`/cases/${this.props.case.id}`} className="rlisting">
-          <img src={subjects[0].person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive" />
-          <h3>{`${subjects[0].person.familyName}`}<br />{`${subjects[0].person.givenNames}`}</h3>
-            <h4>{this.props.case.phaseOfInvolvement}</h4>
-      </Link>
-    </div>
+        <Link to={`/cases/${this.props.case.id}`} className="rlisting">
+            <img src={subjects[0].person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive" />
+            <h3>{`${subjects[0].person.familyName}`}<br />{`${subjects[0].person.givenNames}`}</h3>
+              <h4>{this.props.case.phaseOfInvolvement}</h4>
+        </Link>
+      </div>
     </div>
   }
 }
