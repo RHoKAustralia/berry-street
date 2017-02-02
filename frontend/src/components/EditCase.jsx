@@ -27,7 +27,7 @@ class EditCase extends Component {
   }
 
   render () {
-    const {fields: {id, childsName, childsDob, childsAddress, caseManager, familyFinderStaffName, status, objective, dateOpened, dateClosed, phaseOfInvolvement}, handleSubmit} = this.props
+    const {fields: {id, caseManager, familyFinderStaffName, status, objective, dateOpened, dateClosed, phaseOfInvolvement}, handleSubmit} = this.props
     const { phases, statuses } = this.state
     var heading = <h1>New Case</h1>
     if (this.props.params.caseId) {
@@ -37,34 +37,6 @@ class EditCase extends Component {
       <div className="container">
         <form onSubmit={handleSubmit(this.saveCase.bind(this))}>
           {heading}
-          <fieldset>
-            <legend>
-              Child Details
-            </legend>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label htmlFor="childsName">Child's Name</label>
-                  <input type="text" className="form-control" id="childsName" {...childsName} />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label htmlFor="childsDob">Date of Birth</label>
-                  <input type="text" className="form-control" id="childsDob" {...childsDob} />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12">
-                <div className="form-group">
-                  <label htmlFor="childsAddress">Address</label>
-                  <input type="text" className="form-control" id="childsAddress" {...childsAddress} />
-                </div>
-              </div>
-            </div>
-          </fieldset>
-
           <fieldset>
             <legend>
               Case Details
@@ -164,7 +136,7 @@ EditCase.propTypes = {
 }
 
 export default reduxForm({
-  fields: ['id', 'childsName', 'childsDob', 'childsAddress', 'caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
+  fields: ['id', 'caseManager', 'familyFinderStaffName', 'status', 'objective', 'dateOpened', 'dateClosed', 'phaseOfInvolvement'],
   form: 'editCase',
   validate: validateCase
 },

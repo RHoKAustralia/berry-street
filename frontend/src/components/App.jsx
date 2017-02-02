@@ -101,10 +101,12 @@ const App = React.createClass({
                 <IndexLink to="/" className="navbar-brand">My Cases</IndexLink>
               </div>
               <ul className="nav navbar-nav">
+                <li><Link to='/cases/new/child'>Create Case</Link></li>
+                {/*
                 <li><Link to='/cases'>Case List</Link></li>
                 <li><Link to='/people'>People</Link></li>
-                <li><Link to='/cases/new'>Create Case</Link></li>
                 <li><Link to='/people/new'>Create Person</Link></li>
+                */}
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><LoggedIn lock={this.lock} idToken={login.idToken} /></li>

@@ -1,6 +1,6 @@
 var update = require('react/lib/update')
-import { ADD_CASE, CASE_UPDATED, CREATE_CASE, UPDATE_CASE, RECEIVE_CASES, SELECT_CASE } from "./actions.jsx"
-import { ADD_PERSON, CREATE_PERSON, UPDATE_PERSON, FETCH_PERSON } from "./actions.jsx"
+import { ADD_CASE, CASE_SAVED, CREATE_CASE, UPDATE_CASE, RECEIVE_CASES, SELECT_CASE } from "./actions.jsx"
+import { ADD_PERSON, CREATE_PERSON, UPDATE_PERSON, FETCH_PERSON, CHILD_ADDED } from "./actions.jsx"
 import { SET_PROFILE, SET_ID_TOKEN } from './actions.jsx'
 
 export function authReducer (state = {}, action) {
@@ -8,8 +8,8 @@ export function authReducer (state = {}, action) {
     case SET_PROFILE:
       return Object.assign({}, state, { profile: action.profile })
     case SET_ID_TOKEN:
-      return Object.assign({}, state, { 
-        login: { 
+      return Object.assign({}, state, {
+        login: {
           idToken: action.idToken
         }
       })
@@ -27,10 +27,18 @@ export function selectedCaseReducer (state = {}, action) {
   }
 }
 
+export function childReducer (state = {}, action) {
+  switch (action.type) {
+    case CHILD_ADDED:
+      return {childToAdd: action.child}
+    default:
+      return state
+  }
+}
+
 export function caseReducer (state = [], action) {
   switch (action.type) {
-
-    case CASE_UPDATED:
+    case CASE_SAVED:
       // TODO: there must be a better way
       var index = state.map(function(c) { return c.id; }).indexOf(action.case.id)
       return update(state, {

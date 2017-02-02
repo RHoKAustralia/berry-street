@@ -9,7 +9,7 @@ import RelationshipDetails from './RelationshipDetails.jsx';
 
 class CaseDetails extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       ffCase: null,
       error: null,
@@ -35,7 +35,7 @@ class CaseDetails extends Component {
     this.setState({ selectedRelationshipId: id });
   }
   render() {
-    const { ffCase, person, error } = this.state;
+    const { ffCase, person, error } = this.state
     if (!ffCase && !person)
       return this.renderLoading();
     const relations = person.family.concat(person.friends);

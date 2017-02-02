@@ -1,16 +1,16 @@
 import React, { Component } from "react"
 import { Link } from 'react-router'
-import api from "../api.jsx"
+import api from '../api.jsx'
 
-const TILE_WIDTH = 250;
-const TILE_HEIGHT = 400;
-const TILE_VERT_MARGIN = 30;
+const TILE_WIDTH = 250
+const TILE_HEIGHT = 400
+const TILE_VERT_MARGIN = 30
 
 class CreateNewCaseTile extends Component {
   render() {
     return <div className="col-md-3">
       <div className="work nopad">
-        <Link to='/cases/new' style={{ width: TILE_WIDTH }} className="rlisting">
+        <Link to='/cases/new/child' style={{ width: TILE_WIDTH }} className="rlisting">
           <img src="src/assets/images/add_child_case_720.jpg" className="img-responsive" />
           <h3>New Case<br />&nbsp;</h3>
           <h4>&nbsp;</h4>

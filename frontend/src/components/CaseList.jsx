@@ -18,7 +18,7 @@ const CaseList = React.createClass({
     return (
       <div className="container">
         <div className="page-header">
-          <h1>Existing Cases <small><Link to='/cases/new'>Add New Case</Link></small></h1>
+          <h1>Existing Cases <small><Link to='/cases/new/child'>Add New Case</Link></small></h1>
         </div>
         <fieldset>
           <table className="table table-striped">

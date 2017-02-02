@@ -1,11 +1,14 @@
 import fetch from 'isomorphic-fetch'
 import api from './api.jsx'
+import { browserHistory } from 'react-router'
 
 export const FETCH_PROFILE = 'FETCH_PROFILE'
 export const SET_PROFILE = 'SET_PROFILE'
 export const SET_ID_TOKEN = 'SET_ID_TOKEN'
 
-export const CASE_UPDATED = 'CASE_UPDATED'
+export const CHILD_ADDED = 'CHILD_ADDED'
+
+export const CASE_SAVED = 'CASE_SAVED'
 export const CREATE_CASE = 'CREATE_CASE'
 export const SELECT_CASE = 'SELECT_CASE'
 export const UPDATE_CASE = 'UPDATE_CASE'
@@ -27,29 +30,36 @@ export function selectCase(caseId) {
 export function fetchCases() {
   return dispatch => {
     api.getCases().then(json => {
-      dispatch(receiveCases(json));
+      dispatch(receiveCases(json))
     })
-  };
+  }
+}
+
+export function childAdded(childDetails) {
+  return { type: CHILD_ADDED, child: childDetails }
 }
 
 export function addCase(caseDetails) {
-  return dispatch => {
-    api.addCase(caseDetails).then(r => {
-      dispatch(fetchCases()); //Fetching everything again sounds like overkill
-    });
-  };
+  return (dispatch, getState) => {
+    caseDetails.subjects = [getState().child.childToAdd]
+    api.addCase(caseDetails).then(result => {
+      dispatch(caseSaved(result))
+      dispatch(fetchCases()) // Fetching everything again sounds like overkill
+    })
+  }
 }
 
 export function updateCase(caseDetails) {
   return dispatch => {
     api.updateCase(caseDetails).then(r => {
-      dispatch(caseUpdated(caseDetails));
+      dispatch(caseSaved(caseDetails))
     })
-  };
+  }
 }
 
-export function caseUpdated(caseDetails) {
-  return { type: CASE_UPDATED, case: caseDetails }
+export function caseSaved(caseDetails) {
+  browserHistory.push('#/cases/' + caseDetails.id)
+  return { type: CASE_SAVED, case: caseDetails }
 }
 
 export function addPerson(personDetails) {
@@ -80,15 +90,15 @@ export function fetchProfile(lock, token) {
   return (dispatch, getState) => {
     lock.getProfile(token, function (err, profile) {
       if (err) {
-        console.log("Error loading the Profile", err);
-        alert("Error loading the Profile");
-        
-        //My observations thus far is that this is caused by token expiry, so clear everything
-        localStorage.removeItem('userToken');
-        localStorage.removeItem('refreshToken');
-        dispatch(setIdToken(null));
+        console.log('Error loading the Profile', err)
+        alert('Error loading the Profile')
+
+        // My observations thus far is that this is caused by token expiry, so clear everything
+        localStorage.removeItem('userToken')
+        localStorage.removeItem('refreshToken')
+        dispatch(setIdToken(null))
       }
-      dispatch({ type: SET_PROFILE, profile: profile });
-    });
+      dispatch({ type: SET_PROFILE, profile: profile })
+    })
   }
 }

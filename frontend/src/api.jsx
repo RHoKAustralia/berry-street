@@ -394,6 +394,9 @@ export default {
   getPhases() {
     return Promise.resolve(["Referred", "Searching"])
   },
+  getPlacementTypes () {
+    return Promise.resolve(['With Parents', 'With Mother', 'With Father', 'Kinship Care', 'Kith', 'Foster Care', 'Residential Care', 'Lead Tenant', 'Other'])
+  },
   getUsers() {
     return new Promise((resolve, reject) => {
       // This should actually be a fetch AJAX request
