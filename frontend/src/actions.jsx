@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import api from './api.jsx'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 export const FETCH_PROFILE = 'FETCH_PROFILE'
 export const SET_PROFILE = 'SET_PROFILE'
@@ -65,7 +65,7 @@ export function updateCase(caseDetails) {
 }
 
 export function caseSaved(caseDetails) {
-  browserHistory.push('#/cases/' + caseDetails.id)
+  hashHistory.push('/cases/' + caseDetails.id)
   return { type: CASE_SAVED, case: caseDetails }
 }
 

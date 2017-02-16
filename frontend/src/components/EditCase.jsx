@@ -23,7 +23,6 @@ class EditCase extends Component {
 
   saveCase (caseToSave) {
     this.props.dispatch(this.props.params.caseId ? updateCase(caseToSave) : saveNewCase(caseToSave))
-    this.props.router.push('/cases')
   }
 
   render () {
