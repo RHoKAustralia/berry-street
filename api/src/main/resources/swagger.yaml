@@ -77,13 +77,13 @@ paths:
         - application/vnd.api+json
       parameters:
         -
-          name: firstName
+          name: givenNames
           in: query
           description: first name
           required: false
           type: string
         -
-          name: lastName
+          name: familyName
           in: query
           description: last name
           required: false
@@ -223,9 +223,9 @@ definitions:
       id:
         type: number
         format: long
-      firstName:
+      givenNames:
         type: string
-      lastName:
+      familyName:
         type: string
       dateOfBirth:
         type: string

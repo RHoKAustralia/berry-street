@@ -21,7 +21,7 @@ class AddChild extends Component {
   }
 
   render () {
-    const {fields: {firstName, surname, dob, currentPlacement, address, phone, email}, handleSubmit} = this.props
+    const {fields: {givenNames, familyName, dob, currentPlacement, address, phone, email}, handleSubmit} = this.props
     const placementTypes = this.state.placementTypes
     return (
       <div className="container">
@@ -35,14 +35,14 @@ class AddChild extends Component {
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
-                    <label htmlFor="firstName">First Name</label>
-                    <input type="text" className="form-control" id="firstName" {...firstName} />
+                    <label htmlFor="givenNames">Given names</label>
+                    <input type="text" className="form-control" id="givenNames" {...givenNames} />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-group">
-                    <label htmlFor="surname">Surname</label>
-                    <input type="text" className="form-control" id="surname" {...surname} />
+                    <label htmlFor="familyName">Family name</label>
+                    <input type="text" className="form-control" id="familyName" {...familyName} />
                   </div>
                 </div>
               </div>
@@ -113,7 +113,7 @@ class AddChild extends Component {
 }
 
 export default reduxForm({
-  fields: ['firstName', 'surname', 'dob', 'currentPlacement', 'address', 'phone', 'email'],
+  fields: ['givenNames', 'familyName', 'dob', 'currentPlacement', 'address', 'phone', 'email'],
   form: 'addChild'
 },
   state => ({

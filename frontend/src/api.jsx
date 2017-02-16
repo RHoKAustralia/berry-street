@@ -419,25 +419,28 @@ export default {
   getCase(id) {
     if (MOCK_BACKEND) {
       return new Promise((resolve, reject) => {
-        const singleCase = CASE_SUMMARY_DATA.filter(c => c.case_id == id);
+        const singleCase = CASE_SUMMARY_DATA.filter(c => c.case_id == id)
         if (singleCase.length = 1) {
-          resolve(singleCase[0]);
+          resolve(singleCase[0])
         } else {
-          reject(new Error("Case not found"));
+          reject(new Error('Case not found'))
         }
       });
     } else {
-      return sendRequest(`${SERVICE_URL_BASE}/cases/${id}`, "GET");
+      return sendRequest(`${SERVICE_URL_BASE}/cases/${id}`, 'GET')
     }
   },
   addCase(caseDetails) {
     if (MOCK_BACKEND) {
       CASE_DETAILS_DATA.push(caseDetails);
-      CASE_SUMMARY_DATA.push({ staffName: caseDetails.staffName, surname: caseDetails.surname, firstname: caseDetails.firstname, caseNumber: caseDetails.caseNumber, phase: "New" })
+      CASE_SUMMARY_DATA.push({ staffName: caseDetails.staffName, familyName: caseDetails.familyName, givenNames: caseDetails.givenNames, caseNumber: caseDetails.caseNumber, phase: "New" })
       return Promise.resolve(true);
     } else {
       return sendRequest(`${SERVICE_URL_BASE}/cases`, 'POST', caseDetails);
     }
+  },
+  addSubjectToCase(theCase, subject) {
+    return sendRequest(`${SERVICE_URL_BASE}/cases/${theCase.id}/subject/${subject.id}`, 'PUT');
   },
   updateCase(caseDetails) {
     if (MOCK_BACKEND) {
@@ -445,5 +448,8 @@ export default {
     } else {
       return sendRequest(`${SERVICE_URL_BASE}/cases`, 'PUT', caseDetails);
     }
+  },
+  addPerson(person) {
+    return sendRequest(`${SERVICE_URL_BASE}/people/`, 'POST', person);
   }
 }

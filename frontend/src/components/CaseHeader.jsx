@@ -10,7 +10,7 @@ class CaseHeader extends Component {
     const subject = this.props.case.subjects[0];
     return <div className="row page-header">
       <div className="col-xs-12 col-sm-6 col-md-9">
-        <h1>{subject.person.name}</h1>
+        <h1>{subject.person.givenNames} {subject.person.familyName}</h1>
         <p style={{'fontSize': '1.4em'}}><span style={{'color': 'rgba(199,196,196,1)'}}>Phase of Involvement:</span> {this.props.case.phaseOfInvolvement}</p>
       </div>
       <div className="col-xs-12 col-sm-6 col-md-3">

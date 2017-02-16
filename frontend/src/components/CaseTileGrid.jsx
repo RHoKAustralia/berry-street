@@ -23,12 +23,20 @@ class CreateNewCaseTile extends Component {
 class CaseTile extends Component {
 
   render() {
-    const { subjects } = this.props.case;
+    const { subjects } = this.props.case
+    let person = subjects.length > 0 && subjects[0] ? subjects[0].person : null
+    if (!person) {
+      person = {
+        image: `src/assets/images/child_case_720.jpg`,
+        givenNames: 'Unknown',
+        familyName: 'Unknown'
+      }
+    }
     return <div className="col-md-3">
       <div className="work nopad">
         <Link to={`/cases/${this.props.case.id}`} className="rlisting">
-            <img src={subjects[0].person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive" />
-            <h3>{`${subjects[0].person.familyName}`}<br />{`${subjects[0].person.givenNames}`}</h3>
+            <img src={person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive" />
+            <h3>{`${person.familyName}`}<br />{`${person.givenNames}`}</h3>
               <h4>{this.props.case.phaseOfInvolvement}</h4>
         </Link>
       </div>

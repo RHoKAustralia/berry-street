@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
-import { createCase, addCase, updateCase, selectCase } from '../actions.jsx'
+import { createCase, saveNewCase, updateCase, selectCase } from '../actions.jsx'
 import { withRouter } from 'react-router'
 import { selectCaseById } from '../reducers.jsx'
 import api from '../api.jsx'
@@ -22,7 +22,7 @@ class EditCase extends Component {
   }
 
   saveCase (caseToSave) {
-    this.props.dispatch(this.props.params.caseId ? updateCase(caseToSave) : addCase(caseToSave))
+    this.props.dispatch(this.props.params.caseId ? updateCase(caseToSave) : saveNewCase(caseToSave))
     this.props.router.push('/cases')
   }
 

@@ -39,12 +39,19 @@ export function childAdded(childDetails) {
   return { type: CHILD_ADDED, child: childDetails }
 }
 
-export function addCase(caseDetails) {
+export function createCase() {
+  return { type: CREATE_CASE, case: {caseManager: 'manager', phaseOfInvolvement: 'Searching', status: 'Open'} }
+}
+
+export function saveNewCase(caseDetails) {
   return (dispatch, getState) => {
-    caseDetails.subjects = [getState().child.childToAdd]
-    api.addCase(caseDetails).then(result => {
-      dispatch(caseSaved(result))
-      dispatch(fetchCases()) // Fetching everything again sounds like overkill
+    api.addCase(caseDetails).then(caseResult => {
+      api.addPerson(getState().child.childToAdd).then(personResult => {
+        api.addSubjectToCase(caseResult, personResult).then(subjectResult => {
+          dispatch(caseSaved(caseResult))
+          dispatch(fetchCases()) // Fetching everything again sounds like overkill
+        })
+      })
     })
   }
 }
@@ -76,10 +83,6 @@ export function fetchPerson(personId) {
 
 export function updatePerson(personDetails) {
   return { type: UPDATE_PERSON, person: personDetails }
-}
-
-export function createCase() {
-  return { type: CREATE_CASE, case: {} }
 }
 
 export function setIdToken(idToken) {
