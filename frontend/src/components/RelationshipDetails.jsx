@@ -16,7 +16,7 @@ class RelationshipDetailsForm extends Component {
   }
   render() {
     const {
-      fields: { 
+      fields: {
         riskAlert,
         familyName,
         givenName,
@@ -33,7 +33,7 @@ class RelationshipDetailsForm extends Component {
         blendedPerspectives,
         threePlans,
         notes
-      }, handleSubmit 
+      }, handleSubmit
     } = this.props;
     return <form onSubmit={handleSubmit(this.saveRelationship.bind(this))}>
       {/* TODO: We can probably interrogate redux-form for dirty state to conditionally show the below warning */}
@@ -230,38 +230,46 @@ function prepareRelationshipForForm(rel) {
 
 export default class RelationshipDetails extends Component {
   constructor(prop) {
-    super(prop);
+    super(prop)
     this.state = {
       init: false,
       relData: null
-    };
+    }
   }
   componentDidMount() {
-    //TODO: I dunno if we really have to do this. The relationship from the parent person should
-    //have sufficient information
+    // TODO: I dunno if we really have to do this. The relationship from the parent person should
+    // have sufficient information
     if (this.props.personId && this.props.relationshipId) {
       api.getRelationship(this.props.personId, this.props.relationshipId).then(rel => {
         this.setState({
           init: true,
           relData: rel
-        });
-      });
+        })
+      })
     } else {
-      this.setState({ init: true });
+      this.setState({ init: true })
     }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.personId && nextProps.relationshipId) {
+      api.getRelationship(nextProps.personId, nextProps.relationshipId).then(rel => {
+        console.log('relationship data', rel)
+        this.setState({
+          init: true,
+          relData: rel
+        })
+      })
+
       this.setState({ init: false }, () => {
         api.getRelationship(nextProps.personId, nextProps.relationshipId).then(rel => {
           this.setState({
             init: true,
             relData: rel
-          });
-        });
-      });
+          })
+        })
+      })
     } else {
-      this.setState({ init: true });
+      this.setState({ init: true })
     }
   }
   render() {
@@ -269,15 +277,15 @@ export default class RelationshipDetails extends Component {
       return <div className="alert alert-info">
         <i className="fa fa-cog fa-spin fa-3x fa-fw"></i>
         <span className="sr-only">Loading...</span>
-      </div>;
+      </div>
     } else {
       if (this.state.relData) {
-        const data = prepareRelationshipForForm(this.state.relData);
-        return <WrappedRelationshipDetailsForm initVals={data} />;
+        const data = prepareRelationshipForForm(this.state.relData)
+        return <WrappedRelationshipDetailsForm initVals={data} />
       } else {
         return <div className="alert alert-info">
           <strong>Select a related person on the left for more details</strong>
-        </div>;
+        </div>
       }
     }
   }

@@ -1,17 +1,17 @@
 match (n) detach delete n
 
-create (maggie:Person {name: 'Maggie Simpson', dateOfBirth: '1987-04-19'})
-create (lisa:Person {name: 'Lisa Simpson', dateOfBirth: '1987-04-19'})
-create (bart:Person {name: 'Bart Simpson', dateOfBirth: '1987-04-19'})
-create (marge:Person {name: 'Marge Simpson', dateOfBirth: '1987-04-19'})
-create (homer:Person {name: 'Homer Simpson', dateOfBirth: '1987-04-19'})
+create (maggie:Person {givenNames: 'Maggie', familyName: 'Simpson', dateOfBirth: '1987-04-19'})
+create (lisa:Person {givenNames: 'Lisa', familyName: 'Simpson', dateOfBirth: '1987-04-19'})
+create (bart:Person {givenNames: 'Bart', familyName: 'Simpson', dateOfBirth: '1987-04-19'})
+create (marge:Person {givenNames: 'Marge', familyName: 'Simpson', dateOfBirth: '1987-04-19'})
+create (homer:Person {givenNames: 'Homer', familyName: 'Simpson', dateOfBirth: '1987-04-19'})
 
-create (milhouse:Person {name: 'Milhouse Van Houten', dateOfBirth: '1987-04-19'})
-create (ralph:Person {name: 'Ralph Wiggum', dateOfBirth: '1987-04-19'})
-create (willie:Person {name: 'Groundskeeper Willie', dateOfBirth: '1987-04-19'})
-create (nelson:Person {name: 'Nelson Muntz', dateOfBirth: '1987-04-19'})
-create (patty:Person {name: 'Patty Bouvier', dateOfBirth: '1987-04-19'})
-create (ned:Person {name: 'Ned Flanders', dateOfBirth: '1987-04-19'})
+create (milhouse:Person {givenNames: 'Milhouse', familyName: 'Van Houten', dateOfBirth: '1987-04-19'})
+create (ralph:Person {givenNames: 'Ralph', familyName: 'Wiggum', dateOfBirth: '1987-04-19'})
+create (willie:Person {givenNames: 'Groundskeeper', familyName: 'Willie', dateOfBirth: '1987-04-19'})
+create (nelson:Person {givenNames: 'Nelson', familyName: 'Muntz', dateOfBirth: '1987-04-19'})
+create (patty:Person {givenNames: 'Patty', familyName: 'Bouvier', dateOfBirth: '1987-04-19'})
+create (ned:Person {givenNames: 'Ned', familyName: 'Flanders', dateOfBirth: '1987-04-19'})
 
 create (simpsonCase:Case {staffName: 'staff1', status: 'Open', phaseOfInvolvement: 'Referred', dateOpened: '2016-08-05', caseManager: 'Jen', familyFinderStaffName: 'Dolores', caseObjective: 'test Neo4J'})
 
