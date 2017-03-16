@@ -40,7 +40,7 @@ export function caseReducer (state = [], action) {
   switch (action.type) {
     case CASE_SAVED:
       // TODO: there must be a better way
-      var index = state.map(function(c) { return c.id; }).indexOf(action.case.id)
+      var index = state.map(function(c) { return c.id }).indexOf(action.case.id)
       return update(state, {
         [index]: {$set: action.case }
       })
@@ -52,7 +52,7 @@ export function caseReducer (state = [], action) {
 }
 
 export function selectCaseById(state, caseId) {
-    return state.cases ? state.cases.find(function(c) { return c.id == caseId; }) : []
+  return state.cases ? state.cases.find(function(c) { return c.id === caseId }) : []
 }
 
 export function personReducer (state = {people:[]}, action) {

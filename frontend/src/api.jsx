@@ -20,8 +20,8 @@ const CASE_DATA = [
           "dateOfBirth": "1987-04-19",
           "family": [],
           "friends": [],
-	  "givenNames": "Bart",
-	  "familyName": "Simpson"
+          "givenNames": "Bart",
+          "familyName": "Simpson"
         },
         "aCase": {
           "@ref": "1"
@@ -63,8 +63,8 @@ const PEOPLE_DATA = [
           "dateOfBirth": "1987-04-19",
           "family": [],
           "friends": [],
-	  "givenNames": "Lisa",
-	  "familyName": "Simpson"
+          "givenNames": "Lisa",
+          "familyName": "Simpson"
         },
         "relationship": "aunt"
       },
@@ -450,6 +450,9 @@ export default {
     }
   },
   addPerson(person) {
-    return sendRequest(`${SERVICE_URL_BASE}/people/`, 'POST', person);
+    return sendRequest(`${SERVICE_URL_BASE}/people/`, 'POST', person)
+  },
+  updatePerson(person) {
+    return sendRequest(`${SERVICE_URL_BASE}/people/${person.id}`, 'POST', person)
   }
 }

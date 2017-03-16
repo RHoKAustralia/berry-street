@@ -14,7 +14,6 @@ class PersonRelationshipList extends Component {
       <div className="PersonRelationshipList">
         <ul className="list-group">
             {this.props.relationships.map(relationship => {
-              // HACK: kin or kith? Typo?
               const related = relationship.kin || relationship.kith || {}
               return <li key={relationship.id} onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.props.selectedRelationId === relationship.id ? 'active' : '')}>
                 <PersonRelationship personName={related.givenNames + ' ' + related.familyName} relationship={relationship.relationship} riskStatus={relationship.riskStatus}/>

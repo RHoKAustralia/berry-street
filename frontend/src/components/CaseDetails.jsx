@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectCase } from '../actions.jsx'
-import { selectCaseById } from '../reducers.jsx'
 import api from '../api.jsx'
 import CaseHeader from './CaseHeader.jsx'
 import PersonRelationshipList from './PersonRelationshipList.jsx'
