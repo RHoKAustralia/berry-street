@@ -8,8 +8,8 @@ import PersonList from './components/PersonList.jsx'
 import EditPerson from './components/EditPerson.jsx'
 import Person from './components/Person.jsx'
 import CaseView from './components/case/view/CaseView.jsx'
-import EditCase from './components/EditCase.jsx'
-import AddChild from './components/AddChild.jsx'
+import CaseForm from './components/case/create/CaseForm.jsx'
+import CaseSubjectForm from './components/case/create/CaseSubjectForm.jsx'
 import Index from './components/Index.jsx'
 import Login from './components/Login.jsx'
 
@@ -40,10 +40,10 @@ ReactDOM.render((
             <IndexRoute component={Index} />
             <Route path="/about" component={About} />
             <Route path="/users" component={PersonList} />
-            <Route path="/cases/new/child" component={AddChild} />
-            <Route path="/cases/new/case" component={EditCase} />
+            <Route path="/cases/new/child" component={CaseSubjectForm} />
+            <Route path="/cases/new/case" component={CaseForm} />
             <Route path="/cases/:caseId" component={CaseView} />
-            <Route path="/cases/:caseId/edit" component={EditCase} />
+            <Route path="/cases/:caseId/edit" component={CaseForm} />
             <Route path="/people" component={PersonList} />
             <Route path="/people/new" component={EditPerson} />
             <Route path="/people/:id" component={Person} />

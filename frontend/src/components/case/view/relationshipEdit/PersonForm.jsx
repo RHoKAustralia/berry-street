@@ -33,17 +33,17 @@ class PersonForm extends Component {
         <legend>Personal Details</legend>
         <div className="row">
           <div className="col-xs-6 form-group">
-            <label htmlFor="familyName">Family Name</label>
-            <input id="familyName" type="text" className="form-control" {...familyName} />
-          </div>
-          <div className="col-xs-6 form-group">
             <label htmlFor="givenNames">Given Names</label>
             <input id="givenNames" type="text" className="form-control" {...givenNames} />
           </div>
           <div className="col-xs-6 form-group">
+            <label htmlFor="familyName">Family Name</label>
+            <input id="familyName" type="text" className="form-control" {...familyName} />
+          </div>
+          <div className="col-xs-6 form-group">
             <label htmlFor="dateOfBirth">Date of Birth</label>
             {/* TODO: Hook this up to a date picker component (eg. react-widgets DatePicker) */}
-            <input id="dateOfBirth" type="text" className="form-control" {...dateOfBirth} />
+            <input id="dateOfBirth" type="date" className="form-control" {...dateOfBirth} />
           </div>
           <div className="col-xs-6 form-group">
             <label htmlFor="address">Address</label>

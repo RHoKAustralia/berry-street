@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { withRouter } from 'react-router'
-import api from '../api.jsx'
-import { childAdded } from '../actions.jsx'
+import api from '../../../api.jsx'
+import { childAdded } from '../../../actions.jsx'
 
-class AddChild extends Component {
+class CaseSubjectForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -15,7 +15,7 @@ class AddChild extends Component {
     api.getPlacementTypes().then(r => this.setState({ placementTypes: r }))
   }
 
-  addChild(childToAdd) {
+  addCaseSubject (childToAdd) {
     this.props.dispatch(childAdded(childToAdd))
     this.props.router.push('/cases/new/case')
   }
@@ -25,7 +25,7 @@ class AddChild extends Component {
     const placementTypes = this.state.placementTypes
     return (
       <div className="container">
-        <form onSubmit={handleSubmit(this.addChild.bind(this))}>
+        <form onSubmit={handleSubmit(this.addCaseSubject.bind(this))}>
           <h1>New Case</h1>
           <div>
             <fieldset>
@@ -50,7 +50,7 @@ class AddChild extends Component {
                 <div className="col-md-6">
                   <div className="form-group">
                     <label htmlFor="dob">Date of Birth</label>
-                    <input type="text" className="form-control" id="dob" {...dob} />
+                    <input type="date" className="form-control" id="dob" {...dob} />
                   </div>
                 </div>
               </div>
@@ -114,9 +114,9 @@ class AddChild extends Component {
 
 export default reduxForm({
   fields: ['givenNames', 'familyName', 'dob', 'currentPlacement', 'address', 'phone', 'email'],
-  form: 'addChild'
+  form: 'caseSubjectForm'
 },
   state => ({
 
   })
-)(withRouter(AddChild))
+)(withRouter(CaseSubjectForm))

@@ -22,10 +22,6 @@ class RelationshipForm extends Component {
       }, handleSubmit
     } = this.props
     return <form onSubmit={handleSubmit(this)}>
-      {/* TODO: We can probably interrogate redux-form for dirty state to conditionally show the below warning */}
-      <div className="alert alert-warning">
-        <strong><i className="fa fa-warning"/> Be sure to save any changes before selecting a different person</strong>
-      </div>
       <fieldset>
         <div className="row">
           <div className="col-xs-6 form-group">
