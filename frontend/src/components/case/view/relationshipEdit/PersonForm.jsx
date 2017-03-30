@@ -1,15 +1,15 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 
-class RelatedPersonForm extends Component {
-  constructor(props) {
+class PersonForm extends Component {
+  constructor (props) {
     super(props)
     this.state = {
       initVals: props.initVals || {}
     }
   }
 
-  render() {
+  render () {
     const {
       fields: {
         familyName,
@@ -71,7 +71,7 @@ class RelatedPersonForm extends Component {
   }
 }
 
-const RelatedPersonFormWrapper = reduxForm(
+const PersonFormWrapper = reduxForm(
   {
     fields: [
       'familyName',
@@ -88,6 +88,6 @@ const RelatedPersonFormWrapper = reduxForm(
   (state, ownProps) => ({
     initialValues: ownProps.person
   })
-)(RelatedPersonForm)
+)(PersonForm)
 
-export default RelatedPersonFormWrapper
+export default PersonFormWrapper

@@ -7,7 +7,7 @@ import About from './components/About.jsx'
 import PersonList from './components/PersonList.jsx'
 import EditPerson from './components/EditPerson.jsx'
 import Person from './components/Person.jsx'
-import CaseDetails from './components/CaseDetails.jsx'
+import CaseView from './components/case/view/CaseView.jsx'
 import EditCase from './components/EditCase.jsx'
 import AddChild from './components/AddChild.jsx'
 import Index from './components/Index.jsx'
@@ -42,7 +42,7 @@ ReactDOM.render((
             <Route path="/users" component={PersonList} />
             <Route path="/cases/new/child" component={AddChild} />
             <Route path="/cases/new/case" component={EditCase} />
-            <Route path="/cases/:caseId" component={CaseDetails} />
+            <Route path="/cases/:caseId" component={CaseView} />
             <Route path="/cases/:caseId/edit" component={EditCase} />
             <Route path="/people" component={PersonList} />
             <Route path="/people/new" component={EditPerson} />

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import React from 'react'
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
 
 const PersonList = React.createClass({
-  render() {
+  render () {
     return (
       <div className="container">
         <div className="page-header">
@@ -26,12 +26,12 @@ const PersonList = React.createClass({
           </table>
         </fieldset>
       </div>
-    );
+    )
   }
-});
+})
 
 var PersonRow = React.createClass({
-  render() {
+  render () {
     return (
       <tr>
         <td>{this.props.id}</td>
@@ -39,30 +39,28 @@ var PersonRow = React.createClass({
         <td><PersonViewLink id={this.props.id} /></td>
         <td><PersonEditLink id={this.props.id} /></td>
       </tr>
-    );
+    )
   }
-});
+})
 
 var PersonViewLink = React.createClass({
-  render() {
+  render () {
     return (
       <Link to={'/people/' + this.props.id}>View</Link>
-    );
+    )
   }
-});
+})
 
 var PersonEditLink = React.createClass({
-  render() {
+  render () {
     return (
       <Link to={'/people/' + this.props.id + '/edit'}>Edit</Link>
-    );
+    )
   }
-});
+})
 
 export default connect((state) => {
   return {
     people: state.people.people
   }
 })(PersonList)
-
-

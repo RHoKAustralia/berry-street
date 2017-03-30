@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CaseTileGrid from "./CaseTileGrid.jsx"
-import RelationshipDetails from './RelationshipDetails.jsx'
+import CaseTileGrid from './case/list/CaseTileGrid.jsx'
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps (state, ownProps) {
   return {
     profile: state.auth.profile
   }
 }
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps (dispatch, ownProps) {
   return {}
 }
 
 class HomeScreen extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
   }
-  render() {
-    const { profile } = this.props;
+  render () {
+    const { profile } = this.props
     if (profile) {
       return <div className="portfolio container">
         <div className="page-header">

@@ -1,13 +1,13 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { Link } from 'react-router'
-import api from '../api.jsx'
+import api from '../../../api.jsx'
 
 const TILE_WIDTH = 250
 const TILE_HEIGHT = 400
 const TILE_VERT_MARGIN = 30
 
 class CreateNewCaseTile extends Component {
-  render() {
+  render () {
     return <div className="col-md-3">
       <div className="work nopad">
         <Link to='/cases/new/child' style={{ width: TILE_WIDTH }} className="rlisting">
@@ -21,8 +21,7 @@ class CreateNewCaseTile extends Component {
 }
 
 class CaseTile extends Component {
-
-  render() {
+  render () {
     const { subjects } = this.props.case
     let person = subjects.length > 0 && subjects[0] ? subjects[0].person : null
     if (!person) {
@@ -45,20 +44,20 @@ class CaseTile extends Component {
 }
 
 class CaseTileGrid extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       summary: null,
       error: null
-    };
+    }
   }
-  componentDidMount() {
+  componentDidMount () {
     api.getCases()
        .then(r => this.setState({ summary: r }))
-       .catch(err => this.setState({ error: err }));
+       .catch(err => this.setState({ error: err }))
   }
-  render() {
-    const { summary, error } = this.state;
+  render () {
+    const { summary, error } = this.state
     if (summary) {
       return <div className="row">
         <CreateNewCaseTile />

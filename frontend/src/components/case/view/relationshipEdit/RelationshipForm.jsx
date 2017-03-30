@@ -1,14 +1,14 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 
-class RelationshipDetailsForm extends Component {
-  constructor(props) {
+class RelationshipForm extends Component {
+  constructor (props) {
     super(props)
     this.state = {
       initVals: props.initVals || {}
     }
   }
-  render() {
+  render () {
     const {
       fields: {
         riskAlert,
@@ -125,21 +125,21 @@ class RelationshipDetailsForm extends Component {
   }
 }
 
-function validateRelationship(data, props) {
+function validateRelationship (data, props) {
   const errors = {}
   return errors
 }
 
-const WrappedRelationshipDetailsForm = reduxForm({
+const WrappedRelationshipForm = reduxForm({
   fields: [
-    "riskAlert",
-    "relToChild",
-    "assumedOrConfirmed",
-    "howFound",
-    "howInfoConfirmed",
-    "blendedPerspectives",
-    "threePlans",
-    "notes"
+    'riskAlert',
+    'relToChild',
+    'assumedOrConfirmed',
+    'howFound',
+    'howInfoConfirmed',
+    'blendedPerspectives',
+    'threePlans',
+    'notes'
   ],
   form: 'relationshipDetails',
   validate: validateRelationship
@@ -147,6 +147,6 @@ const WrappedRelationshipDetailsForm = reduxForm({
   (state, ownProps) => ({
     initialValues: ownProps.initVals
   })
-)(RelationshipDetailsForm)
+)(RelationshipForm)
 
-export default WrappedRelationshipDetailsForm
+export default WrappedRelationshipForm

@@ -19,15 +19,15 @@ export const CREATE_PERSON = 'CREATE_PERSON'
 export const FETCH_PERSON = 'FETCH_PERSON'
 export const UPDATE_PERSON = 'UPDATE_PERSON'
 
-export function receiveCases(json) {
+export function receiveCases (json) {
   return { type: RECEIVE_CASES, cases: json }
 }
 
-export function selectCase(caseId) {
+export function selectCase (caseId) {
   return { type: SELECT_CASE, caseId }
 }
 
-export function fetchCases() {
+export function fetchCases () {
   return dispatch => {
     api.getCases().then(json => {
       dispatch(receiveCases(json))
@@ -35,15 +35,15 @@ export function fetchCases() {
   }
 }
 
-export function childAdded(childDetails) {
+export function childAdded (childDetails) {
   return { type: CHILD_ADDED, child: childDetails }
 }
 
-export function createCase() {
+export function createCase () {
   return { type: CREATE_CASE, case: {caseManager: 'manager', phaseOfInvolvement: 'Searching', status: 'Open'} }
 }
 
-export function saveNewCase(caseDetails) {
+export function saveNewCase (caseDetails) {
   return (dispatch, getState) => {
     api.addCase(caseDetails).then(caseResult => {
       api.addPerson(getState().child.childToAdd).then(personResult => {
@@ -56,7 +56,7 @@ export function saveNewCase(caseDetails) {
   }
 }
 
-export function updateCase(caseDetails) {
+export function updateCase (caseDetails) {
   return dispatch => {
     api.updateCase(caseDetails).then(r => {
       dispatch(caseSaved(caseDetails))
@@ -64,32 +64,32 @@ export function updateCase(caseDetails) {
   }
 }
 
-export function caseSaved(caseDetails) {
+export function caseSaved (caseDetails) {
   hashHistory.push('/cases/' + caseDetails.id)
   return { type: CASE_SAVED, case: caseDetails }
 }
 
-export function addPerson(personDetails) {
+export function addPerson (personDetails) {
   return { type: ADD_PERSON, person: personDetails }
 }
 
-export function createPerson() {
+export function createPerson () {
   return { type: CREATE_PERSON }
 }
 
-export function fetchPerson(personId) {
+export function fetchPerson (personId) {
   return { type: FETCH_PERSON, personId: personId }
 }
 
-export function updatePerson(personDetails) {
+export function updatePerson (personDetails) {
   return { type: UPDATE_PERSON, person: personDetails }
 }
 
-export function setIdToken(idToken) {
+export function setIdToken (idToken) {
   return { type: SET_ID_TOKEN, idToken: idToken }
 }
 
-export function fetchProfile(lock, token) {
+export function fetchProfile (lock, token) {
   return (dispatch, getState) => {
     lock.getProfile(token, function (err, profile) {
       if (err) {

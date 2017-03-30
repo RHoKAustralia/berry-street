@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
-import api from '../api.jsx'
-
-const TILE_WIDTH = 100
-const TILE_HEIGHT = 100
 
 class CaseHeader extends Component {
-  render() {
+  render () {
     if (!this.props.case) return (<p>Case prop missing...</p>)
-    const subject = this.props.case.subjects[0];
+    const subject = this.props.case.subjects[0]
     return <div className="row page-header">
       <div className="col-xs-12 col-sm-6 col-md-9">
         <h1>{subject.person.givenNames} {subject.person.familyName}</h1>

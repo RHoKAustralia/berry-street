@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import './PersonRelationshipList.css'
-import PersonRelationship from './PersonRelationship.jsx'
+import './CaseRelationshipList.css'
+import CaseRelationship from './CaseRelationship.jsx'
 
-class PersonRelationshipList extends Component {
-  constructor(props) {
+class CaseRelationshipList extends Component {
+  constructor (props) {
     super(props)
     this.personRelationshipOnClick = this.personRelationshipOnClick.bind(this)
   }
-  render() {
+  render () {
     // FIXME: There is no risk status in the modeled relationship
     return (
-      <div className="PersonRelationshipList">
+      <div className="CaseRelationshipList">
         <ul className="list-group">
             {this.props.relationships.map(relationship => {
               const related = relationship.kin || relationship.kith || {}
               return <li key={relationship.id} onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.props.selectedRelationId === relationship.id ? 'active' : '')}>
-                <PersonRelationship personName={related.givenNames + ' ' + related.familyName} relationship={relationship.relationship} riskStatus={relationship.riskStatus}/>
+                <CaseRelationship personName={related.givenNames + ' ' + related.familyName} relationship={relationship.relationship} riskStatus={relationship.riskStatus}/>
               </li>
             })}
         </ul>
@@ -24,11 +24,11 @@ class PersonRelationshipList extends Component {
     )
   }
 
-  personRelationshipOnClick(personRelationship) {
+  personRelationshipOnClick (personRelationship) {
     if (this.props.onRelationSelected) {
       this.props.onRelationSelected(personRelationship.id)
     }
   }
 }
 
-export default PersonRelationshipList
+export default CaseRelationshipList
