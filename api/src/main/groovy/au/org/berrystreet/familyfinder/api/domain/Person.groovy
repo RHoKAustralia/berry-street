@@ -50,6 +50,18 @@ class Person extends Entity {
     String image = null
 
     @ApiModelProperty
+    @JsonProperty
+    String address = null
+
+    @ApiModelProperty
+    @JsonProperty
+    String phone = null
+
+    @ApiModelProperty
+    @JsonProperty
+    String email = null
+
+    @ApiModelProperty
     @JsonProperty('family')
     @Relationship(type = 'FAMILY', direction = Relationship.UNDIRECTED)
     List<Family> family = []

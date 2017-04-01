@@ -15,6 +15,10 @@ class Friend extends Entity {
     @StartNode Person kith
     @EndNode Person person
     @ApiModelProperty String relationship
+    @ApiModelProperty String howFound
+    @ApiModelProperty String howInfoConfirmed
+    @ApiModelProperty String notes
+    @ApiModelProperty String riskAlert
 
     Friend() {}
 

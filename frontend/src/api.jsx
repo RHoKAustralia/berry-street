@@ -1,458 +1,461 @@
 const CASE_DATA = [
   {
-    "@id": "1",
-    "id": 191,
-    "familyFinderStaffName": "Dolores",
-    "caseManager": "Jen",
-    "status": "Open",
-    "dateOpened": "2016-08-05",
-    "dateClosed": null,
-    "caseObjective": "test Neo4J",
-    "phaseOfInvolvement": "Referred",
-    "subjects": [
+    '@id': '1',
+    'id': 191,
+    'familyFinderStaffName': 'Dolores',
+    'caseManager': 'Jen',
+    'status': 'Open',
+    'dateOpened': '2016-08-05',
+    'dateClosed': null,
+    'caseObjective': 'test Neo4J',
+    'phaseOfInvolvement': 'Referred',
+    'subjects': [
       {
-        "@id": "2",
-        "id": 255,
-        "person": {
-          "@id": "3",
-          "id": 182,
-          "name": "Bart Simpson",
-          "dateOfBirth": "1987-04-19",
-          "family": [],
-          "friends": [],
-          "givenNames": "Bart",
-          "familyName": "Simpson"
+        '@id': '2',
+        'id': 255,
+        'person': {
+          '@id': '3',
+          'id': 182,
+          'name': 'Bart Simpson',
+          'dateOfBirth': '1987-04-19',
+          'family': [],
+          'friends': [],
+          'givenNames': 'Bart',
+          'familyName': 'Simpson'
         },
-        "aCase": {
-          "@ref": "1"
+        'aCase': {
+          '@ref': '1'
         },
-        "date": "2016-08-05"
+        'date': '2016-08-05'
       }
     ]
   }
-];
+]
 const PEOPLE_DATA = [
   {
-    "@id": "1",
-    "id": 180,
-    "name": "Maggie Simpson",
-    "dateOfBirth": "1987-04-19",
-    "family": [],
-    "friends": [],
-    "givenNames": "Maggie",
-    "familyName": "Simpson"
+    '@id': '1',
+    'id': 180,
+    'name': 'Maggie Simpson',
+    'dateOfBirth': '1987-04-19',
+    'family': [],
+    'friends': [],
+    'givenNames': 'Maggie',
+    'familyName': 'Simpson'
   },
   {
-    "@id": "2",
-    "id": 189,
-    "name": "Patty Bouvier",
-    "dateOfBirth": "1987-04-19",
-    "givenNames": "Patty",
-    "familyName": "Bouvier",
-    "family": [
+    '@id': '2',
+    'id': 189,
+    'name': 'Patty Bouvier',
+    'dateOfBirth': '1987-04-19',
+    'givenNames': 'Patty',
+    'familyName': 'Bouvier',
+    'family': [
       {
-        "@id": "3",
-        "id": 248,
-        "kin": {
-          "@ref": "2"
+        '@id': '3',
+        'id': 248,
+        'kin': {
+          '@ref': '2'
         },
-        "person": {
-          "@id": "4",
-          "id": 181,
-          "name": "Lisa Simpson",
-          "dateOfBirth": "1987-04-19",
-          "family": [],
-          "friends": [],
-          "givenNames": "Lisa",
-          "familyName": "Simpson"
+        'person': {
+          '@id': '4',
+          'id': 181,
+          'name': 'Lisa Simpson',
+          'dateOfBirth': '1987-04-19',
+          'family': [],
+          'friends': [],
+          'givenNames': 'Lisa',
+          'familyName': 'Simpson'
         },
-        "relationship": "aunt"
+        'relationship': 'aunt'
       },
       {
-        "@id": "5",
-        "id": 247,
-        "kin": {
-          "@ref": "2"
+        '@id': '5',
+        'id': 247,
+        'kin': {
+          '@ref': '2'
         },
-        "person": {
-          "@ref": "1"
+        'person': {
+          '@ref': '1'
         },
-        "relationship": "aunt"
+        'relationship': 'aunt'
       },
       {
-        "@id": "6",
-        "id": 249,
-        "kin": {
-          "@ref": "2"
+        '@id': '6',
+        'id': 249,
+        'kin': {
+          '@ref': '2'
         },
-        "person": {
-          "@id": "7",
-          "id": 182,
-          "name": "Bart Simpson",
-          "dateOfBirth": "1987-04-19",
-          "family": [],
-          "friends": [],
-          "givenNames": "Bart",
-          "familyName": "Simpson"
+        'person': {
+          '@id': '7',
+          'id': 182,
+          'name': 'Bart Simpson',
+          'dateOfBirth': '1987-04-19',
+          'family': [],
+          'friends': [],
+          'givenNames': 'Bart',
+          'familyName': 'Simpson'
         },
-        "relationship": "aunt"
+        'relationship': 'aunt'
       }
     ],
-    "friends": []
+    'friends': []
   },
   {
-    "@id": "8",
-    "id": 183,
-    "name": "Marge Simpson",
-    "dateOfBirth": "1987-04-19",
-    "givenNames": "Marge",
-    "familyName": "Simpson",
-    "family": [
+    '@id': '8',
+    'id': 183,
+    'name': 'Marge Simpson',
+    'dateOfBirth': '1987-04-19',
+    'givenNames': 'Marge',
+    'familyName': 'Simpson',
+    'family': [
       {
-        "@id": "9",
-        "id": 244,
-        "kin": {
-          "@ref": "8"
+        '@id': '9',
+        'id': 244,
+        'kin': {
+          '@ref': '8'
         },
-        "person": {
-          "@ref": "4"
+        'person': {
+          '@ref': '4'
         },
-        "relationship": "parent"
+        'relationship': 'parent'
       },
       {
-        "@id": "10",
-        "id": 243,
-        "kin": {
-          "@ref": "8"
+        '@id': '10',
+        'id': 243,
+        'kin': {
+          '@ref': '8'
         },
-        "person": {
-          "@ref": "1"
+        'person': {
+          '@ref': '1'
         },
-        "relationship": "parent"
+        'relationship': 'parent'
       },
       {
-        "@id": "11",
-        "id": 245,
-        "kin": {
-          "@ref": "8"
+        '@id': '11',
+        'id': 245,
+        'kin': {
+          '@ref': '8'
         },
-        "person": {
-          "@ref": "7"
+        'person': {
+          '@ref': '7'
         },
-        "relationship": "parent"
+        'relationship': 'parent'
       }
     ],
-    "friends": []
+    'friends': []
   },
   {
-    "@id": "12",
-    "id": 184,
-    "name": "Homer Simpson",
-    "dateOfBirth": "1987-04-19",
-    "givenNames": "Homer",
-    "familyName": "Simpson",
-    "family": [
+    '@id': '12',
+    'id': 184,
+    'name': 'Homer Simpson',
+    'dateOfBirth': '1987-04-19',
+    'givenNames': 'Homer',
+    'familyName': 'Simpson',
+    'family': [
       {
-        "@id": "13",
-        "id": 241,
-        "kin": {
-          "@ref": "12"
+        '@id': '13',
+        'id': 241,
+        'kin': {
+          '@ref': '12'
         },
-        "person": {
-          "@ref": "4"
+        'person': {
+          '@ref': '4'
         },
-        "relationship": "parent"
+        'relationship': 'parent'
       },
       {
-        "@id": "14",
-        "id": 240,
-        "kin": {
-          "@ref": "12"
+        '@id': '14',
+        'id': 240,
+        'kin': {
+          '@ref': '12'
         },
-        "person": {
-          "@ref": "1"
+        'person': {
+          '@ref': '1'
         },
-        "relationship": "parent"
+        'relationship': 'parent'
       },
       {
-        "@id": "15",
-        "id": 242,
-        "kin": {
-          "@ref": "12"
+        '@id': '15',
+        'id': 242,
+        'kin': {
+          '@ref': '12'
         },
-        "person": {
-          "@ref": "7"
+        'person': {
+          '@ref': '7'
         },
-        "relationship": "parent"
+        'relationship': 'parent'
       },
       {
-        "@id": "16",
-        "id": 246,
-        "kin": {
-          "@ref": "12"
+        '@id': '16',
+        'id': 246,
+        'kin': {
+          '@ref': '12'
         },
-        "person": {
-          "@ref": "8"
+        'person': {
+          '@ref': '8'
         },
-        "relationship": "partner"
+        'relationship': 'partner'
       }
     ],
-    "friends": []
+    'friends': []
   },
   {
-    "@ref": "4"
+    '@ref': '4'
   },
   {
-    "@id": "17",
-    "id": 186,
-    "name": "Ralph Wiggum",
-    "dateOfBirth": "1987-04-19",
-    "family": [],
-    "friends": [
+    '@id': '17',
+    'id': 186,
+    'name': 'Ralph Wiggum',
+    'dateOfBirth': '1987-04-19',
+    'family': [],
+    'friends': [
       {
-        "@id": "18",
-        "id": 251,
-        "kith": {
-          "@ref": "17"
+        '@id': '18',
+        'id': 251,
+        'kith': {
+          '@ref': '17'
         },
-        "person": {
-          "@ref": "4"
+        'person': {
+          '@ref': '4'
         },
-        "relationship": "friend"
+        'relationship': 'friend'
       }
     ],
-    "givenNames": "Ralph",
-    "familyName": "Wiggum"
+    'givenNames': 'Ralph',
+    'familyName': 'Wiggum'
   },
   {
-    "@ref": "7"
+    '@ref': '7'
   },
   {
-    "@id": "19",
-    "id": 187,
-    "name": "Groundskeeper Willie",
-    "dateOfBirth": "1987-04-19",
-    "family": [],
-    "friends": [
+    '@id': '19',
+    'id': 187,
+    'name': 'Groundskeeper Willie',
+    'dateOfBirth': '1987-04-19',
+    'family': [],
+    'friends': [
       {
-        "@id": "20",
-        "id": 252,
-        "kith": {
-          "@ref": "19"
+        '@id': '20',
+        'id': 252,
+        'kith': {
+          '@ref': '19'
         },
-        "person": {
-          "@ref": "7"
+        'person': {
+          '@ref': '7'
         },
-        "relationship": "grounskeeper"
+        'relationship': 'grounskeeper'
       }
     ],
-    "givenNames": "Groundskeeper",
-    "familyName": "Willie"
+    'givenNames': 'Groundskeeper',
+    'familyName': 'Willie'
   },
   {
-    "@id": "21",
-    "id": 188,
-    "name": "Nelson Muntz",
-    "dateOfBirth": "1987-04-19",
-    "family": [],
-    "friends": [
+    '@id': '21',
+    'id': 188,
+    'name': 'Nelson Muntz',
+    'dateOfBirth': '1987-04-19',
+    'family': [],
+    'friends': [
       {
-        "@id": "22",
-        "id": 253,
-        "kith": {
-          "@ref": "21"
+        '@id': '22',
+        'id': 253,
+        'kith': {
+          '@ref': '21'
         },
-        "person": {
-          "@ref": "7"
+        'person': {
+          '@ref': '7'
         },
-        "relationship": "friend"
+        'relationship': 'friend'
       }
     ],
-    "givenNames": "Nelson",
-    "familyName": "Muntz"
+    'givenNames': 'Nelson',
+    'familyName': 'Muntz'
   },
   {
-    "@id": "23",
-    "id": 185,
-    "name": "Milhouse Van Houten",
-    "dateOfBirth": "1987-04-19",
-    "family": [],
-    "friends": [
+    '@id': '23',
+    'id': 185,
+    'name': 'Milhouse Van Houten',
+    'dateOfBirth': '1987-04-19',
+    'family': [],
+    'friends': [
       {
-        "@id": "24",
-        "id": 250,
-        "kith": {
-          "@ref": "23"
+        '@id': '24',
+        'id': 250,
+        'kith': {
+          '@ref': '23'
         },
-        "person": {
-          "@ref": "7"
+        'person': {
+          '@ref': '7'
         },
-        "relationship": "friend"
+        'relationship': 'friend'
       }
     ],
-    "givenNames": "Milhouse",
-    "familyName": "Van Houten"
+    'givenNames': 'Milhouse',
+    'familyName': 'Van Houten'
   },
   {
-    "@id": "25",
-    "id": 190,
-    "name": "Ned Flanders",
-    "dateOfBirth": "1987-04-19",
-    "family": [],
-    "friends": [
+    '@id': '25',
+    'id': 190,
+    'name': 'Ned Flanders',
+    'dateOfBirth': '1987-04-19',
+    'family': [],
+    'friends': [
       {
-        "@id": "26",
-        "id": 254,
-        "kith": {
-          "@ref": "25"
+        '@id': '26',
+        'id': 254,
+        'kith': {
+          '@ref': '25'
         },
-        "person": {
-          "@ref": "12"
+        'person': {
+          '@ref': '12'
         },
-        "relationship": "neighbour"
+        'relationship': 'neighbour'
       }
     ],
-    "givenNames": "Ned",
-    "familyName": "Flanders"
+    'givenNames': 'Ned',
+    'familyName': 'Flanders'
   }
-];
+]
 
 const RELATIONSHIPS = [
 
-];
+]
 
 const CASE_DETAILS_DATA = [
-  { id: 1, "familyFinderStaffName": "Dolores", "caseManager": "Jen", "status": "Open", "dateOpened": "2016-08-05", "dateClosed": null, "caseObjective": "test Neo4J", "phaseOfInvolvement": "Referred", subjects: [] },
-  { id: 2, "familyFinderStaffName": "Dolores", "caseManager": "Jen", "status": "Open", "dateOpened": "2016-08-05", "dateClosed": null, "caseObjective": "test Neo4J", "phaseOfInvolvement": "Referred", subjects: [] },
-  { id: 3, "familyFinderStaffName": "Dolores", "caseManager": "Jen", "status": "Open", "dateOpened": "2016-08-05", "dateClosed": null, "caseObjective": "test Neo4J", "phaseOfInvolvement": "Referred", subjects: [] },
-  { id: 4, "familyFinderStaffName": "Dolores", "caseManager": "Jen", "status": "Open", "dateOpened": "2016-08-05", "dateClosed": null, "caseObjective": "test Neo4J", "phaseOfInvolvement": "Referred", subjects: [] },
-  { id: 5, "familyFinderStaffName": "Dolores", "caseManager": "Jen", "status": "Open", "dateOpened": "2016-08-05", "dateClosed": null, "caseObjective": "test Neo4J", "phaseOfInvolvement": "Referred", subjects: [] },
-  { id: 6, "familyFinderStaffName": "Dolores", "caseManager": "Jen", "status": "Open", "dateOpened": "2016-08-05", "dateClosed": null, "caseObjective": "test Neo4J", "phaseOfInvolvement": "Referred", subjects: [] }
-];
+  { id: 1, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
+  { id: 2, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
+  { id: 3, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
+  { id: 4, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
+  { id: 5, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
+  { id: 6, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] }
+]
 
 const cases = [
-  { caseId: "12345", staffName: "Jenny", childName: "Bob Jones", caseNumber: "234956" },
-  { caseId: "12346", staffName: "Jenny", childName: "Ben James", caseNumber: "234957" },
-  { caseId: "12347", staffName: "Jenny", childName: "Kate Smith", caseNumber: "234958" },
-];
+  { caseId: '12345', staffName: 'Jenny', childName: 'Bob Jones', caseNumber: '234956' },
+  { caseId: '12346', staffName: 'Jenny', childName: 'Ben James', caseNumber: '234957' },
+  { caseId: '12347', staffName: 'Jenny', childName: 'Kate Smith', caseNumber: '234958' }
+]
 
-export const MOCK_BACKEND = false;
-export const SERVICE_URL_BASE = "http://localhost:8080";
+export const MOCK_BACKEND = false
+export const SERVICE_URL_BASE = 'http://localhost:8080'
 
-function sendRequest(url, method, data) {
+function sendRequest (url, method, data) {
   const requestOpts = {
     method: method,
     headers: new Headers({
       'Content-Type': 'application/json'
     })
-  };
+  }
   if (data) {
     requestOpts.body = JSON.stringify(data)
   }
   const request = new Request(url, requestOpts)
   return fetch(request).then(r => {
     if (r.ok) {
-      return r.json();
+      return r.json()
     }
-  });
+  })
 }
 
 export default {
-  getPerson(id) {
+  getPerson (id) {
     if (MOCK_BACKEND) {
       return new Promise((resolve, reject) => {
-        const matches = PEOPLE_DATA.filter(p => p.id == id);
-        if (matches.length == 1) {
-          resolve(matches[0]);
+        const matches = PEOPLE_DATA.filter(p => p.id == id)
+        if (matches.length === 1) {
+          resolve(matches[0])
         } else {
-          reject(new Error("Person not found"));
+          reject(new Error('Person not found'))
         }
       })
     } else {
-      return sendRequest(`${SERVICE_URL_BASE}/people/${id}`, 'GET');
+      return sendRequest(`${SERVICE_URL_BASE}/people/${id}`, 'GET')
     }
   },
-  getRelationship(personId, relationId) {
+  getRelationship (personId, relationId) {
     return this.getPerson(personId).then(r => {
-      const family = r.family;
-      const friends = r.friends;
+      const family = r.family
+      const friends = r.friends
 
-      let matches = family.filter(f => f.id == relationId);
-      if (matches.length == 1) {
-        return Promise.resolve(matches[0]);
+      let matches = family.filter(f => f.id === relationId)
+      if (matches.length === 1) {
+        return Promise.resolve(matches[0])
       }
-      matches = friends.filter(f => f.id == relationId);
-      if (matches.length == 1) {
-        return Promise.resolve(matches[0]);
+      matches = friends.filter(f => f.id === relationId)
+      if (matches.length === 1) {
+        return Promise.resolve(matches[0])
       }
-      return Promise.reject(new Error("No such relationship"));
-    });
+      return Promise.reject(new Error('No such relationship'))
+    })
   },
-  getCaseStatuses() {
-    return Promise.resolve(["Open", "Closed"])
+  getRelationshipTypes () {
+    return Promise.resolve(['Parent', 'Partner', 'Aunt', 'Uncle', 'Friend', 'Neighbour'])
   },
-  getPhases() {
-    return Promise.resolve(["Referred", "Searching"])
+  getCaseStatuses () {
+    return Promise.resolve(['Open', 'Closed'])
+  },
+  getPhases () {
+    return Promise.resolve(['Referred', 'Searching'])
   },
   getPlacementTypes () {
     return Promise.resolve(['With Parents', 'With Mother', 'With Father', 'Kinship Care', 'Kith', 'Foster Care', 'Residential Care', 'Lead Tenant', 'Other'])
   },
-  getUsers() {
+  getUsers () {
     return new Promise((resolve, reject) => {
       // This should actually be a fetch AJAX request
       setTimeout(() => {
-        resolve(["Shaun", "LJ", "Yael"]);
-      }, 2000);
-    });
+        resolve(['Shaun', 'LJ', 'Yael'])
+      }, 2000)
+    })
   },
-  getCases() {
+  getCases () {
     if (MOCK_BACKEND) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve(CASE_DATA);
-        }, 2000);
-      });
+          resolve(CASE_DATA)
+        }, 2000)
+      })
     } else {
-      return sendRequest(`${SERVICE_URL_BASE}/cases`, 'GET');
+      return sendRequest(`${SERVICE_URL_BASE}/cases`, 'GET')
     }
   },
-  getCase(id) {
+  getCase (id) {
     if (MOCK_BACKEND) {
       return new Promise((resolve, reject) => {
-        const singleCase = CASE_SUMMARY_DATA.filter(c => c.case_id == id)
-        if (singleCase.length = 1) {
+        const singleCase = CASE_SUMMARY_DATA.filter(c => c.case_id === id)
+        if (singleCase.length === 1) {
           resolve(singleCase[0])
         } else {
           reject(new Error('Case not found'))
         }
-      });
+      })
     } else {
       return sendRequest(`${SERVICE_URL_BASE}/cases/${id}`, 'GET')
     }
   },
-  addCase(caseDetails) {
+  addCase (caseDetails) {
     if (MOCK_BACKEND) {
-      CASE_DETAILS_DATA.push(caseDetails);
-      CASE_SUMMARY_DATA.push({ staffName: caseDetails.staffName, familyName: caseDetails.familyName, givenNames: caseDetails.givenNames, caseNumber: caseDetails.caseNumber, phase: "New" })
-      return Promise.resolve(true);
+      CASE_DETAILS_DATA.push(caseDetails)
+      CASE_SUMMARY_DATA.push({ staffName: caseDetails.staffName, familyName: caseDetails.familyName, givenNames: caseDetails.givenNames, caseNumber: caseDetails.caseNumber, phase: 'New' })
+      return Promise.resolve(true)
     } else {
-      return sendRequest(`${SERVICE_URL_BASE}/cases`, 'POST', caseDetails);
+      return sendRequest(`${SERVICE_URL_BASE}/cases`, 'POST', caseDetails)
     }
   },
-  addSubjectToCase(theCase, subject) {
-    return sendRequest(`${SERVICE_URL_BASE}/cases/${theCase.id}/subject/${subject.id}`, 'PUT');
+  addSubjectToCase (theCase, subject) {
+    return sendRequest(`${SERVICE_URL_BASE}/cases/${theCase.id}/subject/${subject.id}`, 'PUT')
   },
-  updateCase(caseDetails) {
+  updateCase (caseDetails) {
     if (MOCK_BACKEND) {
-      return Promise.resolve(caseDetails);
+      return Promise.resolve(caseDetails)
     } else {
-      return sendRequest(`${SERVICE_URL_BASE}/cases`, 'PUT', caseDetails);
+      return sendRequest(`${SERVICE_URL_BASE}/cases`, 'PUT', caseDetails)
     }
   },
-  addPerson(person) {
+  addPerson (person) {
     return sendRequest(`${SERVICE_URL_BASE}/people/`, 'POST', person)
   },
-  updatePerson(person) {
-    return sendRequest(`${SERVICE_URL_BASE}/people/${person.id}`, 'POST', person)
+  updatePerson (person) {
+    return sendRequest(`${SERVICE_URL_BASE}/people/${person.id}`, 'PUT', person)
   }
 }

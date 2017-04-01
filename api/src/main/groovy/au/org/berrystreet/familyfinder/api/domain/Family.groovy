@@ -15,6 +15,10 @@ class Family extends Entity {
     @StartNode Person kin
     @EndNode Person person
     @ApiModelProperty String relationship
+    @ApiModelProperty String howFound
+    @ApiModelProperty String howInfoConfirmed
+    @ApiModelProperty String notes
+    @ApiModelProperty String riskAlert
 
     Family() { }
 

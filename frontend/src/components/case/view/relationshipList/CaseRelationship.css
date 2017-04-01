@@ -1,11 +1,11 @@
-.CaseRelationship-risk1 {
+.CaseRelationship-risk-None {
   color: green;
 }
 
-.CaseRelationship-risk2 {
+.CaseRelationship-risk-Past {
   color: yellow;
 }
 
-.CaseRelationship-risk3 {
+.CaseRelationship-risk-Current {
   color: red;
 }
