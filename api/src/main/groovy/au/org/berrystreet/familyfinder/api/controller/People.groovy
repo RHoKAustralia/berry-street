@@ -53,7 +53,7 @@ class People extends Controller<Person> {
         super.create(body)
     }
 
-    @ApiOperation(value = '', notes = 'list of all `Person`s that match the criteria provided')
+    @ApiOperation(value = '', notes = 'List all `Person`s that match the criteria provided')
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response')])
     @RequestMapping(
             value = '',
@@ -99,10 +99,14 @@ class People extends Controller<Person> {
             method = PUT)
     Person addFamily(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
                      @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
-                     @ApiParam(value = 'relative', required = true) @RequestParam('kinId') Long kinId) {
+                     @ApiParam(value = 'relative', required = true) @RequestParam('kinId') Long kinId,
+                     @ApiParam(value = 'howFound', required = false) @RequestParam('howFound') String howFound,
+                     @ApiParam(value = 'howInfoConfirmed', required = false) @RequestParam('howInfoConfirmed') String howInfoConfirmed,
+                     @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes,
+                     @ApiParam(value = 'riskAlert', required = false) @RequestParam('riskAlert') String riskAlert) {
         Person kin = super.find(kinId) as Person
         Person person = super.find(id) as Person
-        Family family = new Family(kin, person, relationship)
+        Family family = new Family(kin, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
         familyService.repository.save(family)
         person
     }
@@ -120,10 +124,14 @@ class People extends Controller<Person> {
             method = PUT)
     Person addFriend(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
                      @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
-                     @ApiParam(value = 'friend', required = true) @RequestParam('friendId') Long friendId) {
+                     @ApiParam(value = 'friend', required = true) @RequestParam('friendId') Long friendId,
+                     @ApiParam(value = 'howFound', required = false) @RequestParam('howFound') String howFound,
+                     @ApiParam(value = 'howInfoConfirmed', required = false) @RequestParam('howInfoConfirmed') String howInfoConfirmed,
+                     @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes,
+                     @ApiParam(value = 'riskAlert', required = false) @RequestParam('riskAlert') String riskAlert) {
         Person friend = super.find(friendId) as Person
         Person person = super.find(id) as Person
-        Friend friendship = new Friend(friend, person, relationship)
+        Friend friendship = new Friend(friend, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
         friendService.repository.save(friendship)
         person
     }

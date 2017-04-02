@@ -5,27 +5,36 @@ export default class CaseRelationshipForm extends Component {
   constructor (prop) {
     super(prop)
     this.state = {
-      acquaintanceSelected: false,
       caseSubject: null,
       relationship: null,
-      caseAcquaintance: null
+      relatedPerson: null,
+      relatedPersonSelected: false
     }
-    this.handleAcquaintanceChange = this.handleAcquaintanceChange.bind(this)
+    this.handleRelatedPersonChange = this.handleRelatedPersonChange.bind(this)
     this.handleRelationshipChange = this.handleRelationshipChange.bind(this)
   }
   componentDidMount () {
     api.getRelationshipTypes().then(r => this.setState({ relationshipTypes: r }))
-    this.loadDataIfPersonSelected(this.props.caseSubjectId, this.props.relationshipId)
+
+    if (this.props.newRelation) {
+      this.loadCaseSubjectAndNewRelation(this.props.caseSubjectId)
+    } else {
+      this.loadDataIfPersonSelected(this.props.caseSubjectId, this.props.relationshipId)
+    }
   }
   componentWillReceiveProps (nextProps) {
-    this.loadDataIfPersonSelected(nextProps.caseSubjectId, nextProps.relationshipId)
+    if (nextProps.newRelation) {
+      this.loadCaseSubjectAndNewRelation(nextProps.caseSubjectId)
+    } else {
+      this.loadDataIfPersonSelected(nextProps.caseSubjectId, nextProps.relationshipId)
+    }
   }
   loadDataIfPersonSelected (caseSubjectId, relationshipId) {
     if (caseSubjectId && relationshipId) {
-      this.setState(Object.assign({}, this.state, {caseAcquaintance: null, relationship: null}))
+      this.setState(Object.assign({}, this.state, {relatedPerson: null, relationship: null}))
       this.loadData(caseSubjectId, relationshipId)
     } else {
-      this.setState({ acquaintanceSelected: false })
+      this.setState({ relatedPersonSelected: false })
     }
   }
   loadData (caseSubjectId, relationshipId) {
@@ -42,10 +51,20 @@ export default class CaseRelationshipForm extends Component {
       }
 
       this.setState({
-        acquaintanceSelected: true,
+        relatedPersonSelected: true,
         caseSubject: caseSubject,
         relationship: relationship,
-        caseAcquaintance: relationship.kith || relationship.kin
+        relatedPerson: relationship.kith || relationship.kin
+      })
+    })
+  }
+  loadCaseSubjectAndNewRelation (caseSubjectId) {
+    api.getPerson(caseSubjectId).then(caseSubject => {
+      this.setState({
+        relatedPersonSelected: true,
+        caseSubject: caseSubject,
+        relationship: {},
+        relatedPerson: {}
       })
     })
   }
@@ -58,27 +77,34 @@ export default class CaseRelationshipForm extends Component {
     st.relationship[name] = value
     this.setState(st)
   }
-  handleAcquaintanceChange (event) {
+  handleRelatedPersonChange (event) {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
 
     let st = Object.assign({}, this.state)
-    st.caseAcquaintance[name] = value
+    st.relatedPerson[name] = value
     this.setState(st)
   }
   save (event) {
     event.preventDefault()
-    api.updatePerson(this.state.caseSubject)
-    this.props.caseUpdated()
+    if (this.props.relationshipId) {
+      api.updatePerson(this.state.caseSubject)
+      this.props.caseUpdated()
+    } else {
+      api.addPerson(this.state.relatedPerson).then(createdPerson => {
+        api.linkPerson(this.state.caseSubject.id, createdPerson.id, this.state.relationship)
+        this.props.caseUpdated()
+      })
+    }
   }
   render () {
-    if (!this.state.acquaintanceSelected) {
+    if (!this.state.relatedPersonSelected) {
       return <div className="alert alert-info">
         <strong>Select a related person on the left for more details</strong>
       </div>
     } else {
-      if (this.state.caseAcquaintance) {
+      if (this.state.relatedPerson) {
         return <div>
           <form onSubmit={this.save.bind(this)}>
             <fieldset>
@@ -87,35 +113,35 @@ export default class CaseRelationshipForm extends Component {
 
                 <div className="col-xs-6 form-group">
                   <label htmlFor="givenNames">Given Names</label>
-                  <input id="givenNames" name="givenNames" type="text" className="form-control" value={this.state.caseAcquaintance.givenNames} onChange={this.handleAcquaintanceChange} />
+                  <input id="givenNames" name="givenNames" type="text" className="form-control" value={this.state.relatedPerson.givenNames} onChange={this.handleRelatedPersonChange} />
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="familyName">Family Name</label>
-                  <input id="familyName" name="familyName" type="text" className="form-control" value={this.state.caseAcquaintance.familyName} onChange={this.handleAcquaintanceChange} />
+                  <input id="familyName" name="familyName" type="text" className="form-control" value={this.state.relatedPerson.familyName} onChange={this.handleRelatedPersonChange} />
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="dateOfBirth">Date of Birth</label>
-                  <input id="dateOfBirth" name="dateOfBirth" type="date" className="form-control" value={this.state.caseAcquaintance.dateOfBirth} onChange={this.handleAcquaintanceChange} />
+                  <input id="dateOfBirth" name="dateOfBirth" type="date" className="form-control" value={this.state.relatedPerson.dateOfBirth} onChange={this.handleRelatedPersonChange} />
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="address">Address</label>
-                  <input id="address" name="address" type="text" className="form-control" value={this.state.caseAcquaintance.address} onChange={this.handleAcquaintanceChange} />
+                  <input id="address" name="address" type="text" className="form-control" value={this.state.relatedPerson.address} onChange={this.handleRelatedPersonChange} />
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="phone">Phone</label>
-                  <input id="phone" name="phone" type="text" className="form-control" value={this.state.caseAcquaintance.phone} onChange={this.handleAcquaintanceChange} />
+                  <input id="phone" name="phone" type="text" className="form-control" value={this.state.relatedPerson.phone} onChange={this.handleRelatedPersonChange} />
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="email">Email</label>
-                  <input id="email" name="email" type="email" className="form-control" value={this.state.caseAcquaintance.email} onChange={this.handleAcquaintanceChange} />
+                  <input id="email" name="email" type="email" className="form-control" value={this.state.relatedPerson.email} onChange={this.handleRelatedPersonChange} />
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="atsi">ATSI</label>
-                  <input id="atsi" name="atsi" type="checkbox" style={{'margin-left': '15px'}} value={this.state.caseAcquaintance.atsi} onChange={this.handleAcquaintanceChange} />
+                  <input id="atsi" name="atsi" type="checkbox" style={{'marginLeft': '15px'}} value={this.state.relatedPerson.atsi} onChange={this.handleRelatedPersonChange} />
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="atsiLocation">ATSI mob or location</label>
-                  <input id="atsiLocation" name="atsiLocation" type="text" className="form-control" value={this.state.caseAcquaintance.atsiLocation} onChange={this.handleAcquaintanceChange} />
+                  <input id="atsiLocation" name="atsiLocation" type="text" className="form-control" value={this.state.relatedPerson.atsiLocation} onChange={this.handleRelatedPersonChange} />
                 </div>
               </div>
             </fieldset>

@@ -22,10 +22,14 @@ class Family extends Entity {
 
     Family() { }
 
-    Family(Person kin, Person person, String relationship) {
+    Family(Person kin, Person person, String relationship, String howFound, String howInfoConfirmed, String notes, String riskAlert) {
         this.kin = kin
         this.person = person
         this.relationship = relationship
+        this.howFound = howFound
+        this.howInfoConfirmed = howInfoConfirmed
+        this.notes = notes
+        this.riskAlert = riskAlert
         this.kin.family.add(this)
         this.person.family.add(this)
     }

@@ -11,9 +11,9 @@ class CaseView extends Component {
       ffCase: null,
       error: null,
       caseSubject: null,
-      selectedRelationshipId: null
+      selectedRelationshipId: null,
+      newRelation: false
     }
-    this.reloadCase = this.reloadCase.bind(this)
   }
 
   componentDidMount () {
@@ -29,13 +29,17 @@ class CaseView extends Component {
         return Promise.all([ r, api.getPerson(r.subjects[0].person.id) ])
       })
       .then(results => {
-        this.setState({ffCase: results[0], caseSubject: results[1]})
+        this.setState(Object.assign({}, this.state, {ffCase: results[0], caseSubject: results[1]}))
       })
       .catch(err => this.setState({ error: err }))
   }
 
   onRelationSelected (id) {
-    this.setState({ selectedRelationshipId: id })
+    this.setState(Object.assign({}, this.state, {selectedRelationshipId: id, newRelation: false}))
+  }
+
+  onAddRelation () {
+    this.setState(Object.assign({}, this.state, {selectedRelationshipId: null, newRelation: true}))
   }
 
   render () {
@@ -49,10 +53,15 @@ class CaseView extends Component {
         <CaseHeader case={ffCase} />
         <div className="row">
           <div className="col-xs-12 col-sm-6 col-md-3">
-            <CaseRelationshipList relationships={relations} selectedRelationId={this.state.selectedRelationshipId} onRelationSelected={this.onRelationSelected.bind(this)} />
+            <CaseRelationshipList relationships={relations} selectedRelationId={this.state.selectedRelationshipId}
+              onRelationSelected={this.onRelationSelected.bind(this)} />
+            <div>
+                <button className="btn btn-default" onClick={this.onAddRelation.bind(this)}>Add Related Person</button>
+            </div>
           </div>
           <div className="col-xs-12 col-sm-6 col-md-9">
-            <CaseRelationshipForm caseSubjectId={caseSubject.id} relationshipId={this.state.selectedRelationshipId} caseUpdated={this.reloadCase} />
+            <CaseRelationshipForm caseSubjectId={caseSubject.id} relationshipId={this.state.selectedRelationshipId}
+              newRelation={this.state.newRelation} caseUpdated={this.reloadCase.bind(this)} />
           </div>
         </div>
       </div>

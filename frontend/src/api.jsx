@@ -317,10 +317,6 @@ const PEOPLE_DATA = [
   }
 ]
 
-const RELATIONSHIPS = [
-
-]
-
 const CASE_DETAILS_DATA = [
   { id: 1, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
   { id: 2, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
@@ -361,7 +357,7 @@ export default {
   getPerson (id) {
     if (MOCK_BACKEND) {
       return new Promise((resolve, reject) => {
-        const matches = PEOPLE_DATA.filter(p => p.id == id)
+        const matches = PEOPLE_DATA.filter(p => p.id === id)
         if (matches.length === 1) {
           resolve(matches[0])
         } else {
@@ -389,7 +385,7 @@ export default {
     })
   },
   getRelationshipTypes () {
-    return Promise.resolve(['Parent', 'Partner', 'Aunt', 'Uncle', 'Friend', 'Neighbour'])
+    return Promise.resolve(['Parent', 'Brother', 'Sister', 'Aunt', 'Uncle', 'Partner', 'Friend', 'Neighbour'])
   },
   getCaseStatuses () {
     return Promise.resolve(['Open', 'Closed'])
@@ -457,5 +453,16 @@ export default {
   },
   updatePerson (person) {
     return sendRequest(`${SERVICE_URL_BASE}/people/${person.id}`, 'PUT', person)
+  },
+  linkPerson (caseSubjectId, relatedPersonId, relationship) {
+    const isFamily = ['Parent', 'Aunt', 'Uncle', 'Brother', 'Sister'].indexOf(relationship.relationship) > 0
+    let requestParams = '?' + (isFamily ? 'kinId' : 'friendId') + '=' + relatedPersonId +
+      '&relationship=' + encodeURIComponent(relationship.relationship) +
+      '&howFound=' + encodeURIComponent(relationship.howFound) +
+      '&howInfoConfirmed=' + encodeURIComponent(relationship.howInfoConfirmed) +
+      '&notes=' + encodeURIComponent(relationship.notes) +
+      '&riskAlert=' + encodeURIComponent(relationship.riskAlert)
+
+    return sendRequest(`${SERVICE_URL_BASE}/people/${caseSubjectId}/${isFamily ? 'family' : 'friends'}${requestParams}`, 'PUT')
   }
 }

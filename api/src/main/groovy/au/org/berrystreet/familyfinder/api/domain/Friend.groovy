@@ -22,10 +22,14 @@ class Friend extends Entity {
 
     Friend() {}
 
-    Friend(Person kith, Person person, String relationship) {
+    Friend(Person kith, Person person, String relationship, String howFound, String howInfoConfirmed, String notes, String riskAlert) {
         this.kith = kith
         this.person = person
         this.relationship = relationship
+        this.howFound = howFound
+        this.howInfoConfirmed = howInfoConfirmed
+        this.notes = notes
+        this.riskAlert = riskAlert
         this.kith.friends.add(this)
         this.person.friends.add(this)
     }
