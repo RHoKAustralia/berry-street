@@ -8,6 +8,7 @@ import LoggedIn from './LoggedIn.jsx';
 import config from '../config.jsx';
 import utils from '../utils.jsx';
 import { setIdToken } from '../actions.jsx';
+import './App.css';
 
 function mapStateToProps(state, ownProps) {
   return {
