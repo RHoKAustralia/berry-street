@@ -16,12 +16,20 @@ class CaseRelationshipList extends Component {
             {this.props.relationships.map(relationship => {
               const related = relationship.kin || relationship.kith || {}
               return <li key={relationship.id} onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.props.selectedRelationId === relationship.id ? 'active' : '')}>
-                <CaseRelationship personName={related.givenNames + ' ' + related.familyName} relationship={relationship.relationship} riskStatus={relationship.riskAlert}/>
+                <CaseRelationship personName={this.getRelationshipPersonName(related)} relationship={relationship.relationship} riskStatus={relationship.riskAlert}/>
               </li>
             })}
         </ul>
       </div>
     )
+  }
+
+  getRelationshipPersonName (relatedPerson) {
+    if (relatedPerson.givenNames === null) {
+      return '';
+    }
+
+    return relatedPerson.givenNames + (relatedPerson.familyName === null ? '' : ' ' + relatedPerson.familyName);
   }
 
   personRelationshipOnClick (personRelationship) {
