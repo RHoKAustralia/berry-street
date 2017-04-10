@@ -89,8 +89,9 @@ export default class CaseRelationshipForm extends Component {
   save (event) {
     event.preventDefault()
     if (this.props.relationshipId) {
-      api.updatePerson(this.state.caseSubject)
-      this.props.caseUpdated()
+      api.updatePerson(this.state.caseSubject).then(() => {
+        this.props.caseUpdated()
+      });
     } else {
       api.addPerson(this.state.relatedPerson).then(createdPerson => {
         api.linkPerson(this.state.caseSubject.id, createdPerson.id, this.state.relationship)
