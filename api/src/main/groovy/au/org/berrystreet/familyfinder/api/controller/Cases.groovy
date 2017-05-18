@@ -1,13 +1,14 @@
 package au.org.berrystreet.familyfinder.api.controller
 
+import au.org.berrystreet.familyfinder.api.domain.CSVCase
 import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.domain.Subject
 import au.org.berrystreet.familyfinder.api.service.PersonService
 import au.org.berrystreet.familyfinder.api.service.SubjectService
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 
+import javax.servlet.http.HttpServletResponse
 import java.text.SimpleDateFormat
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET
@@ -15,6 +16,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST
 import static org.springframework.web.bind.annotation.RequestMethod.PUT
 
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
+import static au.org.berrystreet.familyfinder.api.Constants.TEXT_CSV
 
 import au.org.berrystreet.familyfinder.api.domain.Case
 import au.org.berrystreet.familyfinder.api.service.CaseService
@@ -103,9 +105,20 @@ class Cases extends Controller<Case> {
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful Response', response = Case)])
     @RequestMapping(
             value = '/{id}',
+            consumes = [APPLICATION_JSON],
             method = GET)
     Case find(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id) {
         super.find(id)
+    }
+
+    @RequestMapping(
+            value = '/{id}/foo',
+            produces = [TEXT_CSV],
+            method = GET)
+    CSVCase find_as_csv(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id,
+                     HttpServletResponse response) {
+        def result = super.find(id)
+        return new CSVCase()
     }
 
     @Override
