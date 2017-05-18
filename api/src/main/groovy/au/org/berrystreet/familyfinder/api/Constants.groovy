@@ -10,5 +10,6 @@ final class Constants {
 
     static final String APPLICATION_JSON_API = 'application/vnd.api+json'
     static final String APPLICATION_JSON = 'application/json'
+    static final String TEXT_CSV = 'text/csv'
 
 }
