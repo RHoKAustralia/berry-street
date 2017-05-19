@@ -1,7 +1,7 @@
 package au.org.berrystreet.familyfinder.api.service
 
 import au.com.bytecode.opencsv.CSVWriter
-import au.org.berrystreet.familyfinder.api.domain.CSVCase
+import au.org.berrystreet.familyfinder.api.domain.Person
 import org.springframework.http.HttpInputMessage
 import org.springframework.http.HttpOutputMessage
 import org.springframework.http.MediaType
@@ -11,7 +11,7 @@ import org.springframework.http.converter.HttpMessageNotWritableException
 
 import java.nio.charset.Charset
 
-class CsvMessageConverter extends AbstractHttpMessageConverter<CSVCase> {
+class CsvMessageConverter extends AbstractHttpMessageConverter<List<Person>> {
     public static final MediaType MEDIA_TYPE = new MediaType("text", "csv", Charset.forName("utf-8"))
 
     CsvMessageConverter() {
@@ -20,21 +20,24 @@ class CsvMessageConverter extends AbstractHttpMessageConverter<CSVCase> {
 
     @Override
     protected boolean supports(Class<?> clazz) {
-        return CSVCase.class.equals(clazz)
+        return  List.class.isAssignableFrom(clazz)
     }
 
     @Override
-    protected CSVCase readInternal(Class<? extends CSVCase> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+    protected List<Person> readInternal(Class<? extends List<Person>> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
         throw new UnsupportedOperationException("Not implemented")
     }
 
     @Override
-    protected void writeInternal(CSVCase csvCase, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+    protected void writeInternal(List<Person> people, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         outputMessage.getHeaders().setContentType(MEDIA_TYPE)
-        outputMessage.getHeaders().set("Content-Disposition", "attachment; filename=\"" + csvCase.getFilename() + "\"")
+        outputMessage.getHeaders().set("Content-Disposition", "attachment; filename=\"personcsv.csv\"")
         def body = outputMessage.getBody()
         def writer = new CSVWriter(new OutputStreamWriter(body))
-        writer.writeNext(csvCase.line as String[])
+        writer.writeNext(["Name","Type","Tags","Description"] as String[])
+        people.each { person ->
+            writer.writeNext([person.givenNames + " " + person.familyName, "type","tags","description"] as String[])
+        }
         writer.flush()
         writer.close()
     }
