@@ -6,7 +6,10 @@ import au.org.berrystreet.familyfinder.api.service.FamilyService
 import au.org.berrystreet.familyfinder.api.service.FriendService
 import org.springframework.web.bind.annotation.RequestParam
 
+import javax.servlet.http.HttpServletResponse
+
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
+import static au.org.berrystreet.familyfinder.api.Constants.TEXT_CSV
 import static org.springframework.web.bind.annotation.RequestMethod.GET
 import static org.springframework.web.bind.annotation.RequestMethod.POST
 
@@ -133,6 +136,16 @@ class People extends Controller<Person> {
         Friend friendship = new Friend(friend, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
         friendService.repository.save(friendship)
         person
+    }
+
+
+    @RequestMapping(
+            value = '/csv',
+            produces = [TEXT_CSV],
+            method = GET)
+    List<Person> find_as_csv(HttpServletResponse response) {
+        def array = super.list() as Person[]
+        return array.toList()
     }
 
     @Override
