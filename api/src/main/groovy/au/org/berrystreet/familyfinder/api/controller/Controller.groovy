@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 @RequestMapping(value = '/')
 abstract class Controller<T> {
 
-    T[] list(int depth) {
-        service.findAll(depth)
+    T[] list() {
+        service.findAll()
     }
 
     T create(T entity) {

@@ -58,11 +58,10 @@ class People extends Controller<Person> {
     @RequestMapping(
             value = '',
             method = GET)
-    Person[] list(
-            @ApiParam(value = 'depth') @RequestParam(value = 'depth', required = true) int depth
-    ) {
-        super.list(depth) as Person[]
+    Person[] list() {
+        super.list() as Person[]
     }
+
 
     @ApiOperation(value = '', notes = 'Gets `Person` identified with `id`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Person)])
