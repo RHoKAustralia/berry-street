@@ -1,6 +1,7 @@
 package au.org.berrystreet.familyfinder.api.domain
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -129,13 +130,11 @@ class Person extends Entity {
     @JsonProperty
     String email = null
 
-    @ApiModelProperty
-    @JsonProperty('family')
+    @JsonIgnore
     @Relationship(type = 'FAMILY', direction = Relationship.UNDIRECTED)
     List<Family> family = []
 
-    @ApiModelProperty
-    @JsonProperty('friends')
+    @JsonIgnore
     @Relationship(type = 'FRIEND', direction = Relationship.UNDIRECTED)
     List<Friend> friends = []
 }
