@@ -98,11 +98,10 @@ class Cases extends Controller<Case> {
         super.list() as Case[]
     }
 
-    @ApiOperation(value = '', notes = 'list all `Case`s', response = Case)
+    @ApiOperation(value = '', notes = 'Gets `Case` identified with `id`', response = Case)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful Response', response = Case)])
     @RequestMapping(
             value = '/{id}',
-            consumes = [APPLICATION_JSON],
             method = GET)
     Case find(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id) {
         super.find(id)
