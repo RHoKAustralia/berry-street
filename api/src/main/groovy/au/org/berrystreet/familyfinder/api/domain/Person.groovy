@@ -131,7 +131,7 @@ class Person extends Entity {
     String email = null
 
     @ApiModelProperty
-    @JsonIgnore
+    @JsonProperty('family')
     @Relationship(type = 'FAMILY', direction = Relationship.UNDIRECTED)
     List<Family> family = []
 
