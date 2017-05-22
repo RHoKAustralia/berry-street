@@ -12,6 +12,10 @@ import org.neo4j.ogm.annotation.Relationship
 @NodeEntity(label='Person')
 class Person extends Entity {
 
+    @ApiModelProperty
+    @JsonProperty('name')
+    /** @Deprecated Temp compatibility - Remove this */
+    String name = null
 
     @ApiModelProperty
     @JsonProperty
@@ -126,11 +130,13 @@ class Person extends Entity {
     @JsonProperty
     String email = null
 
+    @ApiModelProperty
     @JsonIgnore
     @Relationship(type = 'FAMILY', direction = Relationship.UNDIRECTED)
     List<Family> family = []
 
-    @JsonIgnore
+    @ApiModelProperty
+    @JsonProperty('friends')
     @Relationship(type = 'FRIEND', direction = Relationship.UNDIRECTED)
     List<Friend> friends = []
 }
