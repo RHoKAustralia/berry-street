@@ -2,7 +2,7 @@ package au.org.berrystreet.familyfinder.api.service
 
 interface Service<T> {
 
-    Iterable<T> findAll(int depth)
+    Iterable<T> findAll()
 
     T find(Long id)
 

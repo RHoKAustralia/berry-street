@@ -1,37 +1,20 @@
 package au.org.berrystreet.familyfinder.api.controller
 
+import au.org.berrystreet.familyfinder.api.domain.Case
 import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.domain.Subject
+import au.org.berrystreet.familyfinder.api.service.CaseService
 import au.org.berrystreet.familyfinder.api.service.PersonService
+import au.org.berrystreet.familyfinder.api.service.Service
 import au.org.berrystreet.familyfinder.api.service.SubjectService
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.CrossOrigin
+import io.swagger.annotations.*
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.*
 
 import java.text.SimpleDateFormat
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET
-import static org.springframework.web.bind.annotation.RequestMethod.POST
-import static org.springframework.web.bind.annotation.RequestMethod.PUT
-
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
-
-import au.org.berrystreet.familyfinder.api.domain.Case
-import au.org.berrystreet.familyfinder.api.service.CaseService
-import au.org.berrystreet.familyfinder.api.service.Service
-
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
-import io.swagger.annotations.ApiResponse
-import io.swagger.annotations.ApiResponses
-
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-
+import static org.springframework.web.bind.annotation.RequestMethod.*
 
 @RestController
 @RequestMapping(value = '/cases', produces = [APPLICATION_JSON])
@@ -96,10 +79,10 @@ class Cases extends Controller<Case> {
     Case[] list(
 //            @ApiParam(value = 'depth') @RequestParam(value = 'depth', required = true) int depth
     ) {
-        super.list(1) as Case[]
+        super.list() as Case[]
     }
 
-    @ApiOperation(value = '', notes = 'list all `Case`s', response = Case)
+    @ApiOperation(value = '', notes = 'Gets `Case` identified with `id`', response = Case)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful Response', response = Case)])
     @RequestMapping(
             value = '/{id}',

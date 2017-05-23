@@ -5,12 +5,11 @@ import org.springframework.data.neo4j.repository.GraphRepository
 
 abstract class GenericService<T> implements Service<T> {
 
-    private static final int DEPTH_LIST = 0
     private static final int DEPTH_ENTITY = 1
 
     @Override
-    Iterable<T> findAll(int depth) {
-        getRepository().findAll(depth)
+    Iterable<T> findAll() {
+        getRepository().findAll()
     }
 
     @Override
