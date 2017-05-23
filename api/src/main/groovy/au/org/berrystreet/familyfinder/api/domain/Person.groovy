@@ -107,7 +107,7 @@ class Person extends Entity {
 
     @ApiModelProperty
     @JsonProperty
-    Boolean atsi = null
+    String atsi = null
 
     @ApiModelProperty
     @JsonProperty

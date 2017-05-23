@@ -138,7 +138,12 @@ export default class CaseRelationshipForm extends Component {
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="atsi">ATSI</label>
-                  <input id="atsi" name="atsi" type="checkbox" style={{'marginLeft': '15px'}} value={this.state.relatedPerson.atsi} onChange={this.handleRelatedPersonChange} />
+                  <select id="atsi" name="atsi" className="form-control" value={this.state.relatedPerson.atsi} onChange={this.handleRelatedPersonChange}>
+                    <option key="Unknown">Unknown</option>
+                    <option key="Yes">Yes</option>
+                    <option key="No">No</option>
+                    <option key="NotIdentifying">Not Identifying</option>
+                  </select>
                 </div>
                 <div className="col-xs-6 form-group">
                   <label htmlFor="atsiLocation">ATSI mob or location</label>
