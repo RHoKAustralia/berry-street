@@ -76,7 +76,7 @@ class People extends Controller<Person> {
         super.update(id, body)
     }
 
-    @ApiOperation(value = '', notes = 'Gets Family of `Person` identified with `id`', response = Person)
+    @ApiOperation(value = '', notes = 'Gets connections of `Person` identified with `id`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Person)])
     @RequestMapping(
             value = '/{id}/connections',
