@@ -18,13 +18,7 @@ class Connection extends Entity {
     @ApiModelProperty
     String relationship
     @ApiModelProperty
-    String howFound
-    @ApiModelProperty
-    String howInfoConfirmed
-    @ApiModelProperty
     String notes
-    @ApiModelProperty
-    String riskAlert
 
     Connection() {}
 
@@ -32,10 +26,7 @@ class Connection extends Entity {
         this.from = from
         this.to = to
         this.relationship = relationship
-        this.howFound = howFound
-        this.howInfoConfirmed = howInfoConfirmed
         this.notes = notes
-        this.riskAlert = riskAlert
 
         this.from.connections.add(this)
         this.to.connections.add(this)
