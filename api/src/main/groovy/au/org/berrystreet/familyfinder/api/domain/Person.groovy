@@ -136,7 +136,7 @@ class Person extends Entity {
     List<Family> family = []
 
     @ApiModelProperty
-    @JsonProperty('friends')
+    @JsonProperty("friends")
     @Relationship(type = 'FRIEND', direction = Relationship.UNDIRECTED)
     List<Friend> friends = []
 }

@@ -2,34 +2,21 @@ package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Family
 import au.org.berrystreet.familyfinder.api.domain.Friend
+import au.org.berrystreet.familyfinder.api.domain.Person
+import au.org.berrystreet.familyfinder.api.domain.Relationship
 import au.org.berrystreet.familyfinder.api.service.FamilyService
 import au.org.berrystreet.familyfinder.api.service.FriendService
-import org.springframework.web.bind.annotation.RequestParam
+import au.org.berrystreet.familyfinder.api.service.PersonService
+import au.org.berrystreet.familyfinder.api.service.Service
+import io.swagger.annotations.*
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.*
 
 import javax.servlet.http.HttpServletResponse
 
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
 import static au.org.berrystreet.familyfinder.api.Constants.TEXT_CSV
-import static org.springframework.web.bind.annotation.RequestMethod.GET
-import static org.springframework.web.bind.annotation.RequestMethod.POST
-
-import au.org.berrystreet.familyfinder.api.domain.Person
-import au.org.berrystreet.familyfinder.api.service.PersonService
-import au.org.berrystreet.familyfinder.api.service.Service
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiParam
-import io.swagger.annotations.ApiResponse
-import io.swagger.annotations.ApiResponses
-
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-
-import static org.springframework.web.bind.annotation.RequestMethod.PUT
+import static org.springframework.web.bind.annotation.RequestMethod.*
 
 @RestController
 @RequestMapping(value = '/people', produces = [APPLICATION_JSON])
@@ -140,12 +127,30 @@ class People extends Controller<Person> {
 
 
     @RequestMapping(
-            value = '/csv',
+            value = '/csv/entities',
             produces = [TEXT_CSV],
             method = GET)
     List<Person> find_as_csv(HttpServletResponse response) {
         def array = super.list() as Person[]
         return array.toList()
+    }
+
+    @RequestMapping(
+            value = "/csv/relationships",
+            produces = [TEXT_CSV],
+            method = GET)
+    List<Relationship> relationships_as_csv(HttpServletResponse response) {
+        def array = super.list() as Person[]
+        Set<Relationship> ret = new HashSet<Relationship>()
+        for (person in array) {
+            for (relation in person.friends) {
+                ret.add(relation)
+            }
+            for (relation in person.family) {
+                ret.add(relation)
+            }
+        }
+        return ret.toList()
     }
 
     @Override
