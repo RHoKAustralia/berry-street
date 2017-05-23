@@ -13,10 +13,10 @@ import org.springframework.http.converter.HttpMessageNotWritableException
 
 import java.nio.charset.Charset
 
-class CsvPeopleConverter extends AbstractHttpMessageConverter<List<Entity>> {
+class CsvConverter extends AbstractHttpMessageConverter<List<Entity>> {
     public static final MediaType MEDIA_TYPE = new MediaType("text", "csv", Charset.forName("utf-8"))
 
-    CsvPeopleConverter() {
+    CsvConverter() {
         super(MEDIA_TYPE)
     }
 
@@ -45,12 +45,12 @@ class CsvPeopleConverter extends AbstractHttpMessageConverter<List<Entity>> {
                 flush()
                 close()
             }
-        } else if (list.get(0).class.isAssignableFrom(Relationship.class)) {
+        } else if (Relationship.class.isAssignableFrom(list.get(0).class)) {
             outputMessage.getHeaders().set("Content-Disposition", "attachment; filename=\"relationshipcsv.csv\"")
             def body = outputMessage.getBody()
 
             new CSVWriter(new OutputStreamWriter(body)).with {
-                writeNext(["Name", "Type", "Tags", "Description"] as String[])
+                writeNext(["From", "To", "Type", "Description"] as String[])
                 list.each { Relationship relationship ->
                     writeNext([relationship.from.givenNames + " " + relationship.from.familyName,
                                relationship.to.givenNames + " " + relationship.to.familyName,

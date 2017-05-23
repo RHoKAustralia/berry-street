@@ -1,6 +1,6 @@
 package au.org.berrystreet.familyfinder.api.configuration
 
-import au.org.berrystreet.familyfinder.api.service.csv.CsvPeopleConverter
+import au.org.berrystreet.familyfinder.api.service.csv.CsvConverter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
@@ -16,13 +16,13 @@ class ApiConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    CsvPeopleConverter csvPeopleConverter() {
-        return new CsvPeopleConverter()
+    CsvConverter csvConverter() {
+        return new CsvConverter()
     }
 
     @Override
     void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(csvPeopleConverter())
+        converters.add(csvConverter())
         super.extendMessageConverters(converters)
     }
 }
