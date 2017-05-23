@@ -116,8 +116,8 @@ class People extends Controller<Person> {
     @RequestMapping(
             value = '/{id}/friends',
             method = GET)
-    List<Family> listFriends(@ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
-        (super.find(id) as Person).family
+    List<Friend> listFriends(@ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
+        (super.find(id) as Person).friends
     }
     @RequestMapping(
             value = '/{id}/friends',
