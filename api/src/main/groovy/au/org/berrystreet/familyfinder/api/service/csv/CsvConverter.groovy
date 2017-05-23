@@ -13,8 +13,9 @@ import org.springframework.http.converter.HttpMessageNotWritableException
 
 import java.nio.charset.Charset
 
-class CsvConverter extends AbstractHttpMessageConverter<List<Entity>> {
-    public static final MediaType MEDIA_TYPE = new MediaType("text", "csv", Charset.forName("utf-8"))
+class CsvConverter extends AbstractHttpMessageConverter<List<? extends Entity>> {
+
+    public static final MediaType MEDIA_TYPE = new MediaType('text', 'csv', Charset.forName('utf-8'))
 
     CsvConverter() {
         super(MEDIA_TYPE)
@@ -22,43 +23,75 @@ class CsvConverter extends AbstractHttpMessageConverter<List<Entity>> {
 
     @Override
     protected boolean supports(Class<?> clazz) {
-        return  List.class.isAssignableFrom(clazz)
+        return List.class.isAssignableFrom(clazz)
     }
 
     @Override
-    protected List<Entity> readInternal(Class<? extends List<Entity>> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
-        throw new UnsupportedOperationException("Not implemented")
+    protected List<? extends Entity> readInternal(Class<List<? extends Entity>> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+        throw new UnsupportedOperationException('Not implemented')
     }
 
     @Override
-    protected void writeInternal(List<Entity> list, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
-        outputMessage.getHeaders().setContentType(MEDIA_TYPE)
-        if (list.get(0).class.isAssignableFrom(Person.class)) {
-            outputMessage.getHeaders().set("Content-Disposition", "attachment; filename=\"personcsv.csv\"")
-            def body = outputMessage.getBody()
-            new CSVWriter(new OutputStreamWriter(body)).with {
+    protected void writeInternal(List<? extends Entity> list, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+        def filename = 'unknown'
+        def fields = []
+        switch (list.get(0)) {
+            case { Person.class.isAssignableFrom(it.class) }:
+                filename = 'person'
+                fields += ['Name', 'Type', 'Tags', 'Description']
+                break
+            case { Relationship.class.isAssignableFrom(it.class) }:
+                filename = 'relationship'
+                fields += ['From', 'To', 'Type', 'Description']
+                break
+        }
+        writeCsv(list, outputMessage, filename, fields)
+    }
 
-                writeNext(["Name", "Type", "Tags", "Description"] as String[])
-                list.each { Person person ->
-                    writeNext([person.givenNames + " " + person.familyName, "type", "tags", "description"] as String[])
-                }
-                flush()
-                close()
-            }
-        } else if (Relationship.class.isAssignableFrom(list.get(0).class)) {
-            outputMessage.getHeaders().set("Content-Disposition", "attachment; filename=\"relationshipcsv.csv\"")
-            def body = outputMessage.getBody()
+    void writeCsv(List<? extends Entity> list, HttpOutputMessage outputMessage, def filename, def fields) {
+        outputMessage.headers.with {
+            setContentType(MEDIA_TYPE)
+            set('Content-Disposition', """attachment; filename="${filename}.csv" """)
+        }
 
-            new CSVWriter(new OutputStreamWriter(body)).with {
-                writeNext(["From", "To", "Type", "Description"] as String[])
-                list.each { Relationship relationship ->
-                    writeNext([relationship.from.givenNames + " " + relationship.from.familyName,
-                               relationship.to.givenNames + " " + relationship.to.familyName,
-                               relationship.relationship, "description"] as String[])
-                }
-                flush()
-                close()
+        def writer = new CSVWriter(new OutputStreamWriter(outputMessage.body))
+        writer.writeNext(fields as String[])
+
+        list.each {
+            switch (it) {
+                case Person:
+                    writeTo(writer, it as Person)
+                    break
+                case Relationship:
+                    writeTo(writer, it as Relationship)
+                    break
             }
         }
+
+        writer.flush()
+        writer.close()
     }
+
+    void writeTo(CSVWriter writer, Person person) {
+        person.with {
+            writer.writeNext([
+                "$givenNames $familyName",
+                'type',
+                'tags',
+                'description'
+            ] as String[])
+        }
+    }
+
+    void writeTo(CSVWriter writer, Relationship rel) {
+        rel.with {
+            writer.writeNext([
+                "${from.givenNames} ${from.familyName}",
+                "${to.givenNames} ${to.familyName}",
+                relationship,
+                'description'
+            ] as String[])
+        }
+    }
+
 }
