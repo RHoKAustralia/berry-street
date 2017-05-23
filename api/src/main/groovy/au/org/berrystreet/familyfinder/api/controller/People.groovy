@@ -3,7 +3,6 @@ package au.org.berrystreet.familyfinder.api.controller
 import au.org.berrystreet.familyfinder.api.domain.Family
 import au.org.berrystreet.familyfinder.api.domain.Friend
 import au.org.berrystreet.familyfinder.api.domain.Person
-import au.org.berrystreet.familyfinder.api.domain.Relationship
 import au.org.berrystreet.familyfinder.api.service.FamilyService
 import au.org.berrystreet.familyfinder.api.service.FriendService
 import au.org.berrystreet.familyfinder.api.service.PersonService
@@ -12,10 +11,7 @@ import io.swagger.annotations.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
-import javax.servlet.http.HttpServletResponse
-
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
-import static au.org.berrystreet.familyfinder.api.Constants.TEXT_CSV
 import static org.springframework.web.bind.annotation.RequestMethod.*
 
 @RestController
@@ -126,32 +122,6 @@ class People extends Controller<Person> {
     }
 
 
-    @RequestMapping(
-            value = '/csv/entities',
-            produces = [TEXT_CSV],
-            method = GET)
-    List<Person> find_as_csv(HttpServletResponse response) {
-        def array = super.list() as Person[]
-        return array.toList()
-    }
-
-    @RequestMapping(
-            value = "/csv/relationships",
-            produces = [TEXT_CSV],
-            method = GET)
-    List<Relationship> relationships_as_csv(HttpServletResponse response) {
-        def array = super.list() as Person[]
-        Set<Relationship> ret = new HashSet<Relationship>()
-        for (person in array) {
-            for (relation in person.friends) {
-                ret.add(relation)
-            }
-            for (relation in person.family) {
-                ret.add(relation)
-            }
-        }
-        return ret.toList()
-    }
 
     @Override
     Service<Person> getService() { service }
