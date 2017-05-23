@@ -353,6 +353,37 @@ function sendRequest (url, method, data) {
   })
 }
 
+function downloadCSV (url, fileName) {
+  const requestOpts = {
+    method: 'GET',
+    headers: new Headers({
+      'Accept': 'text/csv',
+      'Content-Type': 'text/csv'
+    })
+  }
+  const request = new Request(url, requestOpts)
+  return fetch(request)
+  .then(r => {
+    if (r.ok) {
+      return r.blob()
+    }
+  })
+  .then(blob => saveData(blob,fileName+'.csv'))
+}
+
+var saveData = (function () {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    return function (blob, fileName) {
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+}());
+
 export default {
   getPerson (id) {
     if (MOCK_BACKEND) {
@@ -447,6 +478,12 @@ export default {
     } else {
       return sendRequest(`${SERVICE_URL_BASE}/cases`, 'PUT', caseDetails)
     }
+  },
+  getEntities () {
+    return downloadCSV(`${SERVICE_URL_BASE}/people/csv/entities`,'entities')
+  },
+  getRelationships () {
+    return downloadCSV(`${SERVICE_URL_BASE}/people/csv/relationships`,'relationships')
   },
   addPerson (person) {
     return sendRequest(`${SERVICE_URL_BASE}/people/`, 'POST', person)
