@@ -2,7 +2,7 @@
 
 // 25 May
 
-create (syrahCase:Case {
+CREATE (syrahCase:Case {
     staffName: 'Marcus', status: 'Open', phaseOfInvolvement: 'Referred',
     dateOpened: '2016-10-05',
     caseManager: 'Stacey Ryan',
@@ -10,37 +10,37 @@ create (syrahCase:Case {
     caseObjective: 'care for Syrah and Aiden, and maintain contact with Rowan and Kimmie and Brylee'
     })
 
-create (syrah:Person {name: 'Syrah Ward', givenNames: 'Syrah', familyName: 'Ward', dateOfBirth: '2002-03-19',
-    image: 'http://q1065.fm/files/2013/05/Nicole11.jpg?w=600&h=0&zc=1&s=0&a=t&q=89'})
-create (syrah)-[:SUBJECT {date: '2016-10-05'}]->(syrahCase)
+CREATE (syrah:Person {name:  'Syrah Ward', givenNames: 'Syrah', familyName: 'Ward', dateOfBirth: '2002-03-19',
+                      image: 'http://q1065.fm/files/2013/05/Nicole11.jpg?w=600&h=0&zc=1&s=0&a=t&q=89'})
+CREATE (syrah)-[:SUBJECT {date: '2016-10-05'}]->(syrahCase)
 
-create (kimmie:Person {name: 'Kimmie Charles', givenNames: 'Kimmie', familyName: 'Charles'})
-create (kimmie)-[:FAMILY  {relationship: 'parent'}]->(syrah)
+CREATE (kimmie:Person {name: 'Kimmie Charles', givenNames: 'Kimmie', familyName: 'Charles'})
+CREATE (kimmie)-[:CONNECTION {relationship: 'parent'}]->(syrah)
 
-create (rowan:Person {name: 'Rowan Quinn', givenNames: 'Rowan', familyName: 'Quinn'})
-create (rowan)-[:FAMILY  {relationship: 'parent'}]->(syrah)
+CREATE (rowan:Person {name: 'Rowan Quinn', givenNames: 'Rowan', familyName: 'Quinn'})
+CREATE (rowan)-[:CONNECTION {relationship: 'parent'}]->(syrah)
 // Connect to Billy case - this is the same Rowan
 
-create (aiden:Person {name: 'Aiden', givenNames: 'Aiden'})
-create (aiden)-[:FAMILY {relationship: 'brother'}]->(syrah)
+CREATE (aiden:Person {name: 'Aiden', givenNames: 'Aiden'})
+CREATE (aiden)-[:CONNECTION {relationship: 'brother'}]->(syrah)
 //create (aiden)-[:SUBJECT {date: '2016-10-05'}]->(syrahCase)
 
-create (brylee:Person {name: 'Brylee', givenNames: 'Brylee'})
-create (brylee)-[:FAMILY {relationship: 'halfsister'}]->(syrah)
+CREATE (brylee:Person {name: 'Brylee', givenNames: 'Brylee'})
+CREATE (brylee)-[:CONNECTION {relationship: 'halfsister'}]->(syrah)
 
 // 29 May
 
-create (denise:Person {name: 'Denise Quinn', givenNames: 'Denise', familyName: 'Quinn'})
-create (denise)-[:FAMILY  {relationship: 'grandparent'}]->(syrah)
+CREATE (denise:Person {name: 'Denise Quinn', givenNames: 'Denise', familyName: 'Quinn'})
+CREATE (denise)-[:CONNECTION {relationship: 'grandparent'}]->(syrah)
 // Connect to Billy case - this is the same Denise
 
-create (sandra:Person {name: 'Sandra Charles', givenNames: 'Sandra', familyName: 'Charles'})
-create (sandra)-[:FAMILY  {relationship: 'grandparent'}]->(syrah)
+CREATE (sandra:Person {name: 'Sandra Charles', givenNames: 'Sandra', familyName: 'Charles'})
+CREATE (sandra)-[:CONNECTION {relationship: 'grandparent'}]->(syrah)
 
-create (andy:Person {name: 'Andy Charles', givenNames: 'Andy', familyName: 'Charles'})
-create (andy)-[:FAMILY  {relationship: 'grandparent'}]->(syrah)
+CREATE (andy:Person {name: 'Andy Charles', givenNames: 'Andy', familyName: 'Charles'})
+CREATE (andy)-[:CONNECTION {relationship: 'grandparent'}]->(syrah)
 
-create (donna:Person {name: 'Donna', givenNames: 'Donna'})
-create (donna)-[:FAMILY  {relationship: 'aunt'}]->(syrah)
+CREATE (donna:Person {name: 'Donna', givenNames: 'Donna'})
+CREATE (donna)-[:CONNECTION {relationship: 'aunt'}]->(syrah)
 
 // ...

@@ -1,18 +1,27 @@
 package au.org.berrystreet.familyfinder.api.controller
 
-import au.org.berrystreet.familyfinder.api.domain.Family
-import au.org.berrystreet.familyfinder.api.domain.Friend
+import au.org.berrystreet.familyfinder.api.domain.Connection
 import au.org.berrystreet.familyfinder.api.domain.Person
-import au.org.berrystreet.familyfinder.api.service.FamilyService
-import au.org.berrystreet.familyfinder.api.service.FriendService
+import au.org.berrystreet.familyfinder.api.service.ConnectionService
 import au.org.berrystreet.familyfinder.api.service.PersonService
 import au.org.berrystreet.familyfinder.api.service.Service
-import io.swagger.annotations.*
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
+import io.swagger.annotations.ApiResponse
+import io.swagger.annotations.ApiResponses
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
-import static org.springframework.web.bind.annotation.RequestMethod.*
+import static org.springframework.web.bind.annotation.RequestMethod.GET
+import static org.springframework.web.bind.annotation.RequestMethod.POST
+import static org.springframework.web.bind.annotation.RequestMethod.PUT
 
 @RestController
 @RequestMapping(value = '/people', produces = [APPLICATION_JSON])
@@ -24,10 +33,8 @@ class People extends Controller<Person> {
     PersonService service
 
     @Autowired
-    FamilyService familyService
+    ConnectionService connectionService
 
-    @Autowired
-    FriendService friendService
 
     @ApiOperation(value = '', notes = 'Creates a new `Person`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Person)])
@@ -75,7 +82,8 @@ class People extends Controller<Person> {
     @RequestMapping(
             value = '/{id}/family',
             method = GET)
-    List<Family> listFamily(@ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
+    List<Connection> listFamily(
+            @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
         (super.find(id) as Person).family
     }
     @RequestMapping(
@@ -90,8 +98,8 @@ class People extends Controller<Person> {
                      @ApiParam(value = 'riskAlert', required = false) @RequestParam('riskAlert') String riskAlert) {
         Person kin = super.find(kinId) as Person
         Person person = super.find(id) as Person
-        Family family = new Family(kin, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
-        familyService.repository.save(family)
+        Connection family = new Connection(kin, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
+        connectionService.repository.save(family)
         person
     }
 
@@ -100,8 +108,9 @@ class People extends Controller<Person> {
     @RequestMapping(
             value = '/{id}/friends',
             method = GET)
-    List<Friend> listFriends(@ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
-        (super.find(id) as Person).friends
+    List<Connection> listFriends(
+            @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
+        (super.find(id) as Person).connections
     }
     @RequestMapping(
             value = '/{id}/friends',
@@ -115,8 +124,8 @@ class People extends Controller<Person> {
                      @ApiParam(value = 'riskAlert', required = false) @RequestParam('riskAlert') String riskAlert) {
         Person friend = super.find(friendId) as Person
         Person person = super.find(id) as Person
-        Friend friendship = new Friend(friend, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
-        friendService.repository.save(friendship)
+        Connection friendship = new Connection(friend, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
+        connectionService.repository.save(friendship)
         person
     }
 

@@ -1,9 +1,9 @@
 package au.org.berrystreet.familyfinder.api.service.csv
 
 import au.com.bytecode.opencsv.CSVWriter
+import au.org.berrystreet.familyfinder.api.domain.Connection
 import au.org.berrystreet.familyfinder.api.domain.Entity
 import au.org.berrystreet.familyfinder.api.domain.Person
-import au.org.berrystreet.familyfinder.api.domain.Relationship
 import org.springframework.http.HttpInputMessage
 import org.springframework.http.HttpOutputMessage
 import org.springframework.http.MediaType
@@ -35,15 +35,18 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends Entity>> 
     protected void writeInternal(List<? extends Entity> list, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         def filename = 'unknown'
         def fields = []
-        switch (list.get(0)) {
-            case { Person.class.isAssignableFrom(it.class) }:
-                filename = 'person'
-                fields += ['Name', 'Type', 'Tags', 'Description']
-                break
-            case { Relationship.class.isAssignableFrom(it.class) }:
-                filename = 'relationship'
-                fields += ['From', 'To', 'Type', 'Description']
-                break
+
+        if (list.size() != 0) {
+            switch (list.get(0)) {
+                case { Person.class.isAssignableFrom(it.class) }:
+                    filename = 'person'
+                    fields += ['Name', 'Type', 'Tags', 'Description']
+                    break
+                case { Connection.class.isAssignableFrom(it.class) }:
+                    filename = 'relationship'
+                    fields += ['From', 'To', 'Type', 'Description']
+                    break
+            }
         }
         writeCsv(list, outputMessage, filename, fields)
     }
@@ -62,8 +65,8 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends Entity>> 
                 case Person:
                     writeTo(writer, it as Person)
                     break
-                case Relationship:
-                    writeTo(writer, it as Relationship)
+                case Connection:
+                    writeTo(writer, it as Connection)
                     break
             }
         }
@@ -83,7 +86,7 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends Entity>> 
         }
     }
 
-    void writeTo(CSVWriter writer, Relationship rel) {
+    void writeTo(CSVWriter writer, Connection rel) {
         rel.with {
             writer.writeNext([
                 "${from.givenNames} ${from.familyName}",

@@ -3,12 +3,14 @@ package au.org.berrystreet.familyfinder.api.domain
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.EndNode
+import org.neo4j.ogm.annotation.RelationshipEntity
 import org.neo4j.ogm.annotation.StartNode
 import org.springframework.stereotype.Component
 
 @ApiModel
 @Component
-class Relationship extends Entity {
+@RelationshipEntity(type = 'CONNECTION')
+class Connection extends Entity {
     @StartNode
     Person from
     @EndNode
@@ -24,9 +26,9 @@ class Relationship extends Entity {
     @ApiModelProperty
     String riskAlert
 
-    Relationship() {}
+    Connection() {}
 
-    Relationship(Person to, Person from, String relationship, String howFound, String howInfoConfirmed, String notes, String riskAlert) {
+    Connection(Person to, Person from, String relationship, String howFound, String howInfoConfirmed, String notes, String riskAlert) {
         this.from = from
         this.to = to
         this.relationship = relationship
@@ -34,5 +36,8 @@ class Relationship extends Entity {
         this.howInfoConfirmed = howInfoConfirmed
         this.notes = notes
         this.riskAlert = riskAlert
+
+        this.from.connections.add(this)
+        this.to.connections.add(this)
     }
 }

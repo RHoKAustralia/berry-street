@@ -1,9 +1,8 @@
 package au.org.berrystreet.familyfinder.api.controller
 
+import au.org.berrystreet.familyfinder.api.domain.Connection
 import au.org.berrystreet.familyfinder.api.domain.Person
-import au.org.berrystreet.familyfinder.api.domain.Relationship
-import au.org.berrystreet.familyfinder.api.service.FamilyService
-import au.org.berrystreet.familyfinder.api.service.FriendService
+import au.org.berrystreet.familyfinder.api.service.ConnectionService
 import au.org.berrystreet.familyfinder.api.service.PersonService
 import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,11 +25,7 @@ class Csv {
     PersonService personService
 
     @Autowired
-    FamilyService familyService
-
-    @Autowired
-    FriendService friendService
-
+    ConnectionService connectionService
 
     @RequestMapping(
             value = '/entities',
@@ -43,15 +38,12 @@ class Csv {
     @RequestMapping(
             value = "/relationships",
             method = GET)
-    List<Relationship> relationships_as_csv(HttpServletResponse response) {
+    List<Connection> relationships_as_csv(HttpServletResponse response) {
         def array = personService.findAll() as Person[]
-        Set<Relationship> ret = new HashSet<Relationship>()
+        Set<Connection> ret = new HashSet<Connection>()
         for (person in array) {
-            for (relation in person.friends) {
-                ret.add(relation)
-            }
-            for (relation in person.family) {
-                ret.add(relation)
+            for (connection in person.connections) {
+                ret.add(connection)
             }
         }
         return ret.toList()
