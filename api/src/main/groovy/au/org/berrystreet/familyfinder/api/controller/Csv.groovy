@@ -39,7 +39,7 @@ class Csv {
             value = "/relationships",
             method = GET)
     List<Connection> relationships_as_csv(HttpServletResponse response) {
-        def array = personService.findAll() as Person[]
+        def array = connectionService.findAll() as Connection[]
         Set<Connection> ret = new HashSet<Connection>()
         for (person in array) {
             for (connection in person.connections) {

@@ -35,7 +35,6 @@ class People extends Controller<Person> {
     @Autowired
     ConnectionService connectionService
 
-
     @ApiOperation(value = '', notes = 'Creates a new `Person`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Person)])
     @RequestMapping(
@@ -80,14 +79,15 @@ class People extends Controller<Person> {
     @ApiOperation(value = '', notes = 'Gets Family of `Person` identified with `id`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Person)])
     @RequestMapping(
-            value = '/{id}/family',
+            value = '/{id}/connections',
             method = GET)
-    List<Connection> listFamily(
+    List<Connection> listConnections(
             @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
-        (super.find(id) as Person).family
+        (super.find(id) as Person).connections
     }
+
     @RequestMapping(
-            value = '/{id}/family',
+            value = '/{id}/connections',
             method = PUT)
     Person addFamily(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
                      @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
@@ -100,32 +100,6 @@ class People extends Controller<Person> {
         Person person = super.find(id) as Person
         Connection family = new Connection(kin, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
         connectionService.repository.save(family)
-        person
-    }
-
-    @ApiOperation(value = '', notes = 'Gets Friends of `Person` identified with `id`', response = Person)
-    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Person)])
-    @RequestMapping(
-            value = '/{id}/friends',
-            method = GET)
-    List<Connection> listFriends(
-            @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
-        (super.find(id) as Person).connections
-    }
-    @RequestMapping(
-            value = '/{id}/friends',
-            method = PUT)
-    Person addFriend(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
-                     @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
-                     @ApiParam(value = 'friend', required = true) @RequestParam('friendId') Long friendId,
-                     @ApiParam(value = 'howFound', required = false) @RequestParam('howFound') String howFound,
-                     @ApiParam(value = 'howInfoConfirmed', required = false) @RequestParam('howInfoConfirmed') String howInfoConfirmed,
-                     @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes,
-                     @ApiParam(value = 'riskAlert', required = false) @RequestParam('riskAlert') String riskAlert) {
-        Person friend = super.find(friendId) as Person
-        Person person = super.find(id) as Person
-        Connection friendship = new Connection(friend, person, relationship, howFound, howInfoConfirmed, notes, riskAlert)
-        connectionService.repository.save(friendship)
         person
     }
 

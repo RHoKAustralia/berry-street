@@ -14,7 +14,7 @@ abstract class GenericService<T> implements Service<T> {
 
     @Override
     T find(Long id) {
-        getRepository().findOne(id, DEPTH_ENTITY)
+        getRepository().findOne(id)
     }
 
     @Override
