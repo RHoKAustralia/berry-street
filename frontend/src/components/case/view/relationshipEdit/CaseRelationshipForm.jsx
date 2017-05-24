@@ -40,21 +40,21 @@ export default class CaseRelationshipForm extends Component {
   loadData (caseSubjectId, relationshipId) {
     api.getPerson(caseSubjectId).then(caseSubject => {
       let relationship = null
-      let matches = caseSubject.family.filter(f => f.id === relationshipId)
+      let relatedPerson = null
+      let matches = caseSubject.connections.filter(f => f.id === relationshipId)
       if (matches.length === 1) {
         relationship = matches[0]
-      } else {
-        matches = caseSubject.friends.filter(f => f.id === relationshipId)
-        if (matches.length === 1) {
-          relationship = matches[0]
+        if(relationship.from.id){
+          relatedPerson = relationship.from
+        } else if(relationship.to.id){
+          relatedPerson = relationship.to
         }
       }
-
       this.setState({
         relatedPersonSelected: true,
         caseSubject: caseSubject,
         relationship: relationship,
-        relatedPerson: relationship.kith || relationship.kin
+        relatedPerson: relatedPerson
       })
     })
   }

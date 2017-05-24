@@ -14,7 +14,13 @@ class CaseRelationshipList extends Component {
       <div className="CaseRelationshipList">
         <ul className="list-group">
             {this.props.relationships.map(relationship => {
-              const related = relationship.kin || relationship.kith || {}
+              var related = null
+              if(relationship.from.id){
+                related = relationship.from
+              }
+              else if(relationship.to.id){
+                related = relationship.to
+              }
               return <li key={relationship.id} onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.props.selectedRelationId === relationship.id ? 'active' : '')}>
                 <CaseRelationship personName={this.getRelationshipPersonName(related)} relationship={relationship.relationship} riskStatus={relationship.riskAlert}/>
               </li>

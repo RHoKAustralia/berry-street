@@ -47,13 +47,12 @@ class CaseView extends Component {
     if (!ffCase && !caseSubject) {
       return this.renderLoading()
     }
-    const relations = caseSubject.family.concat(caseSubject.friends)
     return (
       <div className="container">
         <CaseHeader case={ffCase} />
         <div className="row">
           <div className="col-xs-12 col-sm-6 col-md-3">
-            <CaseRelationshipList relationships={relations} selectedRelationId={this.state.selectedRelationshipId}
+            <CaseRelationshipList subjectId={caseSubject.id} relationships={caseSubject.connections} selectedRelationId={this.state.selectedRelationshipId}
               onRelationSelected={this.onRelationSelected.bind(this)} />
             <div>
                 <button className="btn btn-default" onClick={this.onAddRelation.bind(this)}>Add Related Person</button>
