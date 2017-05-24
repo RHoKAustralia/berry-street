@@ -480,10 +480,10 @@ export default {
     }
   },
   getEntities () {
-    return downloadCSV(`${SERVICE_URL_BASE}/people/csv/entities`,'entities')
+    return downloadCSV(`${SERVICE_URL_BASE}/csv/entities`,'entities')
   },
   getRelationships () {
-    return downloadCSV(`${SERVICE_URL_BASE}/people/csv/relationships`,'relationships')
+    return downloadCSV(`${SERVICE_URL_BASE}/csv/relationships`,'relationships')
   },
   addPerson (person) {
     return sendRequest(`${SERVICE_URL_BASE}/people/`, 'POST', person)
