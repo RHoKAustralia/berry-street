@@ -22,7 +22,7 @@ class Connection extends Entity {
 
     Connection() {}
 
-    Connection(Person to, Person from, String relationship, String howFound, String howInfoConfirmed, String notes, String riskAlert) {
+    Connection(Person to, Person from, String relationship, String notes) {
         this.from = from
         this.to = to
         this.relationship = relationship
