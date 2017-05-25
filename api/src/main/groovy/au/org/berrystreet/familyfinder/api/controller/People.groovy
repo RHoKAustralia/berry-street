@@ -48,6 +48,7 @@ class People extends Controller<Person> {
         super.list() as Person[]
     }
 
+
     @ApiOperation(value = '', notes = 'Gets `Person` identified with `id`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Person)])
     @RequestMapping(
@@ -119,6 +120,8 @@ class People extends Controller<Person> {
         friendService.repository.save(friendship)
         person
     }
+
+
 
     @Override
     Service<Person> getService() { service }
