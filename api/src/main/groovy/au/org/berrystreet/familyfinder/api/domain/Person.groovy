@@ -13,11 +13,6 @@ import org.neo4j.ogm.annotation.Relationship
 class Person extends Entity {
 
     @ApiModelProperty
-    @JsonProperty('name')
-    /** @Deprecated Temp compatibility - Remove this */
-    String name = null
-
-    @ApiModelProperty
     @JsonProperty
     String givenNames = null
 
