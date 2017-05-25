@@ -22,11 +22,6 @@ abstract class Controller<T> {
         entity
     }
 
-//    void delete(Long id) {
-//        if (service.find(id) == null) throw new NotFoundException()
-//        service.delete(id)
-//    }
-
     T update(Long id, T entity) {
         if (service.find(id) == null) throw new NotFoundException()
         ((GraphItem) entity).id = id

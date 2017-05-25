@@ -29,7 +29,6 @@ class People extends Controller<Person> {
     @Autowired
     PersonService service
 
-
     @ApiOperation(value = '', notes = 'Creates a new `Person`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Person)])
     @RequestMapping(

@@ -1,7 +1,6 @@
 package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Group
-import au.org.berrystreet.familyfinder.api.service.ConnectionService
 import au.org.berrystreet.familyfinder.api.service.GroupService
 import au.org.berrystreet.familyfinder.api.service.Service
 import io.swagger.annotations.Api
@@ -29,9 +28,6 @@ class Groups extends Controller<Group> {
 
     @Autowired
     GroupService service
-
-    @Autowired
-    ConnectionService connectionService
 
     @ApiOperation(value = '', notes = 'Creates a new `Group`', response = Group)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Group)])
