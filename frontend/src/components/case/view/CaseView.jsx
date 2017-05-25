@@ -11,8 +11,8 @@ class CaseView extends Component {
       ffCase: null,
       error: null,
       caseSubject: null,
-      selectedRelationshipId: null,
-      newRelation: false
+      relationships: null,
+      selectedRelationshipId: null
     }
   }
 
@@ -26,25 +26,25 @@ class CaseView extends Component {
         // FIXME: GET /cases/{id} returns a subject with empty arrays for family and friends!!!
         // We have to workaround this by doing 2 requests: First for the case, Second for the
         // full person details via the referenced subject
-        return Promise.all([ r, api.getPerson(r.subjects[0].person.id) ])
+        return Promise.all([ r, api.getPerson(r.subjects[0].person.id), api.getRelationships(r.subjects[0].person.id)])
       })
       .then(results => {
-        this.setState(Object.assign({}, this.state, {ffCase: results[0], caseSubject: results[1]}))
+        this.setState(Object.assign({}, this.state, {ffCase: results[0], caseSubject: results[1], relationships: results[2]}))
       })
       .catch(err => this.setState({ error: err }))
   }
 
   onRelationSelected (id) {
-    this.setState(Object.assign({}, this.state, {selectedRelationshipId: id, newRelation: false}))
+    this.setState(Object.assign({}, this.state, {selectedRelationshipId: id}))
   }
 
-  onAddRelation () {
-    this.setState(Object.assign({}, this.state, {selectedRelationshipId: null, newRelation: true}))
+  onAddRelationship () {
+    this.setState(Object.assign({}, this.state, {selectedRelationshipId: null}))
   }
 
   render () {
-    const { ffCase, caseSubject } = this.state
-    if (!ffCase && !caseSubject) {
+    const { ffCase, caseSubject, relationships } = this.state
+    if (!ffCase && !caseSubject && !relationships) {
       return this.renderLoading()
     }
     return (
@@ -52,15 +52,14 @@ class CaseView extends Component {
         <CaseHeader case={ffCase} />
         <div className="row">
           <div className="col-xs-12 col-sm-6 col-md-3">
-            <CaseRelationshipList subjectId={caseSubject.id} relationships={caseSubject.connections} selectedRelationId={this.state.selectedRelationshipId}
+            <CaseRelationshipList subjectId={caseSubject.id} relationships={relationships} selectedRelationshipId={this.state.selectedRelationshipId}
               onRelationSelected={this.onRelationSelected.bind(this)} />
             <div>
-                <button className="btn btn-default" onClick={this.onAddRelation.bind(this)}>Add Related Person</button>
+                <button className="btn btn-default" onClick={this.onAddRelationship.bind(this)}>Add Related Person</button>
             </div>
           </div>
           <div className="col-xs-12 col-sm-6 col-md-9">
-            <CaseRelationshipForm caseSubjectId={caseSubject.id} relationshipId={this.state.selectedRelationshipId}
-              newRelation={this.state.newRelation} caseUpdated={this.reloadCase.bind(this)} />
+            <CaseRelationshipForm subjectId={caseSubject.id} relationships={relationships} selectedRelationshipId={this.state.selectedRelationshipId} caseUpdated={this.reloadCase.bind(this)} />
           </div>
         </div>
       </div>

@@ -69,6 +69,28 @@ paths:
           schema:
             $ref: '#/definitions/Persons'
 
+  /person/${id}/connections:
+    get:
+      description: |
+        Gets `Connections` from `Person` identified with `id`
+      produces:
+        - application/vnd.api+json
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Connections'
+    put:
+      description: |
+        Updates/Creates a `Connection` from `Person` identified with `id`
+      produces:
+        - application/vnd.api+json
+      consumes:
+        - application/vnd.api+json
+      responses:
+        "405":
+          description: Invalid input
+
   /person/search:
     get:
       description: |
@@ -230,6 +252,28 @@ definitions:
       dateOfBirth:
         type: string
         format: date
+  Connections:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Connection'
+      links:
+        $ref: '#/definitions/Links'
+  Connection:
+    type: object
+    properties:
+      from:
+        type: number
+        format: long
+      to:
+        type: number
+        format: long
+      relationship:
+        type: string
+      notes:
+        type: string
   Cases:
     type: object
     properties:

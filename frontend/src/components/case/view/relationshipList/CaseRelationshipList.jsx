@@ -21,7 +21,7 @@ class CaseRelationshipList extends Component {
               else if(relationship.to.id){
                 related = relationship.to
               }
-              return <li key={relationship.id} onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.props.selectedRelationId === relationship.id ? 'active' : '')}>
+              return <li key={relationship.id} onClick={() => this.personRelationshipOnClick(relationship)} className={ 'list-group-item ' + (this.props.selectedRelationshipId === relationship.id ? 'active' : '')}>
                 <CaseRelationship personName={this.getRelationshipPersonName(related)} relationship={relationship.relationship} riskStatus={relationship.riskAlert}/>
               </li>
             })}

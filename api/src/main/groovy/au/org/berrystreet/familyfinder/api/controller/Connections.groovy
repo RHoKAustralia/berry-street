@@ -47,7 +47,7 @@ class Connections extends Controller<Connection> {
     @RequestMapping(
             value = '/{id}/connections',
             method = PUT)
-    List<Connection> addFamily(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
+    List<Connection> saveConnection(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
                                @ApiParam(value = 'to', required = true) @RequestParam('toId') Long toId,
                                @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
                                @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes) {

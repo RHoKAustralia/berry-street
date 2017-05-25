@@ -368,6 +368,9 @@ export default {
       return sendRequest(`${SERVICE_URL_BASE}/people/${id}`, 'GET')
     }
   },
+  getRelationships (id) {
+    return sendRequest(`${SERVICE_URL_BASE}/connections/${id}/connections`, 'GET')
+  },
   getRelationship (personId, relationId) {
     return this.getPerson(personId).then(r => {
       const family = r.family
@@ -383,9 +386,6 @@ export default {
       }
       return Promise.reject(new Error('No such relationship'))
     })
-  },
-  getRelationshipTypes () {
-    return Promise.resolve(['Parent', 'Brother', 'Sister', 'Aunt', 'Uncle', 'Partner', 'Friend', 'Neighbour'])
   },
   getCaseStatuses () {
     return Promise.resolve(['Open', 'Closed'])
@@ -455,14 +455,10 @@ export default {
     return sendRequest(`${SERVICE_URL_BASE}/people/${person.id}`, 'PUT', person)
   },
   linkPerson (caseSubjectId, relatedPersonId, relationship) {
-    const isFamily = ['Parent', 'Aunt', 'Uncle', 'Brother', 'Sister'].indexOf(relationship.relationship) > 0
-    let requestParams = '?' + (isFamily ? 'kinId' : 'friendId') + '=' + relatedPersonId +
+    let requestParams = '?' + 'toId=' + relatedPersonId +
       '&relationship=' + encodeURIComponent(relationship.relationship) +
-      '&howFound=' + encodeURIComponent(relationship.howFound) +
-      '&howInfoConfirmed=' + encodeURIComponent(relationship.howInfoConfirmed) +
-      '&notes=' + encodeURIComponent(relationship.notes) +
-      '&riskAlert=' + encodeURIComponent(relationship.riskAlert)
+      '&notes=' + encodeURIComponent(relationship.notes)
 
-    return sendRequest(`${SERVICE_URL_BASE}/people/${caseSubjectId}/${isFamily ? 'family' : 'friends'}${requestParams}`, 'PUT')
+    return sendRequest(`${SERVICE_URL_BASE}/connections/${caseSubjectId}/connections/${requestParams}`, 'PUT')
   }
 }
