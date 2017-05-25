@@ -89,15 +89,15 @@ class People extends Controller<Person> {
     @RequestMapping(
             value = '/{id}/connections',
             method = PUT)
-    Person addFamily(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
-                     @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
-                     @ApiParam(value = 'to', required = true) @RequestParam('toId') Long kinId,
-                     @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes) {
+    List<Connection> addFamily(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
+                               @ApiParam(value = 'to', required = true) @RequestParam('toId') Long kinId,
+                               @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
+                               @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes) {
         Person to = super.find(kinId) as Person
         Person from = super.find(id) as Person
         Connection family = new Connection(to, from, relationship, notes)
         connectionService.repository.save(family)
-        person
+        from.connections
     }
 
     @Override
