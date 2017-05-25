@@ -105,6 +105,10 @@ For a supercharged frontend dev experience, make sure you have these Chrome exte
 - Copy the script from [/api/src/main/resources/data.cql](/api/src/main/resources/data.cql) (ignoring line 1) paste into the console
 - Click the 'Play' button to run
 
+## Neo4J documentation
+
+There are some helpful examples to help understand the way that Neo4J interfaces with the API code in the [Neo4J tutorial](
+https://neo4j.com/docs/ogm-manual/current/tutorial/#tutorial:annotations)
 
 ## Open tasks
 - Enable CORS globally: [https://spring.io/guides/gs/rest-service-cors#_global_cors_configuration](https://spring.io/guides/gs/rest-service-cors#_global_cors_configuration)
