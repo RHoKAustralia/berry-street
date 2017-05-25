@@ -1,6 +1,6 @@
 package au.org.berrystreet.familyfinder.api.service
 
-import au.org.berrystreet.familyfinder.api.domain.Entity
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphItem
 import org.springframework.data.neo4j.repository.GraphRepository
 
 abstract class GenericService<T> implements Service<T> {
@@ -20,7 +20,7 @@ abstract class GenericService<T> implements Service<T> {
     @Override
     T createOrUpdate(T entity) {
         getRepository().save(entity, DEPTH_ENTITY)
-        find(((Entity) entity).id)
+        find(((GraphItem) entity).id)
     }
 
     abstract GraphRepository<T> getRepository()

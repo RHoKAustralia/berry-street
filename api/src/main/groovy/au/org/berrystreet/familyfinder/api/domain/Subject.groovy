@@ -1,5 +1,7 @@
 package au.org.berrystreet.familyfinder.api.domain
 
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphItem
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.EndNode
@@ -10,14 +12,17 @@ import org.springframework.stereotype.Component
 @ApiModel
 @Component
 @RelationshipEntity(type = 'SUBJECT')
-class Subject extends Entity {
-    @StartNode Person person
-    @EndNode Case aCase
-    @ApiModelProperty String date
+class Subject extends GraphItem {
+    @StartNode
+    GraphNode person
+    @EndNode
+    Case aCase
+    @ApiModelProperty
+    String date
 
-    Subject() { }
+    Subject() {}
 
-    Subject(Person person, Case aCase, String date) {
+    Subject(GraphNode person, Case aCase, String date) {
         this.person = person
         this.aCase = aCase
         this.date = date

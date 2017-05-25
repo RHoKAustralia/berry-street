@@ -1,5 +1,7 @@
 package au.org.berrystreet.familyfinder.api.domain
 
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphItem
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.EndNode
@@ -10,11 +12,11 @@ import org.springframework.stereotype.Component
 @ApiModel
 @Component
 @RelationshipEntity(type = 'CONNECTION')
-class Connection extends Entity {
+class Connection extends GraphItem {
     @StartNode
-    Person from
+    GraphNode from
     @EndNode
-    Person to
+    GraphNode to
     @ApiModelProperty
     String relationship
     @ApiModelProperty
@@ -22,7 +24,7 @@ class Connection extends Entity {
 
     Connection() {}
 
-    Connection(Person to, Person from, String relationship, String notes) {
+    Connection(GraphNode to, GraphNode from, String relationship, String notes) {
         this.from = from
         this.to = to
         this.relationship = relationship

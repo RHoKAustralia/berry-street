@@ -1,5 +1,6 @@
 package au.org.berrystreet.familyfinder.api.domain
 
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.swagger.annotations.ApiModel
@@ -9,9 +10,9 @@ import org.neo4j.ogm.annotation.Relationship
 
 import static org.neo4j.ogm.annotation.Relationship.INCOMING
 
-@ApiModel(value='Case')
-@NodeEntity(label='Case')
-class Case extends Entity {
+@ApiModel(value = 'Case')
+@NodeEntity(label = 'Case')
+class Case extends GraphNode {
 
     @ApiModelProperty
     @JsonProperty('familyFinderStaffName')
@@ -27,12 +28,12 @@ class Case extends Entity {
 
     @ApiModelProperty
     @JsonProperty('dateOpened')
-    @JsonFormat(pattern='yyyy-MM-dd')
+    @JsonFormat(pattern = 'yyyy-MM-dd')
     String dateOpened = null
 
     @ApiModelProperty
     @JsonProperty('dateClosed')
-    @JsonFormat(pattern='yyyy-MM-dd')
+    @JsonFormat(pattern = 'yyyy-MM-dd')
     String dateClosed = null
 
     @ApiModelProperty

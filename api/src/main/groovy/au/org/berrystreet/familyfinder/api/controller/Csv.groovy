@@ -2,6 +2,7 @@ package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Connection
 import au.org.berrystreet.familyfinder.api.domain.Person
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
 import au.org.berrystreet.familyfinder.api.service.ConnectionService
 import au.org.berrystreet.familyfinder.api.service.PersonService
 import io.swagger.annotations.Api
@@ -30,8 +31,8 @@ class Csv {
     @RequestMapping(
             value = '/entities',
             method = GET)
-    List<Person> find_as_csv(HttpServletResponse response) {
-        def array = personService.findAll() as Person[]
+    List<GraphNode> find_as_csv(HttpServletResponse response) {
+        def array = graphNodeService.findAll() as Person[]
         return array.toList()
     }
 

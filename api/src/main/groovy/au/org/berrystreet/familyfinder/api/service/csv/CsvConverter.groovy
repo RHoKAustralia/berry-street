@@ -2,8 +2,8 @@ package au.org.berrystreet.familyfinder.api.service.csv
 
 import au.com.bytecode.opencsv.CSVWriter
 import au.org.berrystreet.familyfinder.api.domain.Connection
-import au.org.berrystreet.familyfinder.api.domain.Entity
 import au.org.berrystreet.familyfinder.api.domain.Person
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphItem
 import org.springframework.http.HttpInputMessage
 import org.springframework.http.HttpOutputMessage
 import org.springframework.http.MediaType
@@ -13,7 +13,7 @@ import org.springframework.http.converter.HttpMessageNotWritableException
 
 import java.nio.charset.Charset
 
-class CsvConverter extends AbstractHttpMessageConverter<List<? extends Entity>> {
+class CsvConverter extends AbstractHttpMessageConverter<List<? extends GraphItem>> {
 
     public static final MediaType MEDIA_TYPE = new MediaType('text', 'csv', Charset.forName('utf-8'))
 
@@ -27,12 +27,12 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends Entity>> 
     }
 
     @Override
-    protected List<? extends Entity> readInternal(Class<List<? extends Entity>> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
+    protected List<? extends GraphItem> readInternal(Class<List<? extends GraphItem>> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
         throw new UnsupportedOperationException('Not implemented')
     }
 
     @Override
-    protected void writeInternal(List<? extends Entity> list, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+    protected void writeInternal(List<? extends GraphItem> list, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         def filename = 'unknown'
         def fields = []
 
@@ -51,7 +51,7 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends Entity>> 
         writeCsv(list, outputMessage, filename, fields)
     }
 
-    void writeCsv(List<? extends Entity> list, HttpOutputMessage outputMessage, def filename, def fields) {
+    void writeCsv(List<? extends GraphItem> list, HttpOutputMessage outputMessage, def filename, def fields) {
         outputMessage.headers.with {
             setContentType(MEDIA_TYPE)
             set('Content-Disposition', """attachment; filename="${filename}.csv" """)

@@ -1,8 +1,6 @@
 package au.org.berrystreet.familyfinder.api.controller
 
-import au.org.berrystreet.familyfinder.api.domain.Connection
 import au.org.berrystreet.familyfinder.api.domain.Person
-import au.org.berrystreet.familyfinder.api.service.ConnectionService
 import au.org.berrystreet.familyfinder.api.service.PersonService
 import au.org.berrystreet.familyfinder.api.service.Service
 import io.swagger.annotations.Api
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
@@ -32,8 +29,6 @@ class People extends Controller<Person> {
     @Autowired
     PersonService service
 
-    @Autowired
-    ConnectionService connectionService
 
     @ApiOperation(value = '', notes = 'Creates a new `Person`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Person)])
@@ -74,30 +69,6 @@ class People extends Controller<Person> {
     Person update(@ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id,
                   @ApiParam(value = '`Person` object to update', required = true) @RequestBody Person body) {
         super.update(id, body)
-    }
-
-    @ApiOperation(value = '', notes = 'Gets connections of `Person` identified with `id`', response = Person)
-    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Person)])
-    @RequestMapping(
-            value = '/{id}/connections',
-            method = GET)
-    List<Connection> listConnections(
-            @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
-        (super.find(id) as Person).connections
-    }
-
-    @RequestMapping(
-            value = '/{id}/connections',
-            method = PUT)
-    List<Connection> addFamily(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
-                               @ApiParam(value = 'to', required = true) @RequestParam('toId') Long kinId,
-                               @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
-                               @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes) {
-        Person to = super.find(kinId) as Person
-        Person from = super.find(id) as Person
-        Connection family = new Connection(to, from, relationship, notes)
-        connectionService.repository.save(family)
-        from.connections
     }
 
     @Override

@@ -1,7 +1,7 @@
 package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.controller.exception.NotFoundException
-import au.org.berrystreet.familyfinder.api.domain.Entity
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphItem
 import au.org.berrystreet.familyfinder.api.service.Service
 import org.springframework.web.bind.annotation.RequestMapping
 
@@ -29,7 +29,7 @@ abstract class Controller<T> {
 
     T update(Long id, T entity) {
         if (service.find(id) == null) throw new NotFoundException()
-        ((Entity) entity).id = id
+        ((GraphItem) entity).id = id
         service.createOrUpdate(entity)
     }
 

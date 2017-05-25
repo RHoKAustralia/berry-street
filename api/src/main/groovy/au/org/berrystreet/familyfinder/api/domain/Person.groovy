@@ -1,16 +1,15 @@
 package au.org.berrystreet.familyfinder.api.domain
 
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.neo4j.ogm.annotation.NodeEntity
-import org.neo4j.ogm.annotation.Relationship
 
-@ApiModel(value='Person')
-@NodeEntity(label='Person')
-class Person extends Entity {
+@ApiModel(value = 'Person')
+@NodeEntity(label = 'Person')
+class Person extends GraphNode {
 
     @ApiModelProperty
     @JsonProperty
@@ -30,7 +29,7 @@ class Person extends Entity {
 
     @ApiModelProperty
     @JsonProperty('dateOfBirth')
-    @JsonFormat(pattern='yyyy-MM-dd')
+    @JsonFormat(pattern = 'yyyy-MM-dd')
     String dateOfBirth = null
 
     @ApiModelProperty
@@ -48,9 +47,5 @@ class Person extends Entity {
     @ApiModelProperty
     @JsonProperty
     String contactInformation = null
-
-    @JsonIgnore
-    @Relationship(type = 'CONNECTION', direction = Relationship.UNDIRECTED)
-    List<Connection> connections = []
 
 }
