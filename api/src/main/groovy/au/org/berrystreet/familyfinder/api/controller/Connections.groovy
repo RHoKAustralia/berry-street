@@ -1,11 +1,9 @@
 package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Connection
-import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
 import au.org.berrystreet.familyfinder.api.service.ConnectionService
 import au.org.berrystreet.familyfinder.api.service.GraphNodeService
-import au.org.berrystreet.familyfinder.api.service.Service
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -26,16 +24,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT
 @RequestMapping(value = '/connections', produces = [APPLICATION_JSON])
 @Api(value = '/connections', description = 'the connections API')
 @CrossOrigin(origins = '*')
-class Connections extends Controller<Connection> {
+class Connections {
 
     @Autowired
-    ConnectionService service
+    ConnectionService connectionService
 
     @Autowired
     GraphNodeService graphNodeService
 
-    @ApiOperation(value = '', notes = 'Gets connections of `Person` identified with `id`', response = Person)
-    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Person)])
+    @ApiOperation(value = '', notes = 'Gets connections of `Person` identified with `id`', response = Connection)
+    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(
             value = '/{id}/connections',
             method = GET)
@@ -53,13 +51,8 @@ class Connections extends Controller<Connection> {
                                @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes) {
         GraphNode to = graphNodeService.find(toId) as GraphNode
         GraphNode from = graphNodeService.find(id) as GraphNode
-        Connection family = new Connection(to, from, relationship, notes)
-        service.repository.save(family)
+        Connection conn = new Connection(to, from, relationship, notes)
+        connectionService.repository.save(conn)
         from.connections
-    }
-
-    @Override
-    Service<Connection> getService() {
-        return service
     }
 }

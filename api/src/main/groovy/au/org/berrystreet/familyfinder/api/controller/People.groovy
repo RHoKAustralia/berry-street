@@ -2,7 +2,6 @@ package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.service.PersonService
-import au.org.berrystreet.familyfinder.api.service.Service
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -24,10 +23,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT
 @RequestMapping(value = '/people', produces = [APPLICATION_JSON])
 @Api(value = '/people', description = 'the person API')
 @CrossOrigin(origins='*')
-class People extends Controller<Person> {
+class People {
 
     @Autowired
-    PersonService service
+    PersonService personService
 
     @ApiOperation(value = '', notes = 'Creates a new `Person`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Person)])
@@ -36,7 +35,7 @@ class People extends Controller<Person> {
             consumes = [APPLICATION_JSON],
             method = POST)
     Person create( @ApiParam(value = '`Person` object to create', required = true) @RequestBody Person body) {
-        super.create(body)
+        personService.create(body)
     }
 
     @ApiOperation(value = '', notes = 'List all `Person`s that match the criteria provided')
@@ -45,7 +44,7 @@ class People extends Controller<Person> {
             value = '',
             method = GET)
     Person[] list() {
-        super.list() as Person[]
+        personService.findAll() as Person[]
     }
 
     @ApiOperation(value = '', notes = 'Gets `Person` identified with `id`', response = Person)
@@ -54,7 +53,7 @@ class People extends Controller<Person> {
             value = '/{id}',
             method = GET)
     Person find(@ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
-        super.find(id)
+        personService.find(id)
     }
 
     @ApiOperation(value = '', notes = 'Updates an existing `Person`', response = Person)
@@ -67,9 +66,7 @@ class People extends Controller<Person> {
             method = PUT)
     Person update(@ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id,
                   @ApiParam(value = '`Person` object to update', required = true) @RequestBody Person body) {
-        super.update(id, body)
+        personService.update(id, body)
     }
 
-    @Override
-    Service<Person> getService() { service }
 }

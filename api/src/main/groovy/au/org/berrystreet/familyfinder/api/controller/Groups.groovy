@@ -2,7 +2,6 @@ package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Group
 import au.org.berrystreet.familyfinder.api.service.GroupService
-import au.org.berrystreet.familyfinder.api.service.Service
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -24,10 +23,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT
 @RequestMapping(value = '/groups', produces = [APPLICATION_JSON])
 @Api(value = '/groups', description = 'the groups API')
 @CrossOrigin(origins = '*')
-class Groups extends Controller<Group> {
+class Groups {
 
     @Autowired
-    GroupService service
+    GroupService groupService
 
     @ApiOperation(value = '', notes = 'Creates a new `Group`', response = Group)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Group)])
@@ -36,7 +35,7 @@ class Groups extends Controller<Group> {
             consumes = [APPLICATION_JSON],
             method = POST)
     Group create(@ApiParam(value = '`Group` object to create', required = true) @RequestBody Group body) {
-        super.create(body)
+        groupService.create(body)
     }
 
     @ApiOperation(value = '', notes = 'List all `Group`s')
@@ -45,7 +44,7 @@ class Groups extends Controller<Group> {
             value = '',
             method = GET)
     Group[] list() {
-        super.list() as Group[]
+        groupService.findAll() as Group[]
     }
 
     @ApiOperation(value = '', notes = 'Gets `Group` identified with `id`', response = Group)
@@ -54,7 +53,7 @@ class Groups extends Controller<Group> {
             value = '/{id}',
             method = GET)
     Group find(@ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
-        super.find(id)
+        groupService.find(id)
     }
 
     @ApiOperation(value = '', notes = 'Updates an existing `Group`', response = Group)
@@ -67,9 +66,6 @@ class Groups extends Controller<Group> {
             method = PUT)
     Group update(@ApiParam(value = 'ID of Group to fetch', required = true) @PathVariable('id') Long id,
                  @ApiParam(value = '`Group` object to update', required = true) @RequestBody Group body) {
-        super.update(id, body)
+        groupService.update(id, body)
     }
-
-    @Override
-    Service<Group> getService() { service }
 }

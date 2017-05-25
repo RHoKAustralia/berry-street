@@ -5,7 +5,6 @@ import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.domain.Subject
 import au.org.berrystreet.familyfinder.api.service.CaseService
 import au.org.berrystreet.familyfinder.api.service.PersonService
-import au.org.berrystreet.familyfinder.api.service.Service
 import au.org.berrystreet.familyfinder.api.service.SubjectService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -30,10 +29,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT
 @RequestMapping(value = '/cases', produces = [APPLICATION_JSON])
 @Api(value = '/cases', description = 'the case API')
 @CrossOrigin(origins='*')
-class Cases extends Controller<Case> {
+class Cases {
 
     @Autowired
-    CaseService service
+    CaseService caseService
 
     @Autowired
     PersonService personService
@@ -48,7 +47,7 @@ class Cases extends Controller<Case> {
             consumes = [APPLICATION_JSON],
             method = POST)
     Case create(@ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body) {
-        super.create(body)
+        caseService.create(body)
     }
 
     @ApiOperation(value = '', notes = 'Update the `Case` ', response = Void)
@@ -61,7 +60,7 @@ class Cases extends Controller<Case> {
             method = PUT)
     Case update(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id,
                 @ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body) {
-        super.update(id, body)
+        caseService.update(id, body)
     }
 
     @ApiOperation(value = '', notes = 'Update the `Case` ', response = Void)
@@ -75,10 +74,10 @@ class Cases extends Controller<Case> {
     Case addSubject(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id,
                     @ApiParam(value = 'person', required = true) @PathVariable('personId') Long personId) {
         Person person = personService.find(personId)
-        Case aCase = super.find(id) as Case
+        Case aCase = caseService.find(id) as Case
         Subject subject = new Subject(person, aCase, new SimpleDateFormat('yyyy-MM-dd').format(new Date()))
         subjectService.repository.save(subject)
-        super.find(id)
+        caseService.find(id)
     }
 
     @ApiOperation(value = '', notes = 'list all `Case`s')
@@ -87,9 +86,8 @@ class Cases extends Controller<Case> {
     @RequestMapping(value = '',
             method = GET)
     Case[] list(
-//            @ApiParam(value = 'depth') @RequestParam(value = 'depth', required = true) int depth
     ) {
-        super.list() as Case[]
+        caseService.findAll() as Case[]
     }
 
     @ApiOperation(value = '', notes = 'Gets `Case` identified with `id`', response = Case)
@@ -98,9 +96,7 @@ class Cases extends Controller<Case> {
             value = '/{id}',
             method = GET)
     Case find(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id) {
-        super.find(id)
+        caseService.find(id)
     }
 
-    @Override
-    Service<Case> getService() { service }
 }
