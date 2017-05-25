@@ -27,79 +27,11 @@ class Person extends Entity {
 
     @ApiModelProperty
     @JsonProperty
-    String clientNumber = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String aliases = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String nickname = null
+    String additionalNames = null
 
     @ApiModelProperty
     @JsonProperty
     String gender = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String bloodType = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String allergies = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String height = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String weight = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String school = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String clubsAttended = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String eyeColor = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String job = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String preferredLanguage = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String languagesSpoken = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String requiresTranslator = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String sourceId = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String sourceAgency = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String violence = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String removalFromCare = null
 
     @ApiModelProperty
     @JsonProperty('dateOfBirth')
@@ -120,15 +52,7 @@ class Person extends Entity {
 
     @ApiModelProperty
     @JsonProperty
-    String address = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String phone = null
-
-    @ApiModelProperty
-    @JsonProperty
-    String email = null
+    String contactInformation = null
 
     @JsonIgnore
     @Relationship(type = 'CONNECTION', direction = Relationship.UNDIRECTED)
