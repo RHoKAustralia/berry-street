@@ -43,8 +43,8 @@ class Groups {
     @RequestMapping(
             value = '',
             method = GET)
-    Group[] list() {
-        groupService.findAll() as Group[]
+    Iterable<Group> list() {
+        groupService.findAll()
     }
 
     @ApiOperation(value = '', notes = 'Gets `Group` identified with `id`', response = Group)

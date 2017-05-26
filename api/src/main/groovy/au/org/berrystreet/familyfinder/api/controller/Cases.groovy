@@ -85,9 +85,9 @@ class Cases {
         @ApiResponse(code = 200, message = 'Successful Response', response = Case, responseContainer = 'List')])
     @RequestMapping(value = '',
             method = GET)
-    Case[] list(
+    Iterable<Case> list(
     ) {
-        caseService.findAll() as Case[]
+        caseService.findAll()
     }
 
     @ApiOperation(value = '', notes = 'Gets `Case` identified with `id`', response = Case)

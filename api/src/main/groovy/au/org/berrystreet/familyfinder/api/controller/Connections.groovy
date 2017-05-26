@@ -35,13 +35,12 @@ class Connections {
     List<Connection> listConnections(
             @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
         connectionService.getConnections(id)
-
     }
 
     @RequestMapping(
             value = '/{fromId}/connections',
             method = PUT)
-    List<Connection> saveConnection(
+    Iterable<Connection> saveConnection(
             @ApiParam(value = 'this person', required = true) @PathVariable('fromId') Long fromId,
             @ApiParam(value = 'to', required = true) @RequestParam('toId') Long toId,
             @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,

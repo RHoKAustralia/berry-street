@@ -43,8 +43,8 @@ class People {
     @RequestMapping(
             value = '',
             method = GET)
-    Person[] list() {
-        personService.findAll() as Person[]
+    Iterable<Person> list() {
+        personService.findAll()
     }
 
     @ApiOperation(value = '', notes = 'Gets `Person` identified with `id`', response = Person)
