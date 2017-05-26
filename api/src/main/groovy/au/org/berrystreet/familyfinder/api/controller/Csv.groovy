@@ -2,6 +2,7 @@ package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Connection
 import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
+import au.org.berrystreet.familyfinder.api.service.ConnectionService
 import au.org.berrystreet.familyfinder.api.service.GraphNodeService
 import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,26 +24,21 @@ class Csv {
     @Autowired
     GraphNodeService graphNodeService
 
+    @Autowired
+    ConnectionService connectionService
+
     @RequestMapping(
             value = '/entities',
             method = GET)
-    List<GraphNode> find_as_csv(HttpServletResponse response) {
-        def array = graphNodeService.findAll() as GraphNode[]
-        return array.toList()
+    Iterable<GraphNode> find_as_csv(HttpServletResponse response) {
+        graphNodeService.findAll()
     }
 
     @RequestMapping(
             value = "/relationships",
             method = GET)
-    List<Connection> relationships_as_csv(HttpServletResponse response) {
-        def array = graphNodeService.findAll() as GraphNode[]
-        Set<Connection> ret = new HashSet<Connection>()
-        for (node in array) {
-            for (connection in node.connections) {
-                ret.add(connection)
-            }
-        }
-        return ret.toList()
+    Iterable<Connection> relationships_as_csv(HttpServletResponse response) {
+        connectionService.findAll()
     }
 
 }

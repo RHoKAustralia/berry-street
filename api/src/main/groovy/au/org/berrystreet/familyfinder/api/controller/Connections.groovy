@@ -1,9 +1,7 @@
 package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Connection
-import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
 import au.org.berrystreet.familyfinder.api.service.ConnectionService
-import au.org.berrystreet.familyfinder.api.service.GraphNodeService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -29,9 +27,6 @@ class Connections {
     @Autowired
     ConnectionService connectionService
 
-    @Autowired
-    GraphNodeService graphNodeService
-
     @ApiOperation(value = '', notes = 'Gets connections of `Person` identified with `id`', response = Connection)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(
@@ -39,20 +34,18 @@ class Connections {
             method = GET)
     List<Connection> listConnections(
             @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id) {
-        (graphNodeService.find(id) as GraphNode).connections
+        connectionService.getConnections(id)
+
     }
 
     @RequestMapping(
-            value = '/{id}/connections',
+            value = '/{fromId}/connections',
             method = PUT)
-    List<Connection> saveConnection(@ApiParam(value = 'this person', required = true) @PathVariable('id') Long id,
-                               @ApiParam(value = 'to', required = true) @RequestParam('toId') Long toId,
-                               @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
-                               @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes) {
-        GraphNode to = graphNodeService.find(toId) as GraphNode
-        GraphNode from = graphNodeService.find(id) as GraphNode
-        Connection conn = new Connection(to, from, relationship, notes)
-        connectionService.repository.save(conn)
-        from.connections
+    List<Connection> saveConnection(
+            @ApiParam(value = 'this person', required = true) @PathVariable('fromId') Long fromId,
+            @ApiParam(value = 'to', required = true) @RequestParam('toId') Long toId,
+            @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
+            @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes) {
+        connectionService.create(toId, fromId, relationship, notes)
     }
 }
