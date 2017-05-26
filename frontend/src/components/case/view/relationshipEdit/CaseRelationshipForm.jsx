@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import api from '../../../../api.jsx'
 
+api = api()
+
 export default class CaseRelationshipForm extends Component {
 
   constructor (prop) {
@@ -119,84 +121,90 @@ export default class CaseRelationshipForm extends Component {
 
   render () {
     if (!this.state.relatedPersonSelected) {
-      return <div className="alert alert-info">
-        <strong>Select a related person on the left for more details</strong>
-      </div>
+      return (
+        <div className="alert alert-info">
+          <strong>Select a related person on the left for more details</strong>
+        </div>
+      )
     } else {
       if (!this.state.loading) {
-        return <div>
-          <form onSubmit={this.save.bind(this)}>
-            <fieldset>
-              <legend>Personal Details</legend>
-              <div className="row">
+        return (
+          <div>
+            <form onSubmit={this.save.bind(this)}>
+              <fieldset>
+                <legend>Personal Details</legend>
+                <div className="row">
 
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="givenNames">Given Names</label>
-                  <input id="givenNames" name="givenNames" type="text" className="form-control" value={this.state.relatedPerson.givenNames} onChange={this.handleRelatedPersonChange} />
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="givenNames">Given Names</label>
+                    <input id="givenNames" name="givenNames" type="text" className="form-control" value={this.state.relatedPerson.givenNames} onChange={this.handleRelatedPersonChange} />
+                  </div>
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="familyName">Family Name</label>
+                    <input id="familyName" name="familyName" type="text" className="form-control" value={this.state.relatedPerson.familyName} onChange={this.handleRelatedPersonChange} />
+                  </div>
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="additionalNames">Additional Names</label>
+                    <input id="additionalNames" name="additionalNames" type="text" className="form-control" value={this.state.relatedPerson.additionalNames} onChange={this.handleRelatedPersonChange} />
+                  </div>
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="gender">Gender</label>
+                    <select id="gender" name="gender" className="form-control" value={this.state.relatedPerson.gender} onChange={this.handleRelatedPersonChange}>
+                      <option></option>
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>
+                  </div>
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="dateOfBirth">Date of Birth</label>
+                    <input id="dateOfBirth" name="dateOfBirth" type="date" className="form-control" value={this.state.relatedPerson.dateOfBirth} onChange={this.handleRelatedPersonChange} />
+                  </div>
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="atsi">ATSI</label>
+                    <select id="atsi" name="atsi" className="form-control" value={this.state.relatedPerson.atsi} onChange={this.handleRelatedPersonChange}>
+                      <option key="Unknown">Unknown</option>
+                      <option key="Yes">Yes</option>
+                      <option key="No">No</option>
+                      <option key="NotIdentifying">Not Identifying</option>
+                    </select>
+                  </div>
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="atsiLocation">ATSI mob or location</label>
+                    <input id="atsiLocation" name="atsiLocation" type="text" className="form-control" value={this.state.relatedPerson.atsiLocation} onChange={this.handleRelatedPersonChange} />
+                  </div>
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="contactInformation">Contact Information</label>
+                    <textarea className="form-control" id="contactInformation" name="contactInformation" placeholder="Add Contact Information" value={this.state.relatedPerson.contactInformation} onChange={this.handleRelatedPersonChange} />
+                  </div>
                 </div>
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="familyName">Family Name</label>
-                  <input id="familyName" name="familyName" type="text" className="form-control" value={this.state.relatedPerson.familyName} onChange={this.handleRelatedPersonChange} />
+              </fieldset>
+              <fieldset>
+                <legend>Relationship</legend>
+                <div className="row">
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="relationship">Relationship</label>
+                    <input id="relationship" name="relationship" type="text" className="form-control" value={this.state.relationship.relationship} onChange={this.handleRelationshipChange} />
+                  </div>
+                  <div className="col-xs-6 form-group">
+                    <label htmlFor="notes">Notes</label>
+                    <textarea className="form-control" id="notes" name="notes" placeholder="Add Notes" value={this.state.relationship.notes} onChange={this.handleRelationshipChange} />
+                  </div>
                 </div>
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="additionalNames">Additional Names</label>
-                  <input id="additionalNames" name="additionalNames" type="text" className="form-control" value={this.state.relatedPerson.additionalNames} onChange={this.handleRelatedPersonChange} />
+                <div className="row">
                 </div>
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="gender">Gender</label>
-                  <select id="gender" name="gender" className="form-control" value={this.state.relatedPerson.gender} onChange={this.handleRelatedPersonChange}>
-                    <option></option>
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="dateOfBirth">Date of Birth</label>
-                  <input id="dateOfBirth" name="dateOfBirth" type="date" className="form-control" value={this.state.relatedPerson.dateOfBirth} onChange={this.handleRelatedPersonChange} />
-                </div>
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="atsi">ATSI</label>
-                  <select id="atsi" name="atsi" className="form-control" value={this.state.relatedPerson.atsi} onChange={this.handleRelatedPersonChange}>
-                    <option key="Unknown">Unknown</option>
-                    <option key="Yes">Yes</option>
-                    <option key="No">No</option>
-                    <option key="NotIdentifying">Not Identifying</option>
-                  </select>
-                </div>
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="atsiLocation">ATSI mob or location</label>
-                  <input id="atsiLocation" name="atsiLocation" type="text" className="form-control" value={this.state.relatedPerson.atsiLocation} onChange={this.handleRelatedPersonChange} />
-                </div>
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="contactInformation">Contact Information</label>
-                  <textarea className="form-control" id="contactInformation" name="contactInformation" placeholder="Add Contact Information" value={this.state.relatedPerson.contactInformation} onChange={this.handleRelatedPersonChange} />
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend>Relationship</legend>
-              <div className="row">
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="relationship">Relationship</label>
-                  <input id="relationship" name="relationship" type="text" className="form-control" value={this.state.relationship.relationship} onChange={this.handleRelationshipChange} />
-                </div>
-                <div className="col-xs-6 form-group">
-                  <label htmlFor="notes">Notes</label>
-                  <textarea className="form-control" id="notes" name="notes" placeholder="Add Notes" value={this.state.relationship.notes} onChange={this.handleRelationshipChange} />
-                </div>
-              </div>
-              <div className="row">
-              </div>
-            </fieldset>
+              </fieldset>
 
-            <button type="submit" className="btn btn-default">Save</button>
-          </form>
-        </div>
+              <button type="submit" className="btn btn-default">Save</button>
+            </form>
+          </div>
+        )
       } else {
-        return <div className="alert alert-info">
-          <i className="fa fa-cog fa-spin fa-3x fa-fw"></i>
-          <span className="sr-only">Loading...</span>
-        </div>
+        return (
+          <div className="alert alert-info">
+            <i className="fa fa-cog fa-spin fa-3x fa-fw"></i>
+            <span className="sr-only">Loading...</span>
+          </div>
+        )
       }
     }
   }

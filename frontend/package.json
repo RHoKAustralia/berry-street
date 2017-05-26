@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-core/register **/*.spec.js*",
     "build": "node_modules/.bin/webpack",
     "watch": "node_modules/.bin/webpack --watch",
     "dev": "node_modules/.bin/parallelshell \"npm run watch\" \"npm run start\" ",
@@ -33,6 +33,7 @@
     "transform-loader": "^0.2.3"
   },
   "devDependencies": {
+    "chai": "3.5.0",
     "css-loader": "^0.26.0",
     "eslint": "^3.18.0",
     "eslint-config-standard": "^7.1.0",
@@ -41,8 +42,25 @@
     "eslint-plugin-standard": "^2.1.1",
     "http-server": "^0.9.0",
     "imports-loader": "^0.6.5",
+    "mocha": "3.4.2",
+    "pact": "2.5.0",
     "parallelshell": "^2.0.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
+  },
+  "standard": {
+    "globals": [
+      "after",
+      "afterEach",
+      "before",
+      "beforeEach",
+      "context",
+      "describe",
+      "fail",
+      "fetch",
+      "it",
+      "Headers",
+      "Request"
+    ]
   }
 }

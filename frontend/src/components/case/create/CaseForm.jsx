@@ -4,6 +4,7 @@ import { createCase, saveNewCase, updateCase, selectCase } from '../../../action
 import { withRouter } from 'react-router'
 import { selectCaseById } from '../../../reducers.jsx'
 import api from '../../../api.jsx'
+api = api()
 
 class CaseForm extends Component {
   constructor (props) {

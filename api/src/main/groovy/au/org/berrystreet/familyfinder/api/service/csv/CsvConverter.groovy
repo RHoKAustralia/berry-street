@@ -38,13 +38,13 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends GraphItem
         def filename = 'unknown'
         def fields = []
 
-        if (list.size() != 0) {
+        if (list.size() > 0) {
             switch (list.get(0)) {
-                case { GraphNode.class.isAssignableFrom(it.class) }:
+                case Person:
                     filename = 'person'
                     fields += ['Name', 'Type', 'Tags', 'Description']
                     break
-                case { Connection.class.isAssignableFrom(it.class) }:
+                case Connection:
                     filename = 'relationship'
                     fields += ['From', 'To', 'Type', 'Description']
                     break

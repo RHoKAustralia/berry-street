@@ -4,6 +4,8 @@ import CaseHeader from './CaseHeader.jsx'
 import CaseRelationshipList from './relationshipList/CaseRelationshipList.jsx'
 import CaseRelationshipForm from './relationshipEdit/CaseRelationshipForm.jsx'
 
+api = api()
+
 class CaseView extends Component {
   constructor (props) {
     super(props)

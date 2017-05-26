@@ -70,9 +70,9 @@ secrets.json
 **/auth0-variables.js
 
 # spikes
-/spikes/auth0-react-sample/npm-debug.log
 /spikes/api/secret.js
 
 **/*.nogit.*
 
-npm-debug.log
+**/*.log
+pacts

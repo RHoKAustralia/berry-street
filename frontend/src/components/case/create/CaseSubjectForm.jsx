@@ -4,6 +4,8 @@ import { withRouter } from 'react-router'
 import api from '../../../api.jsx'
 import { childAdded } from '../../../actions.jsx'
 
+api = api()
+
 class CaseSubjectForm extends Component {
   constructor (props) {
     super(props)
