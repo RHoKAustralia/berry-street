@@ -14,4 +14,8 @@ class Group extends GraphNode {
     @JsonProperty
     String name;
 
+    @Override
+    String displayName() {
+        name
+    }
 }

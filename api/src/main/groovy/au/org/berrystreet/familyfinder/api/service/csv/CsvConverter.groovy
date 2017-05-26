@@ -2,8 +2,10 @@ package au.org.berrystreet.familyfinder.api.service.csv
 
 import au.com.bytecode.opencsv.CSVWriter
 import au.org.berrystreet.familyfinder.api.domain.Connection
+import au.org.berrystreet.familyfinder.api.domain.Group
 import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.domain.internals.GraphItem
+import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
 import org.springframework.http.HttpInputMessage
 import org.springframework.http.HttpOutputMessage
 import org.springframework.http.MediaType
@@ -38,7 +40,7 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends GraphItem
 
         if (list.size() != 0) {
             switch (list.get(0)) {
-                case { Person.class.isAssignableFrom(it.class) }:
+                case { GraphNode.class.isAssignableFrom(it.class) }:
                     filename = 'person'
                     fields += ['Name', 'Type', 'Tags', 'Description']
                     break
@@ -63,7 +65,8 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends GraphItem
         list.each {
             switch (it) {
                 case Person:
-                    writeTo(writer, it as Person)
+                case Group:
+                    writeTo(writer, it as GraphNode)
                     break
                 case Connection:
                     writeTo(writer, it as Connection)
@@ -75,13 +78,13 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends GraphItem
         writer.close()
     }
 
-    void writeTo(CSVWriter writer, Person person) {
-        person.with {
+    void writeTo(CSVWriter writer, GraphNode node) {
+        node.with {
             writer.writeNext([
-                "$givenNames $familyName",
-                'type',
-                'tags',
-                'description'
+                    displayName(),
+                    'type',
+                    'tags',
+                    'description'
             ] as String[])
         }
     }
@@ -89,10 +92,10 @@ class CsvConverter extends AbstractHttpMessageConverter<List<? extends GraphItem
     void writeTo(CSVWriter writer, Connection rel) {
         rel.with {
             writer.writeNext([
-                "${from.givenNames} ${from.familyName}",
-                "${to.givenNames} ${to.familyName}",
-                relationship,
-                'description'
+                    from.displayName(),
+                    to.displayName(),
+                    relationship,
+                    'description'
             ] as String[])
         }
     }

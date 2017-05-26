@@ -48,4 +48,9 @@ class Case extends GraphNode {
     @JsonProperty('subjects')
     @Relationship(type = 'SUBJECT', direction = INCOMING)
     List<Subject> subjects = []
+
+    @Override
+    String displayName() {
+        """Case for: ${subjects.collect({ it.person.displayName() }).join("; ")}"""
+    }
 }

@@ -1,10 +1,8 @@
 package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Connection
-import au.org.berrystreet.familyfinder.api.domain.Person
 import au.org.berrystreet.familyfinder.api.domain.internals.GraphNode
-import au.org.berrystreet.familyfinder.api.service.ConnectionService
-import au.org.berrystreet.familyfinder.api.service.PersonService
+import au.org.berrystreet.familyfinder.api.service.GraphNodeService
 import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -23,16 +21,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET
 class Csv {
 
     @Autowired
-    PersonService personService
-
-    @Autowired
-    ConnectionService connectionService
+    GraphNodeService graphNodeService
 
     @RequestMapping(
             value = '/entities',
             method = GET)
     List<GraphNode> find_as_csv(HttpServletResponse response) {
-        def array = graphNodeService.findAll() as Person[]
+        def array = graphNodeService.findAll() as GraphNode[]
         return array.toList()
     }
 
@@ -40,10 +35,10 @@ class Csv {
             value = "/relationships",
             method = GET)
     List<Connection> relationships_as_csv(HttpServletResponse response) {
-        def array = connectionService.findAll() as Connection[]
+        def array = graphNodeService.findAll() as GraphNode[]
         Set<Connection> ret = new HashSet<Connection>()
-        for (person in array) {
-            for (connection in person.connections) {
+        for (node in array) {
+            for (connection in node.connections) {
                 ret.add(connection)
             }
         }

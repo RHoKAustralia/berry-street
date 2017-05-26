@@ -48,4 +48,8 @@ class Person extends GraphNode {
     @JsonProperty
     String contactInformation = null
 
+    @Override
+    String displayName() {
+        return "$givenNames $familyName"
+    }
 }
