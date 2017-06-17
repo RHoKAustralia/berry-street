@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import api from '../../../api.jsx'
+import apiFunc from '../../../api.jsx'
 import CaseHeader from './CaseHeader.jsx'
 import CaseRelationshipList from './relationshipList/CaseRelationshipList.jsx'
 import CaseRelationshipForm from './relationshipEdit/CaseRelationshipForm.jsx'
 
-api = api()
+const api = apiFunc()
 
 class CaseView extends Component {
   constructor (props) {

@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch'
-import api from './api.jsx'
+import apiFunc from './api.jsx'
 import { hashHistory } from 'react-router'
 
-api = api()
+const api = apiFunc()
 
 export const FETCH_PROFILE = 'FETCH_PROFILE'
 export const SET_PROFILE = 'SET_PROFILE'

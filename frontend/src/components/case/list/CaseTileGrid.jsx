@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import api from '../../../api.jsx'
+import apiFunc from '../../../api.jsx'
 
-api = api()
+const api = apiFunc()
 
 const TILE_WIDTH = 250
 const TILE_HEIGHT = 400

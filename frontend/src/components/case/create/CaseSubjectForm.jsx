@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { withRouter } from 'react-router'
-import api from '../../../api.jsx'
+import apiFunc from '../../../api.jsx'
 import { childAdded } from '../../../actions.jsx'
 
-api = api()
+const api = apiFunc()
 
 class CaseSubjectForm extends Component {
   constructor (props) {

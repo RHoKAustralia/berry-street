@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import api from '../../../../api.jsx'
+import apiFunc from '../../../../api.jsx'
 
-api = api()
+const api = apiFunc()
 
 export default class CaseRelationshipForm extends Component {
 
