@@ -40,63 +40,46 @@ class Cases {
     @Autowired
     SubjectService subjectService
 
-    @ApiOperation(value = '', notes = 'Creates a `Case`', response = Case)
-    @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Void)])
-    @RequestMapping(
-            value = '',
-            consumes = [APPLICATION_JSON],
-            method = POST)
-    Case create(@ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body) {
-        caseService.create(body)
-    }
-
-    @ApiOperation(value = '', notes = 'Update the `Case` ', response = Void)
-    @ApiResponses(value = [
-            @ApiResponse(code = 200, message = 'Successfully updated `Case`', response = Case),
-            @ApiResponse(code = 404, message = 'Could not find `Case`', response = Void)])
-    @RequestMapping(
-            value = '/{id}',
-            consumes = [APPLICATION_JSON],
-            method = PUT)
-    Case update(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id,
-                @ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body) {
-        caseService.update(id, body)
-    }
-
-    @ApiOperation(value = '', notes = 'Update the `Case` ', response = Void)
-    @ApiResponses(value = [
-            @ApiResponse(code = 200, message = 'Successfully updated `Case`', response = Case),
-            @ApiResponse(code = 404, message = 'Could not find `Case`', response = Void)])
-    @RequestMapping(
-            value = '/{id}/subject/{personId}',
-            consumes = [APPLICATION_JSON],
-            method = PUT)
-    Case addSubject(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id,
-                    @ApiParam(value = 'person', required = true) @PathVariable('personId') Long personId) {
-        Person person = personService.find(personId)
-        Case aCase = caseService.find(id) as Case
-        Subject subject = new Subject(person, aCase, new SimpleDateFormat('yyyy-MM-dd').format(new Date()))
-        subjectService.repository.save(subject)
-        caseService.find(id)
-    }
-
     @ApiOperation(value = '', notes = 'list all `Case`s')
     @ApiResponses(value = [
-        @ApiResponse(code = 200, message = 'Successful Response', response = Case, responseContainer = 'List')])
-    @RequestMapping(value = '',
-            method = GET)
-    Iterable<Case> list(
-    ) {
+        @ApiResponse(code = 200, message = 'Successful Response', response = Case, responseContainer = 'List')
+    ])
+    @RequestMapping(method = GET, value = '')
+    Iterable<Case> list() {
         caseService.findAll()
     }
 
+    @ApiOperation(value = '', notes = 'Creates a `Case`', response = Case)
+    @ApiResponses(value = [
+        @ApiResponse(code = 405, message = 'Invalid input', response = Void)
+    ])
+    @RequestMapping(method = POST, value = '', consumes = [APPLICATION_JSON])
+    Case create(
+        @ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body
+    ) {
+        caseService.create(body)
+    }
+
     @ApiOperation(value = '', notes = 'Gets `Case` identified with `id`', response = Case)
-    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful Response', response = Case)])
-    @RequestMapping(
-            value = '/{id}',
-            method = GET)
+    @ApiResponses(value = [
+        @ApiResponse(code = 200, message = 'Successful Response', response = Case)
+    ])
+    @RequestMapping(method = GET, value = '/{id}')
     Case find(@ApiParam(value = 'ID of `Case` to retrieve', required = true) @PathVariable('id') Long id) {
         caseService.find(id)
+    }
+
+    @ApiOperation(value = '', notes = 'Update the `Case` ', response = Void)
+    @ApiResponses(value = [
+        @ApiResponse(code = 200, message = 'Successfully updated `Case`', response = Case),
+        @ApiResponse(code = 404, message = 'Could not find `Case`', response = Void)
+    ])
+    @RequestMapping(method = PUT, value = '/{id}', consumes = [APPLICATION_JSON])
+    Case update(
+        @ApiParam(value = 'ID of `Case` to update', required = true) @PathVariable('id') Long id,
+        @ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body
+    ) {
+        caseService.update(id, body)
     }
 
 }
