@@ -1,7 +1,8 @@
 import React, { Component } from "react"
+import CaseInformationForm from "./CaseInformationForm.jsx"
 
 const WIZARD_STEPS = [
-    { step: 1, title: "Case Profile", canGoBack: false, canGoForward: true, renderer: (props, state) => <noscript /> },
+    { step: 1, title: "Case Profile", canGoBack: false, canGoForward: true, renderer: (props, state) => <CaseInformationForm /> },
     { step: 2, title: "Family", canGoBack: true, canGoForward: true, renderer: (props, state) => <noscript /> },
     { step: 3, title: "Risks", canGoBack: true, canGoForward: true, renderer: (props, state) => <noscript /> },
     { step: 4, title: "Review/Save", canGoBack: true, canGoForward: false, renderer: (props, state) => <noscript /> }
