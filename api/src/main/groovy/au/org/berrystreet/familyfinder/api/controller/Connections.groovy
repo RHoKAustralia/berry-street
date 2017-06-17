@@ -27,12 +27,20 @@ class Connections {
     @Autowired
     ConnectionService connectionService
 
-    @ApiOperation(value = '', notes = 'Gets connections of `Case` identified with `id`', response = Connection)
+    @ApiOperation(value = '', notes = 'Gets connections of `Case` identified with `caseId`', response = Connection)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(method = GET)
     List<Connection> listConnections(
             @ApiParam(value = 'ID of case to fetch', required = true) @PathVariable('caseId') Long caseId) {
         connectionService.getConnections(caseId)
+    }
+
+    @ApiOperation(value = '/{connectionId}', notes = 'Gets connection with `id`', response = Connection)
+    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
+    @RequestMapping(method = GET, value = '/{connectionId}')
+    Connection getConnection(
+            @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId) {
+        connectionService.find(connectionId)
     }
 
 }
