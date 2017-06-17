@@ -31,6 +31,10 @@ class ConnectionService extends GenericService<Connection> {
         connectionRepository.save(conn)
     }
 
+    void delete(Long connectionId) {
+        connectionRepository.delete(connectionId)
+    }
+
     List<Connection> getConnections(Long caseId) {
         (graphNodeService.find(caseId) as GraphNode).connections
     }

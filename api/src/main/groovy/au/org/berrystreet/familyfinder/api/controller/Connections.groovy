@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE
 import static org.springframework.web.bind.annotation.RequestMethod.GET
 import static org.springframework.web.bind.annotation.RequestMethod.POST
 import static org.springframework.web.bind.annotation.RequestMethod.PUT
@@ -65,6 +66,15 @@ class Connections {
             @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes
     ) {
         connectionService.update(connectionId, relationship, notes)
+    }
+
+    @ApiOperation(value = '/{connectionId}', notes = 'Delete connection')
+    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
+    @RequestMapping(method = DELETE, value= '/{connectionId}')
+    void updateConnection(
+            @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId
+    ) {
+        connectionService.delete(connectionId)
     }
 
 }
