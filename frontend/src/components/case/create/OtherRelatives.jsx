@@ -9,16 +9,16 @@ const renderRelated = ({ fields, meta: { error, submitFailed } }) => (
             <tbody>
                 {(() => {
                     if (fields.length > 0) {
-                        return fields.map((sibling, index) => (
+                        return fields.map((related, index) => (
                             <tr key={index}>
                                 <td>
                                     <div className="form-group">
-                                        <label htmlFor={`${sibling}.relName`}>Name</label>
-                                        <Field name={`${sibling}.relName`} component="input" type="text" className="form-control" />
+                                        <label htmlFor={`${related}.name`}>Name</label>
+                                        <Field name={`${related}.name`} component="input" type="text" className="form-control" />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor={`${sibling}.relation`}>Relation</label>
-                                        <Field name={`${sibling}.relation`} component="select" className="form-control">
+                                        <label htmlFor={`${related}.relation`}>Relation</label>
+                                        <Field name={`${related}.relation`} component="select" className="form-control">
                                             <option />
                                             <option value="Uncle">Uncle</option>
                                             <option value="Aunt">Aunt</option>

@@ -1,14 +1,21 @@
 import React, { Component } from "react"
 import CaseInformationForm from "./CaseInformationForm.jsx"
 import FamilyInformationForm from "./FamilyInformationForm.jsx"
+import RiskInformationForm from "./RiskInformationForm.jsx"
+import CaseReviewStep from "./CaseReviewStep.jsx"
 import { FORM_CASE } from '../../../constants'
-import { reduxForm } from 'redux-form'
+import { Form, reduxForm } from 'redux-form'
+
+function validate(values) {
+    const errors = {};
+    return errors;
+}
 
 const WIZARD_STEPS = [
     { step: 1, title: "Case Profile", canGoBack: false, canGoForward: true, renderer: (props, state) => <CaseInformationForm /> },
     { step: 2, title: "Family", canGoBack: true, canGoForward: true, renderer: (props, state) => <FamilyInformationForm /> },
-    { step: 3, title: "Risks", canGoBack: true, canGoForward: true, renderer: (props, state) => <noscript /> },
-    { step: 4, title: "Review/Save", canGoBack: true, canGoForward: false, renderer: (props, state) => <noscript /> }
+    { step: 3, title: "Risks", canGoBack: true, canGoForward: true, renderer: (props, state) => <RiskInformationForm /> },
+    { step: 4, title: "Review/Save", canGoBack: true, canGoForward: false, renderer: (props, state) => <CaseReviewStep submitting={props.submitting} /> }
 ]
 
 class NewCaseWizard extends Component {
@@ -19,6 +26,7 @@ class NewCaseWizard extends Component {
         }
         this.fnNextStep = this.onNextStep.bind(this)
         this.fnPrevStep = this.onPrevStep.bind(this)
+        this.fnSubmit = this.onSubmit.bind(this)
     }
     onNextStep() {
         this.setState({ currentStep: this.state.currentStep + 1 });
@@ -26,8 +34,13 @@ class NewCaseWizard extends Component {
     onPrevStep() {
         this.setState({ currentStep: this.state.currentStep - 1 });
     }
+    onSubmit(values) {
+        console.log(values)
+    }
+    
 
     render() {
+        const { handleSubmit } = this.props;
         const { currentStep } = this.state
         const activeStep = WIZARD_STEPS.filter(w => w.step == currentStep)[0];
         return <div className="container-fluid">
@@ -35,7 +48,7 @@ class NewCaseWizard extends Component {
             <div className="row">
                 <div role="content">
                     <div className="widget-body">
-                        <form noValidate="noValidate">
+                        <Form onSubmit={handleSubmit(this.fnSubmit)} noValidate="noValidate">
                             <div className="row">
                                 <div className="col-sm-12">
                                     <div className="form-bootstrapWizard">
@@ -86,7 +99,7 @@ class NewCaseWizard extends Component {
                                     })()}
                                 </div>
                             </div>
-                        </form>
+                        </Form>
                     </div>
                 </div>
             </div>
@@ -95,5 +108,6 @@ class NewCaseWizard extends Component {
 }
 
 export default reduxForm({
-    form: FORM_CASE
+    form: FORM_CASE,
+    validate
 })(NewCaseWizard);

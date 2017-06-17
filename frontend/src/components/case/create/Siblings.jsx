@@ -13,19 +13,19 @@ const renderSiblings = ({ fields, meta: { error, submitFailed } }) => (
                             <tr key={index}>
                                 <td>
                                     <div className="form-group">
-                                        <label htmlFor={`${sibling}.siblingName`}>Name</label>
-                                        <Field name={`${sibling}.siblingName`} component="input" type="text" className="form-control" />
+                                        <label htmlFor={`${sibling}.name`}>Name</label>
+                                        <Field name={`${sibling}.name`} component="input" type="text" className="form-control" />
                                     </div>
                                     <div className="form-group">
                                         <div>
                                             <label>
-                                                <Field name={`${sibling}.siblingRel`} component="input" type="radio" value="brother" />
+                                                <Field name={`${sibling}.relation`} component="input" type="radio" value="brother" />
                                                 {NBSP}
                                                 Brother
                                             </label>
                                             <label>
                                                 {NBSP}
-                                                <Field name={`${sibling}.siblingRel`} component="input" type="radio" value="sister" />
+                                                <Field name={`${sibling}.relation`} component="input" type="radio" value="sister" />
                                                 {NBSP}
                                                 Sister
                                             </label>
