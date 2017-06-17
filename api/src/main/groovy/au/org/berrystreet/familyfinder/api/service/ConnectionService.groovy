@@ -20,7 +20,15 @@ class ConnectionService extends GenericService<Connection> {
         GraphNode from = graphNodeService.find(fromId) as GraphNode
         GraphNode to = graphNodeService.find(toId) as GraphNode
         Connection conn = new Connection(from, to, relationship, notes)
-        repository.save(conn)
+        connectionRepository.save(conn)
+    }
+
+    void update(Long connectionId, String relationship, String notes) {
+        Connection conn = connectionRepository.findOne(connectionId)
+        conn.setRelationship(relationship)
+        conn.setNotes(notes)
+
+        connectionRepository.save(conn)
     }
 
     List<Connection> getConnections(Long caseId) {
