@@ -7,14 +7,15 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "/build/"
   },
   devtool: "source-map",
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: "babel",
+        loader: "babel-loader",
         exclude: /node_modules/
       },
       {
@@ -44,6 +45,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 };
