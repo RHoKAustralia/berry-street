@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
 import static org.springframework.web.bind.annotation.RequestMethod.GET
-import static org.springframework.web.bind.annotation.RequestMethod.PUT
+import static org.springframework.web.bind.annotation.RequestMethod.POST
 
 @RestController
 @RequestMapping(value = '/cases/{caseId}/connections', produces = [APPLICATION_JSON])
@@ -35,7 +35,19 @@ class Connections {
         connectionService.getConnections(caseId)
     }
 
-    @ApiOperation(value = '/{connectionId}', notes = 'Gets connection with `id`', response = Connection)
+    @ApiOperation(value = '', notes = 'Create connection', response = Connection)
+    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
+    @RequestMapping(method = POST)
+    void createConnection(
+            @ApiParam(value = 'from', required = true) @RequestParam('fromId') Long fromId,
+            @ApiParam(value = 'to', required = true) @RequestParam('toId') Long toId,
+            @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
+            @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes
+    ) {
+        connectionService.create(fromId, toId, relationship, notes)
+    }
+
+    @ApiOperation(value = '/{connectionId}', notes = 'Gets connection with `connectionId`', response = Connection)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(method = GET, value = '/{connectionId}')
     Connection getConnection(

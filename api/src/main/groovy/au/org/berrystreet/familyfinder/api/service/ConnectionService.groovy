@@ -16,12 +16,11 @@ class ConnectionService extends GenericService<Connection> {
     @Autowired
     ConnectionRepository connectionRepository
 
-    List<Connection> create(Long toId, Long fromId, String relationship, String notes) {
-        GraphNode to = graphNodeService.find(toId) as GraphNode
+    void create(Long fromId, Long toId, String relationship, String notes) {
         GraphNode from = graphNodeService.find(fromId) as GraphNode
-        Connection conn = new Connection(to, from, relationship, notes)
+        GraphNode to = graphNodeService.find(toId) as GraphNode
+        Connection conn = new Connection(from, to, relationship, notes)
         repository.save(conn)
-        from.connections
     }
 
     List<Connection> getConnections(Long caseId) {
