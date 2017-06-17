@@ -10,7 +10,6 @@ import Person from './components/Person.jsx'
 import CaseView from './components/case/view/CaseView.jsx'
 import CaseForm from './components/case/create/CaseForm.jsx'
 import NewCaseWizard from './components/case/create/NewCaseWizard.jsx'
-import CaseSubjectForm from './components/case/create/CaseSubjectForm.jsx'
 import Index from './components/Index.jsx'
 import Login from './components/Login.jsx'
 
@@ -41,7 +40,6 @@ ReactDOM.render((
             <IndexRoute component={Index} />
             <Route path="/about" component={About} />
             <Route path="/users" component={PersonList} />
-            <Route path="/cases/new/child" component={CaseSubjectForm} />
             <Route path="/cases/new/case" component={NewCaseWizard} />
             <Route path="/cases/:caseId" component={CaseView} />
             <Route path="/cases/:caseId/edit" component={CaseForm} />

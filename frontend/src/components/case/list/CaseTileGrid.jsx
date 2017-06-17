@@ -13,7 +13,7 @@ class CreateNewCaseTile extends Component {
     return (
       <div className="col-md-3">
         <div className="work nopad">
-          <Link to='/cases/new/child' style={{ width: TILE_WIDTH }} className="rlisting">
+          <Link to='/cases/new/case' style={{ width: TILE_WIDTH }} className="rlisting">
             <img src="src/assets/images/add_child_case_720.jpg" className="img-responsive" />
             <h3>New Case<br />&nbsp;</h3>
             <h4>&nbsp;</h4>
