@@ -38,6 +38,8 @@ const App = React.createClass({
     console.log("refreshTokenTick")
     const { login } = this.props;
     if (login && login.idToken) {
+      //FIXME: Now that we have webpack live/hot reloading, we're spamming auth0 here, need to fix this to not do
+      //that (maybe record last check date?)
       if (utils.hasTokenExpired(login.idToken.idToken, 2 * this.refresh_token_check_cycle)) {
         const refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken) {
