@@ -35,7 +35,7 @@ class Connections {
         connectionService.getConnections(caseId)
     }
 
-    @ApiOperation(value = '', notes = 'Create connection', response = Connection)
+    @ApiOperation(value = '', notes = 'Create connection')
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(method = POST)
     void createConnection(
