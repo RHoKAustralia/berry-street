@@ -13,21 +13,34 @@ class ConnectionService extends GenericService<Connection> {
     @Autowired
     GraphNodeService graphNodeService
 
-    List<Connection> create(Long toId, Long fromId, String relationship, String notes) {
-        GraphNode to = graphNodeService.find(toId) as GraphNode
-        GraphNode from = graphNodeService.find(fromId) as GraphNode
-        Connection conn = new Connection(to, from, relationship, notes)
-        repository.save(conn)
-        from.connections
-    }
-
-    List<Connection> getConnections(Long id) {
-        (graphNodeService.find(id) as GraphNode).connections
-    }
-
     @Autowired
-    private ConnectionRepository repository
+    ConnectionRepository connectionRepository
+
+    void create(Long fromId, Long toId, String relationship, String notes) {
+        GraphNode from = graphNodeService.find(fromId) as GraphNode
+        GraphNode to = graphNodeService.find(toId) as GraphNode
+        Connection conn = new Connection(from, to, relationship, notes)
+        connectionRepository.save(conn)
+    }
+
+    void update(Long connectionId, String relationship, String notes) {
+        Connection conn = connectionRepository.findOne(connectionId)
+        conn.setRelationship(relationship)
+        conn.setNotes(notes)
+
+        connectionRepository.save(conn)
+    }
+
+    void delete(Long connectionId) {
+        connectionRepository.delete(connectionId)
+    }
+
+    List<Connection> getConnections(Long caseId) {
+        (graphNodeService.find(caseId) as GraphNode).connections
+    }
 
     @Override
-    GraphRepository<Connection> getRepository() { repository }
+    GraphRepository<Connection> getRepository() {
+        return connectionRepository
+    }
 }

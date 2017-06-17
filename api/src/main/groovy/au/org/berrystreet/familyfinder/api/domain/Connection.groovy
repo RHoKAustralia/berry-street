@@ -24,7 +24,7 @@ class Connection extends GraphItem {
 
     Connection() {}
 
-    Connection(GraphNode to, GraphNode from, String relationship, String notes) {
+    Connection(GraphNode from, GraphNode to, String relationship, String notes) {
         this.from = from
         this.to = to
         this.relationship = relationship
