@@ -1,14 +1,17 @@
 import React, { Component } from "react"
 import CaseInformationForm from "./CaseInformationForm.jsx"
+import FamilyInformationForm from "./FamilyInformationForm.jsx"
+import { FORM_CASE } from '../../../constants'
+import { reduxForm } from 'redux-form'
 
 const WIZARD_STEPS = [
     { step: 1, title: "Case Profile", canGoBack: false, canGoForward: true, renderer: (props, state) => <CaseInformationForm /> },
-    { step: 2, title: "Family", canGoBack: true, canGoForward: true, renderer: (props, state) => <noscript /> },
+    { step: 2, title: "Family", canGoBack: true, canGoForward: true, renderer: (props, state) => <FamilyInformationForm /> },
     { step: 3, title: "Risks", canGoBack: true, canGoForward: true, renderer: (props, state) => <noscript /> },
     { step: 4, title: "Review/Save", canGoBack: true, canGoForward: false, renderer: (props, state) => <noscript /> }
 ]
 
-export default class NewCaseWizard extends Component {
+class NewCaseWizard extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -90,3 +93,7 @@ export default class NewCaseWizard extends Component {
         </div>
     }
 }
+
+export default reduxForm({
+    form: FORM_CASE
+})(NewCaseWizard);

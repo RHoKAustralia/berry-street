@@ -2,11 +2,11 @@ import React, { Component } from "react"
 import { Field, reduxForm } from 'redux-form'
 import { withRouter } from 'react-router'
 import apiFunc from '../../../api.jsx'
-import { NBSP } from '../../../constants'
+import { NBSP, FORM_CASE } from '../../../constants'
 
 const api = apiFunc()
 
-class CaseInformationForm extends Component {
+export default class CaseInformationForm extends Component {
     constructor(props) {
         super(props)
     }
@@ -88,7 +88,3 @@ class CaseInformationForm extends Component {
         </div>
     }
 }
-
-export default reduxForm({
-    form: "case"
-})(CaseInformationForm)
