@@ -16,4 +16,23 @@ class NodeDto {
     String getLabel() {
         return label
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (getClass() != o.class) return false
+
+        NodeDto nodeDto = (NodeDto) o
+
+        if (id != nodeDto.id) return false
+        if (label != nodeDto.label) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = (int) (id ^ (id >>> 32))
+        result = 31 * result + label.hashCode()
+        return result
+    }
 }
