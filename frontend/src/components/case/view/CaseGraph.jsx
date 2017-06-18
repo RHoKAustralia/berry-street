@@ -22,7 +22,7 @@ let options = {
                 face: 'FontAwesome',
                 code: '\uf2be',
                 size: 50,
-                color: '#57169a'
+                color: '#56e02c'
             }
         },
         family: {
@@ -31,7 +31,7 @@ let options = {
                 face: 'FontAwesome',
                 code: '\uf2bd',
                 size: 50,
-                color: '#aa00ff'
+                color: '#5fddb1'
             }
         },
         person: {
@@ -40,7 +40,7 @@ let options = {
                 face: 'FontAwesome',
                 code: '\uf007',
                 size: 50,
-                color: '#aa00ff'
+                color: '#2844c1'
             }
         }
     }
