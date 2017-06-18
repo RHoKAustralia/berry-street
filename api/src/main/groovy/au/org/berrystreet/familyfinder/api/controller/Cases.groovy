@@ -2,10 +2,8 @@ package au.org.berrystreet.familyfinder.api.controller
 
 import au.org.berrystreet.familyfinder.api.domain.Case
 import au.org.berrystreet.familyfinder.api.domain.Person
-import au.org.berrystreet.familyfinder.api.domain.Subject
 import au.org.berrystreet.familyfinder.api.service.CaseService
 import au.org.berrystreet.familyfinder.api.service.PersonService
-import au.org.berrystreet.familyfinder.api.service.SubjectService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -36,9 +34,6 @@ class Cases {
 
     @Autowired
     PersonService personService
-
-    @Autowired
-    SubjectService subjectService
 
     @ApiOperation(value = '', notes = 'list all `Case`s')
     @ApiResponses(value = [

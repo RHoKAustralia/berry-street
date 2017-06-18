@@ -14,43 +14,30 @@ import static org.neo4j.ogm.annotation.Relationship.INCOMING
 @NodeEntity(label = 'Case')
 class Case extends GraphNode {
 
-    @ApiModelProperty
-    @JsonProperty('familyFinderStaffName')
+    @JsonProperty @ApiModelProperty
+    @Relationship(type = 'SUBJECT', direction = INCOMING)
+    Person subject
+
+    @JsonProperty @ApiModelProperty
     String familyFinderStaffName = null
 
-    @ApiModelProperty
-    @JsonProperty('caseManager')
+    @JsonProperty @ApiModelProperty
     String caseManager = null
 
-    @ApiModelProperty
-    @JsonProperty('status')
+    @JsonProperty @ApiModelProperty
     String status = null
 
-    @ApiModelProperty
-    @JsonProperty('dateOpened')
+    @JsonProperty @ApiModelProperty
     @JsonFormat(pattern = 'yyyy-MM-dd')
     String dateOpened = null
 
-    @ApiModelProperty
-    @JsonProperty('dateClosed')
+    @JsonProperty @ApiModelProperty
     @JsonFormat(pattern = 'yyyy-MM-dd')
     String dateClosed = null
 
-    @ApiModelProperty
-    @JsonProperty('caseObjective')
-    String caseObjective = null
-
-    @ApiModelProperty
-    @JsonProperty('phaseOfInvolvement')
-    String phaseOfInvolvement
-
-    @ApiModelProperty
-    @JsonProperty('subjects')
-    @Relationship(type = 'SUBJECT', direction = INCOMING)
-    List<Subject> subjects = []
-
     @Override
-    String displayName() {
-        """Case for: ${subjects.collect({ it.person.displayName() }).join("; ")}"""
+    String getDisplayName() {
+        "Case for: ${subject?.displayName ?: ''}"
     }
+
 }

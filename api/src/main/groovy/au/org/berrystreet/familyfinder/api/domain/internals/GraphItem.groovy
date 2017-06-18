@@ -8,6 +8,8 @@ import org.neo4j.ogm.annotation.GraphId
 @ApiModel
 @JsonIdentityInfo(generator = JSOGGenerator)
 class GraphItem {
+
     @GraphId
     Long id
+
 }

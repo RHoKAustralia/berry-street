@@ -7,9 +7,11 @@ import org.neo4j.ogm.annotation.Relationship
 
 @ApiModel
 abstract class GraphNode extends GraphItem {
+
     @JsonIgnore
     @Relationship(type = 'CONNECTION', direction = Relationship.UNDIRECTED)
     List<Connection> connections = []
 
-    abstract String displayName()
+    abstract String getDisplayName()
+
 }

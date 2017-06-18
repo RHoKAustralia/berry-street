@@ -14,7 +14,7 @@ abstract class GenericService<T> {
 
     T update(Long id, T entity) {
         find(id)
-        ((GraphItem) entity).id = id
+        ((GraphItem)entity).id = id
         createOrUpdate(entity)
     }
 
@@ -24,7 +24,9 @@ abstract class GenericService<T> {
 
     T find(Long id) {
         T entity = getRepository().findOne(id)
-        if (entity == null) throw new NotFoundException()
+        if (entity == null) {
+            throw new NotFoundException()
+        }
         entity
     }
 
@@ -34,4 +36,5 @@ abstract class GenericService<T> {
     }
 
     abstract GraphRepository<T> getRepository()
+
 }

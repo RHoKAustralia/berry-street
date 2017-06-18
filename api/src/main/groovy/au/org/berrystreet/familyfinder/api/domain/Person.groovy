@@ -11,45 +11,37 @@ import org.neo4j.ogm.annotation.NodeEntity
 @NodeEntity(label = 'Person')
 class Person extends GraphNode {
 
-    @ApiModelProperty
-    @JsonProperty
+    @JsonProperty @ApiModelProperty
     String givenNames = null
 
-    @ApiModelProperty
-    @JsonProperty
+    @JsonProperty @ApiModelProperty
     String familyName = null
 
-    @ApiModelProperty
-    @JsonProperty
+    @JsonProperty @ApiModelProperty
     String additionalNames = null
 
-    @ApiModelProperty
-    @JsonProperty
+    @JsonProperty @ApiModelProperty
     String gender = null
 
-    @ApiModelProperty
-    @JsonProperty('dateOfBirth')
+    @JsonProperty @ApiModelProperty
     @JsonFormat(pattern = 'yyyy-MM-dd')
     String dateOfBirth = null
 
-    @ApiModelProperty
-    @JsonProperty
+    @JsonProperty @ApiModelProperty
     String atsi = null
 
-    @ApiModelProperty
-    @JsonProperty
+    @JsonProperty @ApiModelProperty
     String atsiLocation = null
 
-    @ApiModelProperty
-    @JsonProperty
-    String image = null
+    @JsonProperty @ApiModelProperty
+    String imageUrl = null
 
-    @ApiModelProperty
-    @JsonProperty
+    @JsonProperty @ApiModelProperty
     String contactInformation = null
 
     @Override
-    String displayName() {
-        return "$givenNames $familyName"
+    String getDisplayName() {
+        "$givenNames $familyName"
     }
+
 }
