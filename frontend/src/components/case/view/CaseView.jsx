@@ -58,7 +58,7 @@ class CaseView extends Component {
             <SubjectCard {...subject} />
           </div>
           <div className="col-md-6">
-            <CaseGraph />
+            <CaseGraph caseId={ffCase.id} />
           </div>
         </div>
       </div>

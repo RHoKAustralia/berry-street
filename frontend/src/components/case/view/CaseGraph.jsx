@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import Graph from 'react-graph-vis'
+import apiFunc from '../../../api.jsx'
+const api = apiFunc()
 
 let options = {
     layout: {
@@ -101,14 +103,36 @@ export default class CaseGraph extends Component {
             });
         }
     }*/
+    componentDidMount() {
+        /*
+        api.getCaseGraph(this.props.caseId).then(r => {
+            const newState = {
+                ...this.state,
+                ...{ graph: {
+                    nodes: r.nodes.map(n => {
+                        return { ...n, ...{ group: "person" } }
+                    }),
+                    edges: r.edges
+                } }
+            };
+            this.setState(newState);
+        });
+        */
+    }
     render() {
         const { graph } = this.state
         const { width, height } = this.props
-        return (<div>
-            <fieldset>
-                <legend>Relationship Graph</legend>
-                <Graph graph={graph} options={options} events={events} />
-            </fieldset>
-        </div>);
+        if (graph) {
+            return (<div>
+                <fieldset>
+                    <legend>Relationship Graph</legend>
+                    <Graph graph={graph} options={options} events={events} />
+                </fieldset>
+            </div>);
+        } else {
+            return <div className="alert alert-info">
+                Preparing graph
+            </div>
+        }
     }
 }

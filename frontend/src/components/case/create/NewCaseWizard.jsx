@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { saveNewCase } from '../../../actions.jsx'
 import CaseInformationForm from "./CaseInformationForm.jsx"
 import FamilyInformationForm from "./FamilyInformationForm.jsx"
 import RiskInformationForm from "./RiskInformationForm.jsx"
@@ -35,10 +36,8 @@ class NewCaseWizard extends Component {
         this.setState({ currentStep: this.state.currentStep - 1 });
     }
     onSubmit(values) {
-        console.log(values)
+        this.props.dispatch(saveNewCase(values))
     }
-    
-
     render() {
         const { handleSubmit } = this.props;
         const { currentStep } = this.state

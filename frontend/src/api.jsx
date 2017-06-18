@@ -451,6 +451,10 @@ const getCase = (id) => {
   }
 }
 
+const getCaseGraph = (id) => {
+  return sendRequest(`${SERVICE_URL_BASE}/cases/${id}/vis`, 'GET')
+}
+
 const addCase = (caseDetails) => {
   if (MOCK_BACKEND) {
     CASE_DETAILS_DATA.push(caseDetails)
@@ -470,11 +474,16 @@ const updateCase = (caseDetails) => {
     return sendRequest(`${SERVICE_URL_BASE}/cases`, 'PUT', caseDetails)
   }
 }
-const addPerson = (person) => {
-  return sendRequest(`${SERVICE_URL_BASE}/people/`, 'POST', person)
+const addPersonForCase = (caseId, person) => {
+  return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/people`, 'POST', person)
 }
-const updatePerson = (person) => {
-  return sendRequest(`${SERVICE_URL_BASE}/people/${person.id}`, 'PUT', person)
+
+const addCaseSubjectRelationship = (caseId, from, to, relationType) => {
+  return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/connections?fromId=${from}&toId=${to}&type=${relationType}&notes=${relationType}`, 'POST')
+}
+
+const updatePersonForCase = (caseId, person) => {
+  return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/people/${person.id}`, 'PUT', person)
 }
 const linkPerson = (caseSubjectId, relatedPersonId, relationship) => {
   let requestParams = '?' + 'toId=' + relatedPersonId +
@@ -500,8 +509,10 @@ export default (baseUrl) => {
     addCase,
     addSubjectToCase,
     updateCase,
-    addPerson,
-    updatePerson,
-    linkPerson
+    addPersonForCase,
+    updatePersonForCase,
+    linkPerson,
+    addCaseSubjectRelationship,
+    getCaseGraph
   }
 }

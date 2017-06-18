@@ -16,25 +16,25 @@ export default class CaseInformationForm extends Component {
                 <fieldset>
                     <legend>Case Information</legend>
                     <div className="form-group">
-                        <label htmlFor="firstName">First Name</label>
-                        <Field name="firstName" component="input" type="text" className="form-control" />
+                        <label htmlFor="subject.givenNames">First Name</label>
+                        <Field name="subject.givenNames" component="input" type="text" className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="lastName">Last Name</label>
-                        <Field name="lastName" component="input" type="text" className="form-control" />
+                        <label htmlFor="subject.familyName">Last Name</label>
+                        <Field name="subject.familyName" component="input" type="text" className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="dateOfBirth">Date Of Birth</label>
-                        <Field name="dateOfBirth" component="input" type="date" className="form-control" />
+                        <label htmlFor="subject.dateOfBirth">Date Of Birth</label>
+                        <Field name="subject.dateOfBirth" component="input" type="date" className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="address">Address</label>
-                        <Field name="address" component="textarea" className="form-control" />
+                        <label htmlFor="subject.contactInformation">Address</label>
+                        <Field name="subject.contactInformation" component="textarea" className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="atsi">Aboriginal or Torres Strait Islander</label>
+                        <label htmlFor="subject.atsi">Aboriginal or Torres Strait Islander</label>
                         {NBSP}
-                        <Field name="atsi" component="input" type="checkbox" />
+                        <Field name="subject.atsi" component="input" type="checkbox" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="caseType">Type of Case</label>
@@ -76,8 +76,8 @@ export default class CaseInformationForm extends Component {
                 <fieldset>
                     <legend>Referral Information</legend>
                     <div className="form-group">
-                        <label htmlFor="referralStatus">Status</label>
-                        <Field name="referralStatus" component="select" className="form-control">
+                        <label htmlFor="status">Status</label>
+                        <Field name="status" component="select" className="form-control">
                             <option />
                             <option value="Open">Open</option>
                             <option value="Closed">Closed</option>
@@ -87,9 +87,10 @@ export default class CaseInformationForm extends Component {
                         <label htmlFor="referralSource">Referral Source</label>
                         <Field name="referralSource" component="input" type="text" className="form-control" />
                     </div>
+                    {/*TODO: Should be referralDate and map to dateOpened/dateClosed based on status value*/}
                     <div className="form-group">
-                        <label htmlFor="referralDate">Referral Date</label>
-                        <Field name="referralDate" component="input" type="date" className="form-control" />
+                        <label htmlFor="dateOpened">Referral Date</label>
+                        <Field name="dateOpened" component="input" type="date" className="form-control" />
                     </div>
                 </fieldset>
             </div>

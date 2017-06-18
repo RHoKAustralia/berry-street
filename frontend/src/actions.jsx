@@ -46,14 +46,42 @@ export function createCase () {
 }
 
 export function saveNewCase (caseDetails) {
+  const siblings = [...(caseDetails.siblings || [])];
+  const related = [...(caseDetails.related || [])];
+
+  const connections = [];
+
   return (dispatch, getState) => {
     api.addCase(caseDetails).then(caseResult => {
-      api.addPerson(getState().child.childToAdd).then(personResult => {
-        api.addSubjectToCase(caseResult, personResult).then(subjectResult => {
-          dispatch(caseSaved(caseResult))
-          dispatch(fetchCases()) // Fetching everything again sounds like overkill
-        })
-      })
+      const subjectId = caseResult.subject.id;
+      const createPromises = [];
+      if (caseDetails.mother) {
+        createPromises.push(api.addPersonForCase(caseResult.id, { displayName: caseDetails.mother }).then(r => {
+          console.log(`Relate (case: ${caseResult.id}, from: ${subjectId}, to: ${r.id}, type: Mother)`)
+          api.addCaseSubjectRelationship(caseResult.id, subjectId, r.id, "Mother");
+        }));
+      }
+      if (caseDetails.father) {
+        createPromises.push(api.addPersonForCase(caseResult.id, { displayName: caseDetails.father }).then(r => {
+          console.log(`Relate (case: ${caseResult.id}, from: ${subjectId}, to: ${r.id}, type: Father)`)
+          api.addCaseSubjectRelationship(caseResult.id, subjectId, r.id, "Father");
+        }));
+      }
+
+      for (let i = 0; i < siblings.length; i++) {
+        const sib = siblings[i];
+        createPromises.push(api.addPersonForCase(caseResult.id, { displayName: sib.name }).then(r => {
+          console.log(`Relate (case: ${caseResult.id}, from: ${subjectId}, to: ${r.id}, type: ${sib.relation})`)
+          api.addCaseSubjectRelationship(caseResult.id, subjectId, r.id, sib.relation);
+        }));
+      }
+      for (let i = 0; i < related.length; i++) {
+        const rel = related[i];
+        createPromises.push(api.addPersonForCase(caseResult.id, { displayName: rel.name }).then(r => {
+          console.log(`Relate (case: ${caseResult.id}, from: ${subjectId}, to: ${rel.id}, type: ${rel.relation})`)
+        }));
+      }
+      Promise.all(createPromises).then(dispatch(caseSaved(caseResult)));
     })
   }
 }
