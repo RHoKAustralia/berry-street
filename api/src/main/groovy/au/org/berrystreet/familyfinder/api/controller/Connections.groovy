@@ -29,7 +29,7 @@ class Connections {
     @Autowired
     ConnectionService connectionService
 
-    @ApiOperation(value = '', notes = 'Gets connections of `Case` identified with `caseId`', response = Connection)
+    @ApiOperation(value = '', notes = 'Gets connections of `Case` identified with `caseId`', response = List)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(method = GET)
     List<Connection> listConnections(
@@ -38,7 +38,7 @@ class Connections {
     }
 
     @ApiOperation(value = '', notes = 'Create connection')
-    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
+    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response')])
     @RequestMapping(method = POST)
     void createConnection(
             @ApiParam(value = 'from', required = true) @RequestParam('fromId') Long fromId,
@@ -58,7 +58,7 @@ class Connections {
     }
 
     @ApiOperation(value = '/{connectionId}', notes = 'Update connection')
-    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
+    @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response')])
     @RequestMapping(method = PUT, value= '/{connectionId}')
     void updateConnection(
             @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId,
