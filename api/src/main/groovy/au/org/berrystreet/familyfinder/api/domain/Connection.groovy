@@ -13,24 +13,24 @@ import org.springframework.stereotype.Component
 @Component
 @RelationshipEntity(type = 'CONNECTION')
 class Connection extends GraphItem {
+
     @StartNode
     GraphNode from
+
     @EndNode
     GraphNode to
+
     @ApiModelProperty
-    String relationship
+    String type
+
     @ApiModelProperty
     String notes
 
-    Connection() {}
-
-    Connection(GraphNode from, GraphNode to, String relationship, String notes) {
-        this.from = from
-        this.to = to
-        this.relationship = relationship
-        this.notes = notes
-
-        this.from.connections.add(this)
-        this.to.connections.add(this)
+    static Connection connect(GraphNode from, GraphNode to, String type, String notes) {
+        Connection c = new Connection(from: from, to: to, type: type, notes: notes)
+        from.connections.add(c)
+        to.connections.add(c)
+        c
     }
+
 }

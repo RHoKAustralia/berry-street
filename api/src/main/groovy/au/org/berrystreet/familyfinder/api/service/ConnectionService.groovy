@@ -16,18 +16,23 @@ class ConnectionService extends GenericService<Connection> {
     @Autowired
     ConnectionRepository connectionRepository
 
-    void create(Long fromId, Long toId, String relationship, String notes) {
-        GraphNode from = graphNodeService.find(fromId) as GraphNode
-        GraphNode to = graphNodeService.find(toId) as GraphNode
-        Connection conn = new Connection(from, to, relationship, notes)
-        connectionRepository.save(conn)
+    void create(Long fromId, Long toId, String type, String notes) {
+        connectionRepository.save(
+            Connection.connect(
+              graphNodeService.find(fromId),
+              graphNodeService.find(toId),
+              type,
+              notes
+            )
+        )
     }
 
-    void update(Long connectionId, String relationship, String notes) {
+    void update(Long connectionId, String type, String note) {
         Connection conn = connectionRepository.findOne(connectionId)
-        conn.setRelationship(relationship)
-        conn.setNotes(notes)
-
+        conn.with {
+            relationship = type
+            notes = note
+        }
         connectionRepository.save(conn)
     }
 
@@ -41,6 +46,6 @@ class ConnectionService extends GenericService<Connection> {
 
     @Override
     GraphRepository<Connection> getRepository() {
-        return connectionRepository
+        connectionRepository
     }
 }

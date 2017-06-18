@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
 import static org.springframework.web.bind.annotation.RequestMethod.GET
 import static org.springframework.web.bind.annotation.RequestMethod.POST
-import static org.springframework.web.bind.annotation.RequestMethod.PUT
+import static org.springframework.web.bind.annotation.RequestMethod.PATCH
 
 @RestController
 @RequestMapping(value = '/cases', produces = [APPLICATION_JSON])
@@ -69,7 +69,7 @@ class Cases {
         @ApiResponse(code = 200, message = 'Successfully updated `Case`', response = Case),
         @ApiResponse(code = 404, message = 'Could not find `Case`', response = Void)
     ])
-    @RequestMapping(method = PUT, value = '/{id}', consumes = [APPLICATION_JSON])
+    @RequestMapping(method = PATCH, value = '/{id}', consumes = [APPLICATION_JSON])
     Case update(
         @ApiParam(value = 'ID of `Case` to update', required = true) @PathVariable('id') Long id,
         @ApiParam(value = 'A JSON string containing `Case` details', required = true) @RequestBody Case body

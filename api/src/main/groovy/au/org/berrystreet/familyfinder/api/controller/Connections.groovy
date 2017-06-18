@@ -34,7 +34,8 @@ class Connections {
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(method = GET)
     List<Connection> listConnections(
-            @ApiParam(value = 'ID of case to fetch', required = true) @PathVariable('caseId') Long caseId) {
+        @ApiParam(value = 'ID of case to fetch', required = true) @PathVariable('caseId') Long caseId
+    ) {
         connectionService.getConnections(caseId)
     }
 
@@ -42,19 +43,20 @@ class Connections {
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response')])
     @RequestMapping(method = POST)
     void createConnection(
-            @ApiParam(value = 'from', required = true) @RequestParam('fromId') Long fromId,
-            @ApiParam(value = 'to', required = true) @RequestParam('toId') Long toId,
-            @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
-            @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes
+        @ApiParam(value = 'from', required = true) @RequestParam('fromId') Long fromId,
+        @ApiParam(value = 'to', required = true) @RequestParam('toId') Long toId,
+        @ApiParam(value = 'type', required = true) @RequestParam('type') String type,
+        @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes
     ) {
-        connectionService.create(fromId, toId, relationship, notes)
+        connectionService.create(fromId, toId, type, notes)
     }
 
     @ApiOperation(value = '/{connectionId}', notes = 'Gets connection with `connectionId`', response = Connection)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(method = GET, value = '/{connectionId}')
     Connection getConnection(
-            @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId) {
+        @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId
+    ) {
         connectionService.find(connectionId)
     }
 
@@ -62,9 +64,9 @@ class Connections {
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response')])
     @RequestMapping(method = PATCH, value= '/{connectionId}')
     void updateConnection(
-            @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId,
-            @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
-            @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes
+        @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId,
+        @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
+        @ApiParam(value = 'notes', required = false) @RequestParam('notes') String notes
     ) {
         connectionService.update(connectionId, relationship, notes)
     }
@@ -73,7 +75,7 @@ class Connections {
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Connection)])
     @RequestMapping(method = DELETE, value= '/{connectionId}')
     void updateConnection(
-            @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId
+        @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId
     ) {
         connectionService.delete(connectionId)
     }

@@ -11,7 +11,7 @@ import org.neo4j.ogm.annotation.NodeEntity
 class Group extends GraphNode {
 
     @JsonProperty @ApiModelProperty
-    String name;
+    String name
 
     @Override
     String getDisplayName() {
