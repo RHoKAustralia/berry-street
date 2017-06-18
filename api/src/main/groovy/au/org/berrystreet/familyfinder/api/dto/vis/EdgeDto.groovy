@@ -1,4 +1,4 @@
-package au.org.berrystreet.familyfinder.api.service.vis.dto
+package au.org.berrystreet.familyfinder.api.dto.vis
 
 class EdgeDto {
     private long from

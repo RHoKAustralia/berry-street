@@ -1,8 +1,8 @@
-package au.org.berrystreet.familyfinder.api.service
+package au.org.berrystreet.familyfinder.api
 
-import au.org.berrystreet.familyfinder.api.service.vis.dto.EdgeDto
-import au.org.berrystreet.familyfinder.api.service.vis.dto.NodeDto
-import au.org.berrystreet.familyfinder.api.service.vis.dto.VisDto
+import au.org.berrystreet.familyfinder.api.dto.vis.EdgeDto
+import au.org.berrystreet.familyfinder.api.dto.vis.NodeDto
+import au.org.berrystreet.familyfinder.api.dto.vis.VisDto
 import org.springframework.stereotype.Service
 
 

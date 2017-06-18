@@ -1,7 +1,7 @@
 package au.org.berrystreet.familyfinder.api.controller
 
-import au.org.berrystreet.familyfinder.api.service.VisService
-import au.org.berrystreet.familyfinder.api.service.vis.dto.VisDto
+import au.org.berrystreet.familyfinder.api.VisService
+import au.org.berrystreet.familyfinder.api.dto.vis.VisDto
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
