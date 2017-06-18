@@ -76,6 +76,14 @@ export default class CaseInformationForm extends Component {
                 <fieldset>
                     <legend>Referral Information</legend>
                     <div className="form-group">
+                        <label htmlFor="referralStatus">Status</label>
+                        <Field name="referralStatus" component="select" className="form-control">
+                            <option />
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                        </Field>
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="referralSource">Referral Source</label>
                         <Field name="referralSource" component="input" type="text" className="form-control" />
                     </div>
