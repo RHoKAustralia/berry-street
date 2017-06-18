@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController
 import static au.org.berrystreet.familyfinder.api.Constants.APPLICATION_JSON
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE
 import static org.springframework.web.bind.annotation.RequestMethod.GET
+import static org.springframework.web.bind.annotation.RequestMethod.PATCH
 import static org.springframework.web.bind.annotation.RequestMethod.POST
 import static org.springframework.web.bind.annotation.RequestMethod.PUT
 
@@ -59,7 +60,7 @@ class Connections {
 
     @ApiOperation(value = '/{connectionId}', notes = 'Update connection')
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response')])
-    @RequestMapping(method = PUT, value= '/{connectionId}')
+    @RequestMapping(method = PATCH, value= '/{connectionId}')
     void updateConnection(
             @ApiParam(value = 'ID of connection to fetch', required = true) @PathVariable('connectionId') Long connectionId,
             @ApiParam(value = 'relationship', required = true) @RequestParam('relationship') String relationship,
