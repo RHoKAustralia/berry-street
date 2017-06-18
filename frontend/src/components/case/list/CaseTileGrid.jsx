@@ -3,8 +3,8 @@ import { Link } from 'react-router'
 
 class CaseTile extends Component {
   render () {
-    const subjects = this.props.case.subjects || []
-    let person = subjects.length > 0 && subjects[0] ? subjects[0].person : null
+    const { subject } = this.props.case
+    let person = subject
     if (!person) {
       person = {
         image: `src/assets/images/child_case_720.jpg`,

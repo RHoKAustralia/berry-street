@@ -38,11 +38,11 @@ class CaseView extends Component {
         <div className="alert alert-info">Loading...</div>
       </div>
     } else {
-      const subject = ffCase.subjects[0];
+      const { subject } = ffCase
       return <div className="container-fluid">
         <div className="media">
           <div className="media-body">
-            <h4 className="media-heading">Case Profile: {subject.person.givenNames}</h4>
+            <h4 className="media-heading">Case Profile: {subject.givenNames}</h4>
           </div>
           <div className="media-right">
             <img alt="64x64"
@@ -55,7 +55,7 @@ class CaseView extends Component {
         </div>
         <div className="row">
           <div className="col-md-6">
-            <SubjectCard {...subject.person} />
+            <SubjectCard {...subject} />
           </div>
           <div className="col-md-6">
             <CaseGraph />

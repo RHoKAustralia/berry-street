@@ -20,8 +20,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST
 import static org.springframework.web.bind.annotation.RequestMethod.PATCH
 
 @RestController
-@RequestMapping(value = '/groups', produces = [APPLICATION_JSON])
-@Api(value = '/groups', description = 'the groups API')
+@RequestMapping(value = '/cases/{caseId}/groups', produces = [APPLICATION_JSON])
+@Api(value = '/cases/{caseId}/groups', description = 'the groups API')
 @CrossOrigin(origins = '*')
 class Groups {
 
