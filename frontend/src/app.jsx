@@ -18,7 +18,7 @@ import { Provider } from 'react-redux'
 import { caseReducer, childReducer, selectedCaseReducer, personReducer, authReducer } from './reducers.jsx'
 import { reducer as formReducer } from 'redux-form'
 import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 
 const reducer = combineReducers({
   cases: caseReducer,
