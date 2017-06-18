@@ -18,10 +18,11 @@ function mapDispatchToProps (dispatch, ownProps) {
 class CreateNewCaseTile extends Component {
   render () {
     return (
-      <Link to='/cases/new/child'>
-        <h3>New Case<br />&nbsp;</h3>
-        <h4>&nbsp;</h4>
-      </Link>
+      <div>
+        <Link to='/cases/new/child' className="btn">
+          <h3>New Case<br />&nbsp;</h3>
+        </Link>
+      </div>
     )
   }
 }

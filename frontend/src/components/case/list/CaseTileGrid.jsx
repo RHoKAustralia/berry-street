@@ -32,11 +32,6 @@ class CaseTile extends Component {
         </div>
         <div className="col-md-2">
           <Link to={`/cases/${this.props.case.id}`}>
-            graph
-          </Link>
-        </div>
-        <div className="col-md-2">
-          <Link to={`/cases/${this.props.case.id}`}>
             edit
           </Link>
         </div>
