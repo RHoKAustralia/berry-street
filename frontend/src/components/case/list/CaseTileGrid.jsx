@@ -20,10 +20,10 @@ class CaseTile extends Component {
           </Link>
         </div>
         <div className="col-md-2">
-          people
+          8 people
         </div>
         <div className="col-md-2">
-          days left
+          12 days left
         </div>
         <div className="col-md-2">
           <Link to={`/cases/${this.props.case.id}`}>
