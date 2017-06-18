@@ -20,8 +20,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST
 import static org.springframework.web.bind.annotation.RequestMethod.PATCH
 
 @RestController
-@RequestMapping(value = '/people', produces = [APPLICATION_JSON])
-@Api(value = '/people', description = 'the person API')
+@RequestMapping(value = '/cases/{caseId}/people', produces = [APPLICATION_JSON])
+@Api(value = '/cases/{caseId}/people', description = 'the person API')
 @CrossOrigin(origins='*')
 class People {
 
