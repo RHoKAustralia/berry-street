@@ -424,6 +424,18 @@ const getCases = () => {
   }
 }
 
+const getArchivedCases = () => {
+  if (MOCK_BACKEND) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(CASE_DATA)
+      }, 2000)
+    })
+  } else {
+    return sendRequest(`${SERVICE_URL_BASE}/cases`, 'GET')
+  }
+}
+
 const getCase = (id) => {
   if (MOCK_BACKEND) {
     return new Promise((resolve, reject) => {
@@ -483,6 +495,7 @@ export default (baseUrl) => {
     getPlacementTypes,
     getUsers,
     getCases,
+    getArchivedCases,
     getCase,
     addCase,
     addSubjectToCase,

@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import CaseTileGrid from './case/list/CaseTileGrid.jsx'
+import apiFunc from '../api.jsx'
+
+const api = apiFunc()
 
 function mapStateToProps (state, ownProps) {
   return {
@@ -11,18 +15,47 @@ function mapDispatchToProps (dispatch, ownProps) {
   return {}
 }
 
+class CreateNewCaseTile extends Component {
+  render () {
+    return (
+      <Link to='/cases/new/child'>
+        <h3>New Case<br />&nbsp;</h3>
+        <h4>&nbsp;</h4>
+      </Link>
+    )
+  }
+}
+
 class HomeScreen extends Component {
   constructor (props) {
     super(props)
+      this.state = {
+        cases: null,
+        archivedCases: null,
+        error: null
+      }
+  }
+  componentDidMount () {
+   api.getCases()
+     .then(c =>
+       api.getArchivedCases()
+         .then(ac => this.setState(Object.assign({},this.state,{cases: c, archivedCases: ac})))
+         .catch(err => this.setState({ error: err })))
+     .catch(err => this.setState({ error: err }));
   }
   render () {
     const { profile } = this.props
     if (profile) {
       return <div className="portfolio container">
         <div className="page-header">
-          <h1>My Cases</h1>
+          <h1>Your Cases</h1>
         </div>
-        <CaseTileGrid />
+        <CaseTileGrid cases={this.state.cases}/>
+        <CreateNewCaseTile />
+        <div className="page-header">
+            <h1><p>Archived Cases</p></h1>
+        </div>
+        <CaseTileGrid cases={this.state.archivedCases}/>
       </div>
     } else {
       return <div className="alert alert-info">

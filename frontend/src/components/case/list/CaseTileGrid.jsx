@@ -1,32 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import apiFunc from '../../../api.jsx'
-
-const api = apiFunc()
-
-const TILE_WIDTH = 250
-const TILE_HEIGHT = 400
-const TILE_VERT_MARGIN = 30
-
-class CreateNewCaseTile extends Component {
-  render () {
-    return (
-      <div className="col-md-3">
-        <div className="work nopad">
-          <Link to='/cases/new/case' style={{ width: TILE_WIDTH }} className="rlisting">
-            <img src="src/assets/images/add_child_case_720.jpg" className="img-responsive" />
-            <h3>New Case<br />&nbsp;</h3>
-            <h4>&nbsp;</h4>
-          </Link>
-        </div>
-      </div>
-    )
-  }
-}
 
 class CaseTile extends Component {
   render () {
-    const { subjects } = this.props.case
+    const subjects = this.props.case.subjects || []
     let person = subjects.length > 0 && subjects[0] ? subjects[0].person : null
     if (!person) {
       person = {
@@ -36,12 +13,31 @@ class CaseTile extends Component {
       }
     }
     return (
-      <div className="col-md-3">
-        <div className="work nopad">
-          <Link to={`/cases/${this.props.case.id}`} className="rlisting">
-              <img src={person.image || `src/assets/images/child_case_720.jpg`} className="img-responsive" />
-              <h3>{`${person.familyName}`}<br />{`${person.givenNames}`}</h3>
-                <h4>{this.props.case.phaseOfInvolvement}</h4>
+      <div className="work">
+        <div className="col-md-2">
+          <Link to={`/cases/${this.props.case.id}`}>
+            {`${person.givenNames} ${person.familyName}`}
+          </Link>
+        </div>
+        <div className="col-md-2">
+          people
+        </div>
+        <div className="col-md-2">
+          days left
+        </div>
+        <div className="col-md-2">
+          <Link to={`/cases/${this.props.case.id}`}>
+            view
+          </Link>
+        </div>
+        <div className="col-md-2">
+          <Link to={`/cases/${this.props.case.id}`}>
+            graph
+          </Link>
+        </div>
+        <div className="col-md-2">
+          <Link to={`/cases/${this.props.case.id}`}>
+            edit
           </Link>
         </div>
       </div>
@@ -52,23 +48,14 @@ class CaseTile extends Component {
 class CaseTileGrid extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      summary: null,
-      error: null
-    }
   }
-  componentDidMount () {
-    api.getCases()
-       .then(r => this.setState({ summary: r }))
-       .catch(err => this.setState({ error: err }))
-  }
+
   render () {
-    const { summary, error } = this.state
+    const summary = this.props.cases
     if (summary) {
       return (
-        <div className="row">
-          <CreateNewCaseTile />
-          {summary.map((item) => <CaseTile key={item.id} case={item} />)}
+        <div>
+          {summary.map((item) => <CaseTile key={item.id} case={item}/>)}
         </div>
       )
     } else {
