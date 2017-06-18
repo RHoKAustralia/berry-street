@@ -3,6 +3,7 @@ import apiFunc from '../../../api.jsx'
 import { CaseWorkerCard } from './CaseWorkerCard.jsx'
 import { SubjectCard } from './SubjectCard.jsx'
 import { FamilyList } from '../list/FamilyList.jsx'
+import CaseGraph from './CaseGraph.jsx'
 
 const api = apiFunc()
 
@@ -55,6 +56,9 @@ class CaseView extends Component {
         <div className="row">
           <div className="col-md-6">
             <SubjectCard {...subject.person} />
+          </div>
+          <div className="col-md-6">
+            <CaseGraph />
           </div>
         </div>
       </div>
