@@ -5,13 +5,49 @@ let options = {
     layout: {
         hierarchical: false
     },
+    nodes: {
+        size: 30,
+        color: {
+            border: '#222222',
+            background: '#666666'
+        }
+    },
     edges: {
-        color: "#000000"
+        selectionWidth: 1
+    },
+    groups: {
+        subject: {
+            shape: 'icon',
+            icon: {
+                face: 'FontAwesome',
+                code: '\uf2be',
+                size: 50,
+                color: '#57169a'
+            }
+        },
+        family: {
+            shape: 'icon',
+            icon: {
+                face: 'FontAwesome',
+                code: '\uf2bd',
+                size: 50,
+                color: '#aa00ff'
+            }
+        },
+        person: {
+            shape: 'icon',
+            icon: {
+                face: 'FontAwesome',
+                code: '\uf007',
+                size: 50,
+                color: '#aa00ff'
+            }
+        }
     }
 };
 
 let events = {
-    select: function(event) {
+    select: function (event) {
         var { nodes, edges } = event;
         console.log("Selected nodes:");
         console.log(nodes);
@@ -21,22 +57,22 @@ let events = {
 }
 
 export default class CaseGraph extends Component {
-    constructor({initialGraph}) {
+    constructor({ initialGraph }) {
         super();
         this.state = {
             graph: {
                 nodes: [
-                    {id: 1, label: 'Node 1', color: '#e04141'},
-                    {id: 2, label: 'Node 2', color: '#e09c41'},
-                    {id: 3, label: 'Node 3', color: '#e0df41'},
-                    {id: 4, label: 'Node 4', color: '#7be041'},
-                    {id: 5, label: 'Node 5', color: '#41e0c9'}
+                    { id: 1, label: 'Bart Simpson', group: "subject" },
+                    { id: 2, label: 'Lisa Simpson', group: "family" },
+                    { id: 3, label: 'Homer Simpson', group: "family" },
+                    { id: 4, label: 'Marge Simpson', group: "family" },
+                    { id: 5, label: 'Milhouse Van Houten', group: "person" }
                 ],
                 edges: [
-                    {from: 1, to: 2},
-                    {from: 1, to: 3},
-                    {from: 2, to: 4},
-                    {from: 2, to: 5}
+                    { from: 1, to: 2, label: "Sibling", font: {align: 'middle'} },
+                    { from: 1, to: 3, label: "Father", font: {align: 'middle'} },
+                    { from: 1, to: 4, label: "Mother", font: {align: 'middle'} },
+                    { from: 1, to: 5, label: "Friend", font: {align: 'middle'} }
                 ]
             }
         };
@@ -66,10 +102,12 @@ export default class CaseGraph extends Component {
         }
     }*/
     render() {
+        const { graph } = this.state
+        const { width, height } = this.props
         return (<div>
             <fieldset>
                 <legend>Relationship Graph</legend>
-                <Graph graph={this.state.graph} options={options} events={events} />
+                <Graph graph={graph} options={options} events={events} />
             </fieldset>
         </div>);
     }
