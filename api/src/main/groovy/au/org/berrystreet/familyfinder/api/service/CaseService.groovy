@@ -13,5 +13,8 @@ class CaseService extends GenericService<Case> {
     private CaseRepository repository
 
     @Override
-    GraphRepository<Case> getRepository() { repository }
+    GraphRepository<Case> getRepository() {
+      repository
+    }
+
 }
