@@ -4,7 +4,8 @@ import pact from 'pact'
 import api from './api'
 
 import Person from './api.spec.Person'
-const testSuites = [Person]
+import Relationship from './api.spec.Relationship'
+const testSuites = [Person, Relationship]
 
 const mockServerStartupTimeout = 15000 // Slow in docker.
 const port = 1234
