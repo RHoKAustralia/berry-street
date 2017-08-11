@@ -4,7 +4,6 @@ before_install:
 - jdk_switcher use oraclejdk8
 - rm -rf ~/.nvm && git clone --depth=1 https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 8
 script:
-- ./gradlew check
 - cd ../frontend && npm install && npm test -- --coverage && npm run pactPublish
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -12,7 +11,3 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
-  - frontend/node_modules
-notifications:
-  slack:
-    secure: hk69u5JqE5Cu9DUgdGaSedQRU5ZiKKn4H8oxk7TArgX9vQwL5mt+1IoVOEARZwHq4N0yHamFwueh2zg6+C66Xi2s3c8kmQar3T6gNXoiszIj1+2DXcaJ9mR2+JxrA6A/v1u+WLB7zf7Tm1UvNvZJ6d+xuGz1Cg3E9CP+4TuWiwx2f8frxPDl6oyqOzJ6S8Xwe8WAW/a0EOZKOrThtl1g1eXBRsYOolyA7Vc7IUWvpUSbtyDX+D/9g5HEzBS2WQ0XvA+vUm7sk1BJ2g5HNwL19dwe3NU2C42XIS64IzHiUBBdZMXsFrONh1NaEw+HK0RHrHt/WpJhS1XuxsZmpsuTV/fqWACSw67/92/hT8OIOg6gWz4ZI9JeoEZSabqSif6sYmLszDk6ZL52INuarh8RPHldFrc/58jzbIRzfUXpUtu4gVj2MWCfeIaN3J39MTG4rdVq3kqjQFdCLYENKY+fZl7UrOrfNG3dbZuBnmvYERKgAU92NCvBOgiEpY6YJAunwpG5zTY+LCKcTUnUZ2wPFlcS/YPGrG6Bhe52P6J3GAfF+Vl9DeZZyGwDQ1DJzyV8pG8m3FsjpEepxVJo2YEagNWRj4UbJdXyFV1dw8eFNQN20dVT6hoyhF3OPqsvmii8ovp6KtIk+hls2Rxcswht1yxjxH2xMnfNaRLeDMDpuz8=
