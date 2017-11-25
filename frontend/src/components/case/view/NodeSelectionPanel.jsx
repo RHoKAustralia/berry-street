@@ -15,6 +15,7 @@ const Icon = ({ group }) => {
             return <i className="fa fa-user" />;
     }
 }
+import SubjectEdit from './SubjectEdit.jsx'
 
 export class NodeSelectionPanel extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export class NodeSelectionPanel extends Component {
         return <div className="container-fluid">
             <h1><Icon group={node.group} /> {node.label}</h1>
             <hr />
-            <p>Some form goes here</p>
+            <SubjectEdit subject={node} />
         </div>;
     }
 }

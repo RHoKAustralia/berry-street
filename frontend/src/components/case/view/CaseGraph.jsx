@@ -50,10 +50,20 @@ const UNKNOWN_NODE_STYLE = () => {
 
 let options = {
     layout: {
-        hierarchical: false
+        hierarchical: {
+            enabled:false,
+            levelSeparation: 150,
+            nodeSpacing: 150,
+            treeSpacing: 200,
+            blockShifting: true,
+            edgeMinimization: false,
+            parentCentralization: true,
+            direction: 'UD',        // UD, DU, LR, RL
+            sortMethod: 'hubsize'   // hubsize, directed
+        }
     },
     physics: {
-        enabled: false
+        enabled: true
     },
     nodes: {
         size: 30,
