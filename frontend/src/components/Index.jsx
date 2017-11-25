@@ -54,11 +54,13 @@ class HomeScreen extends Component {
           <h1>Your Cases</h1>
         </div>
         <CaseTileGrid cases={this.state.cases}/>
+        {/*
         <CreateNewCaseTile />
-        <div className="page-header">
+        <div className="page-header"> 
             <h1><p>Archived Cases</p></h1>
         </div>
         <CaseTileGrid cases={this.state.archivedCases}/>
+        */}
       </div>
     } else {
       return <div className="alert alert-info">
