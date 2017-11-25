@@ -3,15 +3,8 @@ import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
 import App from './components/App.jsx'
-import About from './components/About.jsx'
-import PersonList from './components/PersonList.jsx'
-import EditPerson from './components/EditPerson.jsx'
-import Person from './components/Person.jsx'
-import CaseView from './components/case/view/CaseView.jsx'
-import CaseForm from './components/case/create/CaseForm.jsx'
-import NewCaseWizard from './components/case/create/NewCaseWizard.jsx'
 import Index from './components/Index.jsx'
-import Login from './components/Login.jsx'
+import CaseViewPage from './components/case/CaseViewPage.jsx'
 
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
@@ -38,15 +31,8 @@ ReactDOM.render((
         <Router history={hashHistory}>
           <Route path="/" component={App} >
             <IndexRoute component={Index} />
-            <Route path="/about" component={About} />
-            <Route path="/users" component={PersonList} />
-            <Route path="/cases/new/case" component={NewCaseWizard} />
-            <Route path="/cases/:caseId" component={CaseView} />
-            <Route path="/cases/:caseId/edit" component={CaseForm} />
-            <Route path="/people" component={PersonList} />
-            <Route path="/people/new" component={EditPerson} />
-            <Route path="/people/:id" component={Person} />
-            <Route path="/people/:id/edit" component={EditPerson} />
+            <Route path="/cases/new" component={CaseViewPage} />
+            <Route path="/cases/:caseId" component={CaseViewPage} />
           </Route>
           <Route path="*" component={App} />
         </Router>

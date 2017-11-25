@@ -1,11 +1,70 @@
 import React, { Component } from "react"
 import Graph from 'react-graph-vis'
 import apiFunc from '../../../api.jsx'
+import { CaseGraphModel } from "../model/CaseGraph"
 const api = apiFunc()
+
+export const TYPE_UNKNOWN_MOTHER = "unknown_mother";
+export const TYPE_UNKNOWN_FATHER = "unknown_father";
+export const TYPE_SUBJECT = "subject";
+
+const SELECTED_NODE_COLOR = "#f49b42";
+
+export const CreateDefaultGraph = () => {
+    const model = new CaseGraphModel();
+    model.addNode(1, { label: "Bart Simpson", group: TYPE_SUBJECT });
+    model.addNode(2, { label: 'Father', group: TYPE_UNKNOWN_FATHER });
+    model.addNode(3, { label: 'Mother', group: TYPE_UNKNOWN_MOTHER });
+    model.addEdge(1, 2, { label: "Father", tag: {}, font: {align: 'middle'} });
+    model.addEdge(1, 3, { label: "Mother", tag: {}, font: {align: 'middle'} });
+    return model;
+}
+
+const example_color = {
+    background:'cyan',
+    border:'blue',
+    highlight:{
+        background:'red',
+        border:'blue'
+    },
+    hover:{
+        background:'white',
+        border:'red'
+    }
+};
+
+const FA_ICON_NODE_STYLE = (code, color, selectedColor) => {
+    return {
+        shape: 'icon',
+        icon: {
+            face: 'FontAwesome',
+            code: code,
+            size: 50,
+            color: color
+            /*
+            color: {
+                background: color,
+                border: color,
+                highlight: {
+                    background: selectedColor,
+                    border: selectedColor
+                }
+            }
+            */
+        }
+    }
+}
+
+const UNKNOWN_NODE_STYLE = () => {
+    return FA_ICON_NODE_STYLE('\uf29c', '#b1c0d8', SELECTED_NODE_COLOR)
+}
 
 let options = {
     layout: {
         hierarchical: false
+    },
+    physics: {
+        enabled: false
     },
     nodes: {
         size: 30,
@@ -18,67 +77,31 @@ let options = {
         selectionWidth: 1
     },
     groups: {
-        subject: {
-            shape: 'icon',
-            icon: {
-                face: 'FontAwesome',
-                code: '\uf2be',
-                size: 50,
-                color: '#56e02c'
-            }
-        },
-        family: {
-            shape: 'icon',
-            icon: {
-                face: 'FontAwesome',
-                code: '\uf2bd',
-                size: 50,
-                color: '#5fddb1'
-            }
-        },
-        person: {
-            shape: 'icon',
-            icon: {
-                face: 'FontAwesome',
-                code: '\uf007',
-                size: 50,
-                color: '#2844c1'
-            }
-        }
+        unknown_father: UNKNOWN_NODE_STYLE(),
+        unknown_mother: UNKNOWN_NODE_STYLE(),
+        subject: FA_ICON_NODE_STYLE('\uf2be', '#56e02c', SELECTED_NODE_COLOR),
+        family: FA_ICON_NODE_STYLE('\uf2bd', '#5fddb1', SELECTED_NODE_COLOR),
+        person: FA_ICON_NODE_STYLE('\uf007', '#2844c1', SELECTED_NODE_COLOR)
     }
 };
 
-let events = {
-    select: function (event) {
-        var { nodes, edges } = event;
-        console.log("Selected nodes:");
-        console.log(nodes);
-        console.log("Selected edges:");
-        console.log(edges);
-    }
-}
-
 export default class CaseGraph extends Component {
-    constructor({ initialGraph }) {
-        super();
-        this.state = {
-            graph: {
-                nodes: [
-                    { id: 1, label: 'Bart Simpson', group: "subject" },
-                    { id: 2, label: 'Lisa Simpson', group: "family" },
-                    { id: 3, label: 'Homer Simpson', group: "family" },
-                    { id: 4, label: 'Marge Simpson', group: "family" },
-                    { id: 5, label: 'Milhouse Van Houten', group: "person" }
-                ],
-                edges: [
-                    { from: 1, to: 2, label: "Sibling", font: {align: 'middle'} },
-                    { from: 1, to: 3, label: "Father", font: {align: 'middle'} },
-                    { from: 1, to: 4, label: "Mother", font: {align: 'middle'} },
-                    { from: 1, to: 5, label: "Friend", font: {align: 'middle'} }
-                ]
-            }
-        };
-    }/*
+    constructor(props) {
+        super(props);
+        this.events = {
+            select: this.onSelect
+        }
+    }
+    onSelect = (e) => {
+        const { nodes, edges } = e;
+        const { onNodeSelected, onEdgeSelected } = this.props;
+        if (nodes && nodes.length == 1 && onNodeSelected) {
+            onNodeSelected(nodes[0]);
+        } else if (edges && edges.length == 1 && onEdgeSelected) {
+            onEdgeSelected(edges[0]);
+        }
+    };
+    /*
     clickHandler() {
         const { graph } = this.state;
         const nodes = Array.from(graph.nodes);
@@ -120,19 +143,7 @@ export default class CaseGraph extends Component {
         */
     }
     render() {
-        const { graph } = this.state
-        const { width, height } = this.props
-        if (graph) {
-            return (<div>
-                <fieldset>
-                    <legend>Relationship Graph</legend>
-                    <Graph graph={graph} options={options} events={events} />
-                </fieldset>
-            </div>);
-        } else {
-            return <div className="alert alert-info">
-                Preparing graph
-            </div>
-        }
+        const { width, height, graph, style } = this.props
+        return <Graph graph={graph} options={options} events={this.events} style={style} />
     }
 }
