@@ -78,7 +78,7 @@ export default class CaseViewPage extends Component {
                 const TOP_OFFSET = 55;
                 const PANEL_WIDTH = "25%";
                 const style = { position: "absolute", left: 0, right: PANEL_WIDTH, top: TOP_OFFSET, bottom: 0 };
-                const panelStyle = { position: "absolute", right: 0, top: TOP_OFFSET, bottom: 0, width: PANEL_WIDTH }
+                const panelStyle = { position: "absolute", right: 0, top: TOP_OFFSET, bottom: 0, width: PANEL_WIDTH, padding: '35px' }
                 return <div>
                     <CaseGraph graph={graph}
                                style={style}
