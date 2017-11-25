@@ -28,42 +28,47 @@ class Groups {
     @Autowired
     GroupService groupService
 
-    @ApiOperation(value = '', notes = 'List all `Group`s')
+    @ApiOperation(value = '', notes = 'List `Group`s for `Case` (by `caseId`)')
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response')])
     @RequestMapping(method = GET, value = '')
-    Iterable<Group> list() {
-        groupService.findAll()
+    Iterable<Group> list(
+        @ApiParam(value = 'ID of `Case` to list from', required = true) @PathVariable('caseId') Long caseId
+    ) {
+        groupService.findAll(caseId)
     }
 
-    @ApiOperation(value = '', notes = 'Creates a new `Group`', response = Group)
+    @ApiOperation(value = '', notes = 'Create a new `Group` in this `Case`', response = Group)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Group)])
     @RequestMapping(method = POST, value = '', consumes = [APPLICATION_JSON])
     Group create(
+        @ApiParam(value = 'ID of `Case` to create in', required = true) @PathVariable('caseId') Long caseId,
         @ApiParam(value = '`Group` object to create', required = true) @RequestBody Group body
     ) {
-        groupService.create(body)
+        groupService.create(caseId, body)
     }
 
-    @ApiOperation(value = '', notes = 'Gets `Group` identified with `id`', response = Group)
+    @ApiOperation(value = '', notes = 'Get `Group` by `id` from this `Case`', response = Group)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Group)])
     @RequestMapping(method = GET, value = '/{id}')
     Group find(
-        @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id
+        @ApiParam(value = 'ID of `Case` to fetch from', required = true) @PathVariable('caseId') Long caseId,
+        @ApiParam(value = 'ID of `Group` to fetch', required = true) @PathVariable('id') Long id
     ) {
-        groupService.find(id)
+        groupService.find(caseId, id)
     }
 
-    @ApiOperation(value = '', notes = 'Updates an existing `Group`', response = Group)
+    @ApiOperation(value = '', notes = 'Update `Group` by `id` in this `Case`', response = Group)
     @ApiResponses(value = [
         @ApiResponse(code = 404, message = '`Group` not found', response = Group),
         @ApiResponse(code = 405, message = 'Invalid input', response = Group)
     ])
     @RequestMapping(method = PATCH, value = '/{id}', consumes = [APPLICATION_JSON])
     Group update(
-        @ApiParam(value = 'ID of Group to fetch', required = true) @PathVariable('id') Long id,
-        @ApiParam(value = '`Group` object to update', required = true) @RequestBody Group body
+        @ApiParam(value = 'ID of `Case` to update in', required = true) @PathVariable('caseId') Long caseId,
+        @ApiParam(value = 'ID of `Group` to update', required = true) @PathVariable('id') Long id,
+        @ApiParam(value = '`Group` fields to update', required = true) @RequestBody Group body
     ) {
-        groupService.update(id, body)
+        groupService.update(caseId, id, body)
     }
 
 }

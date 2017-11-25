@@ -28,42 +28,47 @@ class People {
     @Autowired
     PersonService personService
 
-    @ApiOperation(value = '', notes = 'List all `Person`s that match the criteria provided')
+    @ApiOperation(value = '', notes = 'List `Person`s for `Case` (by `caseId`)')
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response')])
     @RequestMapping(method = GET, value = '')
-    Iterable<Person> list() {
-        personService.findAll()
+    Iterable<Person> list(
+        @ApiParam(value = 'ID of `Case` to fetch from', required = true) @PathVariable('caseId') Long caseId
+    ) {
+        personService.findByCaseId(caseId)
     }
 
-    @ApiOperation(value = '', notes = 'Creates a new `Person`', response = Person)
+    @ApiOperation(value = '', notes = 'Create a new `Person` in this `Case`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 405, message = 'Invalid input', response = Person)])
     @RequestMapping(method = POST, value = '', consumes = [APPLICATION_JSON])
     Person create(
+        @ApiParam(value = 'ID of `Case` to create in', required = true) @PathVariable('caseId') Long caseId,
         @ApiParam(value = '`Person` object to create', required = true) @RequestBody Person body
     ) {
-        personService.create(body)
+        personService.create(caseId, body)
     }
 
-    @ApiOperation(value = '', notes = 'Gets `Person` identified with `id`', response = Person)
+    @ApiOperation(value = '', notes = 'Get `Person` by `id` in this `Case`', response = Person)
     @ApiResponses(value = [@ApiResponse(code = 200, message = 'Successful response', response = Person)])
     @RequestMapping(method = GET, value = '/{id}')
     Person find(
+        @ApiParam(value = 'ID of Case to fetch from', required = true) @PathVariable('caseId') Long caseId,
         @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id
     ) {
-        personService.find(id)
+        personService.find(caseId, id)
     }
 
-    @ApiOperation(value = '', notes = 'Updates an existing `Person`', response = Person)
+    @ApiOperation(value = '', notes = 'Update `Person` by `id` in this `Case`', response = Person)
     @ApiResponses(value = [
         @ApiResponse(code = 404, message = '`Person` not found', response = Person),
         @ApiResponse(code = 405, message = 'Invalid input', response = Person)
     ])
     @RequestMapping(method = PATCH, value = '/{id}', consumes = [APPLICATION_JSON])
     Person update(
-        @ApiParam(value = 'ID of person to fetch', required = true) @PathVariable('id') Long id,
+        @ApiParam(value = 'ID of Case to update in', required = true) @PathVariable('caseId') Long caseId,
+        @ApiParam(value = 'ID of Person to update', required = true) @PathVariable('id') Long id,
         @ApiParam(value = '`Person` object to update', required = true) @RequestBody Person body
     ) {
-        personService.update(id, body)
+        personService.update(caseId, id, body)
     }
 
 }

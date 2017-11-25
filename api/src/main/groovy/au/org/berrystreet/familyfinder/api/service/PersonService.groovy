@@ -14,4 +14,9 @@ class PersonService extends GenericService<Person> {
 
     @Override
     GraphRepository<Person> getRepository() { repository }
+
+    List<Person> findByCaseId(Long caseId) {
+        (repository.findAll() as List<Person>) //TODO .filter({ it })
+    }
+
 }
