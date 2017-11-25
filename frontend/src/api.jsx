@@ -1,8 +1,12 @@
-import { MOCK_BACKEND, PEOPLE_DATA, CASE_SUMMARY_DATA, CASE_DATA } from "./mock-data"
-
-var SERVICE_URL_BASE
-
 import fetch from 'isomorphic-fetch'
+
+import {
+  CONNECTIONS_DATA,
+  CASE_DATA
+} from "./mock-data"
+
+export const MOCK_BACKEND = true
+var SERVICE_URL_BASE
 
 function sendRequest (url, method, data) {
   const requestOpts = {
@@ -106,7 +110,7 @@ const getArchivedCases = () => {
 const getCase = (id) => {
   if (MOCK_BACKEND) {
     return new Promise((resolve, reject) => {
-      const singleCase = CASE_SUMMARY_DATA.filter(c => c.case_id === id)
+      const singleCase = CASE_DATA.filter(c => c.case_id === id)
       if (singleCase.length === 1) {
         resolve(singleCase[0])
       } else {
@@ -124,8 +128,7 @@ const getCaseGraph = (id) => {
 
 const addCase = (caseDetails) => {
   if (MOCK_BACKEND) {
-    CASE_DETAILS_DATA.push(caseDetails)
-    CASE_SUMMARY_DATA.push({ staffName: caseDetails.staffName, familyName: caseDetails.familyName, givenNames: caseDetails.givenNames, caseNumber: caseDetails.caseNumber, phase: 'New' })
+    CASE_DATA.push(caseDetails)
     return Promise.resolve(true)
   } else {
     return sendRequest(`${SERVICE_URL_BASE}/cases`, 'POST', caseDetails)

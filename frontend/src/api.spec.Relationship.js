@@ -26,62 +26,24 @@ export default ({ provider, client, headers }) =>
                 "id": 20,
                 "from": {
                   "id": 8,
-                  "givenNames": "Nelson",
-                  "familyName": "Muntz",
-                  "additionalNames": null,
-                  "gender": null,
-                  "dateOfBirth": "1987-04-19",
-                  "atsi": null,
-                  "atsiLocation": null,
-                  "imageUrl": null,
-                  "contactInformation": null,
                   "displayName": "Nelson Muntz"
                 },
                 "to": {
                   "id": 7,
-                  "givenNames": "Groundskeeper",
-                  "familyName": "Willie",
-                  "additionalNames": null,
-                  "gender": null,
-                  "dateOfBirth": "1987-04-19",
-                  "atsi": null,
-                  "atsiLocation": null,
-                  "imageUrl": null,
-                  "contactInformation": null,
                   "displayName": "Groundskeeper Willie"
                 },
-                "type": null,
                 "notes": "new friend"
               },
               {
                 "id": 22,
                 "from": {
                   "id": 7,
-                  "givenNames": "Groundskeeper",
-                  "familyName": "Willie",
-                  "additionalNames": null,
-                  "gender": null,
-                  "dateOfBirth": "1987-04-19",
-                  "atsi": null,
-                  "atsiLocation": null,
-                  "imageUrl": null,
-                  "contactInformation": null,
                   "displayName": "Groundskeeper Willie"
                 },
                 "to": {
                   "id": 5,
-                  "givenNames": "Milhouse",
-                  "familyName": "Van Houten",
-                  "additionalNames": null,
-                  "gender": null,
-                  "dateOfBirth": "1987-04-19",
-                  "atsi": null,
-                  "atsiLocation": null,
-                  "imageUrl": null,
-                  "contactInformation": null,
                   "displayName": "Milhouse Van Houten"
                 },
-                "type": null,
                 "notes": "TEST"
               }
             ]
@@ -98,62 +60,24 @@ export default ({ provider, client, headers }) =>
               "id": 20,
               "from": {
                 "id": 8,
-                "givenNames": "Nelson",
-                "familyName": "Muntz",
-                "additionalNames": null,
-                "gender": null,
-                "dateOfBirth": "1987-04-19",
-                "atsi": null,
-                "atsiLocation": null,
-                "imageUrl": null,
-                "contactInformation": null,
                 "displayName": "Nelson Muntz"
               },
               "to": {
                 "id": 7,
-                "givenNames": "Groundskeeper",
-                "familyName": "Willie",
-                "additionalNames": null,
-                "gender": null,
-                "dateOfBirth": "1987-04-19",
-                "atsi": null,
-                "atsiLocation": null,
-                "imageUrl": null,
-                "contactInformation": null,
                 "displayName": "Groundskeeper Willie"
               },
-              "type": null,
               "notes": "new friend"
             },
             {
               "id": 22,
               "from": {
                 "id": 7,
-                "givenNames": "Groundskeeper",
-                "familyName": "Willie",
-                "additionalNames": null,
-                "gender": null,
-                "dateOfBirth": "1987-04-19",
-                "atsi": null,
-                "atsiLocation": null,
-                "imageUrl": null,
-                "contactInformation": null,
                 "displayName": "Groundskeeper Willie"
               },
               "to": {
                 "id": 5,
-                "givenNames": "Milhouse",
-                "familyName": "Van Houten",
-                "additionalNames": null,
-                "gender": null,
-                "dateOfBirth": "1987-04-19",
-                "atsi": null,
-                "atsiLocation": null,
-                "imageUrl": null,
-                "contactInformation": null,
                 "displayName": "Milhouse Van Houten"
               },
-              "type": null,
               "notes": "TEST"
             }
           ])

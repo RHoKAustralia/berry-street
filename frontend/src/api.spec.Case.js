@@ -29,22 +29,11 @@ export default ({ provider, client, headers }) =>
                 'status': 'Open',
                 'dateOpened': '2016-08-05',
                 'dateClosed': null,
-                'subjects': [
-                  {
-                    'id': 255,
-                    'person': {
-                      'id': 182,
-                      'name': 'Bart Simpson',
-                      'dateOfBirth': '1987-04-19',
-                      'givenNames': 'Bart',
-                      'familyName': 'Simpson'
-                    },
-                    'aCase': {
-                      '@ref': '1'
-                    },
-                    'date': '2016-08-05'
-                  }
-                ]
+                'subject': {
+                  'id': 182,
+                  'displayName': 'Bart Simpson',
+                  'dateOfBirth': '1987-04-19'
+                }
               }
             ]
           }
