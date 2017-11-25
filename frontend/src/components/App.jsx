@@ -104,7 +104,7 @@ const App = React.createClass({
                 <IndexLink to="/" className="navbar-brand">My Cases</IndexLink>
               </div>
               <ul className="nav navbar-nav">
-                <li><Link to='/cases/new/case'>Create Case</Link></li>
+                <li><Link to='/cases'>Create Case</Link></li>
                 {/*
                 <li><Link to='/cases'>Case List</Link></li>
                 <li><Link to='/people'>People</Link></li>

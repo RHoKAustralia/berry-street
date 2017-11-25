@@ -31,8 +31,7 @@ ReactDOM.render((
         <Router history={hashHistory}>
           <Route path="/" component={App} >
             <IndexRoute component={Index} />
-            <Route path="/cases/new" component={CaseViewPage} />
-            <Route path="/cases/:caseId" component={CaseViewPage} />
+            <Route path="/cases(/:caseId)" component={CaseViewPage} />
           </Route>
           <Route path="*" component={App} />
         </Router>

@@ -8,6 +8,9 @@ import CaseGraph, {
 import { CaseGraphModel } from "./model/CaseGraph"
 import { NodeSelectionPanel } from "./view/NodeSelectionPanel.jsx"
 import { EdgeSelectionPanel } from "./view/EdgeSelectionPanel.jsx"
+import apiFunc from '../../api.jsx'
+
+const api = apiFunc()
 
 export default class CaseViewPage extends Component {
     constructor(props) {
@@ -27,9 +30,24 @@ export default class CaseViewPage extends Component {
         //this.setState({ selectedNode: null, selectedEdge: edge });
     }
     componentDidMount() {
-        this.setState({
-            graph: this.graphModel.toVis()
-        });
+        const { caseId } = this.props.params;
+        if (caseId) {
+            api.getCaseGraph(caseId).then(r => {
+                const vis = {
+                    nodes: r.nodes.map(n => {
+                        return { ...n, ...{ group: "person" } }
+                    }),
+                    edges: r.edges
+                };
+                this.setState({
+                    graph: this.graphModel.setFromVis(vis).toVis()
+                });
+            });
+        } else {
+            this.setState({
+                graph: this.graphModel.toVis()
+            });
+        }
     }
     render() {
         const { graph, error } = this.state
