@@ -14,26 +14,16 @@ class CaseTile extends Component {
     }
     return (
       <div className="work">
-        <div className="col-md-2">
+        <div className="col-md-6">
           <Link to={`/cases/${this.props.case.id}`}>
             {`${person.givenNames} ${person.familyName}`}
           </Link>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-3">
           8 people
         </div>
-        <div className="col-md-2">
+        <div className="col-md-3">
           12 days left
-        </div>
-        <div className="col-md-2">
-          <Link to={`/cases/${this.props.case.id}`}>
-            view
-          </Link>
-        </div>
-        <div className="col-md-2">
-          <Link to={`/cases/${this.props.case.id}`}>
-            edit
-          </Link>
         </div>
       </div>
     )
