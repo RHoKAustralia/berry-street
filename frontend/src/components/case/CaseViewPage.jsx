@@ -76,7 +76,7 @@ export default class CaseViewPage extends Component {
             const { selectedNode, selectedEdge } = this.state;
             if (selectedNode || selectedEdge) {
                 const TOP_OFFSET = 55;
-                const PANEL_WIDTH = "50%";
+                const PANEL_WIDTH = "25%";
                 const style = { position: "absolute", left: 0, right: PANEL_WIDTH, top: TOP_OFFSET, bottom: 0 };
                 const panelStyle = { position: "absolute", right: 0, top: TOP_OFFSET, bottom: 0, width: PANEL_WIDTH }
                 return <div>

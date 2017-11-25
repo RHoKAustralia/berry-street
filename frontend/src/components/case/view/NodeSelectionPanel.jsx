@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SubjectEdit from './SubjectEdit.jsx'
 
 export class NodeSelectionPanel extends Component {
     constructor(props) {
@@ -6,6 +7,6 @@ export class NodeSelectionPanel extends Component {
     }
     render() {
         const { node } = this.props;
-        return <pre>{JSON.stringify(node)}</pre>;
+        return <SubjectEdit subject={node} />
     }
 }
