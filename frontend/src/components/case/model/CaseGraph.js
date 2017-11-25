@@ -15,6 +15,12 @@ export class CaseGraphModel {
     getNode(id) {
         return this.nodes[id] || this.tempNodes[id];
     }
+    reset() {
+        this.clearSelection();
+        this.nodes = {};
+        this.edges = [];
+        return this;
+    }
     clearSelection() {
         this.tempEdges = [];
         this.tempNodes = {};
@@ -25,8 +31,10 @@ export class CaseGraphModel {
         this.tempEdges = [];
         this.tempNodes = {};
         const tid = this.tempNodeIdCounter--;
+        /*
         this.tempNodes[tid] = { id: tid, label: "Add Person", group: "add_person" };
         this.tempEdges.push({ from: id, to: tid });
+        */
         return this;
     }
     setFromVis(vis) {

@@ -9,6 +9,7 @@ import CaseGraph, {
 import { CaseGraphModel } from "./model/CaseGraph"
 import { NodeSelectionPanel } from "./view/NodeSelectionPanel.jsx"
 import { EdgeSelectionPanel } from "./view/EdgeSelectionPanel.jsx"
+import { LandingPanel } from "./view/LandingPanel.jsx"
 import apiFunc from '../../api.jsx'
 
 const api = apiFunc()
@@ -16,7 +17,6 @@ const api = apiFunc()
 export default class CaseViewPage extends Component {
     constructor(props) {
         super(props)
-        this.graphModel = CreateDefaultGraph();
         this.state = {
             graph: null,
             error: null,
@@ -42,18 +42,18 @@ export default class CaseViewPage extends Component {
     onEdgeSelected = (edge) => {
         //this.setState({ selectedNode: null, selectedEdge: edge });
     }
-    componentDidMount() {
-        const { caseId } = this.props.params;
+    setupGraph(caseId) {
+        this.graphModel = CreateDefaultGraph();
         if (caseId) {
             api.getCaseGraph(caseId).then(r => {
                 const vis = {
-                    nodes: r.nodes.map(n => {
+                    nodes: r.nodes.map(n => {   
                         return { ...n, ...{ group: "person" } }
                     }),
                     edges: r.edges
                 };
                 this.setState({
-                    graph: this.graphModel.setFromVis(vis).toVis()
+                    graph: this.graphModel.reset().setFromVis(vis).toVis()
                 });
             });
         } else {
@@ -61,6 +61,17 @@ export default class CaseViewPage extends Component {
                 graph: this.graphModel.toVis()
             });
         }
+    }
+    componentWillReceiveProps(nextProps) {
+        const { caseId } = this.props.params;
+        const nextCaseId = nextProps.params.caseId;
+        if (caseId != nextCaseId) {
+            this.setupGraph(nextCaseId);
+        }
+    }
+    componentDidMount() {
+        const { caseId } = this.props.params;
+        this.setupGraph(caseId);
     }
     render() {
         const { graph, error } = this.state
@@ -74,31 +85,26 @@ export default class CaseViewPage extends Component {
             </div>
         } else {
             const { selectedNode, selectedEdge } = this.state;
-            if (selectedNode || selectedEdge) {
-                const TOP_OFFSET = 55;
-                const PANEL_WIDTH = "50%";
-                const style = { position: "absolute", left: 0, right: PANEL_WIDTH, top: TOP_OFFSET, bottom: 0 };
-                const panelStyle = { position: "absolute", right: 0, top: TOP_OFFSET, bottom: 0, width: PANEL_WIDTH }
-                return <div>
-                    <CaseGraph graph={graph}
-                               style={style}
-                               onNodeSelected={this.onNodeSelected} />
-                    <div style={panelStyle}>
-                        {(() => {
-                            if (selectedNode) {
-                                return <NodeSelectionPanel node={selectedNode} />
-                            } else if (selectedEdge) {
-                                return <EdgeSelectionPanel edge={selectedEdge} />
-                            }
-                        })()}
-                    </div>
+            const TOP_OFFSET = 55;
+            const PANEL_WIDTH = "50%";
+            const style = { position: "absolute", left: 0, right: PANEL_WIDTH, top: TOP_OFFSET, bottom: 0 };
+            const panelStyle = { position: "absolute", right: 0, top: TOP_OFFSET, bottom: 0, width: PANEL_WIDTH, overflowY: "auto" };
+            return <div>
+                <CaseGraph graph={graph}
+                           style={style}
+                           onNodeSelected={this.onNodeSelected} />
+                <div style={panelStyle}>
+                    {(() => {
+                        if (selectedNode) {
+                            return <NodeSelectionPanel node={selectedNode} />
+                        } else if (selectedEdge) {
+                            return <EdgeSelectionPanel edge={selectedEdge} />
+                        } else {
+                            return <LandingPanel />
+                        }
+                    })()}
                 </div>
-            } else {
-                const style = { position: "absolute", left: 0, right: 0, top: 0, bottom: 0 };
-                return <CaseGraph graph={graph}
-                                  style={style}
-                                  onNodeSelected={this.onNodeSelected} />
-            }
+            </div>;
         }
     }
 }

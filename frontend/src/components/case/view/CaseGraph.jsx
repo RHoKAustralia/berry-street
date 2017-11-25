@@ -15,8 +15,8 @@ const SELECTED_NODE_COLOR = "#f49b42";
 export const CreateDefaultGraph = () => {
     const model = new CaseGraphModel();
     model.addNode(1, { label: "Bart Simpson", group: TYPE_SUBJECT });
-    model.addNode(2, { label: 'Father', group: TYPE_UNKNOWN_FATHER });
-    model.addNode(3, { label: 'Mother', group: TYPE_UNKNOWN_MOTHER });
+    model.addNode(2, { label: 'Unknown Father', group: TYPE_UNKNOWN_FATHER });
+    model.addNode(3, { label: 'Unknown Mother', group: TYPE_UNKNOWN_MOTHER });
     model.addEdge(1, 2, { label: "Father", tag: {}, font: {align: 'middle'} });
     model.addEdge(1, 3, { label: "Mother", tag: {}, font: {align: 'middle'} });
     return model;
@@ -50,7 +50,6 @@ const UNKNOWN_NODE_STYLE = () => {
 
 let options = {
     layout: {
-        randomSeed: 2,
         hierarchical: false
     },
     physics: {
