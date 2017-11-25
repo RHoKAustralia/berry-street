@@ -3,6 +3,7 @@ import CaseGraph, {
     TYPE_UNKNOWN_MOTHER,
     TYPE_UNKNOWN_FATHER,
     TYPE_SUBJECT,
+    TYPE_ADD_PERSON,
     CreateDefaultGraph
 } from './view/CaseGraph.jsx'
 import { CaseGraphModel } from "./model/CaseGraph"
@@ -23,8 +24,20 @@ export default class CaseViewPage extends Component {
             selectedEdge: null
         }
     }
-    onNodeSelected = (node) => {
-        this.setState({ selectedNode: this.graphModel.getNode(node), selectedEdge: null });
+    onNodeSelected = (id) => {
+        const node = id ? this.graphModel.getNode(id) : null;
+        if (node) {
+            switch (node.group) {
+                case TYPE_ADD_PERSON:
+                    this.setState({ selectedNode: node, selectedEdge: null });
+                    break;
+                default:
+                    this.setState({ selectedNode: node, selectedEdge: null, graph: this.graphModel.prepareSelectedNode(id).toVis() });
+                    break;
+            }
+        } else {
+            this.setState({ selectedNode: null, selectedEdge: null, graph: this.graphModel.clearSelection().toVis() });
+        }
     }
     onEdgeSelected = (edge) => {
         //this.setState({ selectedNode: null, selectedEdge: edge });
@@ -69,8 +82,7 @@ export default class CaseViewPage extends Component {
                 return <div>
                     <CaseGraph graph={graph}
                                style={style}
-                               onNodeSelected={this.onNodeSelected}
-                               onEdgeSelected={this.onEdgeSelected} />
+                               onNodeSelected={this.onNodeSelected} />
                     <div style={panelStyle}>
                         {(() => {
                             if (selectedNode) {
@@ -85,8 +97,7 @@ export default class CaseViewPage extends Component {
                 const style = { position: "absolute", left: 0, right: 0, top: 0, bottom: 0 };
                 return <CaseGraph graph={graph}
                                   style={style}
-                                  onNodeSelected={this.onNodeSelected}
-                                  onEdgeSelected={this.onEdgeSelected} />
+                                  onNodeSelected={this.onNodeSelected} />
             }
         }
     }

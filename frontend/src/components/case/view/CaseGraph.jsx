@@ -7,6 +7,8 @@ const api = apiFunc()
 export const TYPE_UNKNOWN_MOTHER = "unknown_mother";
 export const TYPE_UNKNOWN_FATHER = "unknown_father";
 export const TYPE_SUBJECT = "subject";
+export const TYPE_PERSON = "person";
+export const TYPE_ADD_PERSON = "add_person";
 
 const SELECTED_NODE_COLOR = "#f49b42";
 
@@ -19,19 +21,6 @@ export const CreateDefaultGraph = () => {
     model.addEdge(1, 3, { label: "Mother", tag: {}, font: {align: 'middle'} });
     return model;
 }
-
-const example_color = {
-    background:'cyan',
-    border:'blue',
-    highlight:{
-        background:'red',
-        border:'blue'
-    },
-    hover:{
-        background:'white',
-        border:'red'
-    }
-};
 
 const FA_ICON_NODE_STYLE = (code, color, selectedColor) => {
     return {
@@ -61,6 +50,7 @@ const UNKNOWN_NODE_STYLE = () => {
 
 let options = {
     layout: {
+        randomSeed: 2,
         hierarchical: false
     },
     physics: {
@@ -81,7 +71,8 @@ let options = {
         unknown_mother: UNKNOWN_NODE_STYLE(),
         subject: FA_ICON_NODE_STYLE('\uf2be', '#56e02c', SELECTED_NODE_COLOR),
         family: FA_ICON_NODE_STYLE('\uf2bd', '#5fddb1', SELECTED_NODE_COLOR),
-        person: FA_ICON_NODE_STYLE('\uf007', '#2844c1', SELECTED_NODE_COLOR)
+        person: FA_ICON_NODE_STYLE('\uf007', '#2844c1', SELECTED_NODE_COLOR),
+        add_person: FA_ICON_NODE_STYLE('\uf234', '#00ff00', SELECTED_NODE_COLOR)
     }
 };
 
@@ -93,12 +84,14 @@ export default class CaseGraph extends Component {
         }
     }
     onSelect = (e) => {
-        const { nodes, edges } = e;
-        const { onNodeSelected, onEdgeSelected } = this.props;
-        if (nodes && nodes.length == 1 && onNodeSelected) {
-            onNodeSelected(nodes[0]);
-        } else if (edges && edges.length == 1 && onEdgeSelected) {
-            onEdgeSelected(edges[0]);
+        const { nodes } = e;
+        const { onNodeSelected } = this.props;
+        if (onNodeSelected) {
+            if (nodes && nodes.length == 1) {
+                onNodeSelected(nodes[0]);
+            } else {
+                onNodeSelected(null);
+            }
         }
     };
     /*
