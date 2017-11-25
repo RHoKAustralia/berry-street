@@ -11,7 +11,7 @@ export default ({ provider, client, headers }) =>
       // given:
       beforeEach(() =>
         provider.addInteraction({
-          state: '',
+          state: 'one case',
           uponReceiving: 'request to fetch all cases',
           withRequest: {
             method: 'GET',
@@ -22,38 +22,31 @@ export default ({ provider, client, headers }) =>
             status: 200,
             headers: headers.response,
             body: [
-                    {
-                      '@id': '1',
-                      'id': 191,
-                      'familyFinderStaffName': 'Dolores',
-                      'caseManager': 'Jen',
-                      'status': 'Open',
-                      'dateOpened': '2016-08-05',
-                      'dateClosed': null,
-                      'caseObjective': 'test Neo4J',
-                      'phaseOfInvolvement': 'Referred',
-                      'subjects': [
-                        {
-                          '@id': '2',
-                          'id': 255,
-                          'person': {
-                            '@id': '3',
-                            'id': 182,
-                            'name': 'Bart Simpson',
-                            'dateOfBirth': '1987-04-19',
-                            'family': [],
-                            'friends': [],
-                            'givenNames': 'Bart',
-                            'familyName': 'Simpson'
-                          },
-                          'aCase': {
-                            '@ref': '1'
-                          },
-                          'date': '2016-08-05'
-                        }
-                      ]
-                    }
-                  ]
+              {
+                'id': 191,
+                'familyFinderStaffName': 'Dolores',
+                'caseManager': 'Jen',
+                'status': 'Open',
+                'dateOpened': '2016-08-05',
+                'dateClosed': null,
+                'subjects': [
+                  {
+                    'id': 255,
+                    'person': {
+                      'id': 182,
+                      'name': 'Bart Simpson',
+                      'dateOfBirth': '1987-04-19',
+                      'givenNames': 'Bart',
+                      'familyName': 'Simpson'
+                    },
+                    'aCase': {
+                      '@ref': '1'
+                    },
+                    'date': '2016-08-05'
+                  }
+                ]
+              }
+            ]
           }
         })
       )
@@ -62,29 +55,21 @@ export default ({ provider, client, headers }) =>
       it('should get cases', () => client.getCases()
       // then:
         .then((body) => {
-          expect(body).to.eql(
-          [
+          expect(body).to.eql([
             {
-              '@id': '1',
               'id': 191,
               'familyFinderStaffName': 'Dolores',
               'caseManager': 'Jen',
               'status': 'Open',
               'dateOpened': '2016-08-05',
               'dateClosed': null,
-              'caseObjective': 'test Neo4J',
-              'phaseOfInvolvement': 'Referred',
               'subjects': [
                 {
-                  '@id': '2',
                   'id': 255,
                   'person': {
-                    '@id': '3',
                     'id': 182,
                     'name': 'Bart Simpson',
                     'dateOfBirth': '1987-04-19',
-                    'family': [],
-                    'friends': [],
                     'givenNames': 'Bart',
                     'familyName': 'Simpson'
                   },
@@ -96,6 +81,82 @@ export default ({ provider, client, headers }) =>
               ]
             }
           ])
+        })
+      )
+    })
+
+    describe('gets a case', () => {
+      // given:
+      beforeEach(() =>
+        provider.addInteraction({
+          state: 'one case',
+          uponReceiving: 'request to fetch one cases',
+          withRequest: {
+            method: 'GET',
+            path: '/cases/191',
+            headers: headers.request
+          },
+          willRespondWith: {
+            status: 200,
+            headers: headers.response,
+            body: {
+              'id': 191,
+              'familyFinderStaffName': 'Dolores',
+              'caseManager': 'Jen',
+              'status': 'Open',
+              'dateOpened': '2016-08-05',
+              'dateClosed': null,
+              'subjects': [
+                {
+                  'id': 255,
+                  'person': {
+                    'id': 182,
+                    'name': 'Bart Simpson',
+                    'dateOfBirth': '1987-04-19',
+                    'givenNames': 'Bart',
+                    'familyName': 'Simpson'
+                  },
+                  'aCase': {
+                    '@ref': '1'
+                  },
+                  'date': '2016-08-05'
+                }
+              ]
+            }
+          }
+        })
+      )
+
+      // when:
+      it('should get a case', () => client.getCase(191)
+      // then:
+        .then((body) => {
+          expect(body).to.eql(
+            {
+              'id': 191,
+              'familyFinderStaffName': 'Dolores',
+              'caseManager': 'Jen',
+              'status': 'Open',
+              'dateOpened': '2016-08-05',
+              'dateClosed': null,
+              'subjects': [
+                {
+                  'id': 255,
+                  'person': {
+                    'id': 182,
+                    'name': 'Bart Simpson',
+                    'dateOfBirth': '1987-04-19',
+                    'givenNames': 'Bart',
+                    'familyName': 'Simpson'
+                  },
+                  'aCase': {
+                    '@ref': '1'
+                  },
+                  'date': '2016-08-05'
+                }
+              ]
+            }
+          )
         })
       )
     })

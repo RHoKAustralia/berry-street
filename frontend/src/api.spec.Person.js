@@ -7,15 +7,17 @@ export default ({ provider, client, headers }) =>
     beforeEach(() => provider.removeInteractions())
     afterEach(() => provider.verify())
 
-    describe('gets a person', () => {
+    // describe('gets all people from a case')
+
+    describe('gets a person from a case', () => {
       // given:
       beforeEach(() =>
         provider.addInteraction({
-          state: 'person 17 (Homer Simpson)',
+          state: 'a case with some people',
           uponReceiving: 'request to fetch person 17',
           withRequest: {
             method: 'GET',
-            path: '/people/17',
+            path: '/cases/6/people/17',
             headers: headers.request
           },
           willRespondWith: {
@@ -36,7 +38,7 @@ export default ({ provider, client, headers }) =>
       )
 
       // when:
-      it('', () => client.getPerson(17)
+      it('', () => client.getPerson(6, 17)
       // then:
         .then((body) => {
           expect(body).to.eql({

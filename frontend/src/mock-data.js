@@ -7,8 +7,6 @@ export const CASE_DATA = [
         'status': 'Open',
         'dateOpened': '2016-08-05',
         'dateClosed': null,
-        'caseObjective': 'test Neo4J',
-        'phaseOfInvolvement': 'Referred',
         'subjects': [
             {
                 '@id': '2',
@@ -318,12 +316,12 @@ export const PEOPLE_DATA = [
 ]
 
 export const CASE_DETAILS_DATA = [
-    { id: 1, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
-    { id: 2, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
-    { id: 3, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
-    { id: 4, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
-    { id: 5, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] },
-    { id: 6, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, 'caseObjective': 'test Neo4J', 'phaseOfInvolvement': 'Referred', subjects: [] }
+    { id: 1, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, subjects: [] },
+    { id: 2, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, subjects: [] },
+    { id: 3, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, subjects: [] },
+    { id: 4, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, subjects: [] },
+    { id: 5, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, subjects: [] },
+    { id: 6, 'familyFinderStaffName': 'Dolores', 'caseManager': 'Jen', 'status': 'Open', 'dateOpened': '2016-08-05', 'dateClosed': null, subjects: [] }
 ]
 
 export const cases = [

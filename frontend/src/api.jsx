@@ -1,4 +1,5 @@
 import { MOCK_BACKEND, PEOPLE_DATA, CASE_SUMMARY_DATA, CASE_DATA } from "./mock-data"
+
 var SERVICE_URL_BASE
 
 import fetch from 'isomorphic-fetch'
@@ -21,10 +22,10 @@ function sendRequest (url, method, data) {
   })
 }
 
-const getPerson = (id) => {
+const getPerson = (caseId, personId) => {
   if (MOCK_BACKEND) {
     return new Promise((resolve, reject) => {
-      const matches = PEOPLE_DATA.filter(p => p.id === id)
+      const matches = PEOPLE_DATA.filter(p => p.id === personId)
       if (matches.length === 1) {
         resolve(matches[0])
       } else {
@@ -32,16 +33,16 @@ const getPerson = (id) => {
       }
     })
   } else {
-    return sendRequest(`${SERVICE_URL_BASE}/people/${id}`, 'GET')
+    return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/people/${personId}`, 'GET')
   }
 }
 
-const getRelationships = (id) => {
-  return sendRequest(`${SERVICE_URL_BASE}/connections/${id}/connections`, 'GET')
+const getRelationships = (caseId) => {
+  return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/connections`, 'GET')
 }
 
-const getRelationship = (personId, relationId) => {
-  return this.getPerson(personId).then(r => {
+const getRelationship = (caseId, personId, relationId) => {
+  return this.getPerson(caseId, personId).then(r => {
     const family = r.family
     const friends = r.friends
 
