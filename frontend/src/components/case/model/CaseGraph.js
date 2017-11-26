@@ -14,6 +14,9 @@ export class CaseGraphModel {
         this.tempNodes = [];
         this.tempNodeIdCounter = -1;
     }
+    setTempIdSeed(value) {
+        this.tempNodeIdCounter = value;
+    }
     clearPendingChanges() {
         this.newNodes = {};
         this.newEdges = [];

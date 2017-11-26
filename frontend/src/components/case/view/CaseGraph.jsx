@@ -13,6 +13,7 @@ export const CreateDefaultGraph = () => {
     model.addNode(-3, { label: 'Unknown Mother', group: TYPE_UNKNOWN_MOTHER });
     model.addEdge(-1, -2, { label: "Father", tag: {}, font: {align: 'middle'} });
     model.addEdge(-1, -3, { label: "Mother", tag: {}, font: {align: 'middle'} });
+    model.setTempIdSeed(-4);
     return model;
 }
 

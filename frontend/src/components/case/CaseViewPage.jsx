@@ -29,6 +29,10 @@ export default class CaseViewPage extends Component {
     onNodeSelected = (id) => {
         const node = id ? this.graphModel.getNode(id) : null;
         if (node) {
+            //HACK: Just in case this wasn't set
+            if (!node.id) {
+                node.id = id;
+            }
             switch (node.group) {
                 case TYPE_ADD_PERSON:
                     this.setState({ selectedNode: node, selectedEdge: null });
