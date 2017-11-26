@@ -25,12 +25,26 @@ function sendRequest (url, method, data) {
   })
 }
 
+const personFromConnection = (conn, personId) => {
+  if ((conn.from || {}).id === personId) {
+    return conn.from
+  }
+  if ((conn.to || {}).id === personId) {
+    return conn.to
+  }
+  return null
+}
+const findPerson = (caseId, personId) => {
+  const matchingConnection = CONNECTIONS_DATA
+    .find(c => personFromConnection(c, personId))
+  return personFromConnection(matchingConnection, personId)
+}
 const getPerson = (caseId, personId) => {
   if (MOCK_BACKEND) {
     return new Promise((resolve, reject) => {
-      const matches = PEOPLE_DATA.filter(p => p.id === personId)
-      if (matches.length === 1) {
-        resolve(matches[0])
+      const match = findPerson(caseId, personId)
+      if (match) {
+        resolve(match)
       } else {
         reject(new Error('Person not found'))
       }
