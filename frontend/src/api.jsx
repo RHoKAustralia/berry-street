@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch'
 import { CONNECTIONS_DATA, CASE_DATA } from "./mock-data"
 import { TYPE_SUBJECT, TYPE_PERSON } from "./components/case/model/CaseGraph"
 
-export const MOCK_BACKEND = true
+export const MOCK_BACKEND = false
 let caseIndex = 299 //FIXME: move to mock-data
 let personIndex = 55 //FIXME: move to mock-data
 let relationshipIndex = 192 //FIXME: move to mock-data

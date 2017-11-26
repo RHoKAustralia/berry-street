@@ -16,7 +16,6 @@ export const CASE_DATA = [
 
 export const CONNECTIONS_DATA = {
   191: [{
-    "@id": "1",
     "id": 2,
     "from": {
       "id": 3,
