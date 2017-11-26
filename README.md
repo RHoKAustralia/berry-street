@@ -78,6 +78,11 @@ and then import the project in the IDE
 
   This will start the backend api and neo4j containers.
 
+NOTE: If you're spinning up these docker containers from Windows 10, make sure you have:
+
+ 1. Switched to Linux Containers mode
+ 2. The `gradlew` shell script is saved with `LF` line endings before you spin up the containers
+
 - In a second terminal
 
   ```
