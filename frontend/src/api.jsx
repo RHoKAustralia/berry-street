@@ -1,9 +1,7 @@
-import {
-  CONNECTIONS_DATA,
-  CASE_DATA
-} from "./mock-data"
-import { TYPE_SUBJECT, TYPE_PERSON } from "./components/case/model/CaseGraph"
 import fetch from 'isomorphic-fetch'
+import { CONNECTIONS_DATA, CASE_DATA } from "./mock-data"
+import { TYPE_SUBJECT, TYPE_PERSON } from "./components/case/model/CaseGraph"
+
 export const MOCK_BACKEND = true
 var SERVICE_URL_BASE
 
@@ -35,7 +33,7 @@ const personFromConnection = (conn, personId) => {
   return null
 }
 const findPerson = (caseId, personId) => {
-  const matchingConnection = CONNECTIONS_DATA
+  const matchingConnection = CONNECTIONS_DATA[caseId]
     .find(c => personFromConnection(c, personId))
   return personFromConnection(matchingConnection, personId)
 }
@@ -156,7 +154,7 @@ const getCaseGraph = (id) => {
         //Exclude subject
         delete otherPeople[subjectId];
         const otherNodes = Object.keys(otherPeople).map(k => ({ id: k, label: otherPeople[k].displayName, group: TYPE_PERSON }));
-  
+
         const graph = {
           nodes: [
             { id: subjectId, label: oCase.subject.displayName, group: TYPE_SUBJECT },
