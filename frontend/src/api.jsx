@@ -3,6 +3,10 @@ import { CONNECTIONS_DATA, CASE_DATA } from "./mock-data"
 import { TYPE_SUBJECT, TYPE_PERSON } from "./components/case/model/CaseGraph"
 
 export const MOCK_BACKEND = true
+let caseIndex = 299 //FIXME: move to mock-data
+let personIndex = 55 //FIXME: move to mock-data
+let relationshipIndex = 192 //FIXME: move to mock-data
+
 var SERVICE_URL_BASE
 
 function sendRequest (url, method, data) {
@@ -172,14 +176,22 @@ const getCaseGraph = (id) => {
 
 const addCase = (caseDetails) => {
   if (MOCK_BACKEND) {
+    caseIndex += 1
+    caseDetails.id = caseIndex
     CASE_DATA.push(caseDetails)
-    return Promise.resolve(true)
+    CONNECTIONS_DATA[caseIndex] = []
+    return Promise.resolve({ id: caseDetails.id })
   } else {
     return sendRequest(`${SERVICE_URL_BASE}/cases`, 'POST', caseDetails)
   }
 }
-const addSubjectToCase = (theCase, subject) => {
-  return sendRequest(`${SERVICE_URL_BASE}/cases/${theCase.id}/subject/${subject.id}`, 'PUT')
+const updateSubject = (caseId, subject) => {
+  if (MOCK_BACKEND) {
+    CASE_DATA.find(it => it.id == caseId).subject = subject
+    return Promise.resolve({ id: subject.id })
+  } else {
+    return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/subject`, 'PUT')
+  }
 }
 const updateCase = (caseDetails) => {
   if (MOCK_BACKEND) {
@@ -188,12 +200,37 @@ const updateCase = (caseDetails) => {
     return sendRequest(`${SERVICE_URL_BASE}/cases`, 'PUT', caseDetails)
   }
 }
+
 const addPersonForCase = (caseId, person) => {
-  return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/people`, 'POST', person)
+  if (MOCK_BACKEND) {
+    personIndex += 1
+    person.id = personIndex
+    return Promise.resolve({ id: person.id })
+  } else {
+    return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/people`, 'POST', person)
+  }
+}
+const addRelationship = (caseId, from, to, relationType, notes) => {
+  if (MOCK_BACKEND) {
+    relationshipIndex += 1
+    CONNECTIONS_DATA[caseId].push({ id: relationshipIndex, from, to })
+    return Promise.resolve({ id: relationshipIndex })
+  } else {
+    return addCaseSubjectRelationship(caseId, from.id, to.id, relationType, notes)
+  }
 }
 
-const addCaseSubjectRelationship = (caseId, from, to, relationType) => {
-  return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/connections?fromId=${from}&toId=${to}&type=${relationType}&notes=${relationType}`, 'POST')
+const addCaseSubjectRelationship = (caseId, from, to, relationType, notes) => {
+  const params = [
+    { k: 'fromId', v: from },
+    { k: 'toId', v: to },
+    { k: 'type', v: relationType },
+    { k: 'notes', v: notes },
+  ]
+  const paramsString = params.map(kv => `${k}=${v}`).join('&')
+  const path = `cases/${caseId}/connections`
+  const url = `${SERVICE_URL_BASE}/${path}?${params}`
+  return sendRequest(url, 'POST')
 }
 
 const updatePersonForCase = (caseId, person) => {
@@ -221,12 +258,13 @@ export default (baseUrl) => {
     getArchivedCases,
     getCase,
     addCase,
-    addSubjectToCase,
+    updateSubject,
     updateCase,
     addPersonForCase,
     updatePersonForCase,
     linkPerson,
-    addCaseSubjectRelationship,
+    addRelationship,
+    addCaseSubjectRelationship, //FIXME: delete this o_O
     getCaseGraph
   }
 }

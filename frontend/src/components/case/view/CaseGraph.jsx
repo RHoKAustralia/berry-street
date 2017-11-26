@@ -14,7 +14,43 @@ export const CreateDefaultGraph = () => {
     model.addEdge(-1, -2, { label: "Father", tag: {}, font: {align: 'middle'} });
     model.addEdge(-1, -3, { label: "Mother", tag: {}, font: {align: 'middle'} });
     model.setTempIdSeed(-4);
+
+    persistNewCase(model)
     return model;
+}
+
+//FIXME: omg then pyramid
+const persistNewCase = (model) => {
+  api.addCase({
+    'familyFinderStaffName': 'Dolores',
+    'caseManager': 'Jen',
+    'dateOpened': '2017-11-26'
+  }).then(caseResponse => {
+    const caseId = caseResponse.id
+
+    const subject = model.getNode(-1)
+    subject.dateOfBirth = '1987-04-19'
+    subject.displayName = subject.label
+    api.addPersonForCase(caseId, subject).then(addSubjectResponse => {
+      subject.id = addSubjectResponse.id
+      api.updateSubject(caseId, subject)
+
+      const father = model.getNode(-2)
+      father.displayName = father.label
+      api.addPersonForCase(caseId, father).then(fatherResponse => {
+        father.id = fatherResponse.id
+
+        const mother = model.getNode(-3)
+        mother.displayName = mother.label
+        api.addPersonForCase(caseId, mother).then(motherResponse => {
+          mother.id = motherResponse.id
+
+          api.addRelationship(caseId, subject, father, 'parent', father.label)
+          api.addRelationship(caseId, subject, mother, 'parent', mother.label)
+        })
+      })
+    })
+  })
 }
 
 const FA_ICON_NODE_STYLE = (code, color, selectedColor) => {
@@ -103,7 +139,7 @@ export default class CaseGraph extends Component {
         const { graph } = this.state;
         const nodes = Array.from(graph.nodes);
         this.counter = this.counter || 5;
-        this.counter++; 
+        this.counter++;
         if (Math.random() > 0.5) {
             nodes.pop();
             this.setState({graph: {...graph, nodes }});
