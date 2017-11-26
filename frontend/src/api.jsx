@@ -1,10 +1,9 @@
-import fetch from 'isomorphic-fetch'
-
 import {
   CONNECTIONS_DATA,
   CASE_DATA
 } from "./mock-data"
-
+import { TYPE_SUBJECT, TYPE_PERSON } from "./components/case/model/CaseGraph"
+import fetch from 'isomorphic-fetch'
 export const MOCK_BACKEND = true
 var SERVICE_URL_BASE
 
@@ -42,7 +41,11 @@ const getPerson = (caseId, personId) => {
 }
 
 const getRelationships = (caseId) => {
-  return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/connections`, 'GET')
+  if (MOCK_BACKEND) {
+    return Promise.resolve(CONNECTIONS_DATA[caseId] || [])
+  } else {
+    return sendRequest(`${SERVICE_URL_BASE}/cases/${caseId}/connections`, 'GET');
+  }
 }
 
 const getRelationship = (caseId, personId, relationId) => {
@@ -110,7 +113,7 @@ const getArchivedCases = () => {
 const getCase = (id) => {
   if (MOCK_BACKEND) {
     return new Promise((resolve, reject) => {
-      const singleCase = CASE_DATA.filter(c => c.case_id === id)
+      const singleCase = CASE_DATA.filter(c => c.id == id)
       if (singleCase.length === 1) {
         resolve(singleCase[0])
       } else {
@@ -123,8 +126,37 @@ const getCase = (id) => {
 }
 
 const getCaseGraph = (id) => {
-  return sendRequest(`${SERVICE_URL_BASE}/cases/${id}/vis`, 'GET')
-}
+  return new Promise((resolve, reject) => {
+    getCase(id).then(oCase => {
+      //HACK-athon-only: @id is bogus. It should be id, but /cases/{id}/connections gives empty array
+      //on case.id, when we can finally fetch by case.id, we can Promise.all the requests simulatneously
+      //instead of one after another
+      const cid = oCase.id; // oCase["@id"];
+      getRelationships(cid).then(connections => {
+        const subjectId = oCase.subject.id;
+        const otherPeople = {};
+        for (const conn of connections) {
+          otherPeople[conn.from.id] = conn.from;
+          otherPeople[conn.to.id] = conn.to;
+        }
+        //Exclude subject
+        delete otherPeople[subjectId];
+        const otherNodes = Object.keys(otherPeople).map(k => ({ id: k, label: otherPeople[k].displayName, group: TYPE_PERSON }));
+  
+        const graph = {
+          nodes: [
+            { id: subjectId, label: oCase.subject.displayName, group: TYPE_SUBJECT },
+            ...otherNodes
+          ],
+          edges: [
+            ...connections.map(c => ({ from: c.from.id, to: c.to.id /*, label: c.notes */ }))
+          ]
+        };
+        resolve(graph);
+      }).catch(reject);
+    }).catch(reject);
+  });
+};
 
 const addCase = (caseDetails) => {
   if (MOCK_BACKEND) {

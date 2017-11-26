@@ -1,3 +1,9 @@
+export const TYPE_UNKNOWN_MOTHER = "unknown_mother";
+export const TYPE_UNKNOWN_FATHER = "unknown_father";
+export const TYPE_SUBJECT = "subject";
+export const TYPE_PERSON = "person";
+export const TYPE_ADD_PERSON = "add_person";
+
 export class CaseGraphModel {
     constructor() {
         this.nodes = {};

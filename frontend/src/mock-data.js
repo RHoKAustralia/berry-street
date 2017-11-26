@@ -14,94 +14,96 @@ export const CASE_DATA = [
   }
 ]
 
-export const CONNECTIONS_DATA = [{
-  "@id": "1",
-  "id": 2,
-  "from": {
-    "id": 3,
-    "displayName": "Rowan Quinn"
-  },
-  "to": {
-    "id": 1,
-    "displayName": "Syrah Ward"
-  },
-  "notes": null
-}, {
-  "id": 1,
-  "from": {
+export const CONNECTIONS_DATA = {
+  191: [{
+    "@id": "1",
     "id": 2,
-    "displayName": "Kimmie Charles"
-  },
-  "to": {
+    "from": {
+      "id": 3,
+      "displayName": "Rowan Quinn"
+    },
+    "to": {
+      "id": 1,
+      "displayName": "Syrah Ward"
+    },
+    "notes": null
+  }, {
     "id": 1,
-    "displayName": "Syrah Ward"
-  },
-  "notes": null
-}, {
-  "id": 3,
-  "from": {
+    "from": {
+      "id": 2,
+      "displayName": "Kimmie Charles"
+    },
+    "to": {
+      "id": 1,
+      "displayName": "Syrah Ward"
+    },
+    "notes": null
+  }, {
+    "id": 3,
+    "from": {
+      "id": 4,
+      "displayName": "Aiden null"
+    },
+    "to": {
+      "id": 1,
+      "displayName": "Syrah Ward"
+    },
+    "notes": null
+  }, {
     "id": 4,
-    "displayName": "Aiden null"
-  },
-  "to": {
-    "id": 1,
-    "displayName": "Syrah Ward"
-  },
-  "notes": null
-}, {
-  "id": 4,
-  "from": {
+    "from": {
+      "id": 5,
+      "displayName": "Brylee null"
+    },
+    "to": {
+      "id": 1,
+      "displayName": "Syrah Ward"
+    },
+    "notes": null
+  }, {
     "id": 5,
-    "displayName": "Brylee null"
-  },
-  "to": {
-    "id": 1,
-    "displayName": "Syrah Ward"
-  },
-  "notes": null
-}, {
-  "id": 5,
-  "from": {
+    "from": {
+      "id": 6,
+      "displayName": "Denise Quinn"
+    },
+    "to": {
+      "id": 1,
+      "displayName": "Syrah Ward"
+    },
+    "notes": null
+  }, {
     "id": 6,
-    "displayName": "Denise Quinn"
-  },
-  "to": {
-    "id": 1,
-    "displayName": "Syrah Ward"
-  },
-  "notes": null
-}, {
-  "id": 6,
-  "from": {
+    "from": {
+      "id": 7,
+      "displayName": "Sandra Charles"
+    },
+    "to": {
+      "id": 1,
+      "displayName": "Syrah Ward"
+    },
+    "notes": null
+  }, {
     "id": 7,
-    "displayName": "Sandra Charles"
-  },
-  "to": {
-    "id": 1,
-    "displayName": "Syrah Ward"
-  },
-  "notes": null
-}, {
-  "id": 7,
-  "from": {
+    "from": {
+      "id": 8,
+      "displayName": "Andy Charles"
+    },
+    "to": {
+      "id": 1,
+      "displayName": "Syrah Ward"
+    },
+    "notes": null
+  }, {
     "id": 8,
-    "displayName": "Andy Charles"
-  },
-  "to": {
-    "id": 1,
-    "displayName": "Syrah Ward"
-  },
-  "notes": null
-}, {
-  "id": 8,
-  "from": {
-    "id": 9,
-    "displayName": "Donna null"
-  },
-  "to": {
-    "id": 1,
-    "displayName": "Syrah Ward"
-  },
-  "type": null,
-  "notes": null
-}]
+    "from": {
+      "id": 9,
+      "displayName": "Donna null"
+    },
+    "to": {
+      "id": 1,
+      "displayName": "Syrah Ward"
+    },
+    "type": null,
+    "notes": null
+  }]
+}

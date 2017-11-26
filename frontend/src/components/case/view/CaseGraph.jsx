@@ -1,24 +1,18 @@
 import React, { Component } from "react"
 import Graph from 'react-graph-vis'
 import apiFunc from '../../../api.jsx'
-import { CaseGraphModel } from "../model/CaseGraph"
+import { CaseGraphModel, TYPE_SUBJECT, TYPE_UNKNOWN_FATHER, TYPE_UNKNOWN_MOTHER } from "../model/CaseGraph"
 const api = apiFunc()
-
-export const TYPE_UNKNOWN_MOTHER = "unknown_mother";
-export const TYPE_UNKNOWN_FATHER = "unknown_father";
-export const TYPE_SUBJECT = "subject";
-export const TYPE_PERSON = "person";
-export const TYPE_ADD_PERSON = "add_person";
 
 const SELECTED_NODE_COLOR = "#f49b42";
 
 export const CreateDefaultGraph = () => {
     const model = new CaseGraphModel();
-    model.addNode(1, { label: "Bart Simpson", group: TYPE_SUBJECT });
-    model.addNode(2, { label: 'Unknown Father', group: TYPE_UNKNOWN_FATHER });
-    model.addNode(3, { label: 'Unknown Mother', group: TYPE_UNKNOWN_MOTHER });
-    model.addEdge(1, 2, { label: "Father", tag: {}, font: {align: 'middle'} });
-    model.addEdge(1, 3, { label: "Mother", tag: {}, font: {align: 'middle'} });
+    model.addNode(-1, { label: "Name of Subject", group: TYPE_SUBJECT });
+    model.addNode(-2, { label: 'Unknown Father', group: TYPE_UNKNOWN_FATHER });
+    model.addNode(-3, { label: 'Unknown Mother', group: TYPE_UNKNOWN_MOTHER });
+    model.addEdge(-1, -2, { label: "Father", tag: {}, font: {align: 'middle'} });
+    model.addEdge(-1, -3, { label: "Mother", tag: {}, font: {align: 'middle'} });
     return model;
 }
 

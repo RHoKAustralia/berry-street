@@ -46,14 +46,8 @@ export default class CaseViewPage extends Component {
         this.graphModel = CreateDefaultGraph();
         if (caseId) {
             api.getCaseGraph(caseId).then(r => {
-                const vis = {
-                    nodes: r.nodes.map(n => {   
-                        return { ...n, ...{ group: "person" } }
-                    }),
-                    edges: r.edges
-                };
                 this.setState({
-                    graph: this.graphModel.reset().setFromVis(vis).toVis()
+                    graph: this.graphModel.reset().setFromVis(r).toVis()
                 });
             });
         } else {

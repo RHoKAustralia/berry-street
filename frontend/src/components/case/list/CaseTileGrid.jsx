@@ -16,7 +16,7 @@ class CaseTile extends Component {
       <div className="work">
         <div className="col-md-6">
           <Link to={`/cases/${this.props.case.id}`}>
-            {`${person.givenNames} ${person.familyName}`}
+            {subject.displayName}
           </Link>
         </div>
         <div className="col-md-3">
