@@ -1,12 +1,14 @@
 import React, { Component } from "react"
 import CaseGraph, {
+    CreateDefaultGraph
+} from './view/CaseGraph.jsx'
+import { 
     TYPE_UNKNOWN_MOTHER,
     TYPE_UNKNOWN_FATHER,
     TYPE_SUBJECT,
     TYPE_ADD_PERSON,
-    CreateDefaultGraph
-} from './view/CaseGraph.jsx'
-import { CaseGraphModel } from "./model/CaseGraph"
+    CaseGraphModel 
+} from "./model/CaseGraph"
 import { NodeSelectionPanel } from "./view/NodeSelectionPanel.jsx"
 import { EdgeSelectionPanel } from "./view/EdgeSelectionPanel.jsx"
 import { LandingPanel } from "./view/LandingPanel.jsx"
@@ -67,6 +69,20 @@ export default class CaseViewPage extends Component {
         const { caseId } = this.props.params;
         this.setupGraph(caseId);
     }
+    onAddPerson = (id, type) => {
+        if (this.graphModel) {
+            this.setState({
+                graph: this.graphModel.addNewNode(id, { label: "New Person", group: type }).toVis()
+            });
+        }
+    }
+    onClearPending = (e) => {
+        if (this.graphModel) {
+            this.setState({
+                graph: this.graphModel.clearPendingChanges().toVis()
+            });
+        }
+    }
     render() {
         const { graph, error } = this.state
         if (error) {
@@ -90,11 +106,11 @@ export default class CaseViewPage extends Component {
                 <div style={panelStyle}>
                     {(() => {
                         if (selectedNode) {
-                            return <NodeSelectionPanel node={selectedNode} />
+                            return <NodeSelectionPanel node={selectedNode} onAddPerson={this.onAddPerson} />
                         } else if (selectedEdge) {
                             return <EdgeSelectionPanel edge={selectedEdge} />
                         } else {
-                            return <LandingPanel />
+                            return <LandingPanel pendingNodes={graph.pendingNodes} pendingEdges={graph.pendingEdges} onClearPending={this.onClearPending} />
                         }
                     })()}
                 </div>
