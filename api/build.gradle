@@ -8,6 +8,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'com.wiredforcode.spawn' version '0.8.2'
+    id 'au.com.dius.pact' version '3.5.11'
+}
 apply plugin: 'groovy'
 //apply plugin: 'codenarc'
 apply plugin: 'spring-boot'
@@ -65,6 +69,7 @@ jar {
     baseName = 'berry-api'
     version = version
 }
+
 ////////////////////////////////////////////
 
 ////////////////////////////////////////////
@@ -89,3 +94,31 @@ jar {
 //}
 
 ////////////////////////////////////////////
+
+import com.wiredforcode.gradle.spawn.*
+task startProvider(type: SpawnProcessTask, dependsOn: 'assemble') {
+    command "java -Dspring.profiles.active=test -jar ${jar.archivePath}"
+    ready 'Started Application'
+}
+task stopProvider(type: KillProcessTask) { }
+
+def props = ['account', 'username', 'password']
+    .inject([:]) { acc, it ->
+        def propName = "pactBroker${it.capitalize()}"
+        acc << [(it): System.env[propName] ?: project.findProperty(propName)]
+    }
+
+pact {
+    serviceProviders {
+        'Case Graph Provider' {
+            startProviderTask = startProvider
+            terminateProviderTask = stopProvider
+            stateChangeUrl = url('http://localhost:8080/pactStateChange')
+
+            hasPactsFromPactBroker(
+                "https://${props.account}.pact.dius.com.au",
+                authentication: ['Basic', props.username, props.password]
+            )
+        }
+    }
+}
